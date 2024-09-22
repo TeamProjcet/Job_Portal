@@ -19,6 +19,10 @@ Route::view('admin/{any}', 'backend')->where('any', '.*');
 
 //frontend route
 //==============>
+Route::get('/', function (){
+    echo "<h1 style='text-align: center'>Hello Job Portal Coming Soon</h1>";
+});
+Route::view('/{any}', 'frontend')->where('any', '.*');
 
 <<<<<<< HEAD
 Route::get('/', function (){
