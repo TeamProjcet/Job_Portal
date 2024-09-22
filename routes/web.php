@@ -20,5 +20,3 @@ Route::view('admin/{any}', 'backend')->where('any', '.*');
 //frontend route
 //==============>
 Route::view('/{any}', 'frontend')->where('any', '.*');
-
-
