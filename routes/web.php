@@ -8,13 +8,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('login', [\App\Http\Controllers\auth\AuthController::class, 'index']);
 
-Route::view('admin/{any}', 'singleApp')->where('any', '.*');
+Route::view('admin/{any}', 'backend')->where('any', '.*');
 
 
 
 //frontend route
 //==============>
 
-Route::get('/', function (){
-    echo "<h1 style='text-align: center'>Hello Job Portal Coming Soon</h1>";
-});
+Route::view('/{any}', 'frontend')->where('any', '.*');
