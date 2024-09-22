@@ -17,6 +17,6 @@ yarn-error.log
 /.idea
 /.vscode
 
+# Ignore specific app.js files
 /public/js/app.js
-
 /public/frontend/js/app.js
