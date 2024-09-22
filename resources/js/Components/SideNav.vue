@@ -55,9 +55,14 @@
                         <div class="collapse" id="base">
                             <ul class="nav nav-collapse">
                                 <li>
-                                    <a href="">
-                                        <span class="sub-item">Job Add</span>
-                                    </a>
+                                    <router-link to="/admin/jobcategory/category">
+                                        <span class="sub-item">Job Category</span>
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <router-link to="/admin/jobcategory/joblist">
+                                        <span class="sub-item">Job Post</span>
+                                    </router-link>
                                 </li>
                             </ul>
                         </div>
