@@ -37,7 +37,8 @@
     <div class="card p-4" style="width: 100%; max-width: 400px;">
         <div class="card-body">
             <h5 class="card-title text-center">Login Form</h5>
-            <form action="" method="post">
+            <form action="{{url('/adlogin')}}" method="post">
+                {{csrf_field()}}
                 <div class="form-group">
                     <label for="email">Email Address</label>
                     <input type="email" class="form-control" id="email" name="email" required>
@@ -56,7 +57,7 @@
                 </div>
                 <button type="submit" class="btn btn-success btn-block mt-3">Login</button>
                 <div class="text-center mt-3">
-                    Not a member? <a href="register.html" class="btn btn-link">Signup now</a>
+                    Not a member? <a href="{{url('/register')}}" class="btn btn-link">Signup now</a>
                 </div>
             </form>
         </div>

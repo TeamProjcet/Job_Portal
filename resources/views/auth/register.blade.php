@@ -36,11 +36,17 @@
 <div class="container d-flex justify-content-center align-items-center min-vh-100">
     <div class="card p-4" style="width: 100%; max-width: 400px;">
         <div class="card-body">
+            @if(session('status'))
+                <div class="alert alert-danger">{{session('status')}}</div>
+            @endif
+
             <h5 class="card-title text-center">Register Form</h5>
-            <form action="" method="post">
+            <form action="{{route('userRegister.store')}}" method="post">
+                @csrf
+                <input type="hidden" name="id"  >
                 <div class="form-group">
                     <label for="username">Username</label>
-                    <input type="text" class="form-control" id="username" name="username" required>
+                    <input type="text" class="form-control" id="username" name="name" required>
                 </div>
                 <div class="form-group">
                     <label for="email">Email Address</label>
@@ -53,12 +59,12 @@
                 </div>
                 <div class="form-group position-relative">
                     <label for="confirm-password">Confirm Password</label>
-                    <input type="password" class="form-control" id="confirm-password" name="confirm-password" required>
+                    <input type="password" class="form-control" id="confirm-password" name="confirm_password"  required>
                     <span toggle="#confirm-password" class="fa fa-fw fa-eye field-icon toggle-password"></span>
                 </div>
                 <button type="submit" class="btn btn-success btn-block mt-3">Register</button>
                 <div class="text-center mt-3">
-                    Already a member? <a href="login.html" class="btn btn-link">Login now</a>
+                    Already a member? <a href="{{url('/login')}}" class="btn btn-link">Login now</a>
                 </div>
             </form>
         </div>

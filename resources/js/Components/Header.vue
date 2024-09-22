@@ -95,6 +95,7 @@
                         </a>
                         <ul class="dropdown-menu dropdown-user animated fadeIn">
                             <div class="dropdown-user-scroll scrollbar-outer">
+
                                 <li>
                                     <div class="user-box">
                                         <div class="avatar-lg">
@@ -119,8 +120,11 @@
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="#">Account Setting</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Logout</a>
+
+
+                                    <a @click.prevent="logout" class="dropdown-item">Logout</a>
                                 </li>
+
                             </div>
                         </ul>
                     </li>
@@ -132,8 +136,21 @@
 </template>
 
 <script>
+    import axios from 'axios';
     export default {
-        name: "Header"
+        name: "Header",
+
+        methods:{
+            async logout(){
+                try {
+                    await axios.post('/api/logout');
+                    window.location.href = '/login';
+
+                } catch (error) {
+                    console.error('Logout Failed:', error);
+                }
+            }
+        }
     }
 </script>
 

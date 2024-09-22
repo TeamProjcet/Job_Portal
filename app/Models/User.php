@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Validator;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -22,6 +23,16 @@ class User extends Authenticatable
         'email',
         'password',
     ];
+
+//    public function validator($input)
+//    {
+//        return Validator::make($input, [
+//            'username' => 'required',
+//            'email' => 'required|unique:users,email',
+//            'password' => 'required|string|max:20|min:4',
+//            'confirm_password' => 'required|string|max:20|min:4|same:password',
+//        ]);
+//    }
 
     /**
      * The attributes that should be hidden for serialization.
