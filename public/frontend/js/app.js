@@ -102,7 +102,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "Dashboard"
+  name: "Dashboard",
+  mounted: function mounted() {
+    this.$nextTick(function () {
+      $('.header-carousel').owlCarousel({
+        loop: true,
+        items: 1,
+        nav: false,
+        autoplay: true,
+        autoplayTimeout: 3000,
+        autoplayHoverPause: true
+      });
+    });
+  }
 });
 
 /***/ }),
@@ -803,12 +815,12 @@ var staticRenderFns = [function () {
   }, [_vm._v("Discover your perfect role in the dynamic world of startups! We help you identify opportunities that align with your skills, passions, and career goals. With personalized support, tailored job matches, and insights into the startup culture, we make it easier for you to find a position where you can thrive and make an impact. Let’s take your career to the next level!")]), _vm._v(" "), _c("a", {
     staticClass: "btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft",
     attrs: {
-      href: ""
+      href: "#"
     }
   }, [_vm._v("Search A Job")]), _vm._v(" "), _c("a", {
     staticClass: "btn btn-secondary py-md-3 px-md-5 animated slideInRight",
     attrs: {
-      href: ""
+      href: "#"
     }
   }, [_vm._v("Find A Talent")])])])])])]), _vm._v(" "), _c("div", {
     staticClass: "owl-carousel-item position-relative"
@@ -836,12 +848,12 @@ var staticRenderFns = [function () {
   }, [_vm._v("Discover your perfect role in the dynamic world of startups! We help you identify opportunities that align with your skills, passions, and career goals. With personalized support, tailored job matches, and insights into the startup culture, we make it easier for you to find a position where you can thrive and make an impact. Let’s take your career to the next level!")]), _vm._v(" "), _c("a", {
     staticClass: "btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft",
     attrs: {
-      href: ""
+      href: "#"
     }
   }, [_vm._v("Search A Job")]), _vm._v(" "), _c("a", {
     staticClass: "btn btn-secondary py-md-3 px-md-5 animated slideInRight",
     attrs: {
-      href: ""
+      href: "#"
     }
   }, [_vm._v("Find A Talent")])])])])])])])]), _vm._v(" "), _c("div", {
     staticClass: "container-fluid bg-primary mb-5 wow fadeIn",
