@@ -742,7 +742,10 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   linkActiveClass: 'active'
 });
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4dc384f (hafoi)
 
 
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vue_toastification__WEBPACK_IMPORTED_MODULE_12__["default"]);

@@ -19,4 +19,8 @@ Route::view('admin/{any}', 'backend')->where('any', '.*');
 
 //frontend route
 //==============>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4dc384f (hafoi)
 Route::view('/{any}', 'frontend')->where('any', '.*');
