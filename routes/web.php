@@ -12,9 +12,7 @@ Route::resource('/userRegister', \App\Http\Controllers\auth\AuthController::clas
 Route::post('adlogin', [\App\Http\Controllers\auth\AuthController::class, 'adlogin']);
 Route::get('logout', [\App\Http\Controllers\auth\AuthController::class, 'logout']);
 
-
 Route::view('admin/{any}', 'backend')->where('any', '.*');
-
 
 
 //frontend route
