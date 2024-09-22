@@ -104,15 +104,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Dashboard",
   mounted: function mounted() {
-    this.$nextTick(function () {
-      $('.header-carousel').owlCarousel({
-        loop: true,
-        items: 1,
-        nav: false,
-        autoplay: true,
-        autoplayTimeout: 3000,
-        autoplayHoverPause: true
-      });
+    $('.header-carousel').owlCarousel({
+      loop: true,
+      items: 1,
+      nav: false,
+      autoplay: true,
+      autoplayTimeout: 3000,
+      autoplayHoverPause: true
+    });
+    $('.testimonial-carousel').owlCarousel({
+      items: 1,
+      loop: true,
+      autoplay: true,
+      autoplayTimeout: 5000,
+      autoplayHoverPause: true
     });
   }
 });

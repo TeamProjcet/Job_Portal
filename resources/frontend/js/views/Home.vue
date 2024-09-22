@@ -573,7 +573,6 @@
     export default {
         name: "Dashboard",
         mounted() {
-            this.$nextTick(() => {
                 $('.header-carousel').owlCarousel({
                     loop: true,
                     items: 1,
@@ -582,6 +581,14 @@
                     autoplayTimeout: 3000,
                     autoplayHoverPause: true,
                 });
+
+
+            $('.testimonial-carousel').owlCarousel({
+                items: 1,
+                loop: true,
+                autoplay: true,
+                autoplayTimeout: 5000,
+                autoplayHoverPause: true,
             });
         }
     }
