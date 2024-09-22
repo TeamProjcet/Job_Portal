@@ -208,50 +208,14 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", {
-    staticClass: "main-header"
-  }, [_vm._m(0), _vm._v(" "), _c("nav", {
-    staticClass: "navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom"
-  }, [_c("div", {
-    staticClass: "container-fluid"
-  }, [_vm._m(1), _vm._v(" "), _c("ul", {
-    staticClass: "navbar-nav topbar-nav ms-md-auto align-items-center"
-  }, [_vm._m(2), _vm._v(" "), _c("li", {
-    staticClass: "nav-item topbar-user dropdown hidden-caret"
-  }, [_vm._m(3), _vm._v(" "), _c("ul", {
-    staticClass: "dropdown-menu dropdown-user animated fadeIn"
-  }, [_c("div", {
-    staticClass: "dropdown-user-scroll scrollbar-outer"
-  }, [_vm._m(4), _vm._v(" "), _c("li", [_c("div", {
-    staticClass: "dropdown-divider"
-  }), _vm._v(" "), _c("a", {
-    staticClass: "dropdown-item",
-    attrs: {
-      href: "#"
-    }
-  }, [_vm._v("My Profile")]), _vm._v(" "), _c("div", {
-    staticClass: "dropdown-divider"
-  }), _vm._v(" "), _c("a", {
-    staticClass: "dropdown-item",
-    attrs: {
-      href: "#"
-    }
-  }, [_vm._v("Account Setting")]), _vm._v(" "), _c("div", {
-    staticClass: "dropdown-divider"
-  }), _vm._v(" "), _c("a", {
-    staticClass: "dropdown-item",
-    on: {
-      click: function click($event) {
-        $event.preventDefault();
-        return _vm.logout.apply(null, arguments);
-      }
-    }
-  }, [_vm._v("Logout")])])])])])])])])]);
+  return _vm._m(0);
 };
 var staticRenderFns = [function () {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
+    staticClass: "main-header"
+  }, [_c("div", {
     staticClass: "main-header-logo"
   }, [_c("div", {
     staticClass: "logo-header",
@@ -284,11 +248,11 @@ var staticRenderFns = [function () {
     staticClass: "topbar-toggler more"
   }, [_c("i", {
     staticClass: "gg-more-vertical-alt"
-  })])])]);
-}, function () {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c("nav", {
+  })])])]), _vm._v(" "), _c("nav", {
+    staticClass: "navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom"
+  }, [_c("div", {
+    staticClass: "container-fluid"
+  }, [_c("nav", {
     staticClass: "navbar navbar-header-left navbar-expand-lg navbar-form nav-search p-0 d-none d-lg-flex"
   }, [_c("div", {
     staticClass: "input-group"
@@ -307,11 +271,9 @@ var staticRenderFns = [function () {
       type: "text",
       placeholder: "Search ..."
     }
-  })])]);
-}, function () {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c("li", {
+  })])]), _vm._v(" "), _c("ul", {
+    staticClass: "navbar-nav topbar-nav ms-md-auto align-items-center"
+  }, [_c("li", {
     staticClass: "nav-item topbar-icon dropdown hidden-caret d-flex d-lg-none"
   }, [_c("a", {
     staticClass: "nav-link dropdown-toggle",
@@ -336,11 +298,9 @@ var staticRenderFns = [function () {
       type: "text",
       placeholder: "Search ..."
     }
-  })])])])]);
-}, function () {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c("a", {
+  })])])])]), _vm._v(" "), _c("li", {
+    staticClass: "nav-item topbar-user dropdown hidden-caret"
+  }, [_c("a", {
     staticClass: "dropdown-toggle profile-pic",
     attrs: {
       "data-bs-toggle": "dropdown",
@@ -355,11 +315,11 @@ var staticRenderFns = [function () {
       src: "https://i.ibb.co.com/3WPvxLF/user.png",
       alt: "..."
     }
-  })])]);
-}, function () {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c("li", [_c("div", {
+  })])]), _vm._v(" "), _c("ul", {
+    staticClass: "dropdown-menu dropdown-user animated fadeIn"
+  }, [_c("div", {
+    staticClass: "dropdown-user-scroll scrollbar-outer"
+  }, [_c("li", [_c("div", {
     staticClass: "user-box"
   }, [_c("div", {
     staticClass: "avatar-lg"
@@ -376,7 +336,28 @@ var staticRenderFns = [function () {
     attrs: {
       href: ""
     }
-  }, [_vm._v("View Profile")])])])]);
+  }, [_vm._v("View Profile")])])])]), _vm._v(" "), _c("li", [_c("div", {
+    staticClass: "dropdown-divider"
+  }), _vm._v(" "), _c("a", {
+    staticClass: "dropdown-item",
+    attrs: {
+      href: "#"
+    }
+  }, [_vm._v("My Profile")]), _vm._v(" "), _c("div", {
+    staticClass: "dropdown-divider"
+  }), _vm._v(" "), _c("a", {
+    staticClass: "dropdown-item",
+    attrs: {
+      href: "#"
+    }
+  }, [_vm._v("Account Setting")]), _vm._v(" "), _c("div", {
+    staticClass: "dropdown-divider"
+  }), _vm._v(" "), _c("a", {
+    staticClass: "dropdown-item",
+    attrs: {
+      href: "/logout"
+    }
+  }, [_vm._v("Logout")])])])])])])])])]);
 }];
 render._withStripped = true;
 
@@ -709,12 +690,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Store__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Store */ "./resources/js/Store/index.js");
 /* harmony import */ var _Store__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_Store__WEBPACK_IMPORTED_MODULE_9__);
 /* harmony import */ var vee_validate__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! vee-validate */ "./node_modules/vee-validate/dist/vee-validate.esm.js");
-/* harmony import */ var _helper__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./helper */ "./resources/js/helper.js");
-/* harmony import */ var _helper__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_helper__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var vue_toastification__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! vue-toastification */ "./node_modules/vue-toastification/dist/esm/index.js");
-/* harmony import */ var vue_toastification_dist_index_css__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! vue-toastification/dist/index.css */ "./node_modules/vue-toastification/dist/index.css");
-/* harmony import */ var vue_sweetalert2__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! vue-sweetalert2 */ "./node_modules/vue-sweetalert2/dist/vue-sweetalert.mjs");
-/* harmony import */ var sweetalert2_dist_sweetalert2_min_css__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! sweetalert2/dist/sweetalert2.min.css */ "./node_modules/sweetalert2/dist/sweetalert2.min.css");
+/* harmony import */ var vue_toastification__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! vue-toastification */ "./node_modules/vue-toastification/dist/esm/index.js");
+/* harmony import */ var vue_toastification_dist_index_css__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! vue-toastification/dist/index.css */ "./node_modules/vue-toastification/dist/index.css");
+/* harmony import */ var vue_sweetalert2__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! vue-sweetalert2 */ "./node_modules/vue-sweetalert2/dist/vue-sweetalert.mjs");
+/* harmony import */ var sweetalert2_dist_sweetalert2_min_css__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! sweetalert2/dist/sweetalert2.min.css */ "./node_modules/sweetalert2/dist/sweetalert2.min.css");
 
 
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
@@ -742,11 +721,14 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   linkActiveClass: 'active'
 });
 
+// import helper from './helper'
+// helper(store, router);
 
 
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vue_toastification__WEBPACK_IMPORTED_MODULE_12__["default"]);
 
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vue_sweetalert2__WEBPACK_IMPORTED_MODULE_14__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vue_toastification__WEBPACK_IMPORTED_MODULE_11__["default"]);
+
+vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vue_sweetalert2__WEBPACK_IMPORTED_MODULE_13__["default"]);
 
 var vue = new vue__WEBPACK_IMPORTED_MODULE_0__["default"]({
   el: '#app',
@@ -757,16 +739,6 @@ var vue = new vue__WEBPACK_IMPORTED_MODULE_0__["default"]({
   axios: axios__WEBPACK_IMPORTED_MODULE_5__["default"],
   store: store
 });
-
-/***/ }),
-
-/***/ "./resources/js/helper.js":
-/*!********************************!*\
-  !*** ./resources/js/helper.js ***!
-  \********************************/
-/***/ (() => {
-
-
 
 /***/ }),
 

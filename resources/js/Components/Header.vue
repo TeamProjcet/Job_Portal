@@ -122,7 +122,7 @@
                                     <div class="dropdown-divider"></div>
 
 
-                                    <a @click.prevent="logout" class="dropdown-item">Logout</a>
+                                    <a href="/logout" class="dropdown-item">Logout</a>
                                 </li>
 
                             </div>

@@ -43,8 +43,8 @@ const router = new VueRouter({
 
 
 
-import helper from './helper'
-helper(store, router);
+// import helper from './helper'
+// helper(store, router);
 
 import Toast from 'vue-toastification';
 import 'vue-toastification/dist/index.css';
