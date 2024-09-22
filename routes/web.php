@@ -13,13 +13,17 @@ Route::post('adlogin', [\App\Http\Controllers\auth\AuthController::class, 'adlog
 Route::get('logout', [\App\Http\Controllers\auth\AuthController::class, 'logout']);
 
 
-Route::view('admin/{any}', 'singleApp')->where('any', '.*');
+Route::view('admin/{any}', 'backend')->where('any', '.*');
 
 
 
 //frontend route
 //==============>
 
+<<<<<<< HEAD
 Route::get('/', function (){
     echo "<h1 style='text-align: center'>Hello Job Portal Coming Soon</h1>";
 });
+=======
+Route::view('/{any}', 'frontend')->where('any', '.*');
+>>>>>>> main
