@@ -6,9 +6,12 @@
 
             <!-- Side bar section -->
             <SideNav></SideNav>
-
+            <div class="container">
+                <div class="page-inner" >
             <!-- Content section -->
             <router-view></router-view>
+                </div>
+            </div>
 
             <!-- Footer section -->
             <Footer></Footer>

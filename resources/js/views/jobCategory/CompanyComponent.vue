@@ -1,7 +1,6 @@
 <template>
-    <div class="container">
-        <div class="page-inner" >
-    <div class="row">
+    <div>
+        <div class="row">
         <div class="card">
             <div class="card-header">
                 <PageTop></PageTop>
@@ -9,7 +8,7 @@
             <DataTable :tableHeading="tableHeading">
                 <tr >
                     <td>1</td>
-                    <td>WEB</td>
+                    <td>Tmss Ict ltd</td>
                     <td>
                         <a  @click="openEditModal(data , data.id)">
                             <i class="fas fa-edit" style="color: blue;"></i>
@@ -24,7 +23,7 @@
         <FormModal @submit="submitFromData(fromData)">
             <div class="row">
                 <div class="col-md-12">
-                    <label>Category Name</label>
+                    <label>Company Name</label>
 
                     <input
                             v-validate="'required'"
@@ -38,7 +37,6 @@
         </FormModal>
     </div>
     </div>
-    </div>
 </template>
 
 <script>
@@ -46,7 +44,7 @@
     import DataTable from "../../Components/DataTable";
     import FormModal from "../../Components/FormModal";
     export default {
-        name: "CategoryComponent",
+        name: "CompanyComponent",
         components: {FormModal, DataTable, PageTop},
         data() {
             return {
@@ -54,11 +52,6 @@
 
             };
         },
-        mounted() {
-            // this.getDataList();
-            // this.$set(this.fromData, "name", "");
-        },
-        computed: {}
     }
 </script>
 

@@ -42,8 +42,8 @@ const router = new VueRouter({
 
 
 // small common-function 
-// import helper from './helper'
-// helper(store, router);
+import helper from './helper'
+helper(store, router);
 
 // alret massage 
 import Toast from 'vue-toastification';

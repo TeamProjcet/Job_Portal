@@ -11,26 +11,44 @@
         </div>
         <form>
             <div class="mb-3 ">
-                <label for="" class="form-label">Name</label>
-                <input type="text" class="form-control" name="name">
+                <label  class="form-label">Name</label>
+                <select class="form-control">
+                    <option>Select Job Name</option>
+                    <option value="1">Web Develpment</option>
+                    <option value="2">Digital Merketing</option>
+                </select>
             </div>
             <div class="mb-3">
                 <label  class="form-label">Title</label>
                 <input type="text" class="form-control"  name="title">
             </div>
             <div class="mb-3">
-                <label class="form-label">Type</label>
+                <label class="form-label">Job Type</label>
                <select class="form-control">
-                   <option>Select type</option>
+                   <option>Select Job type</option>
                    <option value="1">Full Time</option>
                    <option value="2">Part Time</option>
                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Company</label>
+               <select class="form-control">
+                   <option>Select Company</option>
+                   <option value="1">Tmss ict ltd.</option>
+                   <option value="2">TISI</option>
+               </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Location</label>
+                <input type="text" class="form-control" name="location">
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Details</label>
                 <input type="text" class="form-control" name="details">
             </div>
+
+
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>

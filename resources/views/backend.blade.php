@@ -32,8 +32,8 @@
         },
       });
     </script>
-
     <!-- CSS Files -->
+
     <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}" />
     <link rel="stylesheet" href="{{asset('assets/css/plugins.min.css')}}" />
     <link rel="stylesheet" href="{{asset('assets/css/kaiadmin.min.css')}}" />
@@ -46,6 +46,8 @@
     <div id="app">
       <app></app>
     </div>
+
+    <script>window.baseUrl = '{{url('/')}}';</script>
 
     <!--   Core JS Files   -->
     <script src="{{asset('assets/js/core/jquery-3.7.1.min.js')}}"></script>
