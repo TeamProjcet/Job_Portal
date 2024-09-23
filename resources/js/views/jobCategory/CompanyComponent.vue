@@ -6,9 +6,9 @@
                 <PageTop></PageTop>
             </div>
             <DataTable :tableHeading="tableHeading">
-                <tr >
-                    <td>1</td>
-                    <td>Tmss Ict ltd</td>
+                <tr v-for="(data, index) in dataList">
+                    <td>{{index + 1}}</td>
+                    <td>{{data.name}}</td>
                     <td>
                         <a  @click="openEditModal(data , data.id)">
                             <i class="fas fa-edit" style="color: blue;"></i>
@@ -52,6 +52,10 @@
 
             };
         },
+        mounted() {
+            this.getDataList();
+            this.$set(this.fromData, "name", "");
+        }
     }
 </script>
 

@@ -265,6 +265,10 @@ __webpack_require__.r(__webpack_exports__);
     return {
       tableHeading: ["Sl", "name", "Action"]
     };
+  },
+  mounted: function mounted() {
+    this.getDataList();
+    this.$set(this.fromData, "name", "");
   }
 });
 
@@ -1099,29 +1103,31 @@ var render = function render() {
     attrs: {
       tableHeading: _vm.tableHeading
     }
-  }, [_c("tr", [_c("td", [_vm._v("1")]), _vm._v(" "), _c("td", [_vm._v("Tmss Ict ltd")]), _vm._v(" "), _c("td", [_c("a", {
-    on: {
-      click: function click($event) {
-        return _vm.openEditModal(_vm.data, _vm.data.id);
+  }, _vm._l(_vm.dataList, function (data, index) {
+    return _c("tr", [_c("td", [_vm._v(_vm._s(index + 1))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(data.name))]), _vm._v(" "), _c("td", [_c("a", {
+      on: {
+        click: function click($event) {
+          return _vm.openEditModal(data, data.id);
+        }
       }
-    }
-  }, [_c("i", {
-    staticClass: "fas fa-edit",
-    staticStyle: {
-      color: "blue"
-    }
-  })]), _vm._v(" "), _c("a", {
-    on: {
-      click: function click($event) {
-        return _vm.CategoryDatadelete(_vm.data.id, _vm.index);
+    }, [_c("i", {
+      staticClass: "fas fa-edit",
+      staticStyle: {
+        color: "blue"
       }
-    }
-  }, [_c("i", {
-    staticClass: "fas fa-trash-alt",
-    staticStyle: {
-      color: "red"
-    }
-  })])])])])], 1), _vm._v(" "), _c("FormModal", {
+    })]), _vm._v(" "), _c("a", {
+      on: {
+        click: function click($event) {
+          return _vm.CategoryDatadelete(data.id, index);
+        }
+      }
+    }, [_c("i", {
+      staticClass: "fas fa-trash-alt",
+      staticStyle: {
+        color: "red"
+      }
+    })])])]);
+  }), 0)], 1), _vm._v(" "), _c("FormModal", {
     on: {
       submit: function submit($event) {
         return _vm.submitFromData(_vm.fromData);
@@ -1534,8 +1540,8 @@ __webpack_require__.r(__webpack_exports__);
       var optParms = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
       var callback = arguments.length > 2 ? arguments[2] : undefined;
       var _this = this;
-      var method = _this.formType === 2 ? 'put' : 'post';
-      var url = _this.formType === 2 ? "".concat(_this.urlGenaretor(), "/").concat(_this.updateId) : _this.urlGenaretor();
+      var method = _this.formType === 2 && _this.updateId ? 'put' : 'post';
+      var url = _this.formType === 2 && _this.updateId ? "".concat(_this.urlGenaretor(), "/").concat(_this.updateId) : _this.urlGenaretor();
       _this.$validator.validateAll().then(function (valid) {
         if (valid) {
           (0,axios__WEBPACK_IMPORTED_MODULE_2__["default"])({
@@ -1564,7 +1570,7 @@ __webpack_require__.r(__webpack_exports__);
                 });
               });
             } else {
-              console.log('toster');
+              _this.$toast.error("Category  Unsuccessfully!");
             }
           });
         }
@@ -1572,13 +1578,14 @@ __webpack_require__.r(__webpack_exports__);
     },
     CategoryDatadelete: function CategoryDatadelete(id, index) {
       var _this = this;
-      _this.DeleteToster(function (isConfirmedelete) {
-        var url = "".concat(_this.urlGenaretor(), "/").concat(id);
-        _this.httpReq('delete', url, {}, {}, function (retData) {
-          _this.getDataList();
-          _this.$toast.success("Data Delete successfully!");
-        });
+
+      // _this.DeleteToster(function (isConfirmedelete) {
+      var url = "".concat(_this.urlGenaretor(), "/").concat(id);
+      _this.httpReq('delete', url, {}, {}, function (retData) {
+        _this.getDataList();
+        _this.$toast.success("Data Delete successfully!");
       });
+      // })
     }
   }
 });

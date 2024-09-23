@@ -11,7 +11,10 @@ Route::get('register', [\App\Http\Controllers\auth\AuthController::class, 'viewR
 Route::resource('/userRegister', \App\Http\Controllers\auth\AuthController::class);
 Route::post('adlogin', [\App\Http\Controllers\auth\AuthController::class, 'adlogin']);
 
-Route::group(['middleware'=>'auth'],function (){
+Route::prefix('api')->group(function (){
+
+    Route::resource('/company', \App\Http\Controllers\Backend\CompanyController::class);
+
 
 });
 Route::view('admin/{any}', 'backend')->where('any', '.*')->middleware('auth');

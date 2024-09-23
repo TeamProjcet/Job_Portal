@@ -55,8 +55,10 @@ export default {
         },
         submitFromData: function (fromData = {}, optParms = {}, callback) {
             const _this = this;
-            let method = (_this.formType === 2) ? 'put' : 'post';
-            let url = (_this.formType === 2) ? `${_this.urlGenaretor()}/${_this.updateId}` : _this.urlGenaretor();
+
+            let method = (_this.formType === 2 && _this.updateId) ? 'put' : 'post';
+            let url = (_this.formType === 2 && _this.updateId) ? `${_this.urlGenaretor()}/${_this.updateId}` : _this.urlGenaretor();
+
             _this.$validator.validateAll().then(valid => {
                 if (valid) {
                     axios({
@@ -89,7 +91,8 @@ export default {
                             })
 
                         } else {
-                            console.log('toster');
+                            _this.$toast.error("Category  Unsuccessfully!");
+
                         }
                     });
                 }
@@ -98,7 +101,7 @@ export default {
         CategoryDatadelete: function(id , index) {
             const _this = this;
 
-            _this.DeleteToster(function (isConfirmedelete) {
+            // _this.DeleteToster(function (isConfirmedelete) {
                 let url=`${_this.urlGenaretor()}/${id}`;
                 _this.httpReq('delete',url,{},{},function (retData) {
                     _this.getDataList();
@@ -106,7 +109,7 @@ export default {
 
 
                 })
-            })
+            // })
 
         },
 
