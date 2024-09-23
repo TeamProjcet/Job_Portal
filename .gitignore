@@ -18,5 +18,5 @@ yarn-error.log
 /.vscode
 
 # Ignore specific app.js files
-/public/js/app.js
-/public/frontend/js/app.js
+/public/js/
+/public/frontend/js/
