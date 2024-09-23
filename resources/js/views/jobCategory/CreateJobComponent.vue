@@ -55,7 +55,8 @@
 
 <script>
     export default {
-        name: "CreateJopComponent"
+        name: "CreateJopComponent",
+
     }
 </script>
 

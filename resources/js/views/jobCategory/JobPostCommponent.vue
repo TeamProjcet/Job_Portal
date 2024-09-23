@@ -66,6 +66,8 @@
         mounted() {
             // this.getDataList();
             // this.$set(this.fromData, "name", "");
+            this.getDataList();
+            this.getRequiredData(['category']);
         },
         computed: {}
     }
