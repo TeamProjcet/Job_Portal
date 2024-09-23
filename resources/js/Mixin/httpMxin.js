@@ -5,7 +5,9 @@ import {Toast} from "vue-toastification";
 
 export default {
     data() {
-        return {};
+        return {
+
+        };
     },
 
 
@@ -95,6 +97,15 @@ export default {
                 }
             });
         },
+
+
+        oonFileChange(event) {
+            const file = event.target.files[0];
+            if (file) {
+                this.fromData.image = file;
+            }
+        },
+
         CategoryDatadelete: function(id , index) {
             const _this = this;
 

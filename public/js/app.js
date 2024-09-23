@@ -282,7 +282,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "CreateJopComponent"
+  name: "CreateJobComponent",
+  mounted: function mounted() {
+    this.getDataList();
+  }
 });
 
 /***/ }),
@@ -1187,97 +1190,266 @@ var render = function render() {
     staticStyle: {
       "margin-left": "20px"
     }
-  }, [_vm._v(_vm._s(_vm.$route.meta.pagetitle))])]), _vm._v(" "), _c("div", {
+  }, [_vm._v("\n                " + _vm._s(_vm.$route.meta.pagetitle) + "\n            ")])]), _vm._v(" "), _c("div", {
     staticClass: "ms-md-auto py-2 py-md-0"
   }, [_c("router-link", {
     staticClass: "btn btn-primary btn-round",
     attrs: {
       to: "/admin/jobcategory/joblist"
     }
-  }, [_vm._v("Back To Job List")])], 1)]), _vm._v(" "), _vm._m(0)]);
-};
-var staticRenderFns = [function () {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c("form", [_c("div", {
+  }, [_vm._v("\n                Back To Job List\n            ")])], 1)]), _vm._v(" "), _c("form", {
+    on: {
+      submit: function submit($event) {
+        $event.preventDefault();
+        return _vm.submitFromData(_vm.fromData);
+      }
+    }
+  }, [_c("div", {
+    staticClass: "row"
+  }, [_c("div", {
+    staticClass: "col-md-6"
+  }, [_c("div", {
     staticClass: "mb-3"
   }, [_c("label", {
     staticClass: "form-label"
   }, [_vm._v("Name")]), _vm._v(" "), _c("select", {
-    staticClass: "form-control"
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.fromData.name,
+      expression: "fromData.name"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      name: "name"
+    },
+    on: {
+      change: function change($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
+          return o.selected;
+        }).map(function (o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val;
+        });
+        _vm.$set(_vm.fromData, "name", $event.target.multiple ? $$selectedVal : $$selectedVal[0]);
+      }
+    }
   }, [_c("option", [_vm._v("Select Job Name")]), _vm._v(" "), _c("option", {
     attrs: {
-      value: "1"
+      value: "Web Development"
     }
-  }, [_vm._v("Web Develpment")]), _vm._v(" "), _c("option", {
-    attrs: {
-      value: "2"
-    }
-  }, [_vm._v("Digital Merketing")])])]), _vm._v(" "), _c("div", {
+  }, [_vm._v("Web Development")])])]), _vm._v(" "), _c("div", {
     staticClass: "mb-3"
   }, [_c("label", {
     staticClass: "form-label"
   }, [_vm._v("Title")]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.fromData.title,
+      expression: "fromData.title"
+    }],
     staticClass: "form-control",
     attrs: {
       type: "text",
       name: "title"
+    },
+    domProps: {
+      value: _vm.fromData.title
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.$set(_vm.fromData, "title", $event.target.value);
+      }
     }
   })]), _vm._v(" "), _c("div", {
     staticClass: "mb-3"
   }, [_c("label", {
     staticClass: "form-label"
-  }, [_vm._v("Job Type")]), _vm._v(" "), _c("select", {
-    staticClass: "form-control"
-  }, [_c("option", [_vm._v("Select Job type")]), _vm._v(" "), _c("option", {
+  }, [_vm._v("Salary")]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.fromData.salary,
+      expression: "fromData.salary"
+    }],
+    staticClass: "form-control",
     attrs: {
-      value: "1"
+      type: "text",
+      name: "salary"
+    },
+    domProps: {
+      value: _vm.fromData.salary
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.$set(_vm.fromData, "salary", $event.target.value);
+      }
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "mb-3"
+  }, [_c("label", {
+    staticClass: "form-label"
+  }, [_vm._v("Company")]), _vm._v(" "), _c("select", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.fromData.company,
+      expression: "fromData.company"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      name: "company"
+    },
+    on: {
+      change: function change($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
+          return o.selected;
+        }).map(function (o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val;
+        });
+        _vm.$set(_vm.fromData, "company", $event.target.multiple ? $$selectedVal : $$selectedVal[0]);
+      }
+    }
+  }, [_c("option", [_vm._v("Select Company")]), _vm._v(" "), _c("option", {
+    attrs: {
+      value: "Tmss ICT Ltd"
+    }
+  }, [_vm._v("Tmss ICT Ltd")])])]), _vm._v(" "), _c("div", {
+    staticClass: "mb-3"
+  }, [_c("label", {
+    staticClass: "form-label"
+  }, [_vm._v("Location")]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.fromData.address,
+      expression: "fromData.address"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      type: "text",
+      name: "address"
+    },
+    domProps: {
+      value: _vm.fromData.address
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.$set(_vm.fromData, "address", $event.target.value);
+      }
+    }
+  })])]), _vm._v(" "), _c("div", {
+    staticClass: "col-md-6"
+  }, [_c("div", {
+    staticClass: "mb-3"
+  }, [_c("label", {
+    staticClass: "form-label"
+  }, [_vm._v("Job Type")]), _vm._v(" "), _c("select", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.fromData.job_type,
+      expression: "fromData.job_type"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      name: "job_type"
+    },
+    on: {
+      change: function change($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
+          return o.selected;
+        }).map(function (o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val;
+        });
+        _vm.$set(_vm.fromData, "job_type", $event.target.multiple ? $$selectedVal : $$selectedVal[0]);
+      }
+    }
+  }, [_c("option", [_vm._v("Select Job Type")]), _vm._v(" "), _c("option", {
+    attrs: {
+      value: "Full Time"
     }
   }, [_vm._v("Full Time")]), _vm._v(" "), _c("option", {
     attrs: {
-      value: "2"
+      value: "Part Time"
     }
   }, [_vm._v("Part Time")])])]), _vm._v(" "), _c("div", {
     staticClass: "mb-3"
   }, [_c("label", {
     staticClass: "form-label"
-  }, [_vm._v("Company")]), _vm._v(" "), _c("select", {
-    staticClass: "form-control"
-  }, [_c("option", [_vm._v("Select Company")]), _vm._v(" "), _c("option", {
-    attrs: {
-      value: "1"
-    }
-  }, [_vm._v("Tmss ict ltd.")]), _vm._v(" "), _c("option", {
-    attrs: {
-      value: "2"
-    }
-  }, [_vm._v("TISI")])])]), _vm._v(" "), _c("div", {
-    staticClass: "mb-3"
-  }, [_c("label", {
-    staticClass: "form-label"
-  }, [_vm._v("Location")]), _vm._v(" "), _c("input", {
+  }, [_vm._v("Details")]), _vm._v(" "), _c("textarea", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.fromData.details,
+      expression: "fromData.details"
+    }],
     staticClass: "form-control",
     attrs: {
-      type: "text",
-      name: "location"
+      name: "details",
+      rows: "3"
+    },
+    domProps: {
+      value: _vm.fromData.details
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.$set(_vm.fromData, "details", $event.target.value);
+      }
     }
   })]), _vm._v(" "), _c("div", {
     staticClass: "mb-3"
   }, [_c("label", {
     staticClass: "form-label"
-  }, [_vm._v("Details")]), _vm._v(" "), _c("input", {
+  }, [_vm._v("Date")]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.fromData.date_time,
+      expression: "fromData.date_time"
+    }],
     staticClass: "form-control",
     attrs: {
-      type: "text",
-      name: "details"
+      type: "date",
+      name: "date_time"
+    },
+    domProps: {
+      value: _vm.fromData.date_time
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.$set(_vm.fromData, "date_time", $event.target.value);
+      }
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "mb-3"
+  }, [_c("label", {
+    staticClass: "form-label"
+  }, [_vm._v("File")]), _vm._v(" "), _c("input", {
+    staticClass: "form-control",
+    attrs: {
+      type: "file",
+      name: "image"
+    },
+    on: {
+      change: _vm.oonFileChange
     }
   })]), _vm._v(" "), _c("button", {
     staticClass: "btn btn-primary",
     attrs: {
       type: "submit"
     }
-  }, [_vm._v("Submit")])]);
-}];
+  }, [_vm._v("Submit")])])])])]);
+};
+var staticRenderFns = [];
 render._withStripped = true;
 
 
@@ -1569,6 +1741,12 @@ __webpack_require__.r(__webpack_exports__);
           });
         }
       });
+    },
+    oonFileChange: function oonFileChange(event) {
+      var file = event.target.files[0];
+      if (file) {
+        this.fromData.image = file;
+      }
     },
     CategoryDatadelete: function CategoryDatadelete(id, index) {
       var _this = this;
