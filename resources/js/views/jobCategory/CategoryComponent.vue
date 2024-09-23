@@ -6,9 +6,9 @@
                 <PageTop></PageTop>
             </div>
             <DataTable :tableHeading="tableHeading">
-                <tr >
-                    <td>1</td>
-                    <td>WEB</td>
+                <tr v-for="(data, index) in dataList" :key="index">
+                    <td>{{ index + 1 }}</td>
+                    <td>{{ data.name }}</td>
                     <td>
                         <a  @click="openEditModal(data , data.id)">
                             <i class="fas fa-edit" style="color: blue;"></i>
@@ -20,7 +20,9 @@
                 </tr>
             </DataTable>
         </div>
-        <FormModal @submit="submitFromData(fromData)">
+
+<!--        slot-->
+        <FormModal v-if="openModal" @submit="submitFromData(fromData)">
             <div class="row">
                 <div class="col-md-12">
                     <label>Category Name</label>
@@ -35,6 +37,7 @@
                 </div>
             </div>
         </FormModal>
+
     </div>
 
 
@@ -54,7 +57,7 @@
             };
         },
         mounted() {
-            // this.getDataList();
+            this.getDataList();
             // this.$set(this.fromData, "name", "");
         },
         computed: {}

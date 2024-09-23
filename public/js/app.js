@@ -229,7 +229,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
-    // this.getDataList();
+    this.getDataList();
     // this.$set(this.fromData, "name", "");
   },
   computed: {}
@@ -489,8 +489,11 @@ var render = function render() {
         return _vm.closeModal(_vm.modalId);
       }
     }
-  }, [_vm._v("\n                        Close\n                    ")]), _vm._v(" "), _c("button", {
-    staticClass: "btn btn-primary"
+  }, [_vm._v("Close\n                    ")]), _vm._v(" "), _c("button", {
+    staticClass: "btn btn-primary",
+    attrs: {
+      type: "submit"
+    }
   }, [_vm._v("Save changes")])])])])])]);
 };
 var staticRenderFns = [];
@@ -1012,29 +1015,33 @@ var render = function render() {
     attrs: {
       tableHeading: _vm.tableHeading
     }
-  }, [_c("tr", [_c("td", [_vm._v("1")]), _vm._v(" "), _c("td", [_vm._v("WEB")]), _vm._v(" "), _c("td", [_c("a", {
-    on: {
-      click: function click($event) {
-        return _vm.openEditModal(_vm.data, _vm.data.id);
+  }, _vm._l(_vm.dataList, function (data, index) {
+    return _c("tr", {
+      key: index
+    }, [_c("td", [_vm._v(_vm._s(index + 1))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(data.name))]), _vm._v(" "), _c("td", [_c("a", {
+      on: {
+        click: function click($event) {
+          return _vm.openEditModal(data, data.id);
+        }
       }
-    }
-  }, [_c("i", {
-    staticClass: "fas fa-edit",
-    staticStyle: {
-      color: "blue"
-    }
-  })]), _vm._v(" "), _c("a", {
-    on: {
-      click: function click($event) {
-        return _vm.CategoryDatadelete(_vm.data.id, _vm.index);
+    }, [_c("i", {
+      staticClass: "fas fa-edit",
+      staticStyle: {
+        color: "blue"
       }
-    }
-  }, [_c("i", {
-    staticClass: "fas fa-trash-alt",
-    staticStyle: {
-      color: "red"
-    }
-  })])])])])], 1), _vm._v(" "), _c("FormModal", {
+    })]), _vm._v(" "), _c("a", {
+      on: {
+        click: function click($event) {
+          return _vm.CategoryDatadelete(data.id, index);
+        }
+      }
+    }, [_c("i", {
+      staticClass: "fas fa-trash-alt",
+      staticStyle: {
+        color: "red"
+      }
+    })])])]);
+  }), 0)], 1), _vm._v(" "), _vm.openModal ? _c("FormModal", {
     on: {
       submit: function submit($event) {
         return _vm.submitFromData(_vm.fromData);
@@ -1070,7 +1077,7 @@ var render = function render() {
         _vm.$set(_vm.fromData, "name", $event.target.value);
       }
     }
-  })])])])], 1);
+  })])])]) : _vm._e()], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;
