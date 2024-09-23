@@ -1,7 +1,7 @@
 import Dashboard from '../views/Dashboard.vue';
 import CategoryComponent from "../views/jobCategory/CategoryComponent";
 import JobPostCommponent from "../views/jobCategory/JobPostCommponent";
-import CreateJopComponent from "../views/jobCategory/CreateJopComponent";
+import CreateJobComponent from "../views/jobCategory/CreateJobComponent.vue";
 import CompanyComponent from "../views/jobCategory/CompanyComponent";
 
 
@@ -30,7 +30,7 @@ const route = [
     {
         path : '/admin/jobcategory/createjob',
         name : 'createjob',
-        component : CreateJopComponent,
+        component : CreateJobComponent,
         meta:{pagetitle:'Job Create Table',dataUrl:'api/createjob',
         }
 

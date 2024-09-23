@@ -55,7 +55,7 @@
 
 <script>
     export default {
-        name: "CreateJopComponent",
+        name: "CreateJobComponent",
 
     }
 </script>
