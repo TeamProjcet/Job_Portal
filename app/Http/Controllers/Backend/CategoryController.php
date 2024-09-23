@@ -3,26 +3,44 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Supports\Helper;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
 
+    use Helper;
+
+    public function __construct()
+    {
+        $this->model = new Category();
+    }
+
     public function index()
     {
-
+        $data = $this->model->get();
+        return $this->returnData(2000, $data);
     }
+
 
     public function create()
     {
-
+        //
     }
 
 
     public function store(Request $request)
     {
-        //
+        $validator = $this->model->validate($request->all());
+        if ($validator->fails()) {
+            return response()->json(['result' => $validator->errors(), 'status' => 3000], 200);
+        }
+        $this->model->fill($request->all());
+        $this->model->save();
+        return $this->returnData(2000, $this->model);
     }
+
+
 
     /**
      * Display the specified resource.

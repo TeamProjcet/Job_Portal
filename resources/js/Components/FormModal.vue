@@ -25,11 +25,9 @@
                         <button
                                 type="button"
                                 class="btn btn-secondary"
-                                @click="closeModal(modalId)"
-                        >
-                            Close
+                                @click="closeModal(modalId)">Close
                         </button>
-                        <button class="btn btn-primary">Save changes</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
                     </div>
                 </div>
             </form>
