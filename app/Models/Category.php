@@ -10,8 +10,8 @@ class Category extends Model
 {
     use HasFactory;
     protected $fillable = ['name'];
-    public function validate($input)
-    {
+    public function validator($input){
+
         return Validator::make($input, [
             'name' => 'required'
         ]);

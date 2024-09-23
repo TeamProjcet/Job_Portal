@@ -10,9 +10,9 @@ Route::get('logout', [\App\Http\Controllers\auth\AuthController::class, 'logout'
 Route::get('register', [\App\Http\Controllers\auth\AuthController::class, 'viewReg']);
 Route::resource('/userRegister', \App\Http\Controllers\auth\AuthController::class);
 Route::post('adlogin', [\App\Http\Controllers\auth\AuthController::class, 'adlogin']);
-Route::resource('category', \App\Http\Controllers\CategoryController::class);
 
 Route::prefix('api')->group(function (){
+    Route::resource('categories', \App\Http\Controllers\Backend\CategoryController::class);
 
     Route::resource('/company', \App\Http\Controllers\Backend\CompanyController::class);
 
