@@ -1,6 +1,5 @@
 <template>
-    <div class="container">
-    <div class="page-inner" >
+<div>
         <div class="d-flex bg-light align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
             <div>
                 <h3 class="fw-bold mb-3 " style="margin-left: 20px">{{$route.meta.pagetitle}}</h3>
@@ -51,7 +50,6 @@
 
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
-    </div>
     </div>
 </template>
 

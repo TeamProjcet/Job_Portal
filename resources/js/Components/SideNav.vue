@@ -60,6 +60,11 @@
                                     </router-link>
                                 </li>
                                 <li>
+                                    <router-link to="/admin/jobcategory/company">
+                                        <span class="sub-item">Company List</span>
+                                    </router-link>
+                                </li>
+                                <li>
                                     <router-link to="/admin/jobcategory/joblist">
                                         <span class="sub-item">Job Post</span>
                                     </router-link>

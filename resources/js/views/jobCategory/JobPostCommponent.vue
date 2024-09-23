@@ -1,6 +1,5 @@
 <template>
-    <div class="container">
-        <div class="page-inner" >
+
     <div class="row">
         <div class="card">
             <div class="card-header">
@@ -37,8 +36,8 @@
                     <label>Category Name</label>
 
                     <input
-                            v-validate="'required'"
-                    <!--                            v-model="fromData.name"-->
+                    v-validate="'required'"
+                    v-model="fromData.name"
                     class="form-control"
                     name="name"
                     type="text"
@@ -47,8 +46,8 @@
             </div>
         </FormModal>
     </div>
-    </div>
-    </div>
+
+
 </template>
 
 <script>

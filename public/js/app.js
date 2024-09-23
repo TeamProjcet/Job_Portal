@@ -750,6 +750,12 @@ var render = function render() {
     staticClass: "sub-item"
   }, [_vm._v("Job Category")])])], 1), _vm._v(" "), _c("li", [_c("router-link", {
     attrs: {
+      to: "/admin/jobcategory/company"
+    }
+  }, [_c("span", {
+    staticClass: "sub-item"
+  }, [_vm._v("Company List")])])], 1), _vm._v(" "), _c("li", [_c("router-link", {
+    attrs: {
       to: "/admin/jobcategory/joblist"
     }
   }, [_c("span", {
@@ -993,10 +999,6 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
-    staticClass: "container"
-  }, [_c("div", {
-    staticClass: "page-inner"
-  }, [_c("div", {
     staticClass: "row"
   }, [_c("div", {
     staticClass: "card"
@@ -1064,7 +1066,7 @@ var render = function render() {
         _vm.$set(_vm.fromData, "name", $event.target.value);
       }
     }
-  })])])])], 1)])]);
+  })])])])], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -1178,11 +1180,7 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", {
-    staticClass: "container"
-  }, [_c("div", {
-    staticClass: "page-inner"
-  }, [_c("div", {
+  return _c("div", [_c("div", {
     staticClass: "d-flex bg-light align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4"
   }, [_c("div", [_c("h3", {
     staticClass: "fw-bold mb-3",
@@ -1196,7 +1194,7 @@ var render = function render() {
     attrs: {
       to: "/admin/jobcategory/joblist"
     }
-  }, [_vm._v("Back To Job List")])], 1)]), _vm._v(" "), _vm._m(0)])]);
+  }, [_vm._v("Back To Job List")])], 1)]), _vm._v(" "), _vm._m(0)]);
 };
 var staticRenderFns = [function () {
   var _vm = this,
@@ -1301,10 +1299,6 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
-    staticClass: "container"
-  }, [_c("div", {
-    staticClass: "page-inner"
-  }, [_c("div", {
     staticClass: "row"
   }, [_c("div", {
     staticClass: "card"
@@ -1362,7 +1356,33 @@ var render = function render() {
     staticClass: "row"
   }, [_c("div", {
     staticClass: "col-md-12"
-  }, [_c("label", [_vm._v("Category Name")]), _vm._v(" "), _vm._v('\n                class="form-control"\n                name="name"\n                type="text"\n                />\n            ')])])])], 1)])]);
+  }, [_c("label", [_vm._v("Category Name")]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "validate",
+      rawName: "v-validate",
+      value: "required",
+      expression: "'required'"
+    }, {
+      name: "model",
+      rawName: "v-model",
+      value: _vm.fromData.name,
+      expression: "fromData.name"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      name: "name",
+      type: "text"
+    },
+    domProps: {
+      value: _vm.fromData.name
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.$set(_vm.fromData, "name", $event.target.value);
+      }
+    }
+  })])])])], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;
