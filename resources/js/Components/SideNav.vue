@@ -46,6 +46,9 @@
                 </span>
                         <h4 class="text-section">Menu Items</h4>
                     </li>
+
+<!--                    -->
+
                     <li class="nav-item">
                         <a data-bs-toggle="collapse" href="#base">
                             <i class="fas fa-layer-group"></i>
@@ -74,6 +77,27 @@
                     </li>
 
                     <!-- --------------------- -->
+
+                    <li class="nav-item">
+                        <a data-bs-toggle="collapse" href="#base2">
+                            <i class="fab fa-blogger-b"></i>
+                            <p>Blog</p>
+                            <span class="caret"></span>
+                        </a>
+                        <div class="collapse" id="base2">
+                            <ul class="nav nav-collapse">
+                                <li>
+                                    <router-link to="/admin/blog/blogpost">
+                                        <span class="sub-item">Blog Post</span>
+                                    </router-link>
+                                </li>
+
+
+                            </ul>
+                        </div>
+                    </li>
+
+<!--                    -->
                 </ul>
             </div>
         </div>
