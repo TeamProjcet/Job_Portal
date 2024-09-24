@@ -3,6 +3,7 @@ import CategoryComponent from "../views/jobCategory/CategoryComponent";
 import JobPostCommponent from "../views/jobCategory/JobPostCommponent";
 import CreateJobComponent from "../views/jobCategory/CreateJobComponent.vue";
 import CompanyComponent from "../views/jobCategory/CompanyComponent";
+import BlogPostComponent from "../views/Blog/BlogPostComponent";
 
 
 const route = [
@@ -40,6 +41,14 @@ const route = [
         name : 'company',
         component : CompanyComponent,
         meta:{pagetitle:'Job Company Table',dataUrl:'api/company',
+        }
+
+    },
+    {
+        path : '/admin/blog/blogpost',
+        name : 'blogpost',
+        component : BlogPostComponent,
+        meta:{pagetitle:'Blog Post Table',dataUrl:'api/blogpost',
         }
 
     },
