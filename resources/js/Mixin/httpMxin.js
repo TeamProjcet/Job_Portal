@@ -60,7 +60,7 @@ export default {
 
             let method = (_this.formType === 2 && _this.updateId) ? 'put' : 'post';
             let url = (_this.formType === 2 && _this.updateId) ? `${_this.urlGenaretor()}/${_this.updateId}` : _this.urlGenaretor();
-            console.log('Submitting to:', url, 'with method:', method);
+
             _this.$validator.validateAll().then(valid => {
                 if (valid) {
                     axios({

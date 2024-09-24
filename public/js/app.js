@@ -1754,7 +1754,6 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
       var method = _this.formType === 2 && _this.updateId ? 'put' : 'post';
       var url = _this.formType === 2 && _this.updateId ? "".concat(_this.urlGenaretor(), "/").concat(_this.updateId) : _this.urlGenaretor();
-      console.log('Submitting to:', url, 'with method:', method);
       _this.$validator.validateAll().then(function (valid) {
         if (valid) {
           (0,axios__WEBPACK_IMPORTED_MODULE_2__["default"])({
