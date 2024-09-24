@@ -42,6 +42,18 @@ export default {
 
         },
 
+        publicImage : function (imageName) {
+            return `${baseUrl}/${imageName}`;
+        },
+
+        storageImage : function (imageName){
+            return `${uploadPath}/${imageName}`;
+        },
+
+        clickFileField : function (filedName){
+            $(`#${filedName}`).click();
+        }
+
     },
     computed: {
         fromData() {
