@@ -19,8 +19,10 @@ Route::prefix('api')->group(function (){
 Route::resource('categories', \App\Http\Controllers\Backend\CategoryController::class);
 Route::resource('/company', \App\Http\Controllers\Backend\CompanyController::class);
 Route::resource('/company', \App\Http\Controllers\Backend\CompanyController::class);
-Route::resource('/job', \App\Http\Controllers\Backend\JobPostController::class);
+//Route::resource('/job', \App\Http\Controllers\Backend\JobPostController::class);
+Route::resource('/createjob', \App\Http\Controllers\Backend\JobPostController::class);
 Route::post('upload', [\App\Http\Controllers\Backend\UploadController::class, 'upload']);
+Route::post('/required_data', [\App\Http\Controllers\SupportController::class, 'requireData']);
 });
 
 //frontend Route

@@ -43,13 +43,13 @@ class JobPostController extends Controller
     }
 
 
-    public function show(Category $category)
+    public function show( )
     {
 
     }
 
 
-    public function edit(Category $category)
+    public function edit()
     {
 
     }

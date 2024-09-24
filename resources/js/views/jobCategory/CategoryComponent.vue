@@ -22,7 +22,7 @@
         </div>
 
 <!--        slot-->
-        <FormModal v-if="openModal" @submit="submitFromData(fromData)">
+        <FormModal  @submit="submitFromData(fromData)">
             <div class="row">
                 <div class="col-md-12">
                     <label>Category Name</label>

@@ -52,7 +52,7 @@
                     <div class="mb-3">
                         <label class="form-label">Job Type</label>
                         <select v-model="fromData.job_type" name="job_type" class="form-control">
-                            <option>Select Job Type</option>
+                            <option value="">Select Job Type</option>
                             <option value="Full Time">Full Time</option>
                             <option value="Part Time">Part Time</option>
                         </select>
@@ -96,6 +96,8 @@
 
         mounted() {
             this.getDataList();
+            this.getRequiredData(['category','company']);
+
         }
     }
 </script>

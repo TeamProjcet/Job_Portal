@@ -289,6 +289,7 @@ __webpack_require__.r(__webpack_exports__);
   name: "CreateJobComponent",
   mounted: function mounted() {
     this.getDataList();
+    this.getRequiredData(['category', 'company']);
   }
 });
 
@@ -327,7 +328,6 @@ __webpack_require__.r(__webpack_exports__);
     // this.getDataList();
     // this.$set(this.fromData, "name", "");
     this.getDataList();
-    this.getRequiredData(['category']);
   },
   computed: {}
 });
@@ -1046,7 +1046,7 @@ var render = function render() {
         color: "red"
       }
     })])])]);
-  }), 0)], 1), _vm._v(" "), _vm.openModal ? _c("FormModal", {
+  }), 0)], 1), _vm._v(" "), _c("FormModal", {
     on: {
       submit: function submit($event) {
         return _vm.submitFromData(_vm.fromData);
@@ -1082,7 +1082,7 @@ var render = function render() {
         _vm.$set(_vm.fromData, "name", $event.target.value);
       }
     }
-  })])])]) : _vm._e()], 1);
+  })])])])], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -1386,7 +1386,11 @@ var render = function render() {
         _vm.$set(_vm.fromData, "job_type", $event.target.multiple ? $$selectedVal : $$selectedVal[0]);
       }
     }
-  }, [_c("option", [_vm._v("Select Job Type")]), _vm._v(" "), _c("option", {
+  }, [_c("option", {
+    attrs: {
+      value: ""
+    }
+  }, [_vm._v("Select Job Type")]), _vm._v(" "), _c("option", {
     attrs: {
       value: "Full Time"
     }
@@ -1750,6 +1754,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
       var method = _this.formType === 2 && _this.updateId ? 'put' : 'post';
       var url = _this.formType === 2 && _this.updateId ? "".concat(_this.urlGenaretor(), "/").concat(_this.updateId) : _this.urlGenaretor();
+      console.log('Submitting to:', url, 'with method:', method);
       _this.$validator.validateAll().then(function (valid) {
         if (valid) {
           (0,axios__WEBPACK_IMPORTED_MODULE_2__["default"])({
