@@ -90,17 +90,13 @@
 
 <script>
     export default {
-<<<<<<< HEAD:resources/js/views/jobCategory/CreateJobComponent.vue
-        name: "CreateJobComponent",
-
-=======
+  
 
         name: "CreateJobComponent",
 
         mounted() {
             this.getDataList();
         }
->>>>>>> saref:resources/js/views/jobCategory/CreateJopComponent.vue
     }
 </script>
 
