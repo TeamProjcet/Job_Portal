@@ -25,6 +25,15 @@ export default {
             this.openModal(false, data)
 
         },
+        openEdit(data, id) {
+
+            const _this=this;
+            this.$store.commit('updateId', id);
+            this.$store.commit('formType', 2);
+            _this.urlGenaretor('api/createjob')
+
+
+        },
         closeModal: function (modalId = 'myModal', fromData = {}) {
             const _this = this;
             $(`#${modalId}`).modal('hide');

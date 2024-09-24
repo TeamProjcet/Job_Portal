@@ -15,14 +15,13 @@ return new class extends Migration
     {
         Schema::create('job_post_models', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('title');
-            $table->string('company');
-            $table->text('image');
+            $table->integer('category_id');
+            $table->text('position');
+            $table->integer('company_id');
             $table->string('address');
             $table->text('details');
             $table->string('job_type');
-            $table->string('salary');
+            $table->integer('salary');
             $table->string('date_time');
             $table->string('status')->default(0);
             $table->timestamps();

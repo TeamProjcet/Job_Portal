@@ -49,17 +49,19 @@ class JobPostController extends Controller
     }
 
 
-    public function edit()
+    public function edit($id)
     {
+        $data=$this->model->where('id',$id)->first();
+        return $this->returnData(2000, $data);
 
     }
 
 
     public function update(Request $request)
     {
-        if (!$this->can('category_edit')){
-            return $this->returnData(5000, null, 'You do not have permission to edit this category');
-        }
+//        if (!$this->can('category_edit')){
+//            return $this->returnData(5000, null, 'You do not have permission to edit this category');
+//        }
 
 
         try {
@@ -86,10 +88,10 @@ class JobPostController extends Controller
     }
 
 
-    public function destroy($category_id)
+    public function destroy($id)
     {
         try {
-            $data = $this->model->where('id',$category_id)->first();
+            $data = $this->model->where('id',$id)->first();
             if ($data){
                 $data->delete();
 

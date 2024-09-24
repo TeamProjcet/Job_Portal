@@ -11,15 +11,15 @@ class JobPostModel extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name','title', 'salary', 'company', 'address', 'job_type', 'details', 'date_time', 'image',
+        'category_id','position', 'salary', 'company_id', 'address', 'job_type', 'details', 'date_time', 'image',
     ];
 
     public function validator($input){
         return Validator::make($input,[
-            'name'=>'required ',
-            'title'=>'required ',
+            'category_id'=>'required ',
+            'position'=>'required ',
             'salary'=>'required ',
-            'company'=>'required ',
+            'company_id'=>'required ',
             'address'=>'required ',
             'job_type'=>'required ',
             'details'=>'required ',
