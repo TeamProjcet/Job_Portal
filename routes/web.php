@@ -16,9 +16,10 @@ Route::group(['middleware'=>'auth'],function (){
 
 Route::view('admin/{any}', 'backend')->where('any', '.*')->middleware('auth');
 
-//Route::prefix('api')->group(function (){
-//Route::post('/job', [\App\Http\Controllers\Backend\JobPostController::class, 'store']);
-//});
+Route::prefix('api')->group(function (){
+Route::resource('/job', \App\Http\Controllers\Backend\JobPostController::class);
+    Route::post('upload', [\App\Http\Controllers\Backend\UploadController::class, 'upload']);
+});
 
 //frontend Route
 

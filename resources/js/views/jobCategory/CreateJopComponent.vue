@@ -13,7 +13,7 @@
             </div>
         </div>
 
-        <form @submit.prevent="submitFromData(fromData)">
+        <form @submit.prevent="submitFromData(fromData)" >
             <div class="row">
                 <div class="col-md-6">
                     <div class="mb-3">
@@ -68,9 +68,17 @@
                         <input type="date" class="form-control" v-model="fromData.date_time" name="date_time" >
                     </div>
 
-                    <div class="mb-3">
-                        <label class="form-label">File</label>
-                        <input type="file" class="form-control" @change="oonFileChange" name="image">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="mb-3">
+                                <div @click="clickFileField('imageField')" class="image_upload" :style="{ 'background-image': 'url('+publicImage('assets/img/uploading.avif')+')' }">
+                                    <template v-if="fromData.image !== undefined">
+                                        <img :src="storageImage(fromData.image)">
+                                    </template>
+                                </div>
+                                <input @change="uploadImage($event, fromData, 'image')" type="file" id="imageField" class="file_field">
+                            </div>
+                        </div>
                     </div>
 
                     <button type="submit" class="btn btn-primary">Submit</button>
@@ -92,5 +100,19 @@
 </script>
 
 <style scoped>
+    .image_upload img{
+        max-width: 100%;
+        max-height: 100%;
 
+    }
+    .image_upload{
+        height: 99px;
+        width: 170px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        cursor: pointer;
+    }
+    #imageField{
+        display: none;
+    }
 </style>

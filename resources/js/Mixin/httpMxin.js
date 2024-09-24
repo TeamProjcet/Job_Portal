@@ -99,13 +99,6 @@ export default {
         },
 
 
-        oonFileChange(event) {
-            const file = event.target.files[0];
-            if (file) {
-                this.fromData.image = file;
-            }
-        },
-
         CategoryDatadelete: function(id , index) {
             const _this = this;
 
@@ -119,6 +112,19 @@ export default {
                 })
             })
 
+        },
+
+        uploadImage : function (event, dataObject, dataModel, callback = false) {
+            const _this = this;
+
+            var files = event.target.files[0];
+            var form = new FormData();
+
+            form.append('file', files);
+
+            _this.httpReq('post', _this.urlGenaretor('api/upload'), form, {}, function (retData) {
+                _this.$set(dataObject, dataModel, retData.result);
+            })
         },
 
 
