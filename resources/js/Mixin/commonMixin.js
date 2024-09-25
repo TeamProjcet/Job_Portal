@@ -52,17 +52,17 @@ export default {
         },
 
         publicImage : function (imageName) {
-            return `${baseUrl}/${imageName}`;
+            return `${window.publicPath}/${imageName}`;
         },
 
-        storageImage : function (imageName){
-            return `${uploadPath}/${imageName}`;
+// storageImage মেথডে window.uploadPath ব্যবহার করা
+        storageImage : function (imageName) {
+            return `${window.uploadPath}/${imageName}`;
         },
 
-        clickFileField : function (filedName){
+        clickFileField : function (filedName) {
             $(`#${filedName}`).click();
         }
-
     },
     computed: {
         fromData() {

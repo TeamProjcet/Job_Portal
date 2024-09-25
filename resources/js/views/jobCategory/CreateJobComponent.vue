@@ -76,12 +76,12 @@
                     <div class="row">
                         <div class="col-md-2">
                             <div class="mb-3">
-                                <div @click="clickFileField('imageField')" class="image_upload" :style="{ 'background-image': 'url('+publicImage('assets/img/uploading.avif')+')' }">
+                                <div @click="clickFileField('imageField')" class="image_upload" :style="{ 'background-image': 'url('+publicImage('images/uploading.avif')+')' }">
                                     <template v-if="fromData.image !== undefined">
                                         <img :src="storageImage(fromData.image)">
                                     </template>
                                 </div>
-                                <input @change="uploadImage($event, fromData, 'image')" type="file" id="imageField" class="file_field">
+                                <input @change="uploadImage($event, fromData, 'image')" type="file" name="image" id="imageField" class="file_field">
                             </div>
                         </div>
                     </div>
