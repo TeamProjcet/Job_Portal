@@ -83,23 +83,36 @@
                     />
                 </div>
 
-                <div class="mb-3">
-                    <label>Status</label>
-            <select class="form-control" v-model="fromData.status" name="status">
-                <option :value="1">Active</option>
-                <option :value="0">Inactive</option>
 
-            </select>
+
+
+                                <div class="mb-3">
+                    <label>Status</label>
+                    <div class="form-check">
+                        <input
+                                class="form-check-input"
+                                type="radio"
+                                v-model="fromData.status"
+                                :value="1"
+                                id="activeStatus"
+                        />
+                        <label class="form-check-label" for="activeStatus">
+                            Active
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input
+                                class="form-check-input"
+                                type="radio"
+                                v-model="fromData.status"
+                                :value="0"
+                                id="inactiveStatus"
+                        />
+                        <label class="form-check-label" for="inactiveStatus">
+                            Inactive
+                        </label>
+                    </div>
                 </div>
-<!--        <div class="mb-3">-->
-<!--                        <input type="checkbox"-->
-<!--                               v-model="fromData.status"-->
-<!--                               :true-value="1"-->
-<!--                               :false-value="0"-->
-<!--                               v-validate="'required'" name="status"/>-->
-<!--                        <label >-->
-<!--                            {{ fromData.status ? 'Active' : 'Inactive' }}</label>-->
-<!--                </div>-->
 
 
                 <!--                <div class="row">-->
