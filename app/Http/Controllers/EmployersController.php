@@ -1,34 +1,28 @@
 <?php
 
-namespace App\Http\Controllers\Backend;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\Category;
-use App\Models\Company;
+use App\Models\Employers;
 use App\Supports\Helper;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class EmployersController extends Controller
 {
     use Helper;
-
     public function __construct()
     {
-        $this->model = new Category();
+        $this->model = new Employers();
     }
-
     public function index()
     {
         $data = $this->model->get();
         return $this->returnData(2000, $data);
     }
 
-
     public function create()
     {
-        //
+        // Code for showing create form
     }
-
 
     public function store(Request $request)
     {
@@ -40,27 +34,20 @@ class CategoryController extends Controller
         $this->model->fill($request->all());
         $this->model->save();
         return $this->returnData(2000, $this->model);
-
     }
 
-    public function show($id)
+    public function show(Employers $employers)
     {
-
+        // Code for showing a specific employer
     }
 
-
-    public function edit($id)
+    public function edit(Employers $employers)
     {
-
+        // Code for showing edit form
     }
 
-
-    public function update(Request $request)
+    public function update(Request $request, Employers $employers)
     {
-//        if (!$this->can('category_edit')){
-//            return $this->returnData(5000, null, 'You do not have permission to edit this category');
-//        }
-
         try {
             $validator = $this->model->Validator($request->all());
 
@@ -80,10 +67,11 @@ class CategoryController extends Controller
             return response()->json(['result' => null, 'message' => $e->getMessage(), 'status' => 5000]);
         }
     }
-    public function destroy($id)
+
+    public function destroy(Employers $employers)
     {
         try {
-            $data = $this->model->where('id',$id)->first();
+            $data = $this->model->where('id',$employers)->first();
             if ($data){
                 $data->delete();
 
@@ -95,4 +83,5 @@ class CategoryController extends Controller
             return $this->returnData(5000, $exception->getMessage(), 'Something Wrong');
         }
     }
-    }
+
+}

@@ -3,6 +3,7 @@ import CategoryComponent from "../views/jobCategory/CategoryComponent";
 import JobListCommponent from "../views/jobCategory/JobListCommponent";
 import CreateJobComponent from "../views/jobCategory/CreateJobComponent.vue";
 import CompanyComponent from "../views/jobCategory/CompanyComponent";
+import EmployerList from "../views/Employers/EmployerList";
 
 
 const route = [
@@ -41,6 +42,14 @@ const route = [
         name : 'company',
         component : CompanyComponent,
         meta:{pagetitle:'Job Company Table',dataUrl:'api/company',
+        }
+
+    },
+    {
+        path : '/admin/jobcategory/employer',
+        name : 'employer',
+        component :EmployerList,
+        meta:{pagetitle:' Employer Table',dataUrl:'api/employer',
         }
 
     },
