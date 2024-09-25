@@ -29,6 +29,11 @@
                     <td>{{ data.title }}</td>
                     <td>{{ data.description }}</td>
                     <td>
+                    <span :class="data.status ? 'badge badge-success' : 'badge badge-danger'">
+                        {{ data.status ? 'Active' : 'Inactive' }}
+                    </span>
+                    </td>
+                    <td>
                         <a  @click="openEditModal(data , data.id)">
                             <i class="fas fa-edit" style="color: blue;"></i>
                         </a>
@@ -78,8 +83,21 @@
                     />
                 </div>
 
+                <div class="mb-3">
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input"
+                               id="customSwitch"
+                               v-model="fromData.status"
+                               :true-value="1"
+                               :false-value="0"
+                               v-validate="'required'" name="status"/>
+                        <label class="custom-control-label" for="customSwitch">
+                            {{ fromData.status ? 'Active' : 'Inactive' }}</label>
+                    </div>
+                </div>
 
-<!--                <div class="row">-->
+
+                <!--                <div class="row">-->
 <!--                    <div class="col-md-2">-->
 <!--                        <div class="mb-3">-->
 <!--                            <div @click="clickFileField('imageField')" class="image_upload" :style="{ 'background-image': 'url('+publicImage('assets/img/uploading.avif')+')' }">-->
@@ -110,7 +128,7 @@
         // components: {FormModal, DataTable, PageTop},
         data() {
             return {
-                tableHeading: ["company name", "title", "description", "action"],
+                tableHeading: ["company name", "title", "description", "status","action"],
 
             };
         },
