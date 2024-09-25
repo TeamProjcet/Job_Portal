@@ -36,6 +36,7 @@ class JobPostController extends Controller
         if ($validator->fails()) {
             return response()->json(['result' => $validator->errors(), 'status' => 3000], 200);
         }
+
         $this->model->fill($request->all());
         $this->model->save();
         return $this->returnData(2000, $this->model);

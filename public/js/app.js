@@ -322,7 +322,7 @@ __webpack_require__.r(__webpack_exports__);
   name: "JobListCommponent",
   data: function data() {
     return {
-      tableHeading: ["Sl", "Title", "Details", "Salary", "Location", "Date", "Action"]
+      tableHeading: ["Sl", "Title", "Details", "Salary", "Location", "image", "Date", "Action"]
     };
   },
   mounted: function mounted() {
@@ -1466,7 +1466,7 @@ var render = function render() {
   }, [_c("div", {
     staticClass: "image_upload",
     style: {
-      "background-image": "url(" + _vm.publicImage("assets/img/uploading.avif") + ")"
+      "background-image": "url(" + _vm.publicImage("images/uploading.avif") + ")"
     },
     on: {
       click: function click($event) {
@@ -1481,6 +1481,7 @@ var render = function render() {
     staticClass: "file_field",
     attrs: {
       type: "file",
+      name: "image",
       id: "imageField"
     },
     on: {
@@ -1545,7 +1546,13 @@ var render = function render() {
   }, _vm._l(_vm.dataList, function (data, index) {
     return _c("tr", {
       key: index
-    }, [_c("td", [_vm._v(_vm._s(index + 1))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(data.position))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(data.details))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(data.salary))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(data.address))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(data.date_time))]), _vm._v(" "), _c("td", [_c("a", {
+    }, [_c("td", [_vm._v(_vm._s(index + 1))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(data.position))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(data.details))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(data.salary))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(data.address))]), _vm._v(" "), _c("td", [_c("img", {
+      staticClass: "w-25 h-25",
+      attrs: {
+        src: data.image,
+        alt: "Image"
+      }
+    })]), _vm._v(" "), _c("td", [_vm._v(_vm._s(data.date_time))]), _vm._v(" "), _c("td", [_c("a", {
       on: {
         click: function click($event) {
           return _vm.openEditModal(data, data.id);
@@ -1823,7 +1830,7 @@ var render = function render() {
   }, [_c("div", {
     staticClass: "image_upload",
     style: {
-      "background-image": "url(" + _vm.publicImage("assets/img/uploading.avif") + ")"
+      "background-image": "url(" + _vm.publicImage("images/uploading.avif") + ")"
     },
     on: {
       click: function click($event) {
@@ -1911,10 +1918,11 @@ __webpack_require__.r(__webpack_exports__);
       return "".concat(baseUrl, "/").concat(_this.$route.meta.dataUrl);
     },
     publicImage: function publicImage(imageName) {
-      return "".concat(baseUrl, "/").concat(imageName);
+      return "".concat(window.publicPath, "/").concat(imageName);
     },
+    // storageImage মেথডে window.uploadPath ব্যবহার করা
     storageImage: function storageImage(imageName) {
-      return "".concat(uploadPath, "/").concat(imageName);
+      return "".concat(window.uploadPath, "/").concat(imageName);
     },
     clickFileField: function clickFileField(filedName) {
       $("#".concat(filedName)).click();
@@ -2066,7 +2074,7 @@ __webpack_require__.r(__webpack_exports__);
       var form = new FormData();
       form.append('file', files);
       _this.httpReq('post', _this.urlGenaretor('api/upload'), form, {}, function (retData) {
-        _this.$set(dataObject, dataModel, retData.result);
+        _this.$set(dataObject, dataModel, retData.result.name);
       });
     }
   }
