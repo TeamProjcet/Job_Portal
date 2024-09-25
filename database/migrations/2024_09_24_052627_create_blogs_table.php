@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('company_id');
             $table->text('title');
             $table->string('description');
-            $table->text('image');
+//            $table->text('image');
             $table->timestamps();
         });
     }

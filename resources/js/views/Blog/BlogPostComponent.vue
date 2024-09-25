@@ -6,19 +6,38 @@
                 <PageTop></PageTop>
             </div>
             <DataTable :tableHeading="tableHeading">
-<!--                <tr v-for="(data, index) in dataList" :key="index">-->
-<!--                    <td>{{ index + 1 }}</td>-->
-<!--                    <td>{{ data.name }}</td>-->
-<!--                    <td>{{ data.name }}</td>-->
-<!--                    <td>-->
-<!--                        <a  @click="openEditModal(data , data.id)">-->
-<!--                            <i class="fas fa-edit" style="color: blue;"></i>-->
-<!--                        </a>-->
-<!--                        <a  @click="CategoryDatadelete(data.id, index)">-->
-<!--                            <i class="fas fa-trash-alt" style="color: red;"></i>-->
-<!--                        </a>-->
-<!--                    </td>-->
-<!--                </tr>-->
+
+<!--                <tr>-->
+<!--                                        <td>Brainstation</td>-->
+<!--                                        <td>Apply for a job post</td>-->
+<!--                                        <td>sdfmk skfmsdf sdfsd dddd dddddddd eeeeeeee</td>-->
+<!--                                        <td></td>-->
+<!--                                        <td><i class="fas fa-eye"></i></td>-->
+<!--                                        <td>-->
+<!--                                            <a  @click="openEditModal(data , data.id)">-->
+<!--                                                <i class="fas fa-edit" style="color: blue;"></i>-->
+<!--                                            </a>-->
+<!--                                            <a  @click="CategoryDatadelete(data.id, index)">-->
+<!--                                                <i class="fas fa-trash-alt" style="color: red;"></i>-->
+<!--                                            </a>-->
+<!--                                        </td>-->
+<!--                                    </tr>-->
+
+
+                <tr v-for="(data, index) in dataList" :key="index">
+                    <td>{{ index + 1 }}</td>
+                    <td>{{ data.title }}</td>
+                    <td>{{ data.description }}</td>
+                    <td>
+                        <a  @click="openEditModal(data , data.id)">
+                            <i class="fas fa-edit" style="color: blue;"></i>
+                        </a>
+                        <a  @click="CategoryDatadelete(data.id, index)">
+                            <i class="fas fa-trash-alt" style="color: red;"></i>
+                        </a>
+                    </td>
+                </tr>
+
             </DataTable>
         </div>
 
@@ -60,18 +79,18 @@
                 </div>
 
 
-                <div class="row">
-                    <div class="col-md-2">
-                        <div class="mb-3">
-                            <div @click="clickFileField('imageField')" class="image_upload" :style="{ 'background-image': 'url('+publicImage('assets/img/uploading.avif')+')' }">
-                                <template v-if="fromData.image !== undefined">
-                                    <img :src="storageImage(fromData.image)">
-                                </template>
-                            </div>
-                            <input @change="uploadImage($event, fromData, 'image')" type="file" id="imageField" class="file_field">
-                        </div>
-                    </div>
-                </div>
+<!--                <div class="row">-->
+<!--                    <div class="col-md-2">-->
+<!--                        <div class="mb-3">-->
+<!--                            <div @click="clickFileField('imageField')" class="image_upload" :style="{ 'background-image': 'url('+publicImage('assets/img/uploading.avif')+')' }">-->
+<!--                                <template v-if="fromData.image !== undefined">-->
+<!--                                    <img :src="storageImage(fromData.image)">-->
+<!--                                </template>-->
+<!--                            </div>-->
+<!--                            <input @change="uploadImage($event, fromData, 'image')" type="file" id="imageField" class="file_field">-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
 
             </div>
         </FormModal>
@@ -91,7 +110,7 @@
         // components: {FormModal, DataTable, PageTop},
         data() {
             return {
-                tableHeading: ["company name", "title", "description", "image"],
+                tableHeading: ["company name", "title", "description", "action"],
 
             };
         },
