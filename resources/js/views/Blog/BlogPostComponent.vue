@@ -84,17 +84,22 @@
                 </div>
 
                 <div class="mb-3">
-                    <div class="custom-control custom-switch">
-                        <input type="checkbox" class="custom-control-input"
-                               id="customSwitch"
-                               v-model="fromData.status"
-                               :true-value="1"
-                               :false-value="0"
-                               v-validate="'required'" name="status"/>
-                        <label class="custom-control-label" for="customSwitch">
-                            {{ fromData.status ? 'Active' : 'Inactive' }}</label>
-                    </div>
+                    <label>Status</label>
+            <select class="form-control" v-model="fromData.status" name="status">
+                <option :value="1">Active</option>
+                <option :value="0">Inactive</option>
+
+            </select>
                 </div>
+<!--        <div class="mb-3">-->
+<!--                        <input type="checkbox"-->
+<!--                               v-model="fromData.status"-->
+<!--                               :true-value="1"-->
+<!--                               :false-value="0"-->
+<!--                               v-validate="'required'" name="status"/>-->
+<!--                        <label >-->
+<!--                            {{ fromData.status ? 'Active' : 'Inactive' }}</label>-->
+<!--                </div>-->
 
 
                 <!--                <div class="row">-->
@@ -128,7 +133,7 @@
         // components: {FormModal, DataTable, PageTop},
         data() {
             return {
-                tableHeading: ["company name", "title", "description", "status","action"],
+                tableHeading: ["Id", "company name", "title", "description", "status","action"],
 
             };
         },

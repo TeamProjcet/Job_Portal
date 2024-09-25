@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Validator;
 class blog extends Model
 {
     use HasFactory;
-    protected $fillable = ['company_id', 'title', 'description', ];
+    protected $fillable = ['company_id', 'title','status', 'description', ];
 
     public function validator($input)
     {
@@ -17,7 +17,7 @@ class blog extends Model
             'company_id'=>'required ',
             'title'=>'required ',
             'description'=>'required ',
-            'status' => 'required',
+            'status' => 'required|boolean',
 
         ]);
     }
