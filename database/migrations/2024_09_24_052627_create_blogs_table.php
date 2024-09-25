@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('company_id');
             $table->text('title');
             $table->string('description');
-            $table->tinyInteger('status')->default(1); // Status
+            $table->boolean('status')->default(1); // Status
 //            $table->text('image');
             $table->timestamps();
         });
