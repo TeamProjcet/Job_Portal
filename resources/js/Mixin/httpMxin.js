@@ -80,7 +80,7 @@ export default {
                             if (typeof callback === 'function') {
                                 callback(res.data.result);
                             }
-                            _this.$toast.success("Category  successfully!");
+                            _this.$toast.success("data submitted successfully!");
 
                         } else if (parseInt(res.data.status) === 3000) {
                             $.each(res.data.result, function (index, errorValue) {
@@ -93,7 +93,7 @@ export default {
                             })
 
                         } else {
-                            _this.$toast.error("Category  Unsuccessfully!");
+                            _this.$toast.error("data submitted  Unsuccessfully!");
 
                         }
                     });
@@ -126,7 +126,7 @@ export default {
             form.append('file', files);
 
             _this.httpReq('post', _this.urlGenaretor('api/upload'), form, {}, function (retData) {
-                _this.$set(dataObject, dataModel, retData.result);
+                _this.$set(dataObject, dataModel, retData.result.name);
             })
         },
 

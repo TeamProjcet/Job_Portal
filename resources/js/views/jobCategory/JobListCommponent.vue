@@ -19,6 +19,7 @@
                     <td>{{data.details}}</td>
                     <td>{{data.salary}}</td>
                     <td>{{data.address}}</td>
+                    <td><img :src="data.image" class="w-25 h-25" alt="Image"></td>
                     <td>{{data.date_time}}</td>
                     <td>
 
@@ -96,7 +97,7 @@
                         <div class="row">
                             <div class="col-md-2">
                                 <div class="mb-3">
-                                    <div @click="clickFileField('imageField')" class="image_upload" :style="{ 'background-image': 'url('+publicImage('assets/img/uploading.avif')+')' }">
+                                    <div @click="clickFileField('imageField')" class="image_upload" :style="{ 'background-image': 'url('+publicImage('images/uploading.avif')+')' }">
                                         <template v-if="fromData.image !== undefined">
                                             <img :src="storageImage(fromData.image)">
                                         </template>
@@ -124,7 +125,7 @@
         name: "JobListCommponent",
         data() {
             return {
-                tableHeading: ["Sl", "Title", "Details",  "Salary", "Location", "Date", "Action"],
+                tableHeading: ["Sl", "Title", "Details",  "Salary", "Location","image", "Date", "Action"],
 
             };
         },

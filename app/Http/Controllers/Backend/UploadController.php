@@ -28,13 +28,6 @@ class UploadController extends Controller
             ]);
 
 
-//            $files = [
-//                'name' => $fileRecord->name,
-//                'extension' => $fileRecord->extension,
-//                'size' => $fileRecord->size,
-//                'path' => "/uploads/$name",
-//            ];
-
             return $this->returnData(2000, $files);
         }
     }

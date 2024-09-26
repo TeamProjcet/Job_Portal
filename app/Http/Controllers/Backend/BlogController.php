@@ -3,17 +3,17 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Models\JobPostModel;
+use App\Models\blog;
 use App\Supports\Helper;
 use Illuminate\Http\Request;
 
-class JobPostController extends Controller
+class BlogController extends Controller
 {
     use Helper;
 
     public function __construct()
     {
-        $this->model = new JobPostModel();
+        $this->model = new blog();
     }
 
     public function index()
@@ -34,36 +34,44 @@ class JobPostController extends Controller
         $validator = $this->model->Validator($request->all());
 
         if ($validator->fails()) {
-            return response()->json(['result' => $validator->errors(), 'status' => 3000], 200);
+            return response()->json(['result' => $validator->errors(), 'status' => 3000], 100);
         }
-
         $this->model->fill($request->all());
         $this->model->save();
         return $this->returnData(2000, $this->model);
 
     }
-
-
-    public function show( )
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
     {
-
+        //
     }
 
-
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function edit($id)
     {
-        $data=$this->model->where('id',$id)->first();
-        return $this->returnData(2000, $data);
-
+        //
     }
 
-
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function update(Request $request)
     {
-//        if (!$this->can('category_edit')){
-//            return $this->returnData(5000, null, 'You do not have permission to edit this category');
-//        }
-
 
         try {
             $validator = $this->model->Validator($request->all());
@@ -71,24 +79,19 @@ class JobPostController extends Controller
             if ($validator->fails()) {
                 return response()->json(['result' => $validator->errors(), 'status' => 3000], 200);
             }
+            $data = $this->model->where('id', $request->input('id'))->first();
+            if ($data) {
+                $data->fill($request->all());
+                $data->update();
 
-
-            $category = $this->model->where('id', $request->input('id'))->first();
-
-            if ($category) {
-                $category->fill($request->all());
-                $category->update();
-
-                return $this->returnData(2000, $category);
+                return $this->returnData(2000, $data);
             }
-            return $this->returnData(3000, null, 'Category not found');
+            return $this->returnData(3000, null, 'Blog not found');
 
         } catch (\Exception $e) {
             return response()->json(['result' => null, 'message' => $e->getMessage(), 'status' => 5000]);
         }
     }
-
-
     public function destroy($id)
     {
         try {
@@ -96,9 +99,9 @@ class JobPostController extends Controller
             if ($data){
                 $data->delete();
 
-                return $this->returnData(2000, null, 'Category deleted successfully');
+                return $this->returnData(2000, null, 'Blog deleted successfully');
             }
-            return $this->returnData(3000, null, 'Category not found');
+            return $this->returnData(3000, null, 'Blog not found');
 
         }catch (\Exception $exception){
             return $this->returnData(5000, $exception->getMessage(), 'Something Wrong');

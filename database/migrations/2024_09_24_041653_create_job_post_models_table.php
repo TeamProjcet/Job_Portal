@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('company_id');
             $table->string('address');
             $table->text('details');
+            $table->string('image')->nullable();
             $table->string('job_type');
             $table->integer('salary');
             $table->string('date_time');
