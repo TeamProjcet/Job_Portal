@@ -126,7 +126,7 @@ export default {
             form.append('file', files);
 
             _this.httpReq('post', _this.urlGenaretor('api/upload'), form, {}, function (retData) {
-                _this.$set(dataObject, dataModel, retData.result);
+                _this.$set(dataObject, dataModel, retData.result.name);
             })
         },
 
