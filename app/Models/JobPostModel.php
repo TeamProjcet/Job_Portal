@@ -11,7 +11,7 @@ class JobPostModel extends Model
     use HasFactory;
 
     protected $fillable = [
-        'category_id','position', 'salary', 'company_id', 'address', 'job_type', 'details', 'date_time', 'image',
+        'category_id','position', 'salary', 'company_id', 'address', 'job_type', 'details', 'date_time', 'image', 'status',
     ];
 
     public function validator($input){
@@ -25,6 +25,7 @@ class JobPostModel extends Model
             'details'=>'required ',
             'date_time'=>'required ',
             'image'=>'required',
+            'status'=>'required|boolean',
         ]);
     }
 }

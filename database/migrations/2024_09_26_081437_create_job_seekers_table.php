@@ -22,7 +22,6 @@ return new class extends Migration
             $table->string('preferred_location')->nullable(); // Preferred location
             $table->date('availability')->nullable();
             $table->timestamps();
-
             $table->foreign('seeker_id')->references('user_id')->on('users')->onDelete('cascade');
         });
     }

@@ -77,6 +77,7 @@ class JobPostController extends Controller
 
             if ($category) {
                 $category->fill($request->all());
+                $category->status = $request->input('status') == 1 ? 1 : 0;
                 $category->update();
 
                 return $this->returnData(2000, $category);
@@ -87,6 +88,44 @@ class JobPostController extends Controller
             return response()->json(['result' => null, 'message' => $e->getMessage(), 'status' => 5000]);
         }
     }
+
+//    public function update(Request $request)
+//    {
+//        // Uncomment this line if you need permission checks
+//        // if (!$this->can('category_edit')) {
+//        //     return $this->returnData(5000, null, 'You do not have permission to edit this category');
+//        // }
+//
+//        try {
+//            // Validate the incoming request data
+//            $validator = $this->model->Validator($request->all());
+//
+//            if ($validator->fails()) {
+//                return response()->json(['result' => $validator->errors(), 'status' => 3000], 200);
+//            }
+//
+//            // Find the category by ID
+//            $category = $this->model->where('id', $request->input('id'))->first();
+//
+//            if ($category) {
+//                // Fill the category with the new data from the request
+//                $category->fill($request->all());
+//
+//                // Determine the status (1 for active, 0 for inactive)
+//                $category->status = $request->input('status') == 1 ? 1 : 0;
+//
+//                // Save the updated category
+//                $category->save();
+//
+//                return $this->returnData(2000, $category);
+//            }
+//
+//            return $this->returnData(3000, null, 'Category not found');
+//
+//        } catch (\Exception $e) {
+//            return response()->json(['result' => null, 'message' => $e->getMessage(), 'status' => 5000]);
+//        }
+//    }
 
 
     public function destroy($id)

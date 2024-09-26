@@ -25,6 +25,7 @@ export default {
             this.openModal(false, data)
 
         },
+
         openEdit(data, id) {
 
             const _this=this;
@@ -34,6 +35,7 @@ export default {
 
 
         },
+
         closeModal: function (modalId = 'myModal', fromData = {}) {
             const _this = this;
             $(`#${modalId}`).modal('hide');
@@ -55,7 +57,6 @@ export default {
             return `${window.publicPath}/${imageName}`;
         },
 
-// storageImage মেথডে window.uploadPath ব্যবহার করা
         storageImage : function (imageName) {
             return `${window.uploadPath}/${imageName}`;
         },
