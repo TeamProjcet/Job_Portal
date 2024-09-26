@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 class blog extends Model
 {
     use HasFactory;
+
     protected $fillable = ['company_id', 'title','status', 'description', ];
 
     public function validator($input)
