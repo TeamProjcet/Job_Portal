@@ -106,10 +106,7 @@
                                             />
                                         </div>
                                         <div class="u-text">
-                                            <a
-                                                    href=""
-                                                    class="btn btn-xs btn-secondary btn-sm"
-                                            >View Profile</a
+                                            <router-link to="/admin/user/employer" href="" class="btn btn-xs btn-secondary btn-sm">View Profile</router-link
                                             >
                                         </div>
                                     </div>

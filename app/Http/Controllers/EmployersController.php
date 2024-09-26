@@ -15,7 +15,7 @@ class EmployersController extends Controller
     }
     public function index()
     {
-        $data = $this->model->get();
+        $data = $this->model->with('user')->get();
         return $this->returnData(2000, $data);
     }
 
@@ -68,10 +68,11 @@ class EmployersController extends Controller
         }
     }
 
-    public function destroy(Employers $employers)
+    public function destroy( $id)
     {
+
         try {
-            $data = $this->model->where('id',$employers)->first();
+            $data = $this->model->where('id',$id)->first();
             if ($data){
                 $data->delete();
 

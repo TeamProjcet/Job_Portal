@@ -14,11 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('employers', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');  // Reference to User
+            $table->id();  // Primary Key
+            $table->foreign('employer_id')->references('id')->on('users')->onDelete('cascade'); // Foreign Key (Reference to user_id)
             $table->string('company_name');
             $table->string('company_website')->nullable();
-            $table->string('company_address')->nullable();
+            $table->string('company_address');
             $table->string('contact_person');
             $table->string('industry');
             $table->text('company_description')->nullable();

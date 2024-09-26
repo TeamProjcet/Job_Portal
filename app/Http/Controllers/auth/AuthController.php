@@ -17,6 +17,7 @@ class AuthController extends Controller
     {
         $this->model = new User();
     }
+
     public function index()
     {
         return view('auth.login');
@@ -25,6 +26,7 @@ class AuthController extends Controller
 
     public function viewReg()
     {
+
         return view('auth.register');
     }
 

@@ -24,6 +24,7 @@ Route::resource('/createjob', \App\Http\Controllers\Backend\JobPostController::c
 Route::resource('/joblist', \App\Http\Controllers\Backend\JobPostController::class);
 
 Route::resource('/jobseeker', \App\Http\Controllers\JobSeekersController::class);
+Route::resource('/employer', \App\Http\Controllers\EmployersController::class);
 Route::resource('/application',\App\Http\Controllers\ApplicationsController ::class);
 Route::resource('/interview',\App\Http\Controllers\InterviewScheduleController ::class);
 Route::resource('/message',\App\Http\Controllers\MessagesController ::class);

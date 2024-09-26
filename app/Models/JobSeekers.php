@@ -35,7 +35,7 @@ class JobSeekers extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'seeker_id', 'user_id');
+        return $this->belongsTo(User::class, 'id', 'user_id');
     }
 
 }
