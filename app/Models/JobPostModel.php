@@ -24,7 +24,7 @@ class JobPostModel extends Model
             'job_type'=>'required ',
             'details'=>'required ',
             'date_time'=>'required ',
-            'image',
+            'image'=>'required',
         ]);
     }
 }
