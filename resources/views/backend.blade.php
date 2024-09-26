@@ -117,17 +117,7 @@
       window.publicPath = '{{ env('PUBLIC_PATH') }}';
       window.uploadPath = '{{ env('UPLOAD_PATH') }}';
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/7.3.0/tinymce.min.js" integrity="sha512-RUZ2d69UiTI+LdjfDCxqJh5HfjmOcouct56utQNVRjr90Ea8uHQa+gCxvxDTC9fFvIGP+t4TDDJWNTRV48tBpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script>
-      tinymce.init({
-        selector: '#mytextarea',
-        menubar: false,
-        statusbar: false,
-        license_key: 'gpl',
-        height: 200,
-        toolbar: ' styleselect | bold italic | alignleft aligncenter alignright | bullist numlist outdent indent | link image | code',
-      });
-    </script>
+    
 
     <script src="{{asset('js/app.js')}}"></script>
   </body>

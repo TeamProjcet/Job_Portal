@@ -65,7 +65,7 @@
 
                     <div class="mb-3">
                         <label class="form-label">Details</label>
-                        <textarea id="mytextarea" class="form-control" v-model="fromData.details" name="details" rows="3" ></textarea>
+                        <textarea id="" class="form-control" v-model="fromData.details" name="details" rows="3" ></textarea>
                     </div>
 
                     <div class="mb-3">

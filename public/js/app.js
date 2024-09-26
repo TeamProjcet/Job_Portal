@@ -1695,7 +1695,7 @@ var render = function render() {
     }],
     staticClass: "form-control",
     attrs: {
-      id: "mytextarea",
+      id: "",
       name: "details",
       rows: "3"
     },
@@ -2108,7 +2108,7 @@ var render = function render() {
     }],
     staticClass: "form-control",
     attrs: {
-      id: "mytextarea",
+      id: "",
       name: "details",
       rows: "3"
     },
