@@ -79,12 +79,12 @@ class BlogController extends Controller
             if ($validator->fails()) {
                 return response()->json(['result' => $validator->errors(), 'status' => 3000], 200);
             }
-            $category = $this->model->where('id', $request->input('id'))->first();
-            if ($category) {
-                $category->fill($request->all());
-                $category->update();
+            $data = $this->model->where('id', $request->input('id'))->first();
+            if ($data) {
+                $data->fill($request->all());
+                $data->update();
 
-                return $this->returnData(2000, $category);
+                return $this->returnData(2000, $data);
             }
             return $this->returnData(3000, null, 'Blog not found');
 
