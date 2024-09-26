@@ -15,7 +15,7 @@ class EmployersController extends Controller
     }
     public function index()
     {
-        $data = $this->model->with('user')->get();
+        $data = $this->model->get();
         return $this->returnData(2000, $data);
     }
 
