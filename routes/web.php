@@ -19,7 +19,7 @@ Route::prefix('api')->group(function (){
 Route::resource('categories', \App\Http\Controllers\Backend\CategoryController::class);
 //Route::get('/joblist', [\App\Http\Controllers\Backend\JobPostController::class,'index']);
 Route::resource('/createjob', \App\Http\Controllers\Backend\JobPostController::class);
-
+Route::resource('company', \App\Http\Controllers\Backend\CompanyController::class);
 Route::resource('/joblist', \App\Http\Controllers\Backend\JobPostController::class);
 
 Route::resource('/jobseeker', \App\Http\Controllers\JobSeekersController::class);
