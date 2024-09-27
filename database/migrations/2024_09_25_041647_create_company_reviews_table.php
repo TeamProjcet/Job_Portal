@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('company_reviews', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('employer_id')->constrained('employers')->onDelete('cascade'); // Reference to employers table
-            $table->foreignId('seeker_id')->constrained('job_seekers')->onDelete('cascade'); // Reference to job seekers table
+            $table->foreignId('employer_id')->constrained('employers')->onDelete('cascade');
+            $table->foreignId('seeker_id')->constrained('job_seekers')->onDelete('cascade');
             $table->tinyInteger('rating')->unsigned(); // Rating from 1 to 5
             $table->text('review_content'); // Review content
             $table->timestamp('review_date')->useCurrent();

@@ -4,9 +4,8 @@ import JobListCommponent from "../views/jobCategory/JobListCommponent";
 import CreateJobComponent from "../views/jobCategory/CreateJobComponent.vue";
 import CompanyComponent from "../views/jobCategory/CompanyComponent";
 import BlogPostComponent from "../views/Blog/BlogPostComponent";
-import EmployerList from "../views/Employers/EmployerList";
-import BlogPostComponent from "../views/Blog/BlogPostComponent";
 import EmployerForm from "../views/Employers/EmployerForm";
+import EmployerProfile from "../views/Employers/EmployerProfile";
 
 
 const route = [
@@ -49,14 +48,6 @@ const route = [
 
     },
     {
-        path : '/admin/blog/blogpost',
-        name : 'blogpost',
-        component : BlogPostComponent,
-        meta:{pagetitle:'Blog Post Table',dataUrl:'api/blogpost',
-        }
-
-    },
-    {
         path : '/admin/user/employer',
         name : 'employer',
         component :EmployerForm,
@@ -73,12 +64,13 @@ const route = [
 
     },
     {
-        path : '/admin/blog/blogpost',
+        path : '/admin/employer/profile',
         name : 'blogpost',
-        component : BlogPostComponent,
-        meta:{pagetitle:'Blog Post Table',dataUrl:'api/blogpost',
+        component : EmployerProfile,
+        meta:{pagetitle:'Blog Post Table',dataUrl:'api/employer',
         }
 
     },
+
 ];
 export default route;

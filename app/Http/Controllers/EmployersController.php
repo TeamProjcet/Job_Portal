@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Employers;
 use App\Supports\Helper;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EmployersController extends Controller
 {
@@ -31,14 +32,26 @@ class EmployersController extends Controller
         if ($validator->fails()) {
             return response()->json(['result' => $validator->errors(), 'status' => 3000], 100);
         }
-        $this->model->fill($request->all());
-        $this->model->save();
+        $this->model->create([
+            'user_id' => Auth::id(), // Logged-in user's ID
+            'company_name' => $request->input('company_name'),
+            'company_website' => $request->input('company_website'),
+            'company_address' => $request->input('company_address'),
+            'contact_person' => $request->input('contact_person'),
+            'industry' => $request->input('industry'),
+            'company_description' => $request->input('company_description'),
+        ]);
+
         return $this->returnData(2000, $this->model);
     }
 
-    public function show(Employers $employers)
+    public function show()
     {
-        // Code for showing a specific employer
+        // Get the authenticated user's profile
+        $user = Auth::user();
+
+        // Return user data as JSON
+        return response()->json($user);
     }
 
     public function edit(Employers $employers)
