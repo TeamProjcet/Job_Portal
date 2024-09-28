@@ -54,7 +54,7 @@
         },
         mounted() {
             this.getDataList();
-            this.$set(this.fromData, "name", "");
+            // this.$set(this.fromData, "name", "");
         }
     }
 </script>

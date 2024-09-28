@@ -18,8 +18,26 @@ class JobPostController extends Controller
 
     public function index()
     {
-        $data = $this->model->get();
+        $data = $this->model->with('category','company')->get();
         return $this->returnData(2000, $data);
+    }
+    public function partTime()
+
+    {
+        $data = $this->model->where('job_type','Part Time')->with('category','company')->get();
+        return $this->returnData(2000, $data);
+    }
+    public function fulTimelist()
+
+    {
+        $data = $this->model->where('job_type','Full Time')->with('category','company')->get();
+        return $this->returnData(2000, $data);
+    }
+    public function jobview($jobId) {
+        $data = JobPostModel::find($jobId);
+        dd($data);
+
+        return $this->returnData(2000,$data);
     }
 
 
@@ -77,6 +95,7 @@ class JobPostController extends Controller
 
             if ($category) {
                 $category->fill($request->all());
+                $category->status = $request->input('status') == 1 ? 1 : 0;
                 $category->update();
 
                 return $this->returnData(2000, $category);
@@ -87,6 +106,7 @@ class JobPostController extends Controller
             return response()->json(['result' => null, 'message' => $e->getMessage(), 'status' => 5000]);
         }
     }
+
 
 
     public function destroy($id)

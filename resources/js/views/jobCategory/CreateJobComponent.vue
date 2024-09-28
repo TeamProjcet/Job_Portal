@@ -65,7 +65,7 @@
 
                     <div class="mb-3">
                         <label class="form-label">Details</label>
-                        <textarea class="form-control" v-model="fromData.details" name="details" rows="3" ></textarea>
+                        <textarea id="" class="form-control" v-model="fromData.details" name="details" rows="3" ></textarea>
                     </div>
 
                     <div class="mb-3">
@@ -78,13 +78,25 @@
                             <div class="mb-3">
                                 <div @click="clickFileField('imageField')" class="image_upload" :style="{ 'background-image': 'url('+publicImage('images/uploading.avif')+')' }">
                                     <template v-if="fromData.image !== undefined">
-                                        <img :src="storageImage(fromData.image)">
+                                        <img class="photo" :src="storageImage(fromData.image)">
                                     </template>
                                 </div>
                                 <input @change="uploadImage($event, fromData, 'image')" type="file" name="image" id="imageField" class="file_field">
                             </div>
                         </div>
                     </div>
+                    <div class="mb-3">
+                        <label class="form-label">Status</label>
+                        <div>
+                            <label>
+                                <input type="radio" v-model="fromData.status" :value="1"> Active
+                            </label>
+                            <label>
+                                <input type="radio" v-model="fromData.status" :value="0"> Inactive
+                            </label>
+                        </div>
+                    </div>
+
 
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
@@ -95,8 +107,6 @@
 
 <script>
     export default {
-  
-
         name: "CreateJobComponent",
 
         mounted() {
@@ -120,6 +130,10 @@
         background-size: contain;
         background-repeat: no-repeat;
         cursor: pointer;
+    }
+    .photo{
+        height: 99px;
+        width: 170px;
     }
     #imageField{
         display: none;

@@ -1,6 +1,6 @@
 <template>
     <div class="modal fade" :id="modalId" >
-        <div class="modal-dialog ">
+        <div class="modal-dialog modal-lg">
             <form @submit.prevent="submit()">
                 <div class="modal-content">
                     <div class="modal-header">

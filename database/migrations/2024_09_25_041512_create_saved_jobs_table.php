@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('seeker_id')->constrained('job_seekers')->onDelete('cascade'); // Reference to job seekers table
             $table->foreignId('job_id')->constrained('jobs')->onDelete('cascade'); // Reference to jobs table
-            $table->timestamp('saved_at')->useCurrent(); // Saved date
+            $table->timestamp('saved_at')->useCurrent();
             $table->timestamps();
         });
     }
