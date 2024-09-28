@@ -21,19 +21,12 @@ class UploadController extends Controller
             $filePath = "app/public/uploads";
             $file->move(storage_path($filePath), $name);
 
-            $fileRecord = files::create([
-                'name' => $name,
+            $files = files::create([
+                'name' =>"/uploads/$name" ,
                 'extension' => $extension,
                 'size' => $size,
             ]);
 
-
-            $files = [
-                'name' => $fileRecord->name,
-                'extension' => $fileRecord->extension,
-                'size' => $fileRecord->size,
-                'path' => "/uploads/$name",
-            ];
 
             return $this->returnData(2000, $files);
         }

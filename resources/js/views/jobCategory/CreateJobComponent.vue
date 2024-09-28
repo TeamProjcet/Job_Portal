@@ -17,34 +17,39 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="mb-3">
-                        <label class="form-label">Name</label>
-                        <select v-model="fromData.name" name="name" class="form-control">
-                            <option>Select Job Name</option>
-                            <option value="Web Development">Web Development</option>
+                        <label class="form-label">Job Name</label>
+                        <select v-model="fromData.category_id" name="category_id" class="form-control">
+                            <template v-for="(item , index) in requireData.category">
+                                <option :value="item.id">{{item.name}}</option>
+                            </template>
+
                         </select>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Title</label>
-                        <input type="text" class="form-control" v-model="fromData.title" name="title" >
+                        <input type="text" class="form-control" v-model="fromData.position" name="title" >
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Salary</label>
-                        <input type="text" class="form-control" v-model="fromData.salary"  name="salary" >
+                        <input type="number" class="form-control" v-model="fromData.salary"  name="salary" >
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Company</label>
-                        <select v-model="fromData.company" name="company" class="form-control">
-                            <option>Select Company</option>
-                            <option value="Tmss ICT Ltd">Tmss ICT Ltd</option>
+                        <label class="form-label">Company Name</label>
+                        <select v-model="fromData.company_id" name="company_id" class="form-control" >
+                            <option value="" disabled>Select company name</option>
+                           <template v-for="(item ,index) in requireData.company">
+                               <option :value="item.id">{{item.name}}</option>
+
+                           </template>
                         </select>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Location</label>
-                        <input type="text" class="form-control" v-model="fromData.address"  name="address" >
+                        <input type="text" class="form-control" v-model="fromData.address" placeholder="Enter address" name="address" >
                     </div>
                 </div>
 
@@ -60,7 +65,7 @@
 
                     <div class="mb-3">
                         <label class="form-label">Details</label>
-                        <textarea class="form-control" v-model="fromData.details" name="details" rows="3" ></textarea>
+                        <textarea id="" class="form-control" v-model="fromData.details" name="details" rows="3" ></textarea>
                     </div>
 
                     <div class="mb-3">
@@ -71,15 +76,27 @@
                     <div class="row">
                         <div class="col-md-2">
                             <div class="mb-3">
-                                <div @click="clickFileField('imageField')" class="image_upload" :style="{ 'background-image': 'url('+publicImage('assets/img/uploading.avif')+')' }">
+                                <div @click="clickFileField('imageField')" class="image_upload" :style="{ 'background-image': 'url('+publicImage('images/uploading.avif')+')' }">
                                     <template v-if="fromData.image !== undefined">
-                                        <img :src="storageImage(fromData.image)">
+                                        <img class="photo" :src="storageImage(fromData.image)">
                                     </template>
                                 </div>
-                                <input @change="uploadImage($event, fromData, 'image')" type="file" id="imageField" class="file_field">
+                                <input @change="uploadImage($event, fromData, 'image')" type="file" name="image" id="imageField" class="file_field">
                             </div>
                         </div>
                     </div>
+                    <div class="mb-3">
+                        <label class="form-label">Status</label>
+                        <div>
+                            <label>
+                                <input type="radio" v-model="fromData.status" :value="1"> Active
+                            </label>
+                            <label>
+                                <input type="radio" v-model="fromData.status" :value="0"> Inactive
+                            </label>
+                        </div>
+                    </div>
+
 
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
@@ -90,13 +107,12 @@
 
 <script>
     export default {
-  
-
         name: "CreateJobComponent",
 
         mounted() {
             this.getDataList();
             this.getRequiredData(['category','company']);
+            // this.$set(this.fromData, "name", "");
 
         }
     }
@@ -114,6 +130,10 @@
         background-size: contain;
         background-repeat: no-repeat;
         cursor: pointer;
+    }
+    .photo{
+        height: 99px;
+        width: 170px;
     }
     #imageField{
         display: none;

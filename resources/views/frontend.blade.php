@@ -49,6 +49,12 @@
 <script src="{{asset('frontend/assets/js/main.js')}}"></script>
 <script src="{{asset('frontend/js/app.js')}}"></script>
 
+   <script>window.baseUrl = '{{url('/')}}';</script>
+
+   <script>
+       window.publicPath = '{{ env('PUBLIC_PATH') }}';
+       window.uploadPath = '{{ env('UPLOAD_PATH') }}';
+   </script>
 </body>
 
 </html>

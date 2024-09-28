@@ -18,8 +18,26 @@ class JobPostController extends Controller
 
     public function index()
     {
-        $data = $this->model->get();
+        $data = $this->model->with('category','company')->get();
         return $this->returnData(2000, $data);
+    }
+    public function partTime()
+
+    {
+        $data = $this->model->where('job_type','Part Time')->with('category','company')->get();
+        return $this->returnData(2000, $data);
+    }
+    public function fulTimelist()
+
+    {
+        $data = $this->model->where('job_type','Full Time')->with('category','company')->get();
+        return $this->returnData(2000, $data);
+    }
+    public function jobview($jobId) {
+        $data = JobPostModel::find($jobId);
+        dd($data);
+
+        return $this->returnData(2000,$data);
     }
 
 
@@ -36,6 +54,7 @@ class JobPostController extends Controller
         if ($validator->fails()) {
             return response()->json(['result' => $validator->errors(), 'status' => 3000], 200);
         }
+
         $this->model->fill($request->all());
         $this->model->save();
         return $this->returnData(2000, $this->model);
@@ -49,17 +68,19 @@ class JobPostController extends Controller
     }
 
 
-    public function edit()
+    public function edit($id)
     {
+        $data=$this->model->where('id',$id)->first();
+        return $this->returnData(2000, $data);
 
     }
 
 
     public function update(Request $request)
     {
-        if (!$this->can('category_edit')){
-            return $this->returnData(5000, null, 'You do not have permission to edit this category');
-        }
+//        if (!$this->can('category_edit')){
+//            return $this->returnData(5000, null, 'You do not have permission to edit this category');
+//        }
 
 
         try {
@@ -74,6 +95,7 @@ class JobPostController extends Controller
 
             if ($category) {
                 $category->fill($request->all());
+                $category->status = $request->input('status') == 1 ? 1 : 0;
                 $category->update();
 
                 return $this->returnData(2000, $category);
@@ -86,10 +108,11 @@ class JobPostController extends Controller
     }
 
 
-    public function destroy($category_id)
+
+    public function destroy($id)
     {
         try {
-            $data = $this->model->where('id',$category_id)->first();
+            $data = $this->model->where('id',$id)->first();
             if ($data){
                 $data->delete();
 

@@ -112,10 +112,12 @@
       });
     </script>
 
+
     <script>
-      window.publicPath = '{{env('PUBLIC_PATH')}}';
-      window.uploadPath = '{{env('UPLOAD_PATH')}}';
+      window.publicPath = '{{ env('PUBLIC_PATH') }}';
+      window.uploadPath = '{{ env('UPLOAD_PATH') }}';
     </script>
+
 
     <script src="{{asset('js/app.js')}}"></script>
   </body>

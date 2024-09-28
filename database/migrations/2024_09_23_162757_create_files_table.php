@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('extension');
-            $table->bigInteger('size');
+            $table->integer('size');
             $table->timestamps();
         });
     }

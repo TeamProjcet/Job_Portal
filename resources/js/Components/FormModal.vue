@@ -1,6 +1,6 @@
 <template>
-    <div class="modal fade" :id="modalId">
-        <div class="modal-dialog">
+    <div class="modal fade" :id="modalId" >
+        <div class="modal-dialog modal-lg">
             <form @submit.prevent="submit()">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -16,7 +16,7 @@
                     </div>
 
 
-                    <div class="modal-body">
+                    <div class="modal-body" >
                         <slot></slot>
                     </div>
 
@@ -52,6 +52,8 @@
     };
 </script>
 
-<style scoped></style>
+<style scoped>
+
+</style>
 
 

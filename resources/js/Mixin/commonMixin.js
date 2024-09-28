@@ -25,6 +25,17 @@ export default {
             this.openModal(false, data)
 
         },
+
+        openEdit(data, id) {
+
+            const _this=this;
+            this.$store.commit('updateId', id);
+            this.$store.commit('formType', 2);
+            _this.urlGenaretor('api/createjob')
+
+
+        },
+
         closeModal: function (modalId = 'myModal', fromData = {}) {
             const _this = this;
             $(`#${modalId}`).modal('hide');
@@ -43,17 +54,16 @@ export default {
         },
 
         publicImage : function (imageName) {
-            return `${baseUrl}/${imageName}`;
+            return `${window.publicPath}/${imageName}`;
         },
 
-        storageImage : function (imageName){
-            return `${uploadPath}/${imageName}`;
+        storageImage : function (imageName) {
+            return `${window.uploadPath}/${imageName}`;
         },
 
-        clickFileField : function (filedName){
+        clickFileField : function (filedName) {
             $(`#${filedName}`).click();
         }
-
     },
     computed: {
         fromData() {
