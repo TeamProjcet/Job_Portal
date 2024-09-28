@@ -19,8 +19,13 @@
                     <td>{{data.details}}</td>
                     <td>{{data.salary}}</td>
                     <td>{{data.address}}</td>
-                    <td><img :src="data.image" class="w-25 h-25" alt="Image"></td>
+                    <td><img :src="storageImage(data.image)" style="width: 100px; height: 100px" alt="Image"></td>
                     <td>{{data.date_time}}</td>
+                    <td>
+                    <span :class="data.status ? 'badge badge-success' : 'badge badge-danger'">
+                        {{ data.status ? 'Active' : 'Inactive' }}
+                    </span>
+                    </td>
                     <td>
 
                         <a @click="openEditModal(data,data.id)">
@@ -35,7 +40,6 @@
                     </td>
                 </tr>
             </DataTable>
-
             <FormModal class="form-modal" @submit="submitFromData(fromData)">
                 <div class="row">
                     <div class="col-md-6">
@@ -86,7 +90,7 @@
 
                         <div class="mb-3">
                             <label class="form-label">Details</label>
-                            <textarea class="form-control" v-model="fromData.details" name="details" rows="3"></textarea>
+                            <textarea id="" class="form-control" v-model="fromData.details" name="details" rows="3"></textarea>
                         </div>
 
                         <div class="mb-3">
@@ -99,17 +103,27 @@
                                 <div class="mb-3">
                                     <div @click="clickFileField('imageField')" class="image_upload" :style="{ 'background-image': 'url('+publicImage('images/uploading.avif')+')' }">
                                         <template v-if="fromData.image !== undefined">
-                                            <img :src="storageImage(fromData.image)">
+                                            <img class="photo" :src="storageImage(fromData.image)">
                                         </template>
                                     </div>
                                     <input @change="uploadImage($event, fromData, 'image')" type="file" id="imageField" class="file_field">
                                 </div>
                             </div>
                         </div>
+                        <div class="mb-3">
+                            <label class="form-label">Status</label>
+                            <div>
+                                <label>
+                                    <input type="radio" v-model="fromData.status" :value="1"> Active
+                                </label>
+                                <label>
+                                    <input type="radio" v-model="fromData.status" :value="0"> Inactive
+                                </label>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </FormModal>
-
         </div>
     </div>
 
@@ -125,12 +139,11 @@
         name: "JobListCommponent",
         data() {
             return {
-                tableHeading: ["Sl", "Title", "Details",  "Salary", "Location","image", "Date", "Action"],
+                tableHeading: ["Sl", "Title", "Details",  "Salary", "Location","image", "Date", "Status", "Action"],
 
             };
         },
         mounted() {
-
             this.getDataList();
             this.getRequiredData(['category','company']);
 
@@ -139,5 +152,23 @@
 </script>
 
 <style scoped>
+    .image_upload img{
+        max-width: 100%;
+        max-height: 100%;
 
+    }
+    .image_upload{
+        height: 99px;
+        width: 170px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        cursor: pointer;
+    }
+    .photo{
+        height: 99px;
+        width: 170px;
+    }
+    #imageField{
+        display: none;
+    }
 </style>

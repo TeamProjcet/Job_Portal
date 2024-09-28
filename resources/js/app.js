@@ -13,6 +13,7 @@ import axios from "axios"
 import VueAxios from "vue-axios"
 Vue.use(VueAxios, axios)
 
+
 // common-function define and create 
 import httpMixin from "./Mixin/httpMxin"
 import commonMixin from "./Mixin/commonMixin"

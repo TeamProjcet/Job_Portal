@@ -9,11 +9,12 @@ use Illuminate\Support\Facades\Validator;
 class Category extends Model
 {
     use HasFactory;
-    protected $fillable = ['name'];
+    protected $fillable = ['name','image'];
     public function validator($input){
 
         return Validator::make($input, [
-            'name' => 'required'
+            'name' => 'required',
+            'image' => 'required'
         ]);
     }
 

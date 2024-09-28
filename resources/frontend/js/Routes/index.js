@@ -7,9 +7,11 @@ import JobDetails from "../views/JobDetails";
 
 const route = [
     {
-        path : '/',
-        name : 'home',
-        component : Home
+        path: '/',
+        name: 'home',
+        component: Home,
+        meta:{dataUrl:'api/jobpost'}
+
     },
     {
         path : '/about',
@@ -27,7 +29,7 @@ const route = [
         component : JobList
     },
     {
-        path : '/job-details',
+        path : '/job-details/:id',
         name : 'Details',
         component : JobDetails
     },

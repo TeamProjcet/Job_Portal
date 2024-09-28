@@ -2,41 +2,43 @@
     <div class="wrapper">
         <div class="main-panel">
             <!-- Top bar section -->
-           <Header></Header>
+            <Header />
 
             <!-- Side bar section -->
-            <SideNav></SideNav>
+            <SideNav />
+
             <div class="container">
-                <div class="page-inner" >
-            <!-- Content section -->
-            <router-view></router-view>
+                <div class="page-inner">
+                    <!-- Content section -->
+                    <router-view />
                 </div>
             </div>
 
             <!-- Footer section -->
-            <Footer></Footer>
+            <Footer />
         </div>
     </div>
 </template>
 
 <script>
-
-
-    import Footer from "./Components/Footer";
-    import SideNav from "./Components/SideNav";
+    // Importing components
     import Header from "./Components/Header";
+    import SideNav from "./Components/SideNav";
+    import Footer from "./Components/Footer";
+
     export default {
         name: "App",
         components: {
             Header,
             SideNav,
-            Footer
-
+            Footer,
         },
         mounted() {
+
         },
     };
 </script>
 
 <style scoped>
+
 </style>

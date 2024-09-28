@@ -25,13 +25,15 @@
         "webpack": "^5.94.0"
     },
     "dependencies": {
+        "mix": "^0.0.1",
         "sweetalert2": "^11.14.0",
+        "tinymce": "^7.3.0",
         "vee-validate": "^2.2.15",
         "vue-axios": "^3.5.2",
         "vue-router": "^3.6.5",
         "vue-sweetalert2": "^5.0.11",
+        "vue-tinymce": "^1.0.5",
         "vue-toastification": "^1.7.14",
-        "vuex": "^3.6.2",
-        "mix": "^0.0.1"
+        "vuex": "^3.6.2"
     }
 }
