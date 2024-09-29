@@ -4,13 +4,14 @@ import Contact from '../views/Contact.vue';
 import JobCat from "../views/JobCat";
 import JobList from "../views/JobList";
 import JobDetails from "../views/JobDetails";
+import SeekerLogin from "../views/SeekerAuth/SeekerLogin";
+import SeekerRegis from "../views/SeekerAuth/SeekerRegis";
 
 const route = [
     {
         path: '/',
         name: 'home',
         component: Home,
-        meta:{dataUrl:'api/jobpost'}
 
     },
     {
@@ -37,6 +38,19 @@ const route = [
         path : '/contact',
         name : 'contact',
         component : Contact
+    },
+    {
+        path : '/seekerlogin',
+        name : 'seekerlogin',
+        component : SeekerLogin,
+        meta:{pagetitle:'',dataUrl:'seekerlogin'},
+    },
+    {
+        path : '/seekerregis',
+        name : 'registration',
+        component : SeekerRegis,
+        meta:{pagetitle:'',dataUrl:'/seekerregis'},
+
     }
 ];
 export default route;

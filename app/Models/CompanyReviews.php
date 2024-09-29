@@ -25,6 +25,6 @@ class CompanyReviews extends Model
 
     public function seeker()
     {
-        return $this->belongsTo(JobSeekers::class, 'seeker_id', 'seeker_id');
+        return $this->belongsTo(JobSeekers::class, 'seeker_id', 'id');
     }
 }

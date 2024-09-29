@@ -55,6 +55,31 @@ export default {
             })
 
         },
+        submitFrom() {
+            const _this = this;
+
+            if (_this.fromData.password !== _this.fromData.confirmPassword) {
+                _this.errorMessage = "Passwords do not match.";
+                return;
+            }
+
+            axios.post('/seekerregis', _this.fromData)
+                .then(function (res) {
+                    if (parseInt(res.data.status) === 2000) {
+                        _this.$toast.success("Registered successfully!");
+                        _this.$router.push('/seekerlogin');
+                    } else {
+                        _this.$toast.error("Registration failed!");
+                    }
+                })
+                .catch(function (error) {
+                    if (error.response) {
+                        _this.errorMessage = error.response.data.message || "An error occurred.";
+                    }
+                });
+        },
+
+
         submitFromData: function (fromData = {}, optParms = {}, callback) {
             const _this = this;
 
