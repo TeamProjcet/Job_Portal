@@ -19,7 +19,7 @@ return new class extends Migration
             $table->text('title');
             $table->string('description');
             $table->boolean('status')->default(1); // Status
-//            $table->text('image');
+            $table->text('image');
             $table->timestamps();
         });
     }
@@ -34,3 +34,5 @@ return new class extends Migration
         Schema::dropIfExists('blogs');
     }
 };
+
+

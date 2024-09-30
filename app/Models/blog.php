@@ -9,17 +9,15 @@ use Illuminate\Support\Facades\Validator;
 class blog extends Model
 {
     use HasFactory;
+    protected $fillable = ['company_id', 'title', 'description', 'image'];
 
-    protected $fillable = ['company_id', 'title','status', 'description', ];
-
-    public function validator($input)
-    {
-        return Validator::make($input, [
+    public function validator($input){
+        return Validator::make($input,[
             'company_id'=>'required ',
             'title'=>'required ',
             'description'=>'required ',
+            'image'=>'required ',
             'status' => 'required|boolean',
-
         ]);
     }
 }
