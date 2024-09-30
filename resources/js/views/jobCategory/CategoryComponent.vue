@@ -36,14 +36,15 @@
                     />
                 </div>
                 <div class="row">
-                    <div class="col-md-2">
+                    <div class="col-md-4">
                         <div class="mb-3">
-                            <div @click="clickFileField('imageField')" class="image_upload" :style="{ 'background-image': 'url('+publicImage('images/uploading.avif')+')' }">
+                            <label class="form-label">Upload Image</label>
+                            <div @click="clickFileField('imageField')" class="image_upload" :style="{ 'background-image': 'url(' + publicImage('images/uploading.avif') + ')' }">
                                 <template v-if="fromData.image !== undefined">
                                     <img class="photo" :src="storageImage(fromData.image)">
                                 </template>
                             </div>
-                            <input @change="uploadImage($event, fromData, 'image')" type="file" id="imageField" class="file_field">
+                            <input @change="uploadImage($event, fromData, 'image')" type="file" name="image" id="imageField" class="file_field">
                         </div>
                     </div>
                 </div>
@@ -77,5 +78,28 @@
 </script>
 
 <style scoped>
-
+    .image_upload img {
+        max-width: 100%;
+        max-height: 100%;
+        border-radius: 4px;
+    }
+    .image_upload {
+        height: 120px;
+        width: 100%;
+        background-size: cover;
+        background-repeat: no-repeat;
+        cursor: pointer;
+        border: 2px dashed #007bff; /* Add a dashed border for better visibility */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .photo {
+        height: 100%;
+        width: 100%;
+        border-radius: 4px; /* Match the border radius of the upload area */
+    }
+    #imageField {
+        display: none;
+    }
 </style>

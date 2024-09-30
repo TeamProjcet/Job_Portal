@@ -18,6 +18,8 @@
                         <router-link to="/job-list" class="dropdown-item">Job List</router-link>
                     </div>
                 </div>
+                <router-link to="/blog-post" class="nav-item nav-link">Blog</router-link>
+
                 <router-link to="/contact" class="nav-item nav-link">Contact</router-link>
             </div>
             <a href="" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Post A Job<i class="fa fa-arrow-right ms-3"></i></a>

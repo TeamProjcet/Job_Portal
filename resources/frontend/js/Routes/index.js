@@ -4,6 +4,8 @@ import Contact from '../views/Contact.vue';
 import JobCat from "../views/JobCat";
 import JobList from "../views/JobList";
 import JobDetails from "../views/JobDetails";
+import BlogDetails from "../views/BlogDetails";
+import BlogPost from "../views/BlogPost";
 
 const route = [
     {
@@ -31,7 +33,19 @@ const route = [
     {
         path : '/job-details/:id',
         name : 'Details',
-        component : JobDetails
+        component : JobDetails,
+        props: true
+    },
+    {
+        path: '/blog-post',
+        name: 'Blog-Post',
+        component: BlogPost
+    },
+    {
+        path: '/blog-details/:id', // Updated to include :id for dynamic routing
+        name: 'Blog-Details',
+        component: BlogDetails,
+        props: true // Allows route params to be passed as props
     },
     {
         path : '/contact',

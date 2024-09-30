@@ -49,7 +49,8 @@ class BlogController extends Controller
      */
     public function show($id)
     {
-        //
+        $post = blog::findOrFail($id);
+        return response()->json(['result' => $post]);
     }
 
     /**

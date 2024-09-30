@@ -47,7 +47,7 @@
 
 <!-- Template Javascript -->
 <script src="{{asset('frontend/assets/js/main.js')}}"></script>
-<script src="{{asset('frontend/js/app.js')}}"></script>
+
 
    <script>window.baseUrl = '{{url('/')}}';</script>
 
@@ -55,6 +55,8 @@
        window.publicPath = '{{ env('PUBLIC_PATH') }}';
        window.uploadPath = '{{ env('UPLOAD_PATH') }}';
    </script>
+
+   <script src="{{asset('frontend/js/app.js')}}"></script>
 </body>
 
 </html>

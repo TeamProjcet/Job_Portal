@@ -30,6 +30,7 @@ Route::resource('/companyreviews',\App\Http\Controllers\CompanyReviewsController
 
 Route::resource('blogpost', \App\Http\Controllers\Backend\BlogController::class);
 
+
 Route::post('upload', [\App\Http\Controllers\Backend\UploadController::class, 'upload']);
 Route::post('/required_data', [\App\Http\Controllers\SupportController::class, 'requireData']);
 Route::get('/partTime', [\App\Http\Controllers\Backend\JobPostController::class,'partTime']);

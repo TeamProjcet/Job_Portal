@@ -10,7 +10,7 @@ class blog extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['company_id', 'title','status', 'description', ];
+    protected $fillable = ['company_id', 'title','status', 'description', 'image'];
 
     public function validator($input)
     {
@@ -19,7 +19,7 @@ class blog extends Model
             'title'=>'required ',
             'description'=>'required ',
             'status' => 'required|boolean',
-
+            'image'=> 'required'
         ]);
     }
 }

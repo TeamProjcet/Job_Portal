@@ -21,6 +21,9 @@ class SupportController extends Controller
         if (in_array('company', $array)) {
             $data['company'] = Company::get();
         }
+
+
+
         return $this->returnData(2000, $data);
 
     }
