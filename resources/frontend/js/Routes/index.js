@@ -4,17 +4,17 @@ import Contact from '../views/Contact.vue';
 import JobCat from "../views/JobCat";
 import JobList from "../views/JobList";
 import JobDetails from "../views/JobDetails";
-import BlogPost from "../views/BlogPost";
-import BlogDetails from "../views/BlogDetails";
 import SeekerLogin from "../views/SeekerAuth/SeekerLogin";
 import SeekerRegis from "../views/SeekerAuth/SeekerRegis";
+import BlogDetails from "../views/Blog/BlogDetails";
+import BlogPost from "../views/Blog/BlogPost";
 import SeekerProfile from "../views/SeekerAuth/SeekerProfile";
 
 const route = [
     {
         path: '/',
         name: 'home',
-        component: Home,
+        component: Home
 
     },
     {
@@ -44,10 +44,10 @@ const route = [
         component: BlogPost,
     },
     {
-        path: '/blog-details/:id', 
+        path: '/blog-details/:id',
         name: 'Blog-Details',
         component: BlogDetails,
-        props: true 
+        props: true
     },
     {
         path : '/contact',
@@ -58,19 +58,21 @@ const route = [
         path : '/seekerlogin',
         name : 'seekerlogin',
         component : SeekerLogin,
-        meta:{pagetitle:'',dataUrl:'seekerlogin'},
+        meta:{pagetitle:'',dataUrl:'api/frontend/seekerlogin'},
     },
     {
         path : '/seekerregis',
         name : 'registration',
         component : SeekerRegis,
-        meta:{pagetitle:'',dataUrl:'/seekerregis'},
+        meta:{pagetitle:'',dataUrl:'api/frontend/seekerregis'},
     },
     {
         path : '/seekerprofile',
         name : 'seekerprofile',
         component : SeekerProfile,
-        meta:{pagetitle:'',dataUrl:'seekerprofile'},
+        meta:{pagetitle:'',dataUrl:'api/frontend/seekerprofile'
+            
+        },
     }
 ];
 export default route;

@@ -18,7 +18,7 @@
                             <div class="text-start ps-4">
                                 <h3 class="mb-3">{{ job.position }}</h3>
                                 <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>{{ job.address }}</span>
-                                <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i>{{ job.job_type }}</span>
+                                <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i>{{ job.job_type == 1 ? 'Full Time' : (job.job_type == 2 ? 'Part Time' : 'Not Specified') }}</span>
                                 <span class="text-truncate me-0"><i class="far fa-money-bill-alt text-primary me-2"></i>{{ job.salary }}</span>
                             </div>
                         </div>
@@ -59,9 +59,12 @@
                         <div v-if="job" class="bg-light rounded p-5 mb-4 wow slideInUp" data-wow-delay="0.1s">
                             <h4 class="mb-4">Job Summary</h4>
                             <p><i class="fa fa-angle-right text-primary me-2"></i>Published On: {{ job.date_time }}</p>
-                            <p><i class="fa fa-angle-right text-primary me-2"></i>Job Category: Graphic Design </p>
+                            <p><i class="fa fa-angle-right text-primary me-2"></i>Job Category: {{job.category.name}} </p>
                             <p><i class="fa fa-angle-right text-primary me-2"></i>Vacancy: 01</p>
-                            <p><i class="fa fa-angle-right text-primary me-2"></i>Job Nature: {{ job.job_type }}</p>
+                            <p>
+                                <i class="fa fa-angle-right text-primary me-2"></i>
+                                Job Nature: {{ job.job_type == 1 ? 'Full Time' : (job.job_type == 2 ? 'Part Time' : 'Not Specified') }}
+                            </p>
                             <p><i class="fa fa-angle-right text-primary me-2"></i>Salary: {{ job.salary }}</p>
                             <p><i class="fa fa-angle-right text-primary me-2"></i>Location: {{ job.address }}</p>
                             <p class="m-0"><i class="fa fa-angle-right text-primary me-2"></i>Date Line: 2024-10-05</p>
@@ -127,149 +130,3 @@
     /* Add your styles here */
 </style>
 
-<!--<template>-->
-<!--    <div class="container-xxl bg-white p-0">-->
-<!--        &lt;!&ndash; Header Start &ndash;&gt;-->
-<!--        <div class="container-xxl py-5 bg-dark page-header mb-5">-->
-<!--            <div class="container my-5 pt-5 pb-4">-->
-<!--                <h1 class="display-3 text-white mb-3 animated slideInDown">Job Detail</h1>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        &lt;!&ndash; Header End &ndash;&gt;-->
-
-<!--        &lt;!&ndash; Job Detail Start &ndash;&gt;-->
-<!--        <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">-->
-<!--            <div class="container">-->
-<!--                <div class="row gy-5 gx-4">-->
-<!--                    <div class="col-lg-8">-->
-<!--                        <div v-if="job" class="d-flex align-items-center mb-5">-->
-<!--                            <img class="flex-shrink-0 img-fluid border rounded" :src="storageImage(job.image)" alt="" style="width: 80px; height: 80px;">-->
-<!--                            <div class="text-start ps-4">-->
-<!--                                <h3 class="mb-3">{{ job.title }}</h3>-->
-<!--                                <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>{{ job.address }}</span>-->
-<!--                                <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i>{{ job.job_type }}</span>-->
-<!--                                <span class="text-truncate me-0"><i class="far fa-money-bill-alt text-primary me-2"></i>{{ job.salary }}</span>-->
-<!--                            </div>-->
-<!--                        </div>-->
-
-<!--                        <div class="mb-5">-->
-<!--                            <h4 class="mb-3">Job Description</h4>-->
-<!--                            <p>{{ job.details }}</p>-->
-<!--                            <h4 class="mb-3">Responsibility</h4>-->
-<!--                            <ul class="list-unstyled">-->
-<!--                                <li v-for="(responsibility, index) in job.responsibilities" :key="index">-->
-<!--                                    <i class="fa fa-angle-right text-primary me-2"></i>{{ responsibility }}-->
-<!--                                </li>-->
-<!--                            </ul>-->
-<!--                            <h4 class="mb-3">Qualifications</h4>-->
-<!--                            <ul class="list-unstyled">-->
-<!--                                <li v-for="(qualification, index) in job.qualifications" :key="index">-->
-<!--                                    <i class="fa fa-angle-right text-primary me-2"></i>{{ qualification }}-->
-<!--                                </li>-->
-<!--                            </ul>-->
-<!--                        </div>-->
-
-<!--                        <div>-->
-<!--                            <h4 class="mb-4">Apply For The Job</h4>-->
-<!--                            <form @submit.prevent="submitApplication">-->
-<!--                                <div class="row g-3">-->
-<!--                                    <div class="col-12 col-sm-6">-->
-<!--                                        <input type="text" class="form-control" placeholder="Your Name" v-model="application.name" required>-->
-<!--                                    </div>-->
-<!--                                    <div class="col-12 col-sm-6">-->
-<!--                                        <input type="email" class="form-control" placeholder="Your Email" v-model="application.email" required>-->
-<!--                                    </div>-->
-<!--                                    <div class="col-12 col-sm-6">-->
-<!--                                        <input type="text" class="form-control" placeholder="Portfolio Website" v-model="application.portfolio">-->
-<!--                                    </div>-->
-<!--                                    <div class="col-12 col-sm-6">-->
-<!--                                        <input type="file" class="form-control bg-white" @change="onFileChange">-->
-<!--                                    </div>-->
-<!--                                    <div class="col-12">-->
-<!--                                        <textarea class="form-control" rows="5" placeholder="Cover Letter" v-model="application.coverLetter" required></textarea>-->
-<!--                                    </div>-->
-<!--                                    <div class="col-12">-->
-<!--                                        <button class="btn btn-primary w-100" type="submit">Apply Now</button>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </form>-->
-<!--                        </div>-->
-<!--                    </div>-->
-
-<!--                    <div class="col-lg-4">-->
-<!--                        <div v-if="job" class="bg-light rounded p-5 mb-4 wow slideInUp" data-wow-delay="0.1s">-->
-<!--                            <h4 class="mb-4">Job Summary</h4>-->
-<!--                            <p><i class="fa fa-angle-right text-primary me-2"></i>Published On: {{ job.published_on }}</p>-->
-<!--                            <p><i class="fa fa-angle-right text-primary me-2"></i>Vacancy: {{ job.vacancy }}</p>-->
-<!--                            <p><i class="fa fa-angle-right text-primary me-2"></i>Job Nature: {{ job.job_nature }}</p>-->
-<!--                            <p><i class="fa fa-angle-right text-primary me-2"></i>Salary: {{ job.salary }}</p>-->
-<!--                            <p><i class="fa fa-angle-right text-primary me-2"></i>Location: {{ job.location }}</p>-->
-<!--                            <p class="m-0"><i class="fa fa-angle-right text-primary me-2"></i>Date Line: {{ job.date_line }}</p>-->
-<!--                        </div>-->
-<!--                        <div v-if="job" class="bg-light rounded p-5 wow slideInUp" data-wow-delay="0.1s">-->
-<!--                            <h4 class="mb-4">Company Detail</h4>-->
-<!--                            <p class="m-0">{{ job.company_detail }}</p>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div v-if="!job" class="text-center">-->
-<!--                    <p>Loading job details...</p>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        &lt;!&ndash; Job Detail End &ndash;&gt;-->
-<!--    </div>-->
-<!--</template>-->
-
-<!--<script>-->
-<!--    import axios from 'axios';-->
-
-<!--    export default {-->
-<!--        name: "JobDetails",-->
-<!--        props: ['id'],-->
-<!--        data() {-->
-<!--            return {-->
-<!--                job: null, // Initialize as null to indicate loading state-->
-<!--                application: {-->
-<!--                    name: '',-->
-<!--                    email: '',-->
-<!--                    portfolio: '',-->
-<!--                    coverLetter: '',-->
-<!--                    resume: null-->
-<!--                }-->
-<!--            };-->
-<!--        },-->
-<!--        mounted() {-->
-<!--            this.getJobDetails();-->
-<!--        },-->
-<!--        methods: {-->
-<!--            async getJobDetails() {-->
-<!--                try {-->
-<!--                    const response = await axios.get(`/api/joblist/${this.id}`);-->
-<!--                    console.log("Full API Response:", response);-->
-
-<!--                    if (response.data && response.data.result) {-->
-<!--                        this.job = response.data.result; // Assign the result to post-->
-<!--                    } else {-->
-<!--                        this.error = "No blog details found."; // Set new error message-->
-<!--                    }-->
-<!--                } catch (error) {-->
-<!--                    console.error("Error fetching blog details:", error.response ? error.response.data : error.message);-->
-<!--                    this.error = "Failed to load blog details."; // Set error message-->
-<!--                }-->
-<!--            },-->
-<!--            onFileChange(event) {-->
-<!--                this.application.resume = event.target.files[0]; // Handle file selection-->
-<!--            },-->
-<!--            submitApplication() {-->
-<!--                // Handle application submission logic-->
-<!--                console.log("Application submitted:", this.application);-->
-<!--                // You may want to implement a POST request to submit the application here-->
-<!--            }-->
-<!--        }-->
-<!--    };-->
-<!--</script>-->
-
-<!--<style scoped>-->
-<!--    /* Add your styles here */-->
-<!--</style>-->
