@@ -45,9 +45,8 @@ Route::get('/fulTimelist', [\App\Http\Controllers\Backend\JobPostController::cla
 //frontend Route
 
 Route::view('/{any}', 'frontend')->where('any', '.*');
-Route::prefix('api')->group(function (){
-
-});
+Route::post('/seekerregis',[\App\Http\Controllers\frontend\SeekerLoginController::class,'store']);
+Route::post('/seekerlogin',[\App\Http\Controllers\frontend\SeekerLoginController::class,'login']);
 
 
 

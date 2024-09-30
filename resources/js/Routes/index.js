@@ -49,7 +49,7 @@ const route = [
     },
     {
         path : '/admin/employer/employerfrom',
-        name : 'employefromr',
+        name : 'employefrom',
         component :EmployerForm,
         meta:{pagetitle:' Employer Table',dataUrl:'api/employerfrom',
         }

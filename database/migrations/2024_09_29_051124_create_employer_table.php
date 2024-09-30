@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('employers', function (Blueprint $table) {
-            $table->id();  // Primary Key
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+        Schema::create('employer', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');  // Reference to User
             $table->string('company_name');
             $table->string('company_website')->nullable();
-            $table->string('company_address');
+            $table->string('company_address')->nullable();
             $table->string('contact_person');
             $table->string('industry');
             $table->text('company_description')->nullable();
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('employers');
+        Schema::dropIfExists('employer');
     }
 };

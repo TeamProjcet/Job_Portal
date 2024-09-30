@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('job_seekers', function (Blueprint $table) {
+        Schema::create('job_seeker', function (Blueprint $table) {
             $table->id();
             $table->string('resume')->nullable(); // Resume/CV link
             $table->text('skills'); // Skills
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('job_seekers');
+        Schema::dropIfExists('job_seeker');
     }
 };
