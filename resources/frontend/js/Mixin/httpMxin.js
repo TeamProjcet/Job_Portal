@@ -63,7 +63,7 @@ export default {
                 return;
             }
 
-            axios.post('/seekerregis', _this.fromData)
+            axios.post('/api/frontend/seekerregis', _this.fromData)
                 .then(function (res) {
                     if (parseInt(res.data.status) === 2000) {
                         _this.$toast.success("Registered successfully!");

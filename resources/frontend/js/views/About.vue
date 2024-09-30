@@ -36,7 +36,6 @@
                         <p><i class="fa fa-check text-primary me-3"></i>Talent Sourcing and Screening</p>
                         <p><i class="fa fa-check text-primary me-3"></i>Comprehensive Recruitment Solutions</p>
                         <p><i class="fa fa-check text-primary me-3"></i>Employer Branding Services</p>
-                        <a class="btn btn-primary py-3 px-5 mt-3" href="">Read More</a>
                     </div>
                 </div>
             </div>

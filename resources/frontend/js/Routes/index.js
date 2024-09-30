@@ -13,7 +13,7 @@ const route = [
     {
         path: '/',
         name: 'home',
-        component: Home,
+        component: Home
 
     },
     {
@@ -43,10 +43,10 @@ const route = [
         component: BlogPost
     },
     {
-        path: '/blog-details/:id', 
+        path: '/blog-details/:id',
         name: 'Blog-Details',
         component: BlogDetails,
-        props: true 
+        props: true
     },
     {
         path : '/contact',
@@ -57,13 +57,13 @@ const route = [
         path : '/seekerlogin',
         name : 'seekerlogin',
         component : SeekerLogin,
-        meta:{pagetitle:'',dataUrl:'seekerlogin'},
+        meta:{pagetitle:'',dataUrl:'api/frontend/seekerlogin'},
     },
     {
         path : '/seekerregis',
         name : 'registration',
         component : SeekerRegis,
-        meta:{pagetitle:'',dataUrl:'/seekerregis'},
+        meta:{pagetitle:'',dataUrl:'api/frontend/seekerregis'},
 
     }
 ];

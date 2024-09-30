@@ -22,6 +22,23 @@ class SupportController extends Controller
             $data['company'] = Company::get();
         }
 
+        if(in_array('job_type', $array)){
+            $data['job_type'] = [
+                [
+                    'name' => 'Featured',
+                    'value' => 1
+                ],
+                [
+                    'name' => 'Full Time',
+                    'value' => 2
+                ],
+                [
+                    'name' => 'Part Time',
+                    'value' => 3
+                ],
+
+            ];
+        }
 
 
         return $this->returnData(2000, $data);

@@ -40,7 +40,7 @@
             submitLogin() {
                 const _this = this;
 
-                axios.post('/seekerlogin', {
+                axios.post('api/frontend/seekerlogin', {
                     email: _this.fromData.email,
                     password: _this.fromData.password
                 })
