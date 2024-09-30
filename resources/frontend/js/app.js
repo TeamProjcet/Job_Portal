@@ -28,7 +28,7 @@ Vue.use(VeeValidate, {
 const router = new VueRouter({
     mode: 'history',
     routes: route,
-    linkActiveClass: 'active'
+    linkActiveClass: ''
 });
 
 // small common-function
