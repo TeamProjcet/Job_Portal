@@ -43,7 +43,7 @@ class SeekerLoginController extends Controller
 
         $seeker = Seeker::where('email', $request->email)->first();
 
-        if ($seeker && $request->password) {
+        if ($seeker && Hash::check($request->password, $seeker->password)) {
             return response()->json([
                 'status' => 2000,
                 'data' => $seeker,
