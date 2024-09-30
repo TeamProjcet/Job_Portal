@@ -6,6 +6,8 @@ import JobList from "../views/JobList";
 import JobDetails from "../views/JobDetails";
 import SeekerLogin from "../views/SeekerAuth/SeekerLogin";
 import SeekerRegis from "../views/SeekerAuth/SeekerRegis";
+import BlogDetails from "../views/Blog/BlogDetails";
+import BlogPost from "../views/Blog/BlogPost";
 
 const route = [
     {
