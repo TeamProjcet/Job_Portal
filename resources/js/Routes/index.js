@@ -3,8 +3,8 @@ import CategoryComponent from "../views/jobCategory/CategoryComponent";
 import JobListCommponent from "../views/jobCategory/JobListCommponent";
 import CreateJobComponent from "../views/jobCategory/CreateJobComponent.vue";
 import CompanyComponent from "../views/jobCategory/CompanyComponent";
-import EmployerList from "../views/Employers/EmployerList";
 import BlogPostComponent from "../views/Blog/BlogPostComponent";
+import EmployerForm from "../views/Employers/EmployerForm";
 
 
 const route = [
@@ -47,10 +47,10 @@ const route = [
 
     },
     {
-        path : '/admin/jobcategory/employer',
-        name : 'employer',
-        component :EmployerList,
-        meta:{pagetitle:' Employer Table',dataUrl:'api/employer',
+        path : '/admin/employer/employerfrom',
+        name : 'employefromr',
+        component :EmployerForm,
+        meta:{pagetitle:' Employer Table',dataUrl:'api/employerfrom',
         }
 
     },
