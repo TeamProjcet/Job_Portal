@@ -18,6 +18,7 @@ class blog extends Model
             'description'=>'required ',
             'image'=>'required ',
             'status' => 'required|boolean',
+
         ]);
     }
 }

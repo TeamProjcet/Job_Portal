@@ -12,8 +12,8 @@
                     <td>{{ index + 1 }}</td>
                     <td>N/A</td>
                     <td>{{ data.title }}</td>
-                    <td>{{ data.description }}</td>
-                    <td>{{ data.image }}</td>
+                    <td v-html="data.description"></td>
+                    <td><img :src="storageImage(data.image)" style="width: 100px; height: 100px" alt="Image"></td>
                     <td>
                     <span :class="data.status ? 'badge badge-success' : 'badge badge-danger'">
                         {{ data.status ? 'Active' : 'Inactive' }}
@@ -58,18 +58,25 @@
                             type="text"
                     />
                 </div>
-                <div class="col-md-12">
-                    <label>Description</label>
 
-                    <input
-                            v-validate="'required'"
-                            v-model="fromData.description"
-                            class="form-control"
-                            name="description"
-                            type="text"
-                    />
+                <div class="mb-3">
+                    <label class="form-label">Details</label>
+                    <textarea id="details" class="form-control" v-model="fromData.description" name="details" rows="5" placeholder="Enter job details..."></textarea>
                 </div>
 
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="mb-3">
+                            <label class="form-label">Upload Image</label>
+                            <div @click="clickFileField('imageField')" class="image_upload" :style="{ 'background-image': 'url(' + publicImage('images/uploading.avif') + ')' }">
+                                <template v-if="fromData.image !== undefined">
+                                    <img class="photo" :src="storageImage(fromData.image)">
+                                </template>
+                            </div>
+                            <input @change="uploadImage($event, fromData, 'image')" type="file" name="image" id="imageField" class="file_field">
+                        </div>
+                    </div>
+                </div>
 
                 <div class="mb-3">
                     <label>Status</label>
@@ -99,22 +106,6 @@
                     </div>
                 </div>
 
-
-<!--                <div class="row">-->
-<!--                    <div class="col-md-2">-->
-<!--                        <div class="mb-3">-->
-<!--                            <div @click="clickFileField('imageField')" class="image_upload"-->
-<!--                                 :style="{ 'background-image': 'url('+publicImage('assets/img/uploading.avif')+')' }">-->
-<!--                                <template v-if="fromData.image !== undefined">-->
-<!--                                    <img :src="storageImage(fromData.image)">-->
-<!--                                </template>-->
-<!--                            </div>-->
-<!--                            <input @change="uploadImage($event, fromData, 'image')" type="file" id="imageField"-->
-<!--                                   class="file_field">-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-
             </div>
         </FormModal>
 
@@ -134,18 +125,61 @@
         data() {
             return {
                 tableHeading: ["Id", "company name", "title", "description", "image", "status", "action"],
-
+                isReadOnly: false,
             };
         },
         mounted() {
             this.getDataList();
             this.getRequiredData(['company']);
+            this.initTinyMCE();
 
-        }
+        },
+        methods: {
+            initTinyMCE() {
+                tinymce.init({
+                    selector: 'textarea',
+                    setup: (editor) => {
+                        editor.on('change', () => {
+                            this.fromData.description = editor.getContent();
+                        });
+                    },
+                    // Additional TinyMCE configuration can go here
+                    menubar: false,
+                    statusbar: false,
+                    toolbar: "undo redo print spellcheckdialog formatpainter | blocks fontfamily fontsize | bold italic underline forecolor backcolor | link image | alignleft aligncenter alignright alignjustify lineheight | checklist bullist numlist indent outdent | removeformat | code",
+                    height: 300,
+                    readonly: false,
+                    license_key: 'gpl',
+                });
+            },
+
+        },
     }
 </script>
 
 <style scoped>
-
-
+    .image_upload img {
+        max-width: 100%;
+        max-height: 100%;
+        border-radius: 4px;
+    }
+    .image_upload {
+        height: 120px;
+        width: 100%;
+        background-size: cover;
+        background-repeat: no-repeat;
+        cursor: pointer;
+        border: 2px dashed #007bff; /* Add a dashed border for better visibility */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .photo {
+        height: 100%;
+        width: 100%;
+        border-radius: 4px; /* Match the border radius of the upload area */
+    }
+    #imageField {
+        display: none;
+    }
 </style>

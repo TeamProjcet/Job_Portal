@@ -49,6 +49,8 @@
 
     <script>window.baseUrl = '{{url('/')}}';</script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/7.3.0/tinymce.min.js" integrity="sha512-RUZ2d69UiTI+LdjfDCxqJh5HfjmOcouct56utQNVRjr90Ea8uHQa+gCxvxDTC9fFvIGP+t4TDDJWNTRV48tBpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <!--   Core JS Files   -->
     <script src="{{asset('assets/js/core/jquery-3.7.1.min.js')}}"></script>
     <script src="{{asset('assets/js/core/popper.min.js')}}"></script>
