@@ -11,8 +11,7 @@ const route = [
     {
         path: '/',
         name: 'home',
-        component: Home,
-        meta:{dataUrl:'api/jobpost'}
+        component: Home
 
     },
     {
@@ -42,10 +41,10 @@ const route = [
         component: BlogPost
     },
     {
-        path: '/blog-details/:id', // Updated to include :id for dynamic routing
+        path: '/blog-details/:id',
         name: 'Blog-Details',
         component: BlogDetails,
-        props: true // Allows route params to be passed as props
+        props: true
     },
     {
         path : '/contact',

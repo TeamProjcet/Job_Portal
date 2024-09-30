@@ -64,7 +64,7 @@ class JobPostController extends Controller
 
     public function show($id)
     {
-        $job = JobPostModel::findOrFail($id);
+        $job = JobPostModel::findOrFail($id)->load('category', 'company');
         return response()->json(['result' => $job]);
     }
 

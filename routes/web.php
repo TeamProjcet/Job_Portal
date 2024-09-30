@@ -42,10 +42,11 @@ Route::get('/fulTimelist', [\App\Http\Controllers\Backend\JobPostController::cla
 
 //frontend Route
 
-Route::view('/{any}', 'frontend')->where('any', '.*');
-Route::prefix('api')->group(function (){
-
+Route::prefix('api/frontend/')->group(function () {
+    Route::get('/joblist', [\App\Http\Controllers\frontend\FrontendController::class, 'joblist']);
 });
+
+Route::view('/{any}', 'frontend')->where('any', '.*');
 
 
 
