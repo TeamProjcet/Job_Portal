@@ -76,7 +76,7 @@
                             <input type="text" class="form-control" v-model="fromData.address" placeholder="Enter address" name="address">
                         </div>
 
-                        <<div class="mb-3">
+                        <div class="mb-3">
                     <label class="form-label">Job Type</label>
                     <select v-model="fromData.job_type" name="job_type" class="form-control">
                         <option value="">Select Job Type</option>
@@ -144,7 +144,7 @@
         },
         mounted() {
             this.getDataList();
-            this.getRequiredData(['category','company']);
+            this.getRequiredData(['category','company','job_type']);
             this.initTinyMCE();
         },
         methods:{
