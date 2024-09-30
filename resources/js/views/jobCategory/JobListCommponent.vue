@@ -76,14 +76,15 @@
                             <input type="text" class="form-control" v-model="fromData.address" placeholder="Enter address" name="address">
                         </div>
 
-                        <div class="mb-3">
-                            <label class="form-label">Job Type</label>
-                            <select v-model="fromData.job_type" name="job_type" class="form-control">
-                                <option value="">Select Job Type</option>
-                                <option value="Full Time">Full Time</option>
-                                <option value="Part Time">Part Time</option>
-                            </select>
-                        </div>
+                        <<div class="mb-3">
+                    <label class="form-label">Job Type</label>
+                    <select v-model="fromData.job_type" name="job_type" class="form-control">
+                        <option value="">Select Job Type</option>
+                        <template v-for="(type, index) in requireData.job_type">
+                            <option :value="type.value">{{type.name}}</option>
+                        </template>
+                    </select>
+                </div>
 
                         <div class="mb-3">
                             <label class="form-label">Details</label>
