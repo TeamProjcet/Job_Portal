@@ -366,14 +366,18 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      tableHeading: ["Sl", "name", "Action"]
+      tableHeading: ["Sl", "Name", "Image", "Action"] // Make sure Image is included here
     };
   },
   mounted: function mounted() {
-    this.getDataList();
-    // this.$set(this.fromData, "name", "");
+    this.getDataList(); // Ensure you fetch the data that includes images
   },
-  computed: {}
+  methods: {
+    // Assuming this function retrieves the correct path for images
+    storageImage: function storageImage(imagePath) {
+      return "/storage/".concat(imagePath);
+    }
+  }
 });
 
 /***/ }),
@@ -541,7 +545,7 @@ var render = function render() {
   }, [_c("div", {
     staticClass: "main-panel"
   }, [_c("Header"), _vm._v(" "), _c("SideNav"), _vm._v(" "), _c("div", {
-    staticClass: "container"
+    staticClass: "container-fluid"
   }, [_c("div", {
     staticClass: "page-inner"
   }, [_c("router-view")], 1)]), _vm._v(" "), _c("Footer")], 1)]);
@@ -1775,7 +1779,16 @@ var render = function render() {
   }, _vm._l(_vm.dataList, function (data, index) {
     return _c("tr", {
       key: index
-    }, [_c("td", [_vm._v(_vm._s(index + 1))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(data.name))]), _vm._v(" "), _c("td", [_c("a", {
+    }, [_c("td", [_vm._v(_vm._s(index + 1))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(data.name))]), _vm._v(" "), _c("td", [_c("img", {
+      staticStyle: {
+        width: "100px",
+        height: "100px"
+      },
+      attrs: {
+        src: _vm.storageImage(data.image),
+        alt: "Image"
+      }
+    })]), _vm._v(" "), _c("td", [_c("a", {
       on: {
         click: function click($event) {
           return _vm.openEditModal(data, data.id);

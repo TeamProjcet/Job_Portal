@@ -1,5 +1,4 @@
 <template>
-
     <div class="row">
         <div class="card">
             <div class="card-header">
@@ -10,10 +9,14 @@
                     <td>{{ index + 1 }}</td>
                     <td>{{ data.name }}</td>
                     <td>
-                        <a  @click="openEditModal(data , data.id)">
+                        <!-- Display the image -->
+                        <img :src="storageImage(data.image)" style="width: 100px; height: 100px" alt="Image">
+                    </td>
+                    <td>
+                        <a @click="openEditModal(data, data.id)">
                             <i class="fas fa-edit" style="color: blue;"></i>
                         </a>
-                        <a  @click="CategoryDatadelete(data.id, index)">
+                        <a @click="CategoryDatadelete(data.id, index)">
                             <i class="fas fa-trash-alt" style="color: red;"></i>
                         </a>
                     </td>
@@ -21,12 +24,11 @@
             </DataTable>
         </div>
 
-<!--        slot-->
-        <FormModal  @submit="submitFromData(fromData)">
+        <!-- Slot for the form modal -->
+        <FormModal @submit="submitFromData(fromData)">
             <div class="row">
                 <div class="col-md-12">
                     <label>Category Name</label>
-
                     <input
                             v-validate="'required'"
                             v-model="fromData.name"
@@ -50,31 +52,32 @@
                 </div>
             </div>
         </FormModal>
-
     </div>
-
-
 </template>
 
 <script>
     import PageTop from "../../Components/PageTop";
     import DataTable from "../../Components/DataTable";
     import FormModal from "../../Components/FormModal";
+
     export default {
         name: "CategoryComponent",
         components: {FormModal, DataTable, PageTop},
         data() {
             return {
-                tableHeading: ["Sl", "name", "Action"],
-
+                tableHeading: ["Sl", "Name", "Image", "Action"], // Make sure Image is included here
             };
         },
         mounted() {
-            this.getDataList();
-            // this.$set(this.fromData, "name", "");
+            this.getDataList(); // Ensure you fetch the data that includes images
         },
-        computed: {}
-    }
+        methods: {
+            // Assuming this function retrieves the correct path for images
+            storageImage(imagePath) {
+                return `/storage/${imagePath}`;
+            }
+        }
+    };
 </script>
 
 <style scoped>

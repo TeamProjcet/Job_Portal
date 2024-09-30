@@ -22,6 +22,7 @@
 
                 <router-link to="/contact" class="nav-item nav-link">Contact</router-link>
                 <router-link to="/seekerlogin" class="nav-item nav-link">login</router-link>
+                <router-link to="/seekerprofile" class="nav-item nav-link"><i class="fas fa-user"></i>User Profile</router-link>
 
             </div>
 

@@ -4,8 +4,11 @@ import Contact from '../views/Contact.vue';
 import JobCat from "../views/JobCat";
 import JobList from "../views/JobList";
 import JobDetails from "../views/JobDetails";
+import BlogPost from "../views/BlogPost";
+import BlogDetails from "../views/BlogDetails";
 import SeekerLogin from "../views/SeekerAuth/SeekerLogin";
 import SeekerRegis from "../views/SeekerAuth/SeekerRegis";
+import SeekerProfile from "../views/SeekerAuth/SeekerProfile";
 
 const route = [
     {
@@ -38,7 +41,7 @@ const route = [
     {
         path: '/blog-post',
         name: 'Blog-Post',
-        component: BlogPost
+        component: BlogPost,
     },
     {
         path: '/blog-details/:id', 
@@ -62,7 +65,12 @@ const route = [
         name : 'registration',
         component : SeekerRegis,
         meta:{pagetitle:'',dataUrl:'/seekerregis'},
-
+    },
+    {
+        path : '/seekerprofile',
+        name : 'seekerprofile',
+        component : SeekerProfile,
+        meta:{pagetitle:'',dataUrl:'seekerprofile'},
     }
 ];
 export default route;

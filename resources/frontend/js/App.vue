@@ -1,5 +1,5 @@
 <template>
-    <div class="container-xxl bg-white p-0">
+    <div class="container-fluid">
         <Header></Header>
 
 
@@ -24,5 +24,7 @@
     };
 </script>
 
+
 <style scoped>
+
 </style>
