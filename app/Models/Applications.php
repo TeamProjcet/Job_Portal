@@ -11,17 +11,19 @@ class Applications extends Model
     protected $fillable = [
         'job_id',
         'seeker_id',
+        'resume',
+        'cover_letter',
         'application_status',
         'applied_at',
     ];
 
     public function job()
     {
-        return $this->belongsTo(JobPostModel::class, 'id', 'id');
+        return $this->belongsTo(JobPostModel::class, 'job_id', 'id');
     }
 
     public function jobSeeker()
     {
-        return $this->belongsTo(JobSeekers::class, 'id', 'id');
+        return $this->belongsTo(Seeker::class, 'seeker_id', 'id');
     }
 }
