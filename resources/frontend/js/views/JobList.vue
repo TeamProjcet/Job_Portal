@@ -60,7 +60,7 @@
                 fullTimelist: [],
                 error: null,
                 isLoading : false,
-                // job_type : 1,
+                job_type : 1,
             };
         },
         watch: {
