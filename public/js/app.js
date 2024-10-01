@@ -2396,7 +2396,7 @@ var render = function render() {
       domProps: {
         innerHTML: _vm._s(data.details)
       }
-    }), _vm._v(" "), _c("td", [_vm._v(_vm._s(data.salary))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(data.address))]), _vm._v(" "), _c("td", [_c("img", {
+    }), _vm._v(" "), _c("td", [_vm._v(_vm._s(data.salary || "Negotiatable"))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(data.address))]), _vm._v(" "), _c("td", [_c("img", {
       staticStyle: {
         width: "100px",
         height: "100px"
