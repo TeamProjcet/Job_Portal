@@ -71,9 +71,7 @@ const route = [
         path : '/seekerprofile',
         name : 'seekerprofile',
         component : SeekerProfile,
-        meta:{pagetitle:'',dataUrl:'api/frontend/seekerprofile'
-            
-        },
+        meta:{pagetitle:'',dataUrl:'api/frontend/seekerprofile'},
     },
 
 ];

@@ -48,6 +48,7 @@ Route::prefix('api/frontend/')->group(function () {
     Route::post('/seekerregis',[\App\Http\Controllers\frontend\SeekerLoginController::class,'store']);
     Route::post('/seekerlogin',[\App\Http\Controllers\frontend\SeekerLoginController::class,'login']);
     Route::post('/newsletter', [\App\Http\Controllers\frontend\NewsletterController::class, 'store']);
+    Route::post('/contact', [\App\Http\Controllers\frontend\ContactController::class, 'store']);
 
 });
 
