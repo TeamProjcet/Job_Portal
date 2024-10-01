@@ -46,7 +46,9 @@ Route::post('/required_data', [\App\Http\Controllers\SupportController::class, '
 Route::prefix('api/frontend/')->group(function () {
     Route::get('joblist', [\App\Http\Controllers\frontend\FrontendController::class, 'joblist']);
     Route::post('/seekerregis',[\App\Http\Controllers\frontend\SeekerLoginController::class,'store']);
-Route::post('/seekerlogin',[\App\Http\Controllers\frontend\SeekerLoginController::class,'login']);
+    Route::post('/seekerlogin',[\App\Http\Controllers\frontend\SeekerLoginController::class,'login']);
+    Route::post('/newsletter', [\App\Http\Controllers\frontend\NewsletterController::class, 'store']);
+
 });
 
 Route::view('/{any}', 'frontend')->where('any', '.*');

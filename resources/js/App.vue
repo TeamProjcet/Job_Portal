@@ -7,7 +7,7 @@
             <!-- Side bar section -->
             <SideNav />
 
-            <div class="container-fluid">
+            <div class="container">
                 <div class="page-inner">
                     <!-- Content section -->
                     <router-view />

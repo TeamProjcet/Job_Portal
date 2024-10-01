@@ -9,6 +9,7 @@ import SeekerRegis from "../views/SeekerAuth/SeekerRegis";
 import BlogDetails from "../views/Blog/BlogDetails";
 import BlogPost from "../views/Blog/BlogPost";
 import SeekerProfile from "../views/SeekerAuth/SeekerProfile";
+import Newsletter from "../views/Newsletter";
 
 const route = [
     {
@@ -73,6 +74,7 @@ const route = [
         meta:{pagetitle:'',dataUrl:'api/frontend/seekerprofile'
             
         },
-    }
+    },
+
 ];
 export default route;

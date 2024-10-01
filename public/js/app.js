@@ -439,7 +439,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     this.getDataList();
-    this.getRequiredData(['category', 'company']);
+    this.getRequiredData(['category', 'company', 'job_type']);
     this.initTinyMCE();
   },
   methods: {
@@ -545,7 +545,7 @@ var render = function render() {
   }, [_c("div", {
     staticClass: "main-panel"
   }, [_c("Header"), _vm._v(" "), _c("SideNav"), _vm._v(" "), _c("div", {
-    staticClass: "container-fluid"
+    staticClass: "container"
   }, [_c("div", {
     staticClass: "page-inner"
   }, [_c("router-view")], 1)]), _vm._v(" "), _c("Footer")], 1)]);
@@ -2200,15 +2200,13 @@ var render = function render() {
     attrs: {
       value: ""
     }
-  }, [_vm._v("Select Job Type")]), _vm._v(" "), _c("option", {
-    attrs: {
-      value: "Full Time"
-    }
-  }, [_vm._v("Full Time")]), _vm._v(" "), _c("option", {
-    attrs: {
-      value: "Part Time"
-    }
-  }, [_vm._v("Part Time")])])]), _vm._v(" "), _c("div", {
+  }, [_vm._v("Select Job Type")]), _vm._v(" "), _vm._l(_vm.requireData.job_type, function (type, index) {
+    return [_c("option", {
+      domProps: {
+        value: type.value
+      }
+    }, [_vm._v(_vm._s(type.name))])];
+  })], 2)]), _vm._v(" "), _c("div", {
     staticClass: "mb-3"
   }, [_c("label", {
     staticClass: "form-label"
@@ -2586,7 +2584,7 @@ var render = function render() {
         _vm.$set(_vm.fromData, "address", $event.target.value);
       }
     }
-  })]), _vm._v(" "), _c("div", {
+  })]), _vm._v("\n\n                        <"), _c("div", {
     staticClass: "mb-3"
   }, [_c("label", {
     staticClass: "form-label"
@@ -2616,15 +2614,13 @@ var render = function render() {
     attrs: {
       value: ""
     }
-  }, [_vm._v("Select Job Type")]), _vm._v(" "), _c("option", {
-    attrs: {
-      value: "Full Time"
-    }
-  }, [_vm._v("Full Time")]), _vm._v(" "), _c("option", {
-    attrs: {
-      value: "Part Time"
-    }
-  }, [_vm._v("Part Time")])])]), _vm._v(" "), _c("div", {
+  }, [_vm._v("Select Job Type")]), _vm._v(" "), _vm._l(_vm.requireData.job_type, function (type, index) {
+    return [_c("option", {
+      domProps: {
+        value: type.value
+      }
+    }, [_vm._v(_vm._s(type.name))])];
+  })], 2)]), _vm._v(" "), _c("div", {
     staticClass: "mb-3"
   }, [_c("label", {
     staticClass: "form-label"
