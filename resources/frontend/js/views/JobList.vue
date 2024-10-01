@@ -22,7 +22,7 @@
                                             <h5 class="mb-3">{{ job.category.name }}</h5>
                                             <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>{{ job.address }}</span>
                                             <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i> {{job.job_type == 1 ? 'Featured' : job.job_type == 2 ? 'Full Time' : (job.job_type == 3 ? 'Part Time' : 'Unknown') }}</span>
-                                            <span class="text-truncate me-0"><i class="far fa-money-bill-alt text-primary me-2"></i>{{ job.salary }}</span>
+                                            <span class="text-truncate me-0"><i class="far fa-money-bill-alt text-primary me-2"></i>{{ job.salary || 'Negotiatable' }}</span>
                                         </div>
                                     </div>
                                     <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
@@ -43,6 +43,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
     <!-- Jobs End -->
@@ -56,8 +57,6 @@
         data() {
             return {
                 joblist: [],
-                partTimelist: [],
-                fullTimelist: [],
                 error: null,
                 isLoading : false,
                 job_type : 1,

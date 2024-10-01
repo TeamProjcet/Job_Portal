@@ -9,6 +9,7 @@ import SeekerRegis from "../views/SeekerAuth/SeekerRegis";
 import BlogDetails from "../views/Blog/BlogDetails";
 import BlogPost from "../views/Blog/BlogPost";
 import SeekerProfile from "../views/SeekerAuth/SeekerProfile";
+import JobCategory from "../views/JobCategory";
 
 const route = [
     {
@@ -73,6 +74,12 @@ const route = [
         meta:{pagetitle:'',dataUrl:'api/frontend/seekerprofile'
             
         },
-    }
+    },
+    {
+        path: '/jobcategory/:category_id',
+        name: 'jobcategory',
+        component: JobCategory,
+        props: true
+    },
 ];
 export default route;

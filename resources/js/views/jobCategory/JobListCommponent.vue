@@ -17,7 +17,7 @@
                     <td>{{index +1}}</td>
                     <td>{{data.position}}</td>
                     <td v-html="data.details"></td>
-                    <td>{{data.salary}}</td>
+                    <td>{{data.salary  || 'Negotiatable'}}</td>
                     <td>{{data.address}}</td>
                     <td><img :src="storageImage(data.image)" style="width: 100px; height: 100px" alt="Image"></td>
                     <td>{{data.date_time}}</td>

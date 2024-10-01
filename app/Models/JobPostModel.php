@@ -18,7 +18,7 @@ class JobPostModel extends Model
         return Validator::make($input,[
             'category_id'=>'required ',
             'position'=>'required ',
-            'salary'=>'required ',
+            'salary'=>' ',
             'company_id'=>'required ',
             'address'=>'required ',
             'job_type'=>'required ',

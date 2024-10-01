@@ -45,6 +45,7 @@ Route::post('/required_data', [\App\Http\Controllers\SupportController::class, '
 
 Route::prefix('api/frontend/')->group(function () {
     Route::get('joblist', [\App\Http\Controllers\frontend\FrontendController::class, 'joblist']);
+    Route::get('jobcate/{cateId}', [\App\Http\Controllers\frontend\FrontendController::class, 'jobCategory'])->name('web.cat');
     Route::post('/seekerregis',[\App\Http\Controllers\frontend\SeekerLoginController::class,'store']);
 Route::post('/seekerlogin',[\App\Http\Controllers\frontend\SeekerLoginController::class,'login']);
 });
