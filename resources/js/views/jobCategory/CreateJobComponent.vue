@@ -18,7 +18,7 @@
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label class="form-label">Job Name</label>
-                        <select v-model="fromData.category_id" name="category_id" class="form-control">
+                        <select v-model="fromData.category_id" name="category_id" v-validate="'required'" class="form-control">
                             <template v-for="(item, index) in requireData.category">
                                 <option :value="item.id">{{item.name}}</option>
                             </template>
@@ -27,17 +27,17 @@
 
                     <div class="mb-3">
                         <label class="form-label">Title</label>
-                        <input type="text" class="form-control" v-model="fromData.position" name="title">
+                        <input type="text" class="form-control" v-validate="'required'" v-model="fromData.position" name="title">
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Salary</label>
-                        <input type="number" class="form-control" v-model="fromData.salary" name="salary">
+                        <input type="number" class="form-control" v-validate="'required'" v-model="fromData.salary" name="salary">
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Company Name</label>
-                        <select v-model="fromData.company_id" name="company_id" class="form-control">
+                        <select v-model="fromData.company_id" v-validate="'required'" name="company_id" class="form-control">
                             <option value="" disabled>Select company name</option>
                             <template v-for="(item, index) in requireData.company">
                                 <option :value="item.id">{{item.name}}</option>
@@ -47,14 +47,14 @@
 
                     <div class="mb-3">
                         <label class="form-label">Location</label>
-                        <input type="text" class="form-control" v-model="fromData.address" placeholder="Enter address" name="address">
+                        <input type="text" class="form-control" v-validate="'required'" v-model="fromData.address" placeholder="Enter address" name="address">
                     </div>
                 </div>
 
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label class="form-label">Job Type</label>
-                        <select v-model="fromData.job_type" name="job_type" class="form-control">
+                        <select v-model="fromData.job_type" name="job_type" v-validate="'required'" class="form-control">
                             <option value="">Select Job Type</option>
                             <template v-for="(type, index) in requireData.job_type">
                                 <option :value="type.value">{{type.name}}</option>
@@ -64,12 +64,12 @@
 
                     <div class="mb-3">
                         <label class="form-label">Details</label>
-                        <textarea id="details" class="form-control" v-model="fromData.details" name="details" rows="5" placeholder="Enter job details..."></textarea>
+                        <textarea id="details" class="form-control" v-validate="'required'" v-model="fromData.details" name="details" rows="5" placeholder="Enter job details..."></textarea>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Date</label>
-                        <input type="date" class="form-control" v-model="fromData.date_time" name="date_time">
+                        <input type="date" class="form-control" v-validate="'required'" v-model="fromData.date_time" name="date_time">
                     </div>
 
                     <div class="row">
@@ -81,7 +81,7 @@
                                         <img class="photo" :src="storageImage(fromData.image)">
                                     </template>
                                 </div>
-                                <input @change="uploadImage($event, fromData, 'image')" type="file" name="image" id="imageField" class="file_field">
+                                <input @change="uploadImage($event, fromData, 'image')" type="file" name="image"  id="imageField" class="file_field">
                             </div>
                         </div>
                     </div>

@@ -4,6 +4,21 @@ export default {
     data(){
         return{}
     },
+    watch: {
+        'errors': {
+            handler: function (eachError, oldVal) {
+                const _this = this;
+                $(".validation_error").remove();
+                $(".is-invalid").removeClass('is-invalid');
+                $.each(eachError.items, function (index, eachField) {
+                    var target = $("[name='" + eachField.field + "']");
+                    $(target).parent().append("<span class='validation_error'>" + eachField.msg + "</span>")
+                    $(target).addClass('is-invalid');
+                });
+            },
+            deep: true
+        }
+    },
     methods:{
         openModal: function (modalId = false, fromData = {}, callback = false) {
             const _this = this;
@@ -11,6 +26,10 @@ export default {
             $(`#${modal_id}`).modal('show');
             _this.$store.commit('fromData', fromData);
 
+            $.each(defaultObject,function (index ,value) {
+                _this.$set(_this.fromData,index ,value)
+
+            });
             if (typeof callback == 'function') {
                 callback(true)
             }

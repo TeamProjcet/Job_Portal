@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Session;
 
 class SeekerLoginController extends Controller
 {
-    use Helper;
+//    use Helper;
 
 
     public function store(Request $request)
@@ -41,20 +41,64 @@ class SeekerLoginController extends Controller
             'password' => 'required|string|min:4',
         ]);
 
-        $seeker = Seeker::where('email', $request->email)->first();
+        $credentials = $request->only('email', 'password');
 
-        if ($seeker && Hash::check($request->password, $seeker->password)) {
+        if (Auth::guard('seeker')->attempt($credentials)) {
+            $seeker = Auth::guard('seeker')->user();
+
+
+            $token = $seeker->createToken('Seeker Token')->plainTextToken;
+
+
+
             return response()->json([
                 'status' => 2000,
-                'data' => $seeker,
-                'message' => 'Login successful'
+                'data' => [
+                    'seeker' => $seeker,
+                    'token' => $token,
+                ],
+                'message' => 'Login successful',
             ], 200);
+        } else {
+            return response()->json([
+                'status' => 4000,
+                'message' => 'Invalid credentials',
+            ], 401);
         }
-
-        return response()->json([
-            'status' => 4000,
-            'message' => 'Invalid credentials'
-        ], 401);
     }
+
+    public function logout(){
+        Auth::logout();
+//        return redirect()->route('login');
+    }
+
+//    public function login(Request $request)
+//    {
+//        $request->validate([
+//            'email' => 'required|string|email',
+//            'password' => 'required|string|min:4',
+//        ]);
+//
+//        $seeker = Seeker::where('email', $request->email)->first();
+//
+//        if ($seeker && Hash::check($request->password, $seeker->password)) {
+//            // লগইন হলে টোকেন তৈরি করুন
+//            $token = $seeker->createToken('Seeker Token')->plainTextToken;
+//
+//            return response()->json([
+//                'status' => 2000,
+//                'data' => [
+//                    'seeker' => $seeker,
+//                    'token' => $token,
+//                ],
+//                'message' => 'Login successful'
+//            ], 200);
+//        }
+//
+//        return response()->json([
+//            'status' => 4000,
+//            'message' => 'Invalid credentials'
+//        ], 401);
+//    }
 
 }

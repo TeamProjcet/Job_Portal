@@ -33,7 +33,8 @@
         data() {
             return {
 
-                errorMessage: ''
+                errorMessage: '',
+
             };
         },
         methods: {
@@ -57,7 +58,18 @@
                             _this.errorMessage = error.response.data.message || "An error occurred.";
                         }
                     });
-            }
+            },
+            // async submitLogin() {
+            //     try {
+            //         const response = await axios.post('api/frontend/seekerlogin', this.credentials);
+            //         const token = response.data.data.token;
+            //         localStorage.setItem('token', token);
+            //         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+            //     } catch (error) {
+            //         console.error("Login failed:", error.response ? error.response.data : error.message);
+            //     }
+            // }
+
         }
     };
 </script>

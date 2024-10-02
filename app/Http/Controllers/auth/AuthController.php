@@ -4,6 +4,7 @@ namespace App\Http\Controllers\auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Supports\Helper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -12,7 +13,7 @@ use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
-    public $model='';
+use Helper;
     public function __construct()
     {
         $this->model = new User();
@@ -20,10 +21,13 @@ class AuthController extends Controller
 
     public function index()
     {
+
         return view('auth.login');
     }
-
-
+    public function userdata(){
+        $data= Auth::user();
+        return $this->returnData(2000, $data);
+    }
     public function viewReg()
     {
 

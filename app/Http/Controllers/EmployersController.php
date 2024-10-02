@@ -33,7 +33,7 @@ class EmployersController extends Controller
             return response()->json(['result' => $validator->errors(), 'status' => 3000], 100);
         }
         $this->model->create([
-            'user_id' => Auth::id(), // Logged-in user's ID
+            'user_id' => Auth::id(),
             'company_name' => $request->input('company_name'),
             'company_website' => $request->input('company_website'),
             'company_address' => $request->input('company_address'),

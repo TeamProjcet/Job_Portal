@@ -14,6 +14,7 @@
 
         <footer class="mt-5">
             <h3>Leave a Comment</h3>
+            <div v-if="isAuthenticated">
             <form>
                 <div class="mb-3">
                     <label for="name" class="form-label">Name</label>
@@ -29,6 +30,12 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
+            </div>
+            <div v-else>
+                <router-link to="/seekerlogin" class="nav-link">
+                    <button class="btn btn-primary w-100">Login</button>
+                </router-link>
+            </div>
         </footer>
     </div>
 </template>
@@ -41,12 +48,14 @@
         data() {
             return {
                 post: {},
-                error: null
+                isAuthenticated:false,
+                error: null // To store any error messages
             };
         },
         mounted() {
-            console.log("Blog ID:", this.id);
             this.getPostDetails();
+            this.checkAuthentication();
+
         },
         computed: {
             formattedDate() {

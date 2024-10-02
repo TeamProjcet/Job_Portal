@@ -28,29 +28,50 @@
                         </div>
 
                         <div>
-                            <h4 class="mb-4">Apply For The Job</h4>
-                            <form>
-                                <div class="row g-3">
-                                    <div class="col-12 col-sm-6">
-                                        <input type="text" class="form-control" placeholder="Your Name"  >
+                            <div v-if="isAuthenticated">
+                                <h4 class="mb-4">Apply For The Job</h4>
+                                <form @submit.prevent="submitApplication">
+                                    <div class="row g-3">
+                                        <div class="col-12 col-sm-6">
+                                            <input type="text" class="form-control" placeholder="Your Name" v-model="fromData.name" readonly>
+                                        </div>
+                                        <div class="col-12 col-sm-6">
+                                            <input type="email" class="form-control" placeholder="Your Email" v-model="fromData.email" readonly>
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="form-label"> Portfolio/Linkdin/Github</label>
+
+                                            <input type="url" class="form-control" placeholder="Portfolio Website" v-model="fromData.portfolio">
+                                        </div>
+
+
+                                        <div class="col-12">
+                                            <textarea class="form-control" rows="5" placeholder="Cover Letter" v-model="fromData.coverLetter"></textarea>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="mb-3">
+                                                <label class="form-label">Upload your resume</label>
+                                                <div @click="clickFileField('imageField')" class="image_upload" :style="{ 'background-image': 'url(' + publicImage('images/uploading.avif') + ')' }">
+                                                    <template v-if="fromData.image !== undefined">
+                                                        <img class="photo" :src="storageImage(fromData.image)">
+                                                    </template>
+                                                </div>
+                                                <input @change="uploadImage($event, fromData, 'image')" type="file" name="image" id="imageField" class="file_field">
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <button class="btn btn-primary w-100" type="submit">Apply Now</button>
+                                        </div>
                                     </div>
-                                    <div class="col-12 col-sm-6">
-                                        <input type="email" class="form-control" placeholder="Your Email"  >
-                                    </div>
-                                    <div class="col-12 col-sm-6">
-                                        <input type="text" class="form-control" placeholder="Portfolio Website" >
-                                    </div>
-                                    <div class="col-12 col-sm-6">
-                                        <input type="file" class="form-control bg-white" >
-                                    </div>
-                                    <div class="col-12">
-                                        <textarea class="form-control" rows="5" placeholder="Cover Letter"  ></textarea>
-                                    </div>
-                                    <div class="col-12">
-                                        <button class="btn btn-primary w-100" type="submit">Apply Now</button>
-                                    </div>
-                                </div>
-                            </form>
+                                </form>
+                            </div>
+
+                            <div v-else>
+                                <router-link to="/seekerlogin" class="nav-link">
+                                    <button class="btn btn-primary w-100">Login</button>
+                                </router-link>
+                            </div>
                         </div>
                     </div>
 
@@ -84,35 +105,81 @@
         props: ['id'],
         data() {
             return {
-                job: {category: { name: '' }}, // null to indicate loading state
+                job: {
+                    category: {},
+                },
+                isAuthenticated:false
 
             };
         },
         mounted() {
             this.getJobDetails();
+            this.checkAuthentication();
+            this.submitApplication();
         },
         methods: {
             async getJobDetails() {
                 try {
                     const response = await axios.get(`/api/joblist/${this.id}`);
-                    // console.log("Full API Response:", response);
-
                     if (response.data && response.data.result) {
-                        this.job = response.data.result; // Assign result post
+                        this.job = response.data.result;
                     } else {
                         this.error = "No blog details found.";
                     }
                 } catch (error) {
-                    // console.error("Error fetching blog details:", error.response ? error.response.data : error.message);
+ 
                     this.error = "Failed to load blog details.";
                 }
             },
+
+
+                async submitApplication() {
+
+                    this.fromData.job_id = this.job.id;
+                    axios.post('/api/frontend/application', this.fromData)
+                        .then(function (res) {
+                            if (parseInt(res.data.status) === 2000) {
+                            } else {
+                                _this.$toast.error("Registration failed!");
+                            }
+                        })
+                        .catch(function (error) {
+                            if (error.response) {
+                                _this.errorMessage = error.response.data.message || "An error occurred.";
+                            }
+                        });
+                },
+           
 
         }
     };
 </script>
 
 <style scoped>
+    .image_upload img {
+        max-width: 100%;
+        max-height: 100%;
+        border-radius: 4px;
+    }
+    .image_upload {
+        height: 120px;
+        width: 100%;
+        background-size: cover;
+        background-repeat: no-repeat;
+        cursor: pointer;
+        border: 2px dashed #007bff; /* Add a dashed border for better visibility */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .photo {
+        height: 100%;
+        width: 100%;
+        border-radius: 4px; /* Match the border radius of the upload area */
+    }
+    #imageField {
+        display: none;
+    }
     /* Add your styles here */
 </style>
 

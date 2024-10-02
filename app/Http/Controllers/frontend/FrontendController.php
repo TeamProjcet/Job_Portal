@@ -28,9 +28,7 @@ class FrontendController extends Controller
         $data['category'] = Category::get();
 
         $data['company'] = Company::get();
-//        dd($data['company']);
-//        $data['seeker'] = Auth::user();
-//        $data['category']=JobPostModel::with('category:name,id')->get();
+
 
         return $this->returnData(2000,$data);
     }
@@ -38,17 +36,17 @@ class FrontendController extends Controller
 
     public function jobCategory($cateId)
     {
-//        $category = Category::find($cateId);
-//        $data['category']=JobPostModel::with('category:name,id')->get();
         $data['jobPosts'] = JobPostModel::with('category','company')->where('category_id',$cateId)->get();
-
         return response()->json(['result' => $data]);
     }
 
-    public function jobCompany($companyId)
+
+
+
+   public function seekerdata()
     {
-        $data['jobCompany'] = JobPostModel::with('category','company')->where('company_id',$companyId)->get();
-//        dd($data['jobCompany']);
+        $data = Auth::guard('seeker')->user();
+
         return response()->json(['result' => $data]);
     }
 
