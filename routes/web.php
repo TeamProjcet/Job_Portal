@@ -38,7 +38,6 @@ Route::post('/required_data', [\App\Http\Controllers\SupportController::class, '
 
 
 
-
 });
 
 //frontend Route
@@ -47,8 +46,9 @@ Route::prefix('api/frontend/')->group(function () {
     Route::get('joblist', [\App\Http\Controllers\frontend\FrontendController::class, 'joblist']);
     Route::post('/seekerregis',[\App\Http\Controllers\frontend\SeekerLoginController::class,'store']);
     Route::post('/seekerlogin',[\App\Http\Controllers\frontend\SeekerLoginController::class,'login']);
-    Route::post('/newsletter', [\App\Http\Controllers\frontend\NewsletterController::class, 'store']);
-    Route::post('/contact', [\App\Http\Controllers\frontend\ContactController::class, 'store']);
+    Route::resource('/newsletter', \App\Http\Controllers\frontend\NewsletterController::class);
+    Route::resource('/contact', \App\Http\Controllers\frontend\ContactController::class);
+//    Route::post('/contact', [\App\Http\Controllers\frontend\ContactController::class, 'store']);
 
 });
 

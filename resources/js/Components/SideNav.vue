@@ -98,6 +98,32 @@
                     </li>
 
 <!--                    -->
+
+                    <li class="nav-item">
+                        <a data-bs-toggle="collapse" href="#base3">
+                            <i class="fas fa-user"></i>
+                            <p>Visitor</p>
+                            <span class="caret"></span>
+                        </a>
+                        <div class="collapse" id="base3">
+                            <ul class="nav nav-collapse">
+                                <li>
+                                    <router-link to="/admin/visitor/newsletter">
+                                        <span class="sub-item">Newsletter</span>
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <router-link to="/admin/visitor/contact">
+                                        <span class="sub-item">Contact</span>
+                                    </router-link>
+                                </li>
+
+
+                            </ul>
+                        </div>
+                    </li>
+
+<!--                    -->
                 </ul>
             </div>
         </div>

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Contact;
+use App\Models\Newsletter;
+use App\Supports\Helper;
 use Illuminate\Http\Request;
 
 class ContactController extends Controller
@@ -13,9 +15,12 @@ class ContactController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    use Helper;
     public function index()
     {
-        //
+        $data = Contact::all();
+        return $this->returnData(2000, $data);
+
     }
 
     /**
@@ -89,8 +94,18 @@ class ContactController extends Controller
      * @param  \App\Models\Contact  $contact
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Contact $contact)
+    public function destroy($id)
     {
-        //
+        try {
+            $data = Contact::find($id);
+            if ($data) {
+                $data->delete();
+                return response()->json(['message' => 'Newsletter subscription deleted successfully.'], 200);
+            } else {
+                return response()->json(['message' => 'Newsletter not found.'], 404);
+            }
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Something went wrong, please try again later.'], 500);
+        }
     }
 }

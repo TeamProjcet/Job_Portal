@@ -6,6 +6,8 @@ import CompanyComponent from "../views/jobCategory/CompanyComponent";
 import BlogPostComponent from "../views/Blog/BlogPostComponent";
 import EmployerForm from "../views/Employers/EmployerForm";
 import EmployerProfile from "../views/Employers/EmployerProfile";
+import Newsletter from "../views/Visitor/Newsletter";
+import Contact from "../views/Visitor/Contact";
 
 
 const route = [
@@ -71,6 +73,18 @@ const route = [
         }
 
     },
+    {
+        path: '/admin/visitor/newsletter',
+        name: 'newsletter',
+        component: Newsletter,
+        meta: { pagetitle: 'Newsletter Subscriptions', dataUrl: 'api/frontend/newsletter' },
+    },
+    {
+        path: '/admin/visitor/contact',
+        name: 'contact',
+        component: Contact,
+        meta: { pagetitle: 'Visitor Contact Info', dataUrl: 'api/frontend/contact' },
+    }
 
 ];
 export default route;
