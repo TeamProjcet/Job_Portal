@@ -21,8 +21,38 @@
                 <router-link to="/blog-post" class="nav-item nav-link">Blog</router-link>
 
                 <router-link to="/contact" class="nav-item nav-link">Contact</router-link>
-                <router-link to="/seekerlogin" class="nav-item nav-link">login</router-link>
-                <router-link to="/seekerprofile" class="nav-item nav-link"><i class="fas fa-user"></i>User Profile</router-link>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item dropdown" v-if="isAuthenticated">
+                        <a
+                                class="nav-link dropdown-toggle bg-success text-white py-2 px-lg-4 rounded-pill"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                                style="font-size: 16px;"
+                        >
+                            {{ seeker?.name || 'Guest' }}
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end mt-2 shadow-sm border-0">
+                            <li>
+                                <router-link to="/seekerprofile" class="dropdown-item d-flex align-items-center">
+                                    <i class="fas fa-user me-2"></i> User Profile
+                                </router-link>
+                            </li>
+                            <li>
+                                <a  @click.prevent="logout" class="dropdown-item d-flex align-items-center">
+                                    <i class="fas fa-sign-out-alt me-2"></i> Logout
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item" v-else>
+                        <router-link to="/seekerlogin" class="nav-link">
+                            <button class="btn btn-success rounded-pill px-4 py-2">Login</button>
+                        </router-link>
+                    </li>
+                </ul>
+
+
+
 
             </div>
 
@@ -33,8 +63,44 @@
 </template>
 
 <script>
+    import axios from 'axios'
     export default {
         name: "Header",
+        data() {
+            return {
+                isAuthenticated: false,
+                seeker: '',
+            };
+        },
+        mounted() {
+            this.checkAuthentication();
+        },
+        methods: {
+            async checkAuthentication() {
+                try {
+                    const response = await axios.get('/api/frontend/seekerdata');
+                    if (response.data && response.data.result) {
+                        this.seeker = response.data.result; // Assuming response.data.result has the user info
+                        this.isAuthenticated = true;
+                    } else {
+                        this.seeker = null; // Reset username if not found
+                        this.isAuthenticated = false;
+                    }
+                } catch (error) {
+                    this.isAuthenticated = false;
+                    console.error('Authentication check failed:', error.response ? error.response.data : error.message);
+                }
+            },
+        },
+        async logout() {
+            try {
+                await axios.get('/api/frontend/seekerlogout');
+                window.location.href = '/login';
+            } catch (error) {
+                console.error('Logout Failed:', error);
+            }
+        }
+
     }
 </script>
 

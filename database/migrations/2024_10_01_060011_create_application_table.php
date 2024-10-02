@@ -13,11 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('saved_job', function (Blueprint $table) {
+        Schema::create('application', function (Blueprint $table) {
             $table->id();
-//            $table->integer('seeker_id')->constrained('job_seekers')->onDelete('cascade'); // Reference to job seekers table
-//            $table->integer('job_id')->constrained('jobs')->onDelete('cascade'); // Reference to jobs table
-//            $table->timestamp('saved_at')->useCurrent();
+            $table->integer('job_id');
+            $table->integer('seeker_id');
+            $table->string('image');
+            $table->string('cover_letter');
+            $table->text('portfolio');
+            $table->string('application_status')->default('pending');
+            $table->timestamp('applied_at')->useCurrent();
             $table->timestamps();
         });
     }
@@ -29,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('saved_job');
+        Schema::dropIfExists('application');
     }
 };
