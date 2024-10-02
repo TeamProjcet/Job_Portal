@@ -534,7 +534,7 @@ __webpack_require__.r(__webpack_exports__);
   name: "JobListCommponent",
   data: function data() {
     return {
-      tableHeading: ["Sl", "Title", "Details", "Salary", "Location", "image", "Date", "Status", "Action"],
+      tableHeading: ["Sl", "Title", "Salary", "Location", "image", "Date", "Status", "Action"],
       isReadOnly: false
     };
   },
