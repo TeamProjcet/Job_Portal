@@ -18,13 +18,13 @@ class UserTableSeeder extends Seeder
     {
         $arrUser=[
             [
-                'name'=> 'Super Admin',
-                'email'=> 'superadmin@gmail.com',
+                'name'=> 'Mohon Sarker',
+                'email'=> 'mohon@gmail.com',
                 'password'=> Hash::make('1234'),
             ],
             [
-                'name'=> ' Admin',
-                'email'=> 'admin@gmail.com',
+                'name'=> 'Rabby Hasan',
+                'email'=> 'rabby@gmail.com',
                 'password'=> Hash::make('1234'),
             ],
             [
