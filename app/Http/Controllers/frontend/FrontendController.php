@@ -4,6 +4,7 @@ namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Company;
 use App\Models\JobPostModel;
 use App\Models\Seeker;
 use App\Supports\Helper;
@@ -25,6 +26,9 @@ class FrontendController extends Controller
         })->with('category','company')->paginate(10);
 
         $data['category'] = Category::get();
+
+        $data['company'] = Company::get();
+//        dd($data['company']);
 //        $data['seeker'] = Auth::user();
 //        $data['category']=JobPostModel::with('category:name,id')->get();
 
@@ -38,9 +42,16 @@ class FrontendController extends Controller
 //        $data['category']=JobPostModel::with('category:name,id')->get();
         $data['jobPosts'] = JobPostModel::with('category','company')->where('category_id',$cateId)->get();
 
-
-
         return response()->json(['result' => $data]);
     }
+
+    public function jobCompany($companyId)
+    {
+        $data['jobCompany'] = JobPostModel::with('category','company')->where('company_id',$companyId)->get();
+//        dd($data['jobCompany']);
+        return response()->json(['result' => $data]);
+    }
+
+
 
 }

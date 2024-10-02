@@ -11,14 +11,11 @@ Route::get('register', [\App\Http\Controllers\auth\AuthController::class, 'viewR
 Route::resource('/userRegister', \App\Http\Controllers\auth\AuthController::class);
 Route::post('adlogin', [\App\Http\Controllers\auth\AuthController::class, 'adlogin']);
 
-
-
 Route::view('admin/{any}', 'backend')->where('any', '.*')->middleware('auth');
 
 Route::prefix('api')->group(function (){
 Route::resource('categories', \App\Http\Controllers\Backend\CategoryController::class);
 Route::resource('/company', \App\Http\Controllers\Backend\CompanyController::class);
-//Route::get('/joblist', [\App\Http\Controllers\Backend\JobPostController::class,'index']);
 Route::resource('/createjob', \App\Http\Controllers\Backend\JobPostController::class);
 
 Route::resource('/joblist', \App\Http\Controllers\Backend\JobPostController::class);
@@ -32,12 +29,8 @@ Route::resource('/companyreviews',\App\Http\Controllers\CompanyReviewsController
 
 Route::resource('blogpost', \App\Http\Controllers\Backend\BlogController::class);
 
-
 Route::post('upload', [\App\Http\Controllers\Backend\UploadController::class, 'upload']);
 Route::post('/required_data', [\App\Http\Controllers\SupportController::class, 'requireData']);
-
-
-
 
 });
 
@@ -46,8 +39,10 @@ Route::post('/required_data', [\App\Http\Controllers\SupportController::class, '
 Route::prefix('api/frontend/')->group(function () {
     Route::get('joblist', [\App\Http\Controllers\frontend\FrontendController::class, 'joblist']);
     Route::get('jobcate/{cateId}', [\App\Http\Controllers\frontend\FrontendController::class, 'jobCategory'])->name('web.cat');
+    Route::get('jobcompany/{companyId}', [\App\Http\Controllers\frontend\FrontendController::class, 'jobCompany']);
+
     Route::post('/seekerregis',[\App\Http\Controllers\frontend\SeekerLoginController::class,'store']);
-Route::post('/seekerlogin',[\App\Http\Controllers\frontend\SeekerLoginController::class,'login']);
+    Route::post('/seekerlogin',[\App\Http\Controllers\frontend\SeekerLoginController::class,'login']);
 });
 
 Route::view('/{any}', 'frontend')->where('any', '.*');

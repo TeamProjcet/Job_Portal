@@ -17,4 +17,8 @@ class Company extends Model
             'name'=>'required '
         ]);
     }
+
+    public function blogs(){
+        return $this->hasMany(blog::class);
+    }
 }

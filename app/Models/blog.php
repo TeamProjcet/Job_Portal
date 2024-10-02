@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Validator;
 class blog extends Model
 {
     use HasFactory;
-    protected $fillable = ['company_id', 'title', 'description', 'image'];
+    protected $fillable = ['company_id', 'title', 'description', 'image', 'status'];
 
     public function validator($input){
         return Validator::make($input,[
@@ -21,4 +21,9 @@ class blog extends Model
 
         ]);
     }
+
+    public function company(){
+        return $this->belongsTo(Company::class);
+    }
+
 }

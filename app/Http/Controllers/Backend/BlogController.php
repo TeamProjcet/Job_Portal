@@ -18,7 +18,7 @@ class BlogController extends Controller
 
     public function index()
     {
-        $data = $this->model->get();
+        $data = $this->model->with('company')->get();
         return $this->returnData(2000, $data);
     }
 
@@ -49,7 +49,7 @@ class BlogController extends Controller
      */
     public function show($id)
     {
-        $post = blog::findOrFail($id);
+        $post = blog::with('company')->findOrFail($id);
         return response()->json(['result' => $post]);
     }
 

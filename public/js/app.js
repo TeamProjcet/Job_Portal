@@ -366,11 +366,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      tableHeading: ["Sl", "Name", "Image", "Action"] // Make sure Image is included here
+      tableHeading: ["Sl", "Name", "Image", "Action"]
     };
   },
   mounted: function mounted() {
-    this.getDataList(); // Ensure you fetch the data that includes images
+    this.getDataList();
   },
   methods: {
     // Assuming this function retrieves the correct path for images
@@ -1126,7 +1126,7 @@ var render = function render() {
   }, _vm._l(_vm.dataList, function (data, index) {
     return _c("tr", {
       key: index
-    }, [_c("td", [_vm._v(_vm._s(index + 1))]), _vm._v(" "), _c("td", [_vm._v("N/A")]), _vm._v(" "), _c("td", [_vm._v(_vm._s(data.title))]), _vm._v(" "), _c("td", {
+    }, [_c("td", [_vm._v(_vm._s(index + 1))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(data.company.name))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(data.title))]), _vm._v(" "), _c("td", {
       domProps: {
         innerHTML: _vm._s(data.description)
       }
@@ -2392,11 +2392,7 @@ var render = function render() {
   }, _vm._l(_vm.dataList, function (data, index) {
     return _c("tr", {
       key: index
-    }, [_c("td", [_vm._v(_vm._s(index + 1))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(data.position))]), _vm._v(" "), _c("td", {
-      domProps: {
-        innerHTML: _vm._s(data.details)
-      }
-    }), _vm._v(" "), _c("td", [_vm._v(_vm._s(data.salary || "Negotiatable"))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(data.address))]), _vm._v(" "), _c("td", [_c("img", {
+    }, [_c("td", [_vm._v(_vm._s(index + 1))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(data.position))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(data.salary || "Negotiatable"))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(data.address))]), _vm._v(" "), _c("td", [_c("img", {
       staticStyle: {
         width: "100px",
         height: "100px"
@@ -5392,7 +5388,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.image_upload img[data-v-b3cb4348] {\n    max-width: 100%;\n    max-height: 100%;\n    border-radius: 4px;\n}\n.image_upload[data-v-b3cb4348] {\n    height: 120px;\n    width: 100%;\n    background-size: cover;\n    background-repeat: no-repeat;\n    cursor: pointer;\n    border: 2px dashed #007bff; /* Add a dashed border for better visibility */\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n.photo[data-v-b3cb4348] {\n    height: 100%;\n    width: 100%;\n    border-radius: 4px; /* Match the border radius of the upload area */\n}\n#imageField[data-v-b3cb4348] {\n    display: none;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.image_upload img[data-v-b3cb4348] {\n    max-width: 100%;\n    max-height: 100%;\n    border-radius: 4px;\n}\n.image_upload[data-v-b3cb4348] {\n    height: 120px;\n    width: 100%;\n    background-size: cover;\n    background-repeat: no-repeat;\n    cursor: pointer;\n    border: 2px dashed #007bff;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n.photo[data-v-b3cb4348] {\n    height: 100%;\n    width: 100%;\n    border-radius: 4px;\n}\n#imageField[data-v-b3cb4348] {\n    display: none;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -5440,7 +5436,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.image_upload img[data-v-26942d60] {\n    max-width: 100%;\n    max-height: 100%;\n    border-radius: 4px;\n}\n.image_upload[data-v-26942d60] {\n    height: 120px;\n    width: 100%;\n    background-size: cover;\n    background-repeat: no-repeat;\n    cursor: pointer;\n    border: 2px dashed #007bff; /* Add a dashed border for better visibility */\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n.photo[data-v-26942d60] {\n    height: 100%;\n    width: 100%;\n    border-radius: 4px; /* Match the border radius of the upload area */\n}\n#imageField[data-v-26942d60] {\n    display: none;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.image_upload img[data-v-26942d60] {\n    max-width: 100%;\n    max-height: 100%;\n    border-radius: 4px;\n}\n.image_upload[data-v-26942d60] {\n    height: 120px;\n    width: 100%;\n    background-size: cover;\n    background-repeat: no-repeat;\n    cursor: pointer;\n    border: 2px dashed #007bff;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n.photo[data-v-26942d60] {\n    height: 100%;\n    width: 100%;\n    border-radius: 4px;\n}\n#imageField[data-v-26942d60] {\n    display: none;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

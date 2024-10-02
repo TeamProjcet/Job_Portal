@@ -16,7 +16,6 @@
                 <tr v-for="(data, index) in dataList" :key="index" >
                     <td>{{index +1}}</td>
                     <td>{{data.position}}</td>
-                    <td v-html="data.details"></td>
                     <td>{{data.salary  || 'Negotiatable'}}</td>
                     <td>{{data.address}}</td>
                     <td><img :src="storageImage(data.image)" style="width: 100px; height: 100px" alt="Image"></td>
@@ -181,7 +180,7 @@
         background-size: cover;
         background-repeat: no-repeat;
         cursor: pointer;
-        border: 2px dashed #007bff; /* Add a dashed border for better visibility */
+        border: 2px dashed #007bff;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -189,7 +188,7 @@
     .photo {
         height: 100%;
         width: 100%;
-        border-radius: 4px; /* Match the border radius of the upload area */
+        border-radius: 4px;
     }
     #imageField {
         display: none;

@@ -19,33 +19,32 @@
                                 <h3 class="mb-3">{{ job.position }}</h3>
                                 <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>{{ job.address }}</span>
                                 <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i>{{ job.job_type == 1 ? 'Full Time' : (job.job_type == 2 ? 'Part Time' : 'Not Specified') }}</span>
-                                <span class="text-truncate me-0"><i class="far fa-money-bill-alt text-primary me-2"></i>{{ job.salary }}</span>
+                                <span class="text-truncate me-0"><i class="far fa-money-bill-alt text-primary me-2"></i>{{ job.salary || 'Negotiable'}}</span>
                             </div>
                         </div>
 
                         <div class="mb-5">
-                            <h4 class="mb-3">Job Description</h4>
                             <p v-html="job.details"></p>
                         </div>
 
                         <div>
                             <h4 class="mb-4">Apply For The Job</h4>
-                            <form @submit.prevent="submitApplication">
+                            <form>
                                 <div class="row g-3">
                                     <div class="col-12 col-sm-6">
-                                        <input type="text" class="form-control" placeholder="Your Name" v-model="application.name" required>
+                                        <input type="text" class="form-control" placeholder="Your Name"  >
                                     </div>
                                     <div class="col-12 col-sm-6">
-                                        <input type="email" class="form-control" placeholder="Your Email" v-model="application.email" required>
+                                        <input type="email" class="form-control" placeholder="Your Email"  >
                                     </div>
                                     <div class="col-12 col-sm-6">
-                                        <input type="text" class="form-control" placeholder="Portfolio Website" v-model="application.portfolio">
+                                        <input type="text" class="form-control" placeholder="Portfolio Website" >
                                     </div>
                                     <div class="col-12 col-sm-6">
-                                        <input type="file" class="form-control bg-white" @change="onFileChange">
+                                        <input type="file" class="form-control bg-white" >
                                     </div>
                                     <div class="col-12">
-                                        <textarea class="form-control" rows="5" placeholder="Cover Letter" v-model="application.coverLetter" required></textarea>
+                                        <textarea class="form-control" rows="5" placeholder="Cover Letter"  ></textarea>
                                     </div>
                                     <div class="col-12">
                                         <button class="btn btn-primary w-100" type="submit">Apply Now</button>
@@ -65,7 +64,7 @@
                                 <i class="fa fa-angle-right text-primary me-2"></i>
                                 Job Nature: {{ job.job_type == 1 ? 'Full Time' : (job.job_type == 2 ? 'Part Time' : 'Not Specified') }}
                             </p>
-                            <p><i class="fa fa-angle-right text-primary me-2"></i>Salary: {{ job.salary }}</p>
+                            <p><i class="fa fa-angle-right text-primary me-2"></i>Salary: {{ job.salary || 'Negotiable' }}</p>
                             <p><i class="fa fa-angle-right text-primary me-2"></i>Location: {{ job.address }}</p>
                             <p class="m-0"><i class="fa fa-angle-right text-primary me-2"></i>Date Line: 2024-10-05</p>
                         </div>
@@ -85,14 +84,8 @@
         props: ['id'],
         data() {
             return {
-                job: {}, // Initialize as null to indicate loading state
-                application: {
-                    name: '',
-                    email: '',
-                    portfolio: '',
-                    coverLetter: '',
-                    resume: null
-                }
+                job: {category: { name: '' }}, // null to indicate loading state
+
             };
         },
         mounted() {
@@ -102,26 +95,19 @@
             async getJobDetails() {
                 try {
                     const response = await axios.get(`/api/joblist/${this.id}`);
-                    console.log("Full API Response:", response);
+                    // console.log("Full API Response:", response);
 
                     if (response.data && response.data.result) {
-                        this.job = response.data.result; // Assign the result to post
+                        this.job = response.data.result; // Assign result post
                     } else {
-                        this.error = "No blog details found."; // Set new error message
+                        this.error = "No blog details found.";
                     }
                 } catch (error) {
-                    console.error("Error fetching blog details:", error.response ? error.response.data : error.message);
-                    this.error = "Failed to load blog details."; // Set error message
+                    // console.error("Error fetching blog details:", error.response ? error.response.data : error.message);
+                    this.error = "Failed to load blog details.";
                 }
             },
-            onFileChange(event) {
-                this.application.resume = event.target.files[0]; // Handle file selection
-            },
-            submitApplication() {
-                // Handle application submission logic
-                console.log("Application submitted:", this.application);
-                // You may want to implement a POST request to submit the application here
-            }
+
         }
     };
 </script>

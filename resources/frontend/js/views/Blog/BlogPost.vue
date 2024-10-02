@@ -1,15 +1,23 @@
-
-
 <template>
     <div class="container-xxl py-5">
         <div class="row">
-            <div class="col-md-4" v-for="post in blogpost" :key="post.id">
+            <div class="col-md-4" v-for="post in blog_filter" :key="post.id">
                 <div class="card mb-4">
-                    <img style="height: 200px" :src="storageImage(post.image)" class="card-img-top" alt="Blog Post Image">
+                    <img
+                            style="height: 200px"
+                            :src="storageImage(post.image)"
+                            class="card-img-top"
+                            alt="Blog Post Image"
+                    />
                     <div class="card-body">
                         <h5 class="card-title">{{ post.title }}</h5>
                         <p class="card-text">{{ post.description }}</p>
-                        <router-link :to="{ name: 'Blog-Details', params: { id: post.id } }" class="btn btn-primary">Read More</router-link>
+                        <router-link
+                                :to="{ name: 'Blog-Details', params: { id: post.id } }"
+                                class="btn btn-primary"
+                        >
+                            Read More
+                        </router-link>
                     </div>
                 </div>
             </div>
@@ -27,12 +35,20 @@
         data() {
             return {
                 blogpost: [],
-                error: null
+                error: null,
             };
         },
+
+        computed: {
+            blog_filter() {
+                return this.blogpost.filter(post => post.status === 1); // status active on post show
+            },
+        },
+
         mounted() {
             this.getPosts();
         },
+
         methods: {
             async getPosts() {
                 try {
@@ -43,15 +59,14 @@
                         throw new Error("Unexpected response format");
                     }
                 } catch (error) {
-                    console.error("Error fetching blog data:", error);
+                    // console.error("Error fetching blog data:", error);
                     this.error = "Error fetching blog data. Please try again later.";
                 }
             },
-        }
-    }
+        },
+    };
 </script>
 
 <style scoped>
     /* Add your styles here if needed */
 </style>
-

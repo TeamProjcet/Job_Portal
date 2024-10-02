@@ -10,6 +10,7 @@ import BlogDetails from "../views/Blog/BlogDetails";
 import BlogPost from "../views/Blog/BlogPost";
 import SeekerProfile from "../views/SeekerAuth/SeekerProfile";
 import JobCategory from "../views/JobCategory";
+import JobCompany from "../views/JobCompany";
 
 const route = [
     {
@@ -79,6 +80,12 @@ const route = [
         path: '/jobcategory/:category_id',
         name: 'jobcategory',
         component: JobCategory,
+        props: true
+    },
+    {
+        path: '/jobcompany/:company_id',
+        name: 'jobcompany',
+        component: JobCompany,
         props: true
     },
 ];

@@ -10,7 +10,7 @@
 
                 <tr v-for="(data, index) in dataList" :key="index">
                     <td>{{ index + 1 }}</td>
-                    <td>N/A</td>
+                    <td>{{data.company.name}}</td>
                     <td>{{ data.title }}</td>
                     <td v-html="data.description"></td>
                     <td><img :src="storageImage(data.image)" style="width: 100px; height: 100px" alt="Image"></td>
