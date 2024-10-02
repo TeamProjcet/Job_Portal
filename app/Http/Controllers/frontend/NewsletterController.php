@@ -36,17 +36,16 @@ class NewsletterController extends Controller
 //     */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|string',
-            'email' => 'required|email',
-            'subject' => 'nullable|string',
-            'message' => 'required|string',
+        // Validate the incoming request
+        $request->validate([
+            'email' => 'required|email|unique:newsletters,email',
         ]);
-
-        // Store the contact data
-        Contact::create($validated);
-
-        return response()->json(['message' => 'Contact message received!'], 200);
+        // Store the email in the database
+        Newsletter::create([
+            'email' => $request->email,
+        ]);
+        // Respond with a success message
+        return response()->json(['message' => 'Thank you for subscribing!'], 200);
     }
 
 
