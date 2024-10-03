@@ -11,6 +11,7 @@ import BlogPost from "../views/Blog/BlogPost";
 import SeekerProfile from "../views/SeekerAuth/SeekerProfile";
 import JobCategory from "../views/JobCategory";
 import JobCompany from "../views/JobCompany";
+import JobResults from "../views/JobResults";
 
 const route = [
     {
@@ -88,5 +89,11 @@ const route = [
         component: JobCompany,
         props: true
     },
+    {
+        path: '/results',
+        name: 'JobResults',
+        component: JobResults,
+        props: route => ({ jobs: JSON.parse(route.query.jobs) }) // Parse the jobs from query
+    }
 ];
 export default route;

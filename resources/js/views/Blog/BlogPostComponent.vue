@@ -12,7 +12,6 @@
                     <td>{{ index + 1 }}</td>
                     <td>{{data.company.name}}</td>
                     <td>{{ data.title }}</td>
-                    <td v-html="data.description"></td>
                     <td><img :src="storageImage(data.image)" style="width: 100px; height: 100px" alt="Image"></td>
                     <td>
                     <span :class="data.status ? 'badge badge-success' : 'badge badge-danger'">
@@ -124,7 +123,7 @@
         components: {FormModal, DataTable, PageTop},
         data() {
             return {
-                tableHeading: ["Id", "company name", "title", "description", "image", "status", "action"],
+                tableHeading: ["Id", "company name", "title",  "image", "status", "action"],
                 isReadOnly: false,
             };
         },

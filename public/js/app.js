@@ -312,7 +312,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      tableHeading: ["Id", "company name", "title", "description", "image", "status", "action"],
+      tableHeading: ["Id", "company name", "title", "image", "status", "action"],
       isReadOnly: false
     };
   },
@@ -1317,11 +1317,7 @@ var render = function render() {
   }, _vm._l(_vm.dataList, function (data, index) {
     return _c("tr", {
       key: index
-    }, [_c("td", [_vm._v(_vm._s(index + 1))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(data.company.name))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(data.title))]), _vm._v(" "), _c("td", {
-      domProps: {
-        innerHTML: _vm._s(data.description)
-      }
-    }), _vm._v(" "), _c("td", [_c("img", {
+    }, [_c("td", [_vm._v(_vm._s(index + 1))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(data.company.name))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(data.title))]), _vm._v(" "), _c("td", [_c("img", {
       staticStyle: {
         width: "100px",
         height: "100px"
