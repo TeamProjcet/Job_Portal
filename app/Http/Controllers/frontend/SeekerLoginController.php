@@ -67,10 +67,16 @@ class SeekerLoginController extends Controller
         }
     }
 
-    public function logout(){
-        Auth::logout();
-//        return redirect()->route('login');
+    public function logout()
+    {
+        Auth::guard('seeker')->logout();
+
+        return response()->json([
+            'status' => 2000,
+            'message' => 'Logout successful',
+        ]);
     }
+
 
 //    public function login(Request $request)
 //    {

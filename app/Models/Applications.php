@@ -12,28 +12,39 @@ class Applications extends Model
     protected $fillable = [
         'job_id',
         'seeker_id',
-        'resume',
-        'cover_letter',
-        'application_status',
-        'applied_at',
+        'image',
+        'coverLetter',
+        'portfolio',
     ];
     public function validator($input){
         return Validator::make($input,[
             'job_id'=>'required ',
             'seeker_id'=>'required ',
-            'resume'=>'required|file|mimes:pdf,doc,docx',
+            'image'=>'required',
             'portfolio'=>'required  ',
-            'cover_letter'=>'required ',
-            'application_status'=>'required ',
+            'coverLetter'=>'required ',
         ]);
     }
-    public function job()
+
+
+    public function category()
     {
-        return $this->belongsTo(JobPostModel::class, 'job_id', 'id');
+        return $this->belongsTo(Category::class, 'category_id','id');
     }
 
-    public function jobSeeker()
+    public function company()
     {
-        return $this->belongsTo(Seeker::class, 'seeker_id', 'id');
+        return $this->belongsTo(Company::class, 'company_id','id');
+    }
+
+    public function job()
+    {
+        return $this->belongsTo(JobPostModel::class, 'job_id','id');
+    }
+
+
+    public function seeker()
+    {
+        return $this->belongsTo(Seeker::class, 'seeker_id','id');
     }
 }

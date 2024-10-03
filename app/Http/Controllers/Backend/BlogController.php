@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\blog;
 use App\Supports\Helper;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BlogController extends Controller
 {
@@ -53,12 +54,50 @@ class BlogController extends Controller
         return response()->json(['result' => $post]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    public function like($id)
+    {
+        $post = blog::findOrFail($id);
+        $post->likes += 1;
+        $post->save();
+
+        return response()->json([
+            'status' => 200,
+            'message' => 'Post liked successfully!',
+            'likes' => $post->likes,
+        ]);
+    }
+//    public function like($id)
+//    {
+//        try {
+//            $post = blog::findOrFail($id);
+//
+//            $seeker = Auth::guard('seeker')->user();
+//
+//            if ($post->likes()->where('seeker_id', $seeker->id)->exists()) {
+//                return response()->json([
+//                    'status' => 200,
+//                    'message' => 'Already liked!',
+//                    'likes' => $post->likes_count,
+//                    'liked' => true
+//                ]);
+//            }
+//
+//            $post->likes()->create(['seeker_id' => $seeker->id]);
+//            $post->increment('likes_count');
+//
+//            return response()->json([
+//                'status' => 200,
+//                'message' => 'Post liked successfully!',
+//                'likes' => $post->likes_count,
+//                'liked' => true
+//            ]);
+//        } catch (\Exception $e) {
+//            return response()->json([
+//                'status' => 500,
+//                'message' => 'An error occurred while liking the post.',
+//            ], 500);
+//        }
+//    }
     public function edit($id)
     {
         //

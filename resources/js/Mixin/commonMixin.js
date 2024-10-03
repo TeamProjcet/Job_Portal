@@ -26,10 +26,10 @@ export default {
             $(`#${modal_id}`).modal('show');
             _this.$store.commit('fromData', fromData);
 
-            $.each(defaultObject,function (index ,value) {
-                _this.$set(_this.fromData,index ,value)
-
-            });
+            // $.each(defaultObject,function (index ,value) {
+            //     _this.$set(_this.fromData,index ,value)
+            //
+            // });
             if (typeof callback == 'function') {
                 callback(true)
             }

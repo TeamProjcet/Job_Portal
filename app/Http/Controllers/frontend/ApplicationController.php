@@ -26,18 +26,16 @@ class ApplicationController extends Controller
 
     public function store(Request $request)
     {
-
         $validator = $this->model->Validator($request->all());
 
         if ($validator->fails()) {
-            return response()->json(['result' => $validator->errors(), 'status' => 3000], 100);
+            return response()->json(['result' => $validator->errors(), 'status' => 3000], 422); // Use proper status code for validation errors
         }
-        dd($this->model->fill($request->all()));
 
+        $this->model->fill($request->all());
         $this->model->save();
-        return $this->returnData(2000, $this->model);
 
-
+        return response()->json(['message' => 'Application submitted successfully', 'status' => 2000], 200);
     }
 
     public function show(Applications $applications)

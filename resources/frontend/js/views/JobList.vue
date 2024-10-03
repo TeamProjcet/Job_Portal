@@ -85,7 +85,7 @@
                         this.joblist = response.data.result;
                     });
                 } catch (error) {
-                    this.error = "Error fetching job data. Please try again later."; // Set error message
+                    this.error = "Error fetching job data. Please try again later.";
                 }
             },
         }

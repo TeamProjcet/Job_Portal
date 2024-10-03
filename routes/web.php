@@ -35,6 +35,7 @@ Route::prefix('api')->group(function () {
 
     Route::post('upload', [\App\Http\Controllers\Backend\UploadController::class, 'upload']);
     Route::post('/required_data', [\App\Http\Controllers\SupportController::class, 'requireData']);
+    Route::get('backendData',[\App\Http\Controllers\Backend\BackendController::class,'backendData']);
 
 
 });
@@ -47,9 +48,10 @@ Route::prefix('api/frontend/')->group(function () {
     Route::get('jobcate/{cateId}', [\App\Http\Controllers\frontend\FrontendController::class, 'jobCategory'])->name('web.cat');
     Route::post('/seekerregis', [\App\Http\Controllers\frontend\SeekerLoginController::class, 'store']);
     Route::post('/seekerlogin', [\App\Http\Controllers\frontend\SeekerLoginController::class, 'login']);
+    Route::post('/blogpost/{id}/like', [\App\Http\Controllers\Backend\BlogController::class, 'like']);
     Route::post('/seekerlogout', [\App\Http\Controllers\frontend\SeekerLoginController::class, 'logout']);
-    Route::resource('/application', \App\Http\Controllers\frontend\ApplicationController::class);
-
+//    Route::resource('application', \App\Http\Controllers\frontend\ApplicationController::class);
+    Route::post('/application', [\App\Http\Controllers\frontend\ApplicationController::class, 'store']);
 });
 
 Route::view('/{any}', 'frontend')->where('any', '.*');

@@ -99,6 +99,8 @@
 
 <script>
     import axios from 'axios';
+    import {Toast} from "vue-toastification";
+
 
     export default {
         name: "JobDetails",
@@ -115,20 +117,20 @@
         mounted() {
             this.getJobDetails();
             this.checkAuthentication();
-            this.submitApplication();
         },
         methods: {
             async getJobDetails() {
+                const _this=this;
                 try {
                     const response = await axios.get(`/api/joblist/${this.id}`);
                     if (response.data && response.data.result) {
-                        this.job = response.data.result;
+                        _this.job = response.data.result;
                     } else {
-                        this.error = "No blog details found.";
+                        _this.error = "No Job details found.";
                     }
                 } catch (error) {
- 
-                    this.error = "Failed to load blog details.";
+
+                    _this.error = "Failed to load Job details.";
                 }
             },
 
@@ -139,13 +141,16 @@
                     axios.post('/api/frontend/application', this.fromData)
                         .then(function (res) {
                             if (parseInt(res.data.status) === 2000) {
+                                this.$toast.success(" Application submitted successfully");
+
                             } else {
-                                _this.$toast.error("Registration failed!");
+                                this.$toast.error("Application failed!");
                             }
                         })
                         .catch(function (error) {
                             if (error.response) {
-                                _this.errorMessage = error.response.data.message || "An error occurred.";
+                                _this.error = "No Job details found.";
+
                             }
                         });
                 },
