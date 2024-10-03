@@ -39,6 +39,19 @@ class SupportController extends Controller
 
             ];
         }
+        if (in_array('application_status',$array)){
+            $data['application_status']=[
+                [
+                    'name'=>'Accept',
+                    'value'=>1
+                ],
+                [
+                    'name'=>'Recjeted',
+                    'value'=>2
+                ],
+            ];
+        }
+
 
 
         return $this->returnData(2000, $data);

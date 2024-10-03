@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\SavedJobs;
 use Illuminate\Http\Request;
 
-class SavedJobsController extends Controller
+class JobSeekersController extends Controller
 {
     /**
      * Display a listing of the saved jobs.

@@ -13,14 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('application', function (Blueprint $table) {
+        Schema::create('applications', function (Blueprint $table) {
             $table->id();
             $table->integer('job_id');
             $table->integer('seeker_id');
             $table->string('image');
-            $table->string('cover_letter');
+            $table->string('coverLetter');
             $table->text('portfolio');
-            $table->string('application_status')->default('pending');
+            $table->string('application_status')->default(0);
             $table->timestamp('applied_at')->useCurrent();
             $table->timestamps();
         });
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('application');
+        Schema::dropIfExists('applications');
     }
 };

@@ -38,9 +38,9 @@
                                 </router-link>
                             </li>
                             <li>
-                                <a  @click.prevent="logout" class="dropdown-item d-flex align-items-center">
+                                <button  @click.prevent="seekerlogout" class="dropdown-item d-flex align-items-center">
                                     <i class="fas fa-sign-out-alt me-2"></i> Logout
-                                </a>
+                                </button>
                             </li>
                         </ul>
                     </li>
@@ -59,7 +59,7 @@
             <a href="" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Post A Job<i class="fa fa-arrow-right ms-3"></i></a>
         </div>
     </nav>
-    <!-- Navbar End -->
+
 </template>
 
 <script>
@@ -76,31 +76,17 @@
             this.checkAuthentication();
         },
         methods: {
-            async checkAuthentication() {
+            async seekerlogout() {
                 try {
-                    const response = await axios.get('/api/frontend/seekerdata');
-                    if (response.data && response.data.result) {
-                        this.seeker = response.data.result; // Assuming response.data.result has the user info
-                        this.isAuthenticated = true;
-                    } else {
-                        this.seeker = null; // Reset username if not found
-                        this.isAuthenticated = false;
+                    const response = await axios.post('/api/frontend/seekerlogout');
+                    if (response.data.status === 2000) {
+                        this.$router.push('/');
                     }
                 } catch (error) {
-                    this.isAuthenticated = false;
-                    console.error('Authentication check failed:', error.response ? error.response.data : error.message);
+                    console.error('Logout Failed:', error);
                 }
-            },
-        },
-        async logout() {
-            try {
-                await axios.get('/api/frontend/seekerlogout');
-                window.location.href = '/login';
-            } catch (error) {
-                console.error('Logout Failed:', error);
             }
-        }
-
+    }
     }
 </script>
 

@@ -19,5 +19,9 @@ class Seeker extends Authenticatable
         'password',
         'remember_token',
     ];
+    public function applications()
+    {
+        return $this->hasMany(Applications::class);
+    }
 
 }
