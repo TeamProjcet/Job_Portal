@@ -33,6 +33,8 @@ class UserTableSeeder extends Seeder
                 'password'=> Hash::make('1234'),
             ]
         ];
+//        User::truncate();
+
         User::insert($arrUser);
         }
 

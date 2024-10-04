@@ -74,7 +74,7 @@
         methods: {
             // Assuming this function retrieves the correct path for images
             storageImage(imagePath) {
-                return `/storage/${imagePath}`;
+                return `${uploadPath}${imagePath}`;
             }
         }
     };

@@ -19,7 +19,7 @@ class Applications extends Model
     public function validator($input){
         return Validator::make($input,[
             'job_id'=>'required ',
-            'seeker_id'=>'required ',
+            'seeker_id' => 'required|unique:seekers,seeker_id',
             'image'=>'required',
             'portfolio'=>'required  ',
             'coverLetter'=>'required ',
