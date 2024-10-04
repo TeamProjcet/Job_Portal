@@ -19,39 +19,59 @@
                                 <h3 class="mb-3">{{ job.position }}</h3>
                                 <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>{{ job.address }}</span>
                                 <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i>{{ job.job_type == 1 ? 'Full Time' : (job.job_type == 2 ? 'Part Time' : 'Not Specified') }}</span>
-                                <span class="text-truncate me-0"><i class="far fa-money-bill-alt text-primary me-2"></i>{{ job.salary }}</span>
+                                <span class="text-truncate me-0"><i class="far fa-money-bill-alt text-primary me-2"></i>{{ job.salary || 'Negotiable'}}</span>
                             </div>
                         </div>
 
                         <div class="mb-5">
-                            <h4 class="mb-3">Job Description</h4>
                             <p v-html="job.details"></p>
                         </div>
 
                         <div>
-                            <h4 class="mb-4">Apply For The Job</h4>
-                            <form @submit.prevent="submitApplication">
-                                <div class="row g-3">
-                                    <div class="col-12 col-sm-6">
-                                        <input type="text" class="form-control" placeholder="Your Name" v-model="application.name" required>
+                            <div v-if="isAuthenticated">
+                                <h4 class="mb-4">Apply For The Job</h4>
+                                <form @submit.prevent="submitApplication">
+                                    <div class="row g-3">
+                                        <div class="col-12 col-sm-6">
+                                            <input type="text" class="form-control" placeholder="Your Name" v-model="fromData.name" readonly>
+                                        </div>
+                                        <div class="col-12 col-sm-6">
+                                            <input type="email" class="form-control" placeholder="Your Email" v-model="fromData.email" readonly>
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="form-label"> Portfolio/Linkdin/Github</label>
+
+                                            <input type="url" class="form-control" placeholder="Portfolio Website" v-model="fromData.portfolio">
+                                        </div>
+
+
+                                        <div class="col-12">
+                                            <textarea class="form-control" rows="5" placeholder="Cover Letter" v-model="fromData.coverLetter"></textarea>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="mb-3">
+                                                <label class="form-label">Upload your resume</label>
+                                                <div @click="clickFileField('imageField')" class="image_upload" :style="{ 'background-image': 'url(' + publicImage('images/uploading.avif') + ')' }">
+                                                    <template v-if="fromData.image !== undefined">
+                                                        <img class="photo" :src="storageImage(fromData.image)">
+                                                    </template>
+                                                </div>
+                                                <input @change="uploadImage($event, fromData, 'image')" type="file" name="image" id="imageField" class="file_field">
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <button class="btn btn-primary w-100" type="submit">Apply Now</button>
+                                        </div>
                                     </div>
-                                    <div class="col-12 col-sm-6">
-                                        <input type="email" class="form-control" placeholder="Your Email" v-model="application.email" required>
-                                    </div>
-                                    <div class="col-12 col-sm-6">
-                                        <input type="text" class="form-control" placeholder="Portfolio Website" v-model="application.portfolio">
-                                    </div>
-                                    <div class="col-12 col-sm-6">
-                                        <input type="file" class="form-control bg-white" @change="onFileChange">
-                                    </div>
-                                    <div class="col-12">
-                                        <textarea class="form-control" rows="5" placeholder="Cover Letter" v-model="application.coverLetter" required></textarea>
-                                    </div>
-                                    <div class="col-12">
-                                        <button class="btn btn-primary w-100" type="submit">Apply Now</button>
-                                    </div>
-                                </div>
-                            </form>
+                                </form>
+                            </div>
+
+                            <div v-else>
+                                <router-link to="/seekerlogin" class="nav-link">
+                                    <button class="btn btn-primary w-100">Login</button>
+                                </router-link>
+                            </div>
                         </div>
                     </div>
 
@@ -65,7 +85,7 @@
                                 <i class="fa fa-angle-right text-primary me-2"></i>
                                 Job Nature: {{ job.job_type == 1 ? 'Full Time' : (job.job_type == 2 ? 'Part Time' : 'Not Specified') }}
                             </p>
-                            <p><i class="fa fa-angle-right text-primary me-2"></i>Salary: {{ job.salary }}</p>
+                            <p><i class="fa fa-angle-right text-primary me-2"></i>Salary: {{ job.salary || 'Negotiable' }}</p>
                             <p><i class="fa fa-angle-right text-primary me-2"></i>Location: {{ job.address }}</p>
                             <p class="m-0"><i class="fa fa-angle-right text-primary me-2"></i>Date Line: 2024-10-05</p>
                         </div>
@@ -79,54 +99,92 @@
 
 <script>
     import axios from 'axios';
+    import {Toast} from "vue-toastification";
+
 
     export default {
         name: "JobDetails",
         props: ['id'],
         data() {
             return {
-                job: {}, // Initialize as null to indicate loading state
-                application: {
-                    name: '',
-                    email: '',
-                    portfolio: '',
-                    coverLetter: '',
-                    resume: null
-                }
+                job: {
+                    category: {},
+                },
+                isAuthenticated:false
+
             };
         },
         mounted() {
             this.getJobDetails();
+            this.checkAuthentication();
         },
         methods: {
             async getJobDetails() {
+                const _this=this;
                 try {
                     const response = await axios.get(`/api/joblist/${this.id}`);
-                    console.log("Full API Response:", response);
-
                     if (response.data && response.data.result) {
-                        this.job = response.data.result; // Assign the result to post
+                        _this.job = response.data.result;
                     } else {
-                        this.error = "No blog details found."; // Set new error message
+                        _this.error = "No Job details found.";
                     }
                 } catch (error) {
-                    console.error("Error fetching blog details:", error.response ? error.response.data : error.message);
-                    this.error = "Failed to load blog details."; // Set error message
+
+                    _this.error = "Failed to load Job details.";
                 }
             },
-            onFileChange(event) {
-                this.application.resume = event.target.files[0]; // Handle file selection
-            },
-            submitApplication() {
-                // Handle application submission logic
-                console.log("Application submitted:", this.application);
-                // You may want to implement a POST request to submit the application here
-            }
+
+
+                async submitApplication() {
+
+                    this.fromData.job_id = this.job.id;
+                    axios.post('/api/frontend/application', this.fromData)
+                        .then(function (res) {
+                            if (parseInt(res.data.status) === 2000) {
+                                this.$toast.success(" Application submitted successfully");
+
+                            } else {
+                                this.$toast.error("Application failed!");
+                            }
+                        })
+                        .catch(function (error) {
+                            if (error.response) {
+                                _this.error = "No Job details found.";
+
+                            }
+                        });
+                },
+           
+
         }
     };
 </script>
 
 <style scoped>
+    .image_upload img {
+        max-width: 100%;
+        max-height: 100%;
+        border-radius: 4px;
+    }
+    .image_upload {
+        height: 120px;
+        width: 100%;
+        background-size: cover;
+        background-repeat: no-repeat;
+        cursor: pointer;
+        border: 2px dashed #007bff; /* Add a dashed border for better visibility */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .photo {
+        height: 100%;
+        width: 100%;
+        border-radius: 4px; /* Match the border radius of the upload area */
+    }
+    #imageField {
+        display: none;
+    }
     /* Add your styles here */
 </style>
 

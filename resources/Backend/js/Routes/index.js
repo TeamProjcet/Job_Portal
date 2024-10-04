@@ -8,6 +8,7 @@ import EmployerForm from "../views/Employers/EmployerForm";
 import EmployerProfile from "../views/Employers/EmployerProfile";
 import Newsletter from "../views/Visitor/Newsletter";
 import Contact from "../views/Visitor/Contact";
+import ApplicationComponent from "../views/Application/ApplicationComponent";
 
 
 const route = [
@@ -70,6 +71,14 @@ const route = [
         name : 'employerprofile',
         component : EmployerProfile,
         meta:{pagetitle:'Blog Post Table',dataUrl:'api/employer',
+        }
+
+    },
+    {
+        path : '/admin/seeker/application',
+        name : 'application',
+        component : ApplicationComponent,
+        meta:{pagetitle:'Application Table',dataUrl:'api/application',
         }
 
     },

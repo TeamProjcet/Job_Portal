@@ -16,8 +16,7 @@
                 <tr v-for="(data, index) in dataList" :key="index" >
                     <td>{{index +1}}</td>
                     <td>{{data.position}}</td>
-                    <td v-html="data.details"></td>
-                    <td>{{data.salary}}</td>
+                    <td>{{data.salary  || 'Negotiatable'}}</td>
                     <td>{{data.address}}</td>
                     <td><img :src="storageImage(data.image)" style="width: 100px; height: 100px" alt="Image"></td>
                     <td>{{data.date_time}}</td>
@@ -40,11 +39,11 @@
                     </td>
                 </tr>
             </DataTable>
-            <FormModal class="form-modal" @submit="submitFromData(fromData)">
+            <FormModal class="form-modal"  @submit="submitFromData(fromData)">
                 <div class="row">
                         <div class="mb-3">
                             <label class="form-label">Job Name</label>
-                            <select v-model="fromData.category_id" name="category_id" class="form-control">
+                            <select v-model="fromData.category_id" v-validate="'required'" name="category_id" class="form-control">
                                 <template v-for="(item, index) in requireData.category">
                                     <option :value="item.id">{{item.name}}</option>
                                 </template>
@@ -53,17 +52,17 @@
 
                         <div class="mb-3">
                             <label class="form-label">Title</label>
-                            <input type="text" class="form-control" v-model="fromData.position" name="title">
+                            <input type="text" class="form-control" v-validate="'required'" v-model="fromData.position" name="title">
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label">Salary</label>
-                            <input type="number" class="form-control" v-model="fromData.salary" name="salary">
+                            <input type="number" class="form-control" v-validate="'required'" v-model="fromData.salary" name="salary">
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label">Company Name</label>
-                            <select v-model="fromData.company_id" name="company_id" class="form-control">
+                            <select v-model="fromData.company_id" v-validate="'required'" name="company_id" class="form-control">
                                 <option value="" disabled>Select company name</option>
                                 <template v-for="(item, index) in requireData.company">
                                     <option :value="item.id">{{item.name}}</option>
@@ -73,12 +72,12 @@
 
                         <div class="mb-3">
                             <label class="form-label">Location</label>
-                            <input type="text" class="form-control" v-model="fromData.address" placeholder="Enter address" name="address">
+                            <input type="text" class="form-control" v-validate="'required'" v-model="fromData.address" placeholder="Enter address" name="address">
                         </div>
 
-                        <<div class="mb-3">
+                        <div class="mb-3">
                     <label class="form-label">Job Type</label>
-                    <select v-model="fromData.job_type" name="job_type" class="form-control">
+                    <select v-model="fromData.job_type" v-validate="'required'" name="job_type" class="form-control">
                         <option value="">Select Job Type</option>
                         <template v-for="(type, index) in requireData.job_type">
                             <option :value="type.value">{{type.name}}</option>
@@ -88,12 +87,12 @@
 
                         <div class="mb-3">
                             <label class="form-label">Details</label>
-                            <textarea id="details" class="form-control" v-model="fromData.details" name="details" rows="5" placeholder="Enter job details..."></textarea>
+                            <textarea id="details" class="form-control" v-validate="'required'" v-model="fromData.details" name="details" rows="5" placeholder="Enter job details..."></textarea>
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label">Date</label>
-                            <input type="date" class="form-control" v-model="fromData.date_time" name="date_time">
+                            <input type="date" class="form-control" v-validate="'required'" v-model="fromData.date_time" name="date_time">
                         </div>
 
                         <div class="row">
@@ -138,14 +137,15 @@
         name: "JobListCommponent",
         data() {
             return {
-                tableHeading: ["Sl", "Title", "Details",  "Salary", "Location","image", "Date", "Status", "Action"],
+                tableHeading: ["Sl", "Title",  "Salary", "Location","image", "Date", "Status", "Action"],
                 isReadOnly: false,
             };
         },
         mounted() {
             this.getDataList();
-            this.getRequiredData(['category','company']);
+            this.getRequiredData(['category','company','job_type']);
             this.initTinyMCE();
+
         },
         methods:{
             initTinyMCE() {
@@ -165,6 +165,9 @@
                     license_key: 'gpl',
                 });
             },
+        },
+        storageImage(imagePath) {
+            return `${uploadPath}${imagePath}`;
         }
     }
 </script>
@@ -181,7 +184,7 @@
         background-size: cover;
         background-repeat: no-repeat;
         cursor: pointer;
-        border: 2px dashed #007bff; /* Add a dashed border for better visibility */
+        border: 2px dashed #007bff;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -189,7 +192,7 @@
     .photo {
         height: 100%;
         width: 100%;
-        border-radius: 4px; /* Match the border radius of the upload area */
+        border-radius: 4px;
     }
     #imageField {
         display: none;

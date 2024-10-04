@@ -18,7 +18,7 @@ class JobPostModel extends Model
         return Validator::make($input,[
             'category_id'=>'required ',
             'position'=>'required ',
-            'salary'=>'required ',
+            'salary'=>' ',
             'company_id'=>'required ',
             'address'=>'required ',
             'job_type'=>'required ',
@@ -34,4 +34,11 @@ class JobPostModel extends Model
     public function company(){
         return $this->belongsTo(Company::class,'company_id','id');
     }
+
+    public function applications()
+    {
+        return $this->hasMany(Applications::class);
+    }
+
+
 }

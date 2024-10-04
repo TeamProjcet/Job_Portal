@@ -65,16 +65,16 @@
         components: {FormModal, DataTable, PageTop},
         data() {
             return {
-                tableHeading: ["Sl", "Name", "Image", "Action"], // Make sure Image is included here
+                tableHeading: ["Sl", "Name", "Image", "Action"],
             };
         },
         mounted() {
-            this.getDataList(); // Ensure you fetch the data that includes images
+            this.getDataList();
         },
         methods: {
             // Assuming this function retrieves the correct path for images
             storageImage(imagePath) {
-                return `/storage/${imagePath}`;
+                return `${uploadPath}${imagePath}`;
             }
         }
     };
@@ -92,7 +92,7 @@
         background-size: cover;
         background-repeat: no-repeat;
         cursor: pointer;
-        border: 2px dashed #007bff; /* Add a dashed border for better visibility */
+        border: 2px dashed #007bff;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -100,7 +100,7 @@
     .photo {
         height: 100%;
         width: 100%;
-        border-radius: 4px; /* Match the border radius of the upload area */
+        border-radius: 4px;
     }
     #imageField {
         display: none;

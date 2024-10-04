@@ -1,15 +1,22 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\frontend;
 
+use App\Http\Controllers\Controller;
 use App\Models\Applications;
+use App\Supports\Helper;
 use Illuminate\Http\Request;
 
-class ApplicationsController extends Controller
+class ApplicationController extends Controller
 {
+    use Helper;
+    public function __construct()
+    {
+        $this->model=new Applications();
+    }
     public function index()
     {
-        // Code for displaying a listing of applications
+
     }
 
     public function create()
@@ -19,7 +26,16 @@ class ApplicationsController extends Controller
 
     public function store(Request $request)
     {
-        // Code for storing a newly created application
+        $validator = $this->model->Validator($request->all());
+
+        if ($validator->fails()) {
+            return response()->json(['result' => $validator->errors(), 'status' => 3000], 422); // Use proper status code for validation errors
+        }
+
+        $this->model->fill($request->all());
+        $this->model->save();
+
+        return response()->json(['message' => 'Application submitted successfully', 'status' => 2000], 200);
     }
 
     public function show(Applications $applications)

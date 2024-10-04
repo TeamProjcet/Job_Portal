@@ -4,9 +4,12 @@ namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Company;
 use App\Models\JobPostModel;
+use App\Models\Seeker;
 use App\Supports\Helper;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use function Nette\Utils\data;
 
 class FrontendController extends Controller
@@ -22,15 +25,31 @@ class FrontendController extends Controller
             }
         })->with('category','company')->paginate(10);
 
-        $data['category'] = Category::all();
+        $data['category'] = Category::get();
+
+        $data['company'] = Company::get();
+
 
         return $this->returnData(2000,$data);
     }
 
-    public function jobview($jobId){
 
-        $data = JobPostModel::where('id',$jobId)->get();
-
-        return $this->returnData(2000,$data);
+    public function jobCategory($cateId)
+    {
+        $data['jobPosts'] = JobPostModel::with('category','company')->where('category_id',$cateId)->get();
+        return response()->json(['result' => $data]);
     }
+
+
+
+
+   public function seekerdata()
+    {
+        $data = Auth::guard('seeker')->user();
+
+        return response()->json(['result' => $data]);
+    }
+
+
+
 }

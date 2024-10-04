@@ -21,20 +21,72 @@
                 <router-link to="/blog-post" class="nav-item nav-link">Blog</router-link>
 
                 <router-link to="/contact" class="nav-item nav-link">Contact</router-link>
-                <router-link to="/seekerlogin" class="nav-item nav-link">login</router-link>
-                <router-link to="/seekerprofile" class="nav-item nav-link"><i class="fas fa-user"></i>User Profile</router-link>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item dropdown" v-if="isAuthenticated">
+                        <a
+                                class="nav-link dropdown-toggle bg-success text-white py-2 px-lg-4 rounded-pill"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                                style="font-size: 16px;"
+                        >
+                            {{ seeker?.name || 'Guest' }}
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end mt-2 shadow-sm border-0">
+                            <li>
+                                <router-link to="/seekerprofile" class="dropdown-item d-flex align-items-center">
+                                    <i class="fas fa-user me-2"></i> User Profile
+                                </router-link>
+                            </li>
+                            <li>
+                                <button  @click.prevent="seekerlogout" class="dropdown-item d-flex align-items-center">
+                                    <i class="fas fa-sign-out-alt me-2"></i> Logout
+                                </button>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item" v-else>
+                        <router-link to="/seekerlogin" class="nav-link">
+                            <button class="btn btn-success rounded-pill px-4 py-2">Login</button>
+                        </router-link>
+                    </li>
+                </ul>
+
+
+
 
             </div>
 
             <a href="" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Post A Job<i class="fa fa-arrow-right ms-3"></i></a>
         </div>
     </nav>
-    <!-- Navbar End -->
+
 </template>
 
 <script>
+    import axios from 'axios'
     export default {
         name: "Header",
+        data() {
+            return {
+                isAuthenticated: false,
+                seeker: '',
+            };
+        },
+        mounted() {
+            this.checkAuthentication();
+        },
+        methods: {
+            async seekerlogout() {
+                try {
+                    const response = await axios.post('/api/frontend/seekerlogout');
+                    if (response.data.status === 2000) {
+                        this.$router.push('/');
+                    }
+                } catch (error) {
+                    console.error('Logout Failed:', error);
+                }
+            }
+    }
     }
 </script>
 

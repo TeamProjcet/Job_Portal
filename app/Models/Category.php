@@ -18,4 +18,8 @@ class Category extends Model
         ]);
     }
 
+    public function applications(){
+        return $this->hasMany(Applications::class);
+    }
+
 }

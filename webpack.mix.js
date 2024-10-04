@@ -9,8 +9,8 @@ mix.alias({
 
 // backend webpack
 // ==============>
-mix.js('resources/js/app.js', 'public/js').vue();
-mix.sass('resources/css/app.scss', 'public/css');
+mix.js('resources/Backend/js/app.js', 'public/js').vue();
+mix.sass('resources/Backend/css/app.scss', 'public/css');
 
 // frontend webpack
 // ==============>

@@ -1,35 +1,35 @@
 <template>
-
-
-        <!-- Category Start -->
-        <div class="container-xxl py-5">
-            <div class="container">
-                <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Explore By Category</h1>
-                <div class="row g-4">
-                    <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s"  v-for="jobcat in jobcategory" :key="jobcat.id">
-                        <a class="cat-item rounded p-4">
-                            <img class="flex-shrink-0 img-fluid border rounded" :src="storageImage(jobcat.image)" alt="" style="width: 80px; height: 80px;">
-                            <h6 class="mb-3">{{jobcat.name}}</h6>
-                            <p class="mb-0">123 Vacancy</p>
-                        </a>
-                    </div>
+    <!-- Category Start -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Explore By Category</h1>
+            <div class="row g-4 overflow-auto" style="max-height: 400px;"> <!-- Adjust max-height as needed -->
+                <div class="col-lg-4 col-md-4 col-sm-4 wow fadeInUp" data-wow-delay="0.1s" v-for="jobcat in jobcateg" :key="jobcat.id">
+                    <a class="cat-item rounded p-4">
+                        <img class="flex-shrink-0 img-fluid border rounded" :src="storageImage(jobcat.image)" alt="" style="width: 80px; height: 80px;">
+                        <router-link :to="{ name: 'jobcategory', params: { category_id: jobcat.id } }">
+                            {{ jobcat.name }} ( {{jobcat.jobCount}} )
+                        </router-link>
+                    </a>
                 </div>
             </div>
         </div>
-        <!-- Category End -->
+    </div>
 
-
-
+    <!-- Category End -->
 </template>
 
 <script>
     import axios from 'axios';
+
     export default {
         name: "JobCat",
         data() {
             return {
-                jobcategory: [], // Initialize jobList
-                error: null // Optional: to handle errors
+                jobcateg: [],
+                error: null,
+
+
             };
         },
         mounted() {
@@ -38,13 +38,29 @@
         methods: {
             async getDataList() {
                 try {
-                    const response = await axios.get('/api/categories');
-                    this.jobcategory = response.data.result; // Assign the data to jobList
+                    const { data } = await axios.get('/api/frontend/joblist');
+                    const jobs = data.result.jobData.data;
+                    // console.log(jobs)
+                    const categories = data.result.category;
+                    // console.log(categories)
+
+                    // Category with job post count
+                    const jobCountMap = jobs.reduce((map, { category_id }) => {
+                        map[category_id] = (map[category_id] || 0) + 1;
+                        return map;
+                    }, {});
+
+                    this.jobcateg = categories.map(cat => ({
+                        ...cat,
+                        jobCount: jobCountMap[cat.id] || 0
+                    }));
+
                 } catch (error) {
-                    console.error("Error fetching job data:", error);
-                    this.error = "Error fetching job data. Please try again later."; // Set error message
+                    // console.error("Error fetching job data:", error);
+                    this.error = "Error fetching job data. Please try again later.";
                 }
             }
+
         }
     }
 </script>
@@ -52,3 +68,4 @@
 <style scoped>
 
 </style>
+

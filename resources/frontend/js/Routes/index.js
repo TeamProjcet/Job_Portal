@@ -9,6 +9,9 @@ import SeekerRegis from "../views/SeekerAuth/SeekerRegis";
 import BlogDetails from "../views/Blog/BlogDetails";
 import BlogPost from "../views/Blog/BlogPost";
 import SeekerProfile from "../views/SeekerAuth/SeekerProfile";
+import JobCategory from "../views/JobCategory";
+import JobCompany from "../views/JobCompany";
+import JobResults from "../views/JobResults";
 import Newsletter from "../views/Newsletter";
 
 const route = [
@@ -71,8 +74,27 @@ const route = [
         path : '/seekerprofile',
         name : 'seekerprofile',
         component : SeekerProfile,
-        meta:{pagetitle:'',dataUrl:'api/frontend/seekerprofile'},
+        meta:{pagetitle:'',dataUrl:'api/frontend/seekerprofile'
+            
+        },
     },
-
+    {
+        path: '/jobcategory/:category_id',
+        name: 'jobcategory',
+        component: JobCategory,
+        props: true
+    },
+    {
+        path: '/jobcompany/:company_id',
+        name: 'jobcompany',
+        component: JobCompany,
+        props: true
+    },
+    {
+        path: '/results',
+        name: 'JobResults',
+        component: JobResults,
+        props: route => ({ jobs: JSON.parse(route.query.jobs) }) // Parse the jobs from query
+    }
 ];
 export default route;

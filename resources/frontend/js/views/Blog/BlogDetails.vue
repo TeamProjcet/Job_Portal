@@ -2,7 +2,7 @@
     <div class="container-xxl py-5">
         <header class="mb-4">
             <h1>{{post.title}}</h1>
-            <p class="text-muted">Published on {{formattedDate}} by Author Name</p>
+            <p class="text-muted">Published on {{formattedDate}} by Author {{post.company.name}}</p>
         </header>
 
         <article>
@@ -14,6 +14,7 @@
 
         <footer class="mt-5">
             <h3>Leave a Comment</h3>
+            <div v-if="isAuthenticated">
             <form>
                 <div class="mb-3">
                     <label for="name" class="form-label">Name</label>
@@ -29,6 +30,12 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
+            </div>
+            <div v-else>
+                <router-link to="/seekerlogin" class="nav-link">
+                    <button class="btn btn-primary w-100">Login</button>
+                </router-link>
+            </div>
         </footer>
     </div>
 </template>
@@ -41,12 +48,14 @@
         data() {
             return {
                 post: {},
+                isAuthenticated:false,
                 error: null // To store any error messages
             };
         },
         mounted() {
-            console.log("Blog ID:", this.id);
             this.getPostDetails();
+            this.checkAuthentication();
+
         },
         computed: {
             formattedDate() {
@@ -61,16 +70,16 @@
             async getPostDetails() {
                 try {
                     const response = await axios.get(`/api/blogpost/${this.id}`);
-                    console.log("Full API Response:", response);
+                    // console.log("Full API Response:", response);
 
                     if (response.data && response.data.result) {
-                        this.post = response.data.result; // Assign the result to post
+                        this.post = response.data.result;
                     } else {
-                        this.error = "No blog details found."; // Set new error message
+                        this.error = "No blog details found.";
                     }
                 } catch (error) {
-                    console.error("Error fetching blog details:", error.response ? error.response.data : error.message);
-                    this.error = "Failed to load blog details."; // Set error message
+                    // console.error("Error fetching blog details:", error.response ? error.response.data : error.message);
+                    this.error = "Failed to load blog details.";
                 }
             }
         }

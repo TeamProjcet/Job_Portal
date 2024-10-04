@@ -98,8 +98,7 @@
                     </li>
 
 <!--                    -->
-
-                    <li class="nav-item">
+<li class="nav-item">
                         <a data-bs-toggle="collapse" href="#base3">
                             <i class="fas fa-user"></i>
                             <p>Visitor</p>
@@ -117,13 +116,30 @@
                                         <span class="sub-item">Contact</span>
                                     </router-link>
                                 </li>
+                                </ul>
+                        </div>
+                        </li>
+                            
+
+
+                    <li class="nav-item">
+                        <a data-bs-toggle="collapse" href="#base4">
+                            <i class="fas fa-clipboard-list"></i>
+                            <p>Aplication</p>
+                            <span class="caret"></span>
+                        </a>
+                        <div class="collapse" id="base4">
+                            <ul class="nav nav-collapse">
+                                <li>
+                                    <router-link to="/admin/seeker/application">
+                                        <span class="sub-item">Aplication</span>
+                                    </router-link>
+                                </li>
 
 
                             </ul>
                         </div>
                     </li>
-
-<!--                    -->
                 </ul>
             </div>
         </div>

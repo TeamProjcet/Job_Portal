@@ -53,9 +53,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
     // User.php মডেলে
-    public function employers()
+
+    public function seeker()
     {
-        return $this->hasMany(Employers::class);
+        return $this->hasOne(Seeker::class);
     }
 
 }
