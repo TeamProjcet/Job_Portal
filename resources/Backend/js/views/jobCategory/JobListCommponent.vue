@@ -145,6 +145,7 @@
             this.getDataList();
             this.getRequiredData(['category','company','job_type']);
             this.initTinyMCE();
+
         },
         methods:{
             initTinyMCE() {
@@ -164,6 +165,9 @@
                     license_key: 'gpl',
                 });
             },
+        },
+        storageImage(imagePath) {
+            return `${uploadPath}${imagePath}`;
         }
     }
 </script>
