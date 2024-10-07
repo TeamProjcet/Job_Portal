@@ -10,17 +10,15 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
+
 class SeekerLoginController extends Controller
 {
-//    use Helper;
-
-
     public function store(Request $request)
     {
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:seekers',
-            'password' => 'required|string|min:4|',
+            'password' => 'required|string|min:4',
         ]);
 
         $data = new Seeker();
@@ -34,6 +32,7 @@ class SeekerLoginController extends Controller
             'message' => 'Seeker registered successfully'
         ], 201);
     }
+
     public function login(Request $request)
     {
         $request->validate([
@@ -45,11 +44,7 @@ class SeekerLoginController extends Controller
 
         if (Auth::guard('seeker')->attempt($credentials)) {
             $seeker = Auth::guard('seeker')->user();
-
-
             $token = $seeker->createToken('Seeker Token')->plainTextToken;
-
-
 
             return response()->json([
                 'status' => 2000,
@@ -59,12 +54,12 @@ class SeekerLoginController extends Controller
                 ],
                 'message' => 'Login successful',
             ], 200);
-        } else {
-            return response()->json([
-                'status' => 4000,
-                'message' => 'Invalid credentials',
-            ], 401);
         }
+
+        return response()->json([
+            'status' => 4000,
+            'message' => 'Invalid credentials',
+        ], 401);
     }
 
     public function logout()
@@ -77,34 +72,32 @@ class SeekerLoginController extends Controller
         ]);
     }
 
+    public function update(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:seekers,email,' . Auth::guard('seeker')->id(),
+            'phone' => 'nullable|string|max:15',
+            'address' => 'nullable|string|max:255',
+            'bio' => 'nullable|string|max:1000',
+            'profile_picture' => 'nullable|string',
+        ]);
 
-//    public function login(Request $request)
-//    {
-//        $request->validate([
-//            'email' => 'required|string|email',
-//            'password' => 'required|string|min:4',
-//        ]);
-//
-//        $seeker = Seeker::where('email', $request->email)->first();
-//
-//        if ($seeker && Hash::check($request->password, $seeker->password)) {
-//            // লগইন হলে টোকেন তৈরি করুন
-//            $token = $seeker->createToken('Seeker Token')->plainTextToken;
-//
-//            return response()->json([
-//                'status' => 2000,
-//                'data' => [
-//                    'seeker' => $seeker,
-//                    'token' => $token,
-//                ],
-//                'message' => 'Login successful'
-//            ], 200);
-//        }
-//
-//        return response()->json([
-//            'status' => 4000,
-//            'message' => 'Invalid credentials'
-//        ], 401);
-//    }
+        $data = Auth::guard('seeker')->user();
 
+        $data->name = $request->input('name');
+        $data->email = $request->input('email');
+        $data->phone = $request->input('phone', $data->phone);
+        $data->address = $request->input('address', $data->address);
+        $data->bio = $request->input('bio', $data->bio);
+        $data->profile_picture = $request->input('profile_picture', $data->profile_picture);
+
+        $data->save();
+
+        return response()->json([
+            'status' => 2000,
+            'data' => $data,
+            'message' => 'Profile updated successfully',
+        ]);
+    }
 }

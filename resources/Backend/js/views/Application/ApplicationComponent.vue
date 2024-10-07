@@ -30,7 +30,6 @@
                 <!-- Applied Jobs Section -->
                 <div class="tab-pane fade show active" id="applied-jobs" role="tabpanel" aria-labelledby="applied-jobs-tab">
                     <div class="card">
-                        <div class="card-header">Applied Jobs</div>
                         <div class="card-body">
 
                             <template v-if="!isLoading && applylist.applyData !==undefined">
@@ -48,18 +47,27 @@
                                     <td>{{ data.job.category.name}}</td>
                                     <td>{{ data.job.company.name}}</td>
                                     <td>{{ data.job.position}}</td>
-                                    <td>{{data.application_status == 0 ? 'Pending' : data.application_status == 1 ? 'Accept' : (data.application_status == 2 ? 'Recjeted' : 'Unknown') }}</td>
-
-
+                                    <td>
+                                        <span :class="{
+                                        'bg-success p-1': data.application_status == 1,
+                                        'bg-danger p-1': data.application_status == 2,
+                                        'bg-warning p-1': data.application_status == 0
+                                        }">
+                                        {{ data.application_status == 0 ? 'Pending' : data.application_status == 1 ? 'Accepted' : 'Rejected' }}
+                                        </span>
+                                    </td>
                                     <td>
                                         <!-- Display the image -->
                                         <img :src="storageImage(data.image)" style="width: 100px; height: 100px" alt="Image">
                                     </td>
 
                                     <td>
+                                        <router-link :to="{ name: 'ApplicationView', params: { id: data.id } }">
+                                            <i class="fas fa-eye" style="color: blue; margin-right: 5px; font-size: 20px"></i>
+                                        </router-link>
 
-                                        <a @click="CategoryDatadelete(data.id, index)">
-                                            <i class="fas fa-trash-alt" style="color: red;"></i>
+                                        <a style="cursor: pointer" @click="CategoryDatadelete(data.id)">
+                                            <i class="fas fa-trash-alt" style="color: red; font-size: 20px"></i>
                                         </a>
                                     </td>
                                 </tr>
@@ -93,7 +101,7 @@
         components: {DataTable},
         data() {
         return {
-            tableHeading: ["Sl", "Name", "Email","Image","Job Name","Company", "Position","application_status","Resume", "Action"],
+            tableHeading: ["Sl", "Name", "Email","Image","Job Name","Company", "Position","Status","Resume", "Action"],
             applylist:[],
             application_status : 0,
             isLoading : false,

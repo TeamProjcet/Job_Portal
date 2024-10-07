@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('title');
             $table->text('description');
             $table->boolean('status')->default(1);
-            $table->integer('likes')->default(0);
             $table->text('image');
             $table->timestamps();
         });

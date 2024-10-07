@@ -62,14 +62,17 @@
                         </select>
                     </div>
 
-                    <div class="mb-3">
-                        <label class="form-label">Details</label>
-                        <textarea id="details" class="form-control" v-validate="'required'" v-model="fromData.details" name="details" rows="5" placeholder="Enter job details..."></textarea>
-                    </div>
+                <div class="mb-3">
+                    <label class="form-label">Details</label>
+                    <editor v-model="fromData.details" v-validate="'required'" name="details" :init="tinymceInit"/>
+                </div>
+
 
                     <div class="mb-3">
                         <label class="form-label">Date</label>
-                        <input type="date" class="form-control" v-validate="'required'" v-model="fromData.date_time" name="date_time">
+                        <div>
+                            <date-picker class="w-100" placeholder="" v-validate="'required'" v-model="fromData.date_time" name="date_time" valueType="format"></date-picker>
+                        </div>
                     </div>
 
                     <div class="row">
@@ -107,37 +110,28 @@
 
 
 <script>
+    import Editor from '@tinymce/tinymce-vue'
+    import DatePicker from 'vue2-datepicker';
+    import 'vue2-datepicker/index.css';
     export default {
         name: "CreateJobComponent",
+        components: {
+            Editor, DatePicker
+        },
         data() {
             return {
                 isReadOnly: false,
+                tinymceInit:{
+                    height: 300,
+                    menubar: false,
+                    plugins: 'link image code',
+                    toolbar: 'undo redo | styleselect | bold italic | link image | code',
+                }
             };
         },
         mounted() {
             this.getDataList();
             this.getRequiredData(['category','company','job_type']);
-            this.initTinyMCE();
-        },
-        methods: {
-            initTinyMCE() {
-                tinymce.init({
-                    selector: 'textarea',
-                    setup: (editor) => {
-                        editor.on('change', () => {
-                            this.fromData.details = editor.getContent();
-                        });
-                    },
-                    // Additional TinyMCE configuration can go here
-                    menubar: false,
-                    statusbar: false,
-                    toolbar: "undo redo print spellcheckdialog formatpainter | blocks fontfamily fontsize | bold italic underline forecolor backcolor | link image | alignleft aligncenter alignright alignjustify lineheight | checklist bullist numlist indent outdent | removeformat | code",
-                    height: 300,
-                    readonly: false,
-                    license_key: 'gpl',
-                });
-            },
-
         },
     }
 </script>
@@ -154,7 +148,7 @@
         background-size: cover;
         background-repeat: no-repeat;
         cursor: pointer;
-        border: 2px dashed #007bff; /* Add a dashed border for better visibility */
+        border: 2px dashed #007bff;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -162,7 +156,7 @@
     .photo {
         height: 100%;
         width: 100%;
-        border-radius: 4px; /* Match the border radius of the upload area */
+        border-radius: 4px;
     }
     #imageField {
         display: none;

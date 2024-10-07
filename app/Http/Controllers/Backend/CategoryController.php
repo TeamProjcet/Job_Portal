@@ -80,6 +80,7 @@ class CategoryController extends Controller
             return response()->json(['result' => null, 'message' => $e->getMessage(), 'status' => 5000]);
         }
     }
+
     public function destroy($id)
     {
         try {

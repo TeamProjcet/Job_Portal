@@ -27,7 +27,7 @@
                     </td>
                     <td>
 
-                        <a @click="openEditModal(data,data.id)">
+                        <a @click="openEditModal(data, data.id)">
                             <i class="fas fa-edit" style="color: blue;"></i>
                         </a>
 <!--                        <router-link :to="`/admin/jobcategory/createjob/${data.id}`">-->
@@ -85,15 +85,17 @@
                     </select>
                 </div>
 
-                        <div class="mb-3">
-                            <label class="form-label">Details</label>
-                            <textarea id="details" class="form-control" v-validate="'required'" v-model="fromData.details" name="details" rows="5" placeholder="Enter job details..."></textarea>
-                        </div>
+                    <div class="mb-3">
+                        <label class="form-label">Details</label>
+                        <editor v-model="fromData.details" v-validate="'required'" name="details" :init="tinymceInit"/>
+                    </div>
 
-                        <div class="mb-3">
-                            <label class="form-label">Date</label>
-                            <input type="date" class="form-control" v-validate="'required'" v-model="fromData.date_time" name="date_time">
+                    <div class="mb-3">
+                        <label class="form-label">Date</label>
+                        <div>
+                            <date-picker class="w-100" placeholder="" v-validate="'required'" v-model="fromData.date_time" name="date_time" valueType="format"></date-picker>
                         </div>
+                    </div>
 
                         <div class="row">
                             <div class="col-md-4">
@@ -132,39 +134,30 @@
     import PageTop from "../../Components/PageTop";
     import DataTable from "../../Components/DataTable";
     import FormModal from "../../Components/FormModal";
+    import Editor from '@tinymce/tinymce-vue'
+    import DatePicker from 'vue2-datepicker';
+    import 'vue2-datepicker/index.css';
     export default {
-        components: {FormModal, DataTable, PageTop},
+        components: {
+            FormModal, DataTable, PageTop, Editor, DatePicker
+        },
         name: "JobListCommponent",
         data() {
             return {
                 tableHeading: ["Sl", "Title",  "Salary", "Location","image", "Date", "Status", "Action"],
                 isReadOnly: false,
+                tinymceInit:{
+                    height: 300,
+                    menubar: false,
+                    plugins: 'link image code',
+                    toolbar: 'undo redo | styleselect | bold italic | link image | code',
+                }
             };
         },
         mounted() {
             this.getDataList();
             this.getRequiredData(['category','company','job_type']);
-            this.initTinyMCE();
 
-        },
-        methods:{
-            initTinyMCE() {
-                tinymce.init({
-                    selector: 'textarea',
-                    setup: (editor) => {
-                        editor.on('change', () => {
-                            this.fromData.details = editor.getContent();
-                        });
-                    },
-                    // Additional TinyMCE configuration can go here
-                    menubar: false,
-                    statusbar: false,
-                    toolbar: "undo redo print spellcheckdialog formatpainter | blocks fontfamily fontsize | bold italic underline forecolor backcolor | link image | alignleft aligncenter alignright alignjustify lineheight | checklist bullist numlist indent outdent | removeformat | code",
-                    height: 300,
-                    readonly: false,
-                    license_key: 'gpl',
-                });
-            },
         },
         storageImage(imagePath) {
             return `${uploadPath}${imagePath}`;

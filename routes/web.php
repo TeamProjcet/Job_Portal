@@ -19,9 +19,7 @@ Route::view('admin/{any}', 'backend')->where('any', '.*')->middleware('auth');
 Route::prefix('api')->group(function () {
     Route::resource('categories', \App\Http\Controllers\Backend\CategoryController::class);
     Route::resource('/company', \App\Http\Controllers\Backend\CompanyController::class);
-//Route::get('/joblist', [\App\Http\Controllers\Backend\JobPostController::class,'index']);
     Route::resource('/createjob', \App\Http\Controllers\Backend\JobPostController::class);
-
     Route::resource('/joblist', \App\Http\Controllers\Backend\JobPostController::class);
     Route::resource('/jobseeker', \App\Http\Controllers\JobSeekersController::class);
     Route::resource('/employer', \App\Http\Controllers\EmployersController::class);
@@ -32,26 +30,25 @@ Route::prefix('api')->group(function () {
 
     Route::resource('blogpost', \App\Http\Controllers\Backend\BlogController::class);
 
-
     Route::post('upload', [\App\Http\Controllers\Backend\UploadController::class, 'upload']);
     Route::post('/required_data', [\App\Http\Controllers\SupportController::class, 'requireData']);
     Route::get('backendData',[\App\Http\Controllers\Backend\BackendController::class,'backendData']);
-
 
 });
 
 //frontend Route
 
-Route::prefix('api/frontend/')->group(function () {
+Route::prefix('api/frontend')->group(function () {
     Route::get('joblist', [\App\Http\Controllers\frontend\FrontendController::class, 'joblist']);
     Route::get('seekerdata', [\App\Http\Controllers\frontend\FrontendController::class, 'seekerdata']);
     Route::get('jobcate/{cateId}', [\App\Http\Controllers\frontend\FrontendController::class, 'jobCategory'])->name('web.cat');
-    Route::post('/seekerregis', [\App\Http\Controllers\frontend\SeekerLoginController::class, 'store']);
-    Route::post('/seekerlogin', [\App\Http\Controllers\frontend\SeekerLoginController::class, 'login']);
-    Route::post('/blogpost/{id}/like', [\App\Http\Controllers\Backend\BlogController::class, 'like']);
-    Route::post('/seekerlogout', [\App\Http\Controllers\frontend\SeekerLoginController::class, 'logout']);
-//    Route::resource('application', \App\Http\Controllers\frontend\ApplicationController::class);
-    Route::post('/application', [\App\Http\Controllers\frontend\ApplicationController::class, 'store']);
+    Route::post('seekerregis', [\App\Http\Controllers\frontend\SeekerLoginController::class, 'store']);
+    Route::post('seekerlogin', [\App\Http\Controllers\frontend\SeekerLoginController::class, 'login']);
+    Route::post('blogpost/{id}/like', [\App\Http\Controllers\Backend\BlogController::class, 'like']);
+    Route::post('seekerlogout', [\App\Http\Controllers\frontend\SeekerLoginController::class, 'logout']);
+    Route::put('seeker/profile', [\App\Http\Controllers\frontend\SeekerLoginController::class, 'update']);
+
+    Route::resource('application', \App\Http\Controllers\frontend\ApplicationController::class);
 });
 
 Route::view('/{any}', 'frontend')->where('any', '.*');
