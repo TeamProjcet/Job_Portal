@@ -7,6 +7,7 @@ import BlogPostComponent from "../views/Blog/BlogPostComponent";
 import EmployerForm from "../views/Employers/EmployerForm";
 import EmployerProfile from "../views/Employers/EmployerProfile";
 import ApplicationComponent from "../views/Application/ApplicationComponent";
+import ApplicationView from "../views/Application/ApplicationView";
 import PermissionComponent from "../views/RolePermission/PermissionComponent";
 import RolePermissionComponent from "../views/RolePermission/RolePermissionComponent";
 import RoleComponent from "../views/RolePermission/RoleComponent";
@@ -79,7 +80,7 @@ const route = [
         path : '/admin/seeker/application',
         name : 'application',
         component : ApplicationComponent,
-        meta:{pagetitle:'Application Table',dataUrl:'api/application',
+        meta:{pagetitle:'Application Table',dataUrl:'api/frontend/application',
         }
 
     },
@@ -107,6 +108,14 @@ const route = [
         }
 
     },
+
+    {
+        path: '/admin/seeker/application-view/:id',
+        name: 'ApplicationView',
+        component: ApplicationView,
+        meta:{pagetitle:'Job Application', dataUrl:'api/frontend/application',},
+        props: true
+    }
 
 ];
 export default route;

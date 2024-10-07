@@ -49,7 +49,7 @@
             return {
                 post: {},
                 isAuthenticated:false,
-                error: null // To store any error messages
+                error: null
             };
         },
         mounted() {

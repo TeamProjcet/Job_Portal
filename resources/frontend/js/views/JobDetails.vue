@@ -60,6 +60,7 @@
                                                 <input @change="uploadImage($event, fromData, 'image')" type="file" name="image" id="imageField" class="file_field">
                                             </div>
                                         </div>
+
                                         <div class="col-12">
                                             <button class="btn btn-primary w-100" type="submit">Apply Now</button>
                                         </div>
@@ -99,18 +100,22 @@
 
 <script>
     import axios from 'axios';
-    import {Toast} from "vue-toastification";
-
+    import Toast from "vue-toastification";
 
     export default {
         name: "JobDetails",
         props: ['id'],
+
         data() {
             return {
                 job: {
                     category: {},
                 },
-                isAuthenticated:false
+                isAuthenticated:false,
+
+                components:{
+                    Toast
+                }
 
             };
         },
@@ -155,7 +160,6 @@
                             }
                         });
                 },
-           
 
         }
     };
@@ -173,7 +177,7 @@
         background-size: cover;
         background-repeat: no-repeat;
         cursor: pointer;
-        border: 2px dashed #007bff; /* Add a dashed border for better visibility */
+        border: 2px dashed #007bff;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -181,11 +185,12 @@
     .photo {
         height: 100%;
         width: 100%;
-        border-radius: 4px; /* Match the border radius of the upload area */
+        border-radius: 4px;
     }
     #imageField {
         display: none;
     }
-    /* Add your styles here */
+
 </style>
+
 

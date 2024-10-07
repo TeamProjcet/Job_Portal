@@ -60,7 +60,7 @@
 
                 <div class="mb-3">
                     <label class="form-label">Details</label>
-                    <textarea id="details" class="form-control" v-model="fromData.description" name="details" rows="5" placeholder="Enter job details..."></textarea>
+                    <editor v-model="fromData.details" v-validate="'required'" name="details" :init="tinymceInit"/>
                 </div>
 
                 <div class="row">
@@ -117,41 +117,28 @@
     import PageTop from "../../Components/PageTop";
     import DataTable from "../../Components/DataTable";
     import FormModal from "../../Components/FormModal";
+    import Editor from '@tinymce/tinymce-vue'
 
     export default {
         name: "BlogPostComponent",
-        components: {FormModal, DataTable, PageTop},
+        components: {
+            FormModal, DataTable, PageTop, Editor
+        },
         data() {
             return {
                 tableHeading: ["Id", "company name", "title",  "image", "status", "action"],
-                isReadOnly: false,
+                tinymceInit:{
+                    license_key: 'gpl',
+                    height: 300,
+                    menubar: false,
+                    plugins: 'link image code',
+                    toolbar: 'undo redo | styleselect | bold italic | link image | code',
+                }
             };
         },
         mounted() {
             this.getDataList();
             this.getRequiredData(['company']);
-            this.initTinyMCE();
-
-        },
-        methods: {
-            initTinyMCE() {
-                tinymce.init({
-                    selector: 'textarea',
-                    setup: (editor) => {
-                        editor.on('change', () => {
-                            this.fromData.description = editor.getContent();
-                        });
-                    },
-                    // Additional TinyMCE configuration can go here
-                    menubar: false,
-                    statusbar: false,
-                    toolbar: "undo redo print spellcheckdialog formatpainter | blocks fontfamily fontsize | bold italic underline forecolor backcolor | link image | alignleft aligncenter alignright alignjustify lineheight | checklist bullist numlist indent outdent | removeformat | code",
-                    height: 300,
-                    readonly: false,
-                    license_key: 'gpl',
-                });
-            },
-
         },
     }
 </script>
@@ -168,7 +155,7 @@
         background-size: cover;
         background-repeat: no-repeat;
         cursor: pointer;
-        border: 2px dashed #007bff; /* Add a dashed border for better visibility */
+        border: 2px dashed #007bff;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -176,7 +163,7 @@
     .photo {
         height: 100%;
         width: 100%;
-        border-radius: 4px; /* Match the border radius of the upload area */
+        border-radius: 4px;
     }
     #imageField {
         display: none;
