@@ -93,7 +93,7 @@ const route = [
         path: '/results',
         name: 'JobResults',
         component: JobResults,
-        props: route => ({ jobs: JSON.parse(route.query.jobs) }) // Parse the jobs from query
+        props: route => ({ jobs: JSON.parse(route.query.jobs) })
     }
 ];
 export default route;

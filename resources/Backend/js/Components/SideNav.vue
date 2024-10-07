@@ -49,7 +49,7 @@
 
 <!--                    -->
 
-                    <li class="nav-item">
+                    <li class="nav-item" v-for="">
                         <a data-bs-toggle="collapse" href="#base">
                             <i class="fas fa-layer-group"></i>
                             <p>Job</p>
@@ -117,6 +117,29 @@
                             </ul>
                         </div>
                     </li>
+
+                    <li class="nav-item">
+                        <a data-bs-toggle="collapse" href="#base5" aria-expanded="false">
+                            <i class="fas fa-shield-alt"></i>
+                            <p>Role Permission</p>
+                            <span class="caret"></span>
+                        </a>
+                        <div class="collapse" id="base5">
+                            <ul class="nav nav-collapse">
+                                <li>
+                                    <router-link to="/admin/role/rolepermissions">
+                                        <span class="sub-item">Role User Management</span>
+                                    </router-link>
+                                </li>
+                                <li>
+                                    <router-link to="/admin/role/permissions">
+                                        <span class="sub-item">Permission</span>
+                                    </router-link>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
                 </ul>
             </div>
         </div>
@@ -125,7 +148,22 @@
 
 <script>
     export default {
-        name: "SideNav"
+        name: "SideNav",
+        mounted() {
+            this.getconfigurations();
+        },
+        methods:{
+            getconfigurations:function () {
+                const _this=this;
+                const url=_this.urlGenaretor('api/configurations');
+                _this.httpReq('get',url,{},{},function(retData){
+                    _this.$store.commit('Config',retData.result);
+                    // _this.$store.commit('permissions',retData.result.permissions)
+
+
+                })
+            }
+        }
     }
 </script>
 

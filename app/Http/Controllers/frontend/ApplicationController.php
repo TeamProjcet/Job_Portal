@@ -4,6 +4,7 @@ namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Applications;
+use App\Models\blog;
 use App\Supports\Helper;
 use Illuminate\Http\Request;
 
@@ -16,8 +17,10 @@ class ApplicationController extends Controller
     }
     public function index()
     {
-
+        $data = $this->model->with('job', 'seeker')->get();
+        return $this->returnData(2000, $data);
     }
+
 
     public function create()
     {
@@ -38,9 +41,10 @@ class ApplicationController extends Controller
         return response()->json(['message' => 'Application submitted successfully', 'status' => 2000], 200);
     }
 
-    public function show(Applications $applications)
+    public function show($id)
     {
-        // Code for displaying a specific application
+        $post = Applications::with('job', 'seeker')->findOrFail($id);
+        return response()->json(['result' => $post]);
     }
 
     public function edit(Applications $applications)
@@ -48,13 +52,40 @@ class ApplicationController extends Controller
         // Code for showing the form to edit a specific application
     }
 
-    public function update(Request $request, Applications $applications)
+    public function update(Request $request, $id)
     {
-        // Code for updating a specific application
+        $request->validate([
+            'status' => 'required',
+        ]);
+
+        $application = Applications::find($id);
+        if (!$application) {
+            return response()->json(['message' => 'Application not found'], 404);
+        }
+
+        $application->application_status = $request->status;
+        $application->save();
+
+        return response()->json([
+            'message' => 'Application status updated successfully',
+            'application' => $application
+        ]);
     }
 
-    public function destroy(Applications $applications)
+
+    public function destroy($id)
     {
-        // Code for deleting a specific application
+        try {
+            $data = $this->model->where('id',$id)->first();
+            if ($data){
+                $data->delete();
+
+                return $this->returnData(2000, null, 'Category deleted successfully');
+            }
+            return $this->returnData(3000, null, 'Category not found');
+
+        }catch (\Exception $exception){
+            return $this->returnData(5000, $exception->getMessage(), 'Something Wrong');
+        }
     }
 }

@@ -33,11 +33,11 @@ trait Helper
 //        return false;
 //    }
 //
-//    public function authPermissions()
-//    {
-//        return DB::table('permissions')
-//            ->join('role_permissions', 'permissions.id', '=', 'role_permissions.permission_id')
-//            ->where('role_id', auth()->user()->role_id)
-//            ->get()->pluck('name')->toArray();
-//    }
+    public function authPermissions()
+    {
+        return DB::table('permissions')
+            ->join('role_permissions', 'permissions.id', '=', 'role_permissions.permission_id')
+            ->where('role_id', auth()->user()->role_id)
+            ->get()->pluck('name')->toArray();
+    }
 }

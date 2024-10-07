@@ -22,6 +22,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role_id',
     ];
 
 //    public function validator($input)
@@ -57,6 +58,9 @@ class User extends Authenticatable
     public function seeker()
     {
         return $this->hasOne(Seeker::class);
+    }
+    public function roles(){
+        return $this->hasMany(Role::class, 'id', 'role_id');
     }
 
 }

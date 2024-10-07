@@ -7,6 +7,10 @@ import BlogPostComponent from "../views/Blog/BlogPostComponent";
 import EmployerForm from "../views/Employers/EmployerForm";
 import EmployerProfile from "../views/Employers/EmployerProfile";
 import ApplicationComponent from "../views/Application/ApplicationComponent";
+import ApplicationView from "../views/Application/ApplicationView";
+import PermissionComponent from "../views/RolePermission/PermissionComponent";
+import RolePermissionComponent from "../views/RolePermission/RolePermissionComponent";
+import RoleComponent from "../views/RolePermission/RoleComponent";
 
 
 const route = [
@@ -76,10 +80,42 @@ const route = [
         path : '/admin/seeker/application',
         name : 'application',
         component : ApplicationComponent,
-        meta:{pagetitle:'Application Table',dataUrl:'api/application',
+        meta:{pagetitle:'Application Table',dataUrl:'api/frontend/application',
         }
 
     },
+    {
+        path: '/admin/role/permissions',
+        name: 'Permission',
+        component: PermissionComponent ,
+        meta:{pagetitle:'Permission Table',dataUrl:'api/permissions',
+        }
+
+    },
+    {
+        path: '/admin/role/rolepermissions',
+        name: 'RolePermission',
+        component: RolePermissionComponent ,
+        meta:{pagetitle:'Users Table',dataUrl:'api/users',
+        }
+
+    },
+    {
+        path: '/admin/role/role',
+        name: 'RoleComponent',
+        component: RoleComponent ,
+        meta:{pagetitle:'Role Table',dataUrl:'api/roles',
+        }
+
+    },
+
+    {
+        path: '/admin/seeker/application-view/:id',
+        name: 'ApplicationView',
+        component: ApplicationView,
+        meta:{pagetitle:'Job Application', dataUrl:'api/frontend/application',},
+        props: true
+    }
 
 ];
 export default route;

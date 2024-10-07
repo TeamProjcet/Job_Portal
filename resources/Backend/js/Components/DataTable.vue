@@ -1,6 +1,6 @@
 <template>
     <div class="card-body">
-        <table class="table table-head-bg-primary mt-4">
+        <table class="table  mt-4">
             <thead>
             <tr>
                 <template v-for="heading in tableHeading">
@@ -34,6 +34,20 @@
 </script>
 
 <style scoped>
+    table thead th {
+        background-color: rgba(26, 26, 26, 0.84);
+        color: white;
+        text-align: center;
+        padding: 10px;
+        border-bottom: 2px solid #dee2e6;
+    }
 
+    table thead th:first-child {
+        border-top-left-radius: 10px;
+    }
+
+    table thead th:last-child {
+        border-top-right-radius: 10px;
+    }
 </style>
 
