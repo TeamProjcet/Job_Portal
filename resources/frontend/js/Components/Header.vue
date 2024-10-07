@@ -25,13 +25,9 @@
 
                 <ul class="navbar-nav ms-auto ">
                         <li class="nav-item  dropdown" v-if="isAuthenticated">
-                            <a
-                                    class="nav-link dropdown-toggle bg-success text-white py-2 px-lg-4 rounded-pill fw-bold"
-                                    data-bs-toggle="dropdown"
-                                    aria-expanded="false"
-                                    style="font-size: 16px;"
-                            >
-                                {{ seeker?.name || 'Guest' }}
+                            <a class="nav-link dropdown-toggle bg-success text-white py-2 px-lg-4 rounded-pill fw-bold"
+                               data-bs-toggle="dropdown" aria-expanded="false"  style="font-size: 16px;" >
+                                {{ _show(seeker, 'name', 'Guest') }}
                             </a>
 
                             <ul class="dropdown-menu dropdown-menu-end mt-2 shadow-sm border-0">

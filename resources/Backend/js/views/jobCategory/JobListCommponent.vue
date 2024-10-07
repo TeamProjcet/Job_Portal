@@ -142,14 +142,14 @@
     import PageTop from "../../Components/PageTop";
     import DataTable from "../../Components/DataTable";
     import FormModal from "../../Components/FormModal";
-    import Editor from '@tinymce/tinymce-vue'
+
     import DatePicker from 'vue2-datepicker';
     import 'vue2-datepicker/index.css';
     import Pagination from "../plugins/pagination/pagination";
 
     export default {
-        components: {FormModal, DataTable, PageTop,Editor,DatePicker,Pagination},
-   
+        components: {FormModal, DataTable, PageTop,DatePicker,Pagination},
+
 
         name: "JobListCommponent",
         data() {

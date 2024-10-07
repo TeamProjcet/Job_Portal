@@ -4,16 +4,14 @@
             <div class="col-md-6">
                 <div class="card-header ">
                     <h3  class=" btn-custom" >Role</h3>
-                    <select  class="form-control" v-model="selectedRole" @change="fetchRolePermissions">
+                    <select  class="form-control" v-model="selectedRole" @change="getRolesPermissions()">
                         <option disabled>Select Role</option>
-                        <option v-for="role in roles" :key="role.id" :value="role.id">
+                        <option v-for="role in requireData.roles" :key="role.id" :value="role.id">
                             {{ role.name }}
                         </option>
                     </select>
                 </div>
-
             </div>
-
             <div class="col-md-12">
                 <div v-if="status" class="alert alert-success">{{ status }}</div>
                 <div class="card mt-1">
@@ -28,16 +26,12 @@
                             </thead>
                             <tbody>
                             <tr v-for="data in dataList" :key="data.id">
-
                                 <td>
-                                    <input type="checkbox" v-model="selectedPermissions" :value="data.id">
+                                    <input type="checkbox" @change="setPermission($event, selectedModules, data.id, data)" :checked="selectedModules.includes(data.id)">
                                     {{ data.name }}
                                 </td>
                                 <td v-for="permission in data.permissions" :key="permission.id">
-                                    <input type="checkbox"
-
-                                           @change="fetchRolePermissions(permissions,permission.id)"
-                                           :checked="selectedPermissions.includes(permission.id)">
+                                    <input type="checkbox" @change="setPermission($event, selectedPermissions, permission.id)" :checked="selectedPermissions.includes(permission.id)">
                                     {{ permission.name }}
                                 </td>
                             </tr>
@@ -65,43 +59,46 @@ import axios from 'axios';
                 status: null,
                 roles: [],
                 selectedRole: null,
+                selectedModules: [],
                 selectedPermissions: [],
 
             };
         },
         mounted() {
             this.getDataList();
-            this.fetchRolePermissions();
-            this.fetchRoles();
+            this.getRequiredData(['roles']);
 
         },
         methods: {
-            async fetchRoles() {
-                try {
-                    const response = await axios.get('/api/roles');
-                    this.roles = response.data.result;
-                } catch (error) {
-                    console.error('Error fetching roles:', error);
-                }
+            getRolesPermissions : function (){
+                const _this = this;
+                var url = _this.urlGenaretor(`api/roles/${this.selectedRole}/permissions`);
+                _this.httpReq('get', url, {}, {}, function (retData){
+                    _this.selectedModules = retData.result.role_modules;
+                    _this.selectedPermissions = retData.result.role_permissions;
+                })
             },
-            async fetchRolePermissions() {
-                if (!this.selectedRole) return;
-                try {
-                    const response = await axios.get(`/api/roles/${this.selectedRole}/permissions`);
-                    this.permissions = response.data.permissions;
-                    this.selectedPermissions = this.permissions.map(p => p.id);
-                } catch (error) {
-                    console.error('Error fetching permissions:', error);
-                }
-            },
-            async updatePermissions() {
-                try {
-                    await this.$http.post(`/api/roles/${this.selectedRole}/permissions`, {
-                        permissions: this.selectedPermissions
-                    });
-                    this.status = "Permissions updated successfully!";
-                } catch (error) {
-                    console.error('Error updating permissions:', error);
+
+            setPermission : function (event, object, id, baseObject = false){
+                const _this = this;
+                if (event.target.checked){
+                    object.push(id);
+
+                    if (typeof baseObject === 'object'){
+                        $.each(baseObject.permissions, function (index, value){
+                            _this.selectedPermissions.push(value.id);
+                        });
+                    }
+                }else{
+                    var index = object.indexOf(id);
+                    object.splice(index, 1);
+
+                    if (typeof baseObject === 'object'){
+                        $.each(baseObject.permissions, function (index, value){
+                            var dataIndex = _this.selectedPermissions.indexOf(value.id);
+                            _this.selectedPermissions.splice(dataIndex, 1);
+                        });
+                    }
                 }
             }
         }

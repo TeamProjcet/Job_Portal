@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Role;
 use App\Models\RoleModule;
+use App\Models\RolePermission;
 use App\Supports\Helper;
 use Illuminate\Http\Request;
 
@@ -23,11 +24,11 @@ public function __construct(){
     {
         try {
 
-            $role = Role::with('permissions')->findOrFail($roleId);
+            $data['role_modules'] = RoleModule::where('role_id', $roleId)->get()->pluck('module_id')->toArray();
+            $data['role_permissions'] = RolePermission::where('role_id', $roleId)->pluck('permission_id')->toArray();
 
-            $permissions = $role->permissions;
+            return $this->returnData(2000,$data);
 
-            return $this->returnData(2000,$permissions);
         } catch (\Exception $e) {
             return $this->returnData(3000);
         }

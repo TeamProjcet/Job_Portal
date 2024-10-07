@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 export default {
-    data(){
-        return{}
+    data() {
+        return {}
     },
     watch: {
         'errors': {
@@ -19,7 +19,7 @@ export default {
             deep: true
         }
     },
-    methods:{
+    methods: {
         openModal: function (modalId = false, fromData = {}, callback = false) {
             const _this = this;
             let modal_id = modalId ? modalId : 'myModal';
@@ -47,7 +47,7 @@ export default {
 
         openEdit(data, id) {
 
-            const _this=this;
+            const _this = this;
             this.$store.commit('updateId', id);
             this.$store.commit('formType', 2);
             _this.urlGenaretor('api/createjob')
@@ -72,16 +72,23 @@ export default {
 
         },
 
-        publicImage : function (imageName) {
+        publicImage: function (imageName) {
             return `${window.publicPath}/${imageName}`;
         },
 
-        storageImage : function (imageName) {
+        storageImage: function (imageName) {
             return `${window.uploadPath}/${imageName}`;
         },
 
-        clickFileField : function (filedName) {
+        clickFileField: function (filedName) {
             $(`#${filedName}`).click();
+        },
+
+        _show: function (object, colum, defaultData = '') {
+            if (object !== undefined && object !== null && object[colum] !== undefined){
+                return object[colum];
+            }
+            return defaultData;
         }
     },
     computed: {
@@ -100,10 +107,10 @@ export default {
         formType() {
             return this.$store.state.formType;
         },
-        Config(){
+        Config() {
             return this.$store.state.Config;
         },
-        permissions(){
+        permissions() {
             return this.$store.state.permissions;
         }
 

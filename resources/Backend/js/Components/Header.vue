@@ -40,7 +40,7 @@
                 <li class="nav-item topbar-user dropdown hidden-caret">
                     <a class="dropdown-toggle profile-pic" data-bs-toggle="dropdown" href="#" aria-expanded="false">
                         <div class="d-flex align-items-center bg-success text-white p-2 rounded">
-                            <h5 class="mb-0 me-2">{{ username?.name || 'Guest' }}</h5>
+                            <h5 class="mb-0 me-2">{{ username? username.name : 'Guest' }}</h5>
                             <i class="fa fa-angle-down ms-2"></i>
                         </div>
                     </a>

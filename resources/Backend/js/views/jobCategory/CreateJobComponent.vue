@@ -110,13 +110,13 @@
 
 
 <script>
-    import Editor from '@tinymce/tinymce-vue'
+
     import DatePicker from 'vue2-datepicker';
     import 'vue2-datepicker/index.css';
     export default {
         name: "CreateJobComponent",
         components: {
-            Editor, DatePicker
+            DatePicker
         },
         data() {
             return {

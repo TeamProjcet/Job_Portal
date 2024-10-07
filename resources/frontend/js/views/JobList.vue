@@ -19,7 +19,7 @@
                                     <div class="col-sm-12 col-md-8 d-flex align-items-center">
                                         <img class="flex-shrink-0 img-fluid border rounded" :src="storageImage(job.image)" alt="" style="width: 80px; height: 80px;">
                                         <div class="text-start ps-4">
-                                            <h5 class="mb-3">{{ job.category.name }}</h5>
+                                            <h5 class="mb-3">{{ job.position }}</h5>
                                             <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>{{ job.address }}</span>
                                             <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i> {{job.job_type == 1 ? 'Featured' : job.job_type == 2 ? 'Full Time' : (job.job_type == 3 ? 'Part Time' : 'Unknown') }}</span>
                                             <span class="text-truncate me-0"><i class="far fa-money-bill-alt text-primary me-2"></i>{{ job.salary || 'Negotiatable' }}</span>
