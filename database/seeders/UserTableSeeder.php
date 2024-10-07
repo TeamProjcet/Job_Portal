@@ -16,6 +16,8 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
+
+
         $arrUser=[
             [
                 'name'=> 'Mohon Sarker',
@@ -33,8 +35,8 @@ class UserTableSeeder extends Seeder
                 'password'=> Hash::make('1234'),
             ]
         ];
-//        User::truncate();
 
+        User::truncate();
         User::insert($arrUser);
         }
 

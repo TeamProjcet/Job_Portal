@@ -5,7 +5,7 @@
             <h3 class="fw-bold mb-3 " style="margin-left: 20px">{{$route.meta.pagetitle}}</h3>
         </div>
         <div class="ms-md-auto py-2 py-md-0">
-            <a @click="openEditModal()" class="btn btn-primary btn-round"><i class="fas fa-plus"></i>Add</a>
+            <a @click="openEditModal()" class="btn btn-custom btn-round"><i class="fas fa-plus"></i>Add</a>
         </div>
     </div>
 </template>
@@ -17,6 +17,14 @@
 </script>
 
 <style scoped>
+    .btn-custom {
+        background-color: rgba(26, 26, 26, 0.84);
+        color: white;
+        border: none;
+    }
 
+    .btn-custom:hover {
+        background-color: #218838;
+    }
 </style>
 

@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Module extends Model
 {
     use HasFactory;
+    public function permissions()
+    {
+        return $this->hasMany(Permission::class, 'module_id'); // Ensure the foreign key is correct
+    }
 }

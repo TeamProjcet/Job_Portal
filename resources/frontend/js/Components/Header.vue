@@ -63,7 +63,9 @@
 </template>
 
 <script>
-    import axios from 'axios'
+    import axios from 'axios';
+    import {Toast} from "vue-toastification";
+
     export default {
         name: "Header",
         data() {
@@ -78,9 +80,11 @@
         methods: {
             async seekerlogout() {
                 try {
+                    const _this=this;
                     const response = await axios.post('/api/frontend/seekerlogout');
                     if (response.data.status === 2000) {
-                        this.$router.push('/');
+                        _this.$toast.success("Logout  successfully!");
+
                     }
                 } catch (error) {
                     console.error('Logout Failed:', error);

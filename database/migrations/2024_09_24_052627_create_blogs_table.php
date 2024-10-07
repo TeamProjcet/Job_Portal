@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('blogs', function (Blueprint $table) {
             $table->id();
+            $table->string('user_id')->constrained()->onDelete('cascade');  // Reference to User
             $table->foreignId('company_id');
             $table->string('title');
             $table->text('description');
             $table->boolean('status')->default(1);
-            $table->integer('likes')->default(0);
             $table->text('image');
             $table->timestamps();
         });

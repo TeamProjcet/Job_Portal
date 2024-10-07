@@ -29,13 +29,20 @@ Route::prefix('api')->group(function () {
     Route::resource('/message', \App\Http\Controllers\MessagesController ::class);
     Route::resource('/saved', \App\Http\Controllers\SavedJobsController ::class);
     Route::resource('/companyreviews', \App\Http\Controllers\CompanyReviewsController ::class);
-
     Route::resource('blogpost', \App\Http\Controllers\Backend\BlogController::class);
 
 
     Route::post('upload', [\App\Http\Controllers\Backend\UploadController::class, 'upload']);
     Route::post('/required_data', [\App\Http\Controllers\SupportController::class, 'requireData']);
+    Route::post('/configurations', [\App\Http\Controllers\SupportController::class, 'getconfigurations']);
     Route::get('backendData',[\App\Http\Controllers\Backend\BackendController::class,'backendData']);
+    Route::resource('users',\App\Http\Controllers\UserController::class);
+    Route::resource('permissions',\App\Http\Controllers\PermissionController::class);
+    Route::resource('module',\App\Http\Controllers\ModuleController::class);
+    Route::resource('roles',\App\Http\Controllers\RoleController::class);
+//    Route::post('/roles/{role}/permissions',[\App\Http\Controllers\auth\AuthController::class,'show']);
+    Route::get('/roles/{role}/permissions',[\App\Http\Controllers\RoleController::class,'getRolePermissions']);
+    Route::post('/roles/{role}/permissions',[\App\Http\Controllers\RoleController::class,'updateRolePermissions']);
 
 
 });

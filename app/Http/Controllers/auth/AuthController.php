@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Role;
 use App\Models\User;
 use App\Supports\Helper;
 use Illuminate\Http\Request;
@@ -21,9 +22,10 @@ use Helper;
 
     public function index()
     {
-
         return view('auth.login');
+
     }
+
     public function userdata(){
         $data= Auth::user();
         return $this->returnData(2000, $data);
@@ -65,9 +67,8 @@ use Helper;
             'password'=>Hash::make($request->password),
         ]);
 
-        return redirect('/login')->with('status','User create Successfully');
+        return redirect('/login')->with('Success');
     }
-
 
     public function show($id)
     {
@@ -82,11 +83,13 @@ use Helper;
 
     public function update(Request $request, $id)
     {
-        //
+
     }
 
     public function destroy($id)
     {
-        //
+
     }
+
+
 }

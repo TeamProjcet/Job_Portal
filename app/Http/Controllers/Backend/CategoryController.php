@@ -35,7 +35,7 @@ class CategoryController extends Controller
         $validator = $this->model->Validator($request->all());
 
         if ($validator->fails()) {
-            return response()->json(['result' => $validator->errors(), 'status' => 3000], 100);
+            return $this->returnData(3000,$validator->errors());
         }
         $this->model->fill($request->all());
         $this->model->save();

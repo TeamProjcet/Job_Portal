@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Session;
 
 class SeekerLoginController extends Controller
 {
-//    use Helper;
+    use Helper;
 
 
     public function store(Request $request)
@@ -28,11 +28,8 @@ class SeekerLoginController extends Controller
         $data->password = Hash::make($request->password);
         $data->save();
 
-        return response()->json([
-            'status' => 2000,
-            'data' => $data,
-            'message' => 'Seeker registered successfully'
-        ], 201);
+
+        return $this->returnData(2000, $data, 'Seeker registered successfully');
     }
     public function login(Request $request)
     {
@@ -50,7 +47,6 @@ class SeekerLoginController extends Controller
             $token = $seeker->createToken('Seeker Token')->plainTextToken;
 
 
-
             return response()->json([
                 'status' => 2000,
                 'data' => [
@@ -62,7 +58,7 @@ class SeekerLoginController extends Controller
         } else {
             return response()->json([
                 'status' => 4000,
-                'message' => 'Invalid credentials',
+                'message' => 'Unable to authenticate. Please verify your credentials',
             ], 401);
         }
     }
@@ -71,10 +67,7 @@ class SeekerLoginController extends Controller
     {
         Auth::guard('seeker')->logout();
 
-        return response()->json([
-            'status' => 2000,
-            'message' => 'Logout successful',
-        ]);
+        return $this->returnData(2000,null,'Logout successfull');
     }
 
 

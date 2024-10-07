@@ -34,7 +34,12 @@
                                     </div>
                                 </div>
                             </div>
-                            <a class="btn btn-primary py-3 px-5" href="">Browse More Jobs</a>
+                            <a v-if="joblist.jobData && joblist.jobData.current_page < joblist.jobData.last_page"
+                               class="btn btn-primary py-3 px-5"
+                               @click="loadMoreJobs">
+                                Browse More Jobs
+                            </a>
+<!--                            <pagination previousText="PREV" nextText="NEXT" :data="joblist.jobData" @paginateTo="getJobList"></pagination>-->
 
                         </template>
                         <template v-else>
@@ -51,9 +56,11 @@
 
 <script>
     import axios from 'axios';
+    import Pagination from "../plugins/pagination/pagination";
 
     export default {
         name: "JobList",
+        components: {Pagination},
         data() {
             return {
                 joblist: [],
@@ -88,6 +95,12 @@
                     this.error = "Error fetching job data. Please try again later.";
                 }
             },
+            loadMoreJobs() {
+                if (this.joblist.jobData.current_page < this.joblist.jobData.last_page) {
+                    let nextPage = this.joblist.jobData.current_page + 1;
+                    this.getJobList(nextPage);
+                }
+            }
         }
     }
 </script>
