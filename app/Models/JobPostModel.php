@@ -11,7 +11,7 @@ class JobPostModel extends Model
     use HasFactory;
 
     protected $fillable = [
-        'category_id','position', 'salary', 'company_id', 'address', 'job_type', 'details', 'date_time', 'image', 'status',
+      'user_id',  'category_id','position', 'salary', 'company_id', 'address', 'job_type', 'details', 'date_time', 'image', 'status',
     ];
 
     public function validator($input){
@@ -30,6 +30,9 @@ class JobPostModel extends Model
     }
     public function category(){
         return $this->belongsTo(Category::class,'category_id','id');
+    }
+    public function user(){
+        return $this->belongsTo(User::class,'category_id','id');
     }
     public function company(){
         return $this->belongsTo(Company::class,'company_id','id');

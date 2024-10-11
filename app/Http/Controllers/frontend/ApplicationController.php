@@ -32,13 +32,13 @@ class ApplicationController extends Controller
         $validator = $this->model->Validator($request->all());
 
         if ($validator->fails()) {
-            return response()->json(['result' => $validator->errors(), 'status' => 3000], 422); // Use proper status code for validation errors
+            return $this->returnData(3000, $validator->errors()); // Use proper status code for validation errors
         }
 
         $this->model->fill($request->all());
         $this->model->save();
 
-        return response()->json(['message' => 'Application submitted successfully', 'status' => 2000], 200);
+        return $this->returnData(2000,$this->model);
     }
 
     public function show($id)

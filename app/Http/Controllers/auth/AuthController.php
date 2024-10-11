@@ -30,11 +30,6 @@ use Helper;
         $data= Auth::user();
         return $this->returnData(2000, $data);
     }
-    public function viewReg()
-    {
-
-        return view('auth.register');
-    }
 
     public function adlogin(Request $request){
         $credentials=[
@@ -50,24 +45,22 @@ use Helper;
             return redirect()->back();
         }
     }
+
+    public function store(Request $request)
+    {
+        $validator = $this->model->Validator($request->all());
+
+        if ($validator->fails()) {
+            return $this->returnData(3000,$validator->errors());
+        }
+        $this->model->fill($request->all());
+        $this->model->password = Hash::make($request->password);
+        $this->model->save();
+        return $this->returnData(2000, $this->model);
+    }
     public function logout(){
         Auth::logout();
         return redirect()->route('login');
-    }
-    public function store(Request $request)
-    {
-        $request->validate([
-            'name'=>'required|string|max:50',
-            'email'=>'required|string|max:50|unique:users,email',
-            'password'=>'required|string|max:20|min:4',
-        ]);
-        User::create([
-            'name'=>$request->name,
-            'email'=>$request->email,
-            'password'=>Hash::make($request->password),
-        ]);
-
-        return redirect('/login')->with('Success');
     }
 
     public function show($id)

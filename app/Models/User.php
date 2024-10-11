@@ -23,17 +23,19 @@ class User extends Authenticatable
         'email',
         'password',
         'role_id',
+        'company_id',
     ];
 
-//    public function validator($input)
-//    {
-//        return Validator::make($input, [
-//            'username' => 'required',
-//            'email' => 'required|unique:users,email',
-//            'password' => 'required|string|max:20|min:4',
-//            'confirm_password' => 'required|string|max:20|min:4|same:password',
-//        ]);
-//    }
+    public function validator($input)
+    {
+        return Validator::make($input, [
+            'name' => 'required',
+            'email' => 'required|unique:users,email',
+            'password' => 'required|string|max:20|min:4',
+            'role_id' => 'required',
+            'company_id' => 'required',
+        ]);
+    }
 
     /**
      * The attributes that should be hidden for serialization.
@@ -61,6 +63,10 @@ class User extends Authenticatable
     }
     public function roles(){
         return $this->hasMany(Role::class, 'id', 'role_id');
+    }
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
     }
 
 }

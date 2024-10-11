@@ -158,7 +158,8 @@
                 const url=_this.urlGenaretor('api/configurations');
                 _this.httpReq('get',url,{},{},function(retData){
                     _this.$store.commit('Config',retData.result);
-                    // _this.$store.commit('permissions',retData.result.permissions)
+                    // console.log(this.$store.commit('Config',retData.result));
+                    _this.$store.commit('permissions',retData.result.permissions)
 
 
                 })

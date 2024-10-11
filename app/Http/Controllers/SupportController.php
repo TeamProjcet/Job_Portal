@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Applications;
 use App\Models\Category;
 use App\Models\Company;
 use App\Models\Module;
@@ -30,6 +31,9 @@ class SupportController extends Controller
         }
         if (in_array('users', $array)) {
             $data['users'] = User::get();
+        }
+        if (in_array('application', $array)) {
+            $data['application'] = Applications::get();
         }
 
         if(in_array('job_type', $array)){

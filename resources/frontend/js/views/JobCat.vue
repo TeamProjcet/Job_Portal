@@ -40,11 +40,7 @@
                 try {
                     const { data } = await axios.get('/api/frontend/joblist');
                     const jobs = data.result.jobData.data;
-                    // console.log(jobs)
                     const categories = data.result.category;
-                    // console.log(categories)
-
-                    // Category with job post count
                     const jobCountMap = jobs.reduce((map, { category_id }) => {
                         map[category_id] = (map[category_id] || 0) + 1;
                         return map;
@@ -56,7 +52,6 @@
                     }));
 
                 } catch (error) {
-                    // console.error("Error fetching job data:", error);
                     this.error = "Error fetching job data. Please try again later.";
                 }
             }

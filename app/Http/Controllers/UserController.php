@@ -14,10 +14,11 @@ class UserController extends Controller
     use Helper;
     public function index()
     {
-        $users = User::all()->map(function($user) {
-            $user->roles = Role::whereIn('id', explode(',', $user->role_id))->get();
-            return $user;
-        });
+//        $users = User::with('company')->get()->map(function($user) {
+//            $user->roles = Role::whereIn('id', explode(',', $user->role_id))->get();
+//            return $user;
+//        });
+        $users = User::with(['company', 'roles'])->get();
         return $this->returnData(2000,$users);
     }
 

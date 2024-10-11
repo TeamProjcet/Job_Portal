@@ -31,14 +31,17 @@ class BackendController extends Controller
     {
         $application_status = \request()->input('application_status');
 
-        $data['applyData'] = Applications::with(['job.category', 'job.company', 'seeker'])
-        ->where(function ($query) use ($application_status) {
-            if ($application_status) {
-                $query->where('application_status', $application_status);
-            }
-        })
-            ->paginate(10);
+        $user = auth()->user(); // লগইন করা ব্যবহারকারী
 
+        $data['applyData'] = Applications::with(['job.category', 'job.company', 'seeker'])
+            ->whereHas('job', function ($query) use ($user) {
+                $query->where('user_id', $user->id); // যেখানে জবটি ঐ ব্যবহারকারী পোস্ট করেছে
+            })
+            ->where(function ($query) use ($application_status) {
+                if ($application_status) {
+                    $query->where('application_status', $application_status); // আবেদন স্ট্যাটাস ফিল্টার
+                }
+            })->paginate(10);
         // $data['category'] = Category::get();
         // $data['company'] = Company::get();
 

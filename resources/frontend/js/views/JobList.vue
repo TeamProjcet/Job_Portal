@@ -27,7 +27,7 @@
                                     </div>
                                     <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
                                         <div class="d-flex mb-3">
-                                            <a class="btn btn-light btn-square me-3" href=""><i class="far fa-heart text-primary"></i></a>
+                                            <a class="btn btn-light btn-square me-3"><i class="far fa-heart text-primary"></i></a>
                                             <router-link class="btn btn-primary" :to="{ name: 'Details', params: { id: job.id }}">Apply Now</router-link>
                                         </div>
                                         <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Date Line: {{ job.date_time}}</small>
@@ -67,6 +67,7 @@
                 error: null,
                 isLoading : false,
                 job_type : 1,
+                favourites:[]
             };
         },
         watch: {
@@ -80,6 +81,7 @@
         },
         mounted() {
             this.getJobList();
+            // this.loadFavourites();
             this.getRequiredData(['job_type'])
         },
         methods: {
@@ -100,7 +102,20 @@
                     let nextPage = this.joblist.jobData.current_page + 1;
                     this.getJobList(nextPage);
                 }
-            }
+            },
+            loadFavourites() {
+                axios.get('/api/frontend/favourites')
+                    .then(response => {
+                        this.favourites = response.data;
+                    });
+            },
+            addFavourite(jobId) {
+                axios.post('/api/frontend/favourites', { job_id: jobId })
+                    .then(() => {
+                        this.loadFavourites();
+                    });
+            },
+
         }
     }
 </script>

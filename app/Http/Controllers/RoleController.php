@@ -35,10 +35,26 @@ public function __construct(){
     }
     public function updateRolePermissions(Request $request, $roleId)
     {
+
+        $request->validate([
+            'permissions' => 'required|array',
+            'permissions.*' => 'exists:permissions,id',
+            'modules' => 'required|array',
+            'modules.*' => 'exists:modules,id',
+        ]);
+
         $role = Role::find($roleId);
+
+        if (!$role) {
+            return response()->json(['message' => 'Role not found'], 404);
+        }
+
         $role->permissions()->sync($request->permissions);
-        return response()->json(['message' => 'Permissions updated successfully']);
+        $role->modules()->sync($request->modules);
+
+        return $this->returnData(2000,'Permissions updated successfully');
     }
+
     public function create()
     {
         //
@@ -60,8 +76,8 @@ public function __construct(){
 
     public function show($id)
     {    $roleModules = RoleModule::where('role_id', $id)->get();
-        $data['role_modules'] = collect($roleModules)->pluck('id')->toArray();
-        $data['role_permissions'] = collect($roleModules)->pluck('permission_id')->toArray(); // Assuming permission_id is the correct column
+        $data['role_modules'] = collect($roleModules)->pluck('module_id')->toArray();
+        $data['role_permissions'] = collect($roleModules)->pluck('permission_id')->toArray();
 
         return $this->returnData(2000,$data);
     }

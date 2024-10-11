@@ -19,14 +19,15 @@ class BlogController extends Controller
 
     public function index()
     {
-        $data = $this->model->with('user','company')->get();
+        $user = auth()->user();
+        $data = $this->model->with('user', 'company')->where('user_id', $user->id)->get();
         return $this->returnData(2000, $data);
     }
 
 
     public function create()
     {
-        //
+
     }
 
 
@@ -43,10 +44,11 @@ class BlogController extends Controller
         return $this->returnData(2000, $this->model);
 
     }
+
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -64,8 +66,8 @@ class BlogController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
@@ -90,18 +92,19 @@ class BlogController extends Controller
             return response()->json(['result' => null, 'message' => $e->getMessage(), 'status' => 5000]);
         }
     }
+
     public function destroy($id)
     {
         try {
-            $data = $this->model->where('id',$id)->first();
-            if ($data){
+            $data = $this->model->where('id', $id)->first();
+            if ($data) {
                 $data->delete();
 
                 return $this->returnData(2000, null, 'Blog deleted successfully');
             }
             return $this->returnData(3000, null, 'Blog not found');
 
-        }catch (\Exception $exception){
+        } catch (\Exception $exception) {
             return $this->returnData(5000, $exception->getMessage(), 'Something Wrong');
         }
     }

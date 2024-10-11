@@ -11,6 +11,8 @@ import ApplicationView from "../views/Application/ApplicationView";
 import PermissionComponent from "../views/RolePermission/PermissionComponent";
 import RolePermissionComponent from "../views/RolePermission/RolePermissionComponent";
 import RoleComponent from "../views/RolePermission/RoleComponent";
+import UserRegisComponenet from "../views/RolePermission/UserRegisComponenet";
+import InterviewComponent from "../views/Interview/InterviewComponent";
 
 
 const route = [
@@ -115,7 +117,20 @@ const route = [
         component: ApplicationView,
         meta:{pagetitle:'Job Application', dataUrl:'api/frontend/application',},
         props: true
-    }
+    },
+    {
+        path: '/admin/user/registration',
+        name: 'UserRegisComponenet',
+        component: UserRegisComponenet,
+        meta:{pagetitle:'User Registration Form', dataUrl:'api/register',},
+        props: true
+    },
+    {
+        path: '/admin/interview',
+        name: 'InterviewComponent',
+        component: InterviewComponent,
+        meta:{pagetitle:'Interview Schedule', dataUrl:'api/interview',},
+    },
 
 ];
 export default route;

@@ -37,7 +37,7 @@
     table thead th {
         background-color: rgba(26, 26, 26, 0.84);
         color: white;
-        text-align: center;
+        /*text-align: center;*/
         padding: 10px;
         border-bottom: 2px solid #dee2e6;
     }

@@ -19,8 +19,13 @@ Vue.component('Editor', Vue2TinymceEditor);
 // common-function define and create
 import httpMixin from "./Mixin/httpMxin"
 import commonMixin from "./Mixin/commonMixin"
-Vue.mixin(httpMixin)
-Vue.mixin(commonMixin)
+import utilshttpMixin from "../../../resources/utilsMixin/utilsHttpMixin"
+import utilsCommonMicin from "../../../resources/utilsMixin/utilsCommonMixin"
+
+Vue.mixin(httpMixin);
+Vue.mixin(utilshttpMixin);
+Vue.mixin(commonMixin);
+Vue.mixin(utilsCommonMicin);
 
 // store management
 import Vuex from 'vuex';

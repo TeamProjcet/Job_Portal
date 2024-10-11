@@ -9,8 +9,12 @@ import route from './Routes'
 // common-function define and create
 import httpMixin from "./Mixin/httpMxin"
 import commonMixin from "./Mixin/commonMixin"
-Vue.mixin(httpMixin)
-Vue.mixin(commonMixin)
+import utilshttpMixin from "../../../resources/utilsMixin/utilsHttpMixin"
+import utilsCommonMixin from "../../../resources/utilsMixin/utilsCommonMixin"
+Vue.mixin(httpMixin);
+Vue.mixin(utilshttpMixin);
+Vue.mixin(commonMixin);
+Vue.mixin(utilsCommonMixin);
 
 // store management
 import Vuex from 'vuex';

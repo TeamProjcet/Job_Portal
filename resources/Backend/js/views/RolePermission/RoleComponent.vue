@@ -60,11 +60,12 @@
         },
         mounted(){
           this.getDataList();
+
         },
-        methods:{
+        methods: {
 
         }
-    }
+        }
 </script>
 
 <style scoped>

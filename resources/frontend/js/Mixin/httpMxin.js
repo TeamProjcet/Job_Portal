@@ -169,7 +169,7 @@ export default {
                     this.fromData.email = this.seeker.email;
                     this.fromData.seeker_id = this.seeker.id;
                 } else {
-                    this.seeker = null; // Reset username if not found
+                    this.seeker = null;
                     this.isAuthenticated = false;
                 }
             } catch (error) {

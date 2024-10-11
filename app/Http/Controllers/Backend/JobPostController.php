@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\JobPostModel;
 use App\Supports\Helper;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class JobPostController extends Controller
 {
@@ -17,8 +18,10 @@ class JobPostController extends Controller
     }
 
     public function index()
-    {
-        $data = $this->model->with('category','company')->get();
+    {   $user = auth()->user();
+        $data = $this->model->with('category','company')
+            ->where('user_id', $user->id)
+            ->get();
         return $this->returnData(2000, $data);
     }
 
@@ -38,6 +41,7 @@ class JobPostController extends Controller
         }
 
         $this->model->fill($request->all());
+        $this->model->user_id = Auth::id();
         $this->model->save();
         return $this->returnData(2000, $this->model);
 

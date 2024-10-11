@@ -37,7 +37,8 @@ class FrontendController extends Controller
     public function jobCategory($cateId)
     {
         $data['jobPosts'] = JobPostModel::with('category','company')->where('category_id',$cateId)->get();
-        return response()->json(['result' => $data]);
+        return $this->returnData(2000,$data);
+
     }
 
 
@@ -46,8 +47,8 @@ class FrontendController extends Controller
    public function seekerdata()
     {
         $data = Auth::guard('seeker')->user();
+        return $this->returnData(2000,$data);
 
-        return response()->json(['result' => $data]);
     }
 
 
