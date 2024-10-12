@@ -22,7 +22,7 @@ Route::prefix('api')->group(function () {
     Route::resource('/createjob', \App\Http\Controllers\Backend\JobPostController::class);
     Route::resource('/joblist', \App\Http\Controllers\Backend\JobPostController::class);
     Route::resource('/jobseeker', \App\Http\Controllers\JobSeekersController::class);
-    Route::resource('/employer', \App\Http\Controllers\EmployersController::class);
+    Route::resource('/employer_profile', \App\Http\Controllers\EmployersController::class);
     Route::resource('/interview', \App\Http\Controllers\InterviewScheduleController ::class);
     Route::resource('/message', \App\Http\Controllers\MessagesController ::class);
     Route::resource('/saved', \App\Http\Controllers\SavedJobsController ::class);
@@ -44,7 +44,7 @@ Route::prefix('api/frontend')->group(function () {
     Route::get('jobcate/{cateId}', [\App\Http\Controllers\frontend\FrontendController::class, 'jobCategory'])->name('web.cat');
     Route::post('seekerregis', [\App\Http\Controllers\frontend\SeekerLoginController::class, 'store']);
     Route::post('seekerlogin', [\App\Http\Controllers\frontend\SeekerLoginController::class, 'login']);
-    Route::post('blogpost/{id}/like', [\App\Http\Controllers\Backend\BlogController::class, 'like']);
+//    Route::post('blogpost/{id}/like', [\App\Http\Controllers\Backend\BlogController::class, 'like']);
     Route::post('seekerlogout', [\App\Http\Controllers\frontend\SeekerLoginController::class, 'logout']);
     Route::put('seeker/profile', [\App\Http\Controllers\frontend\SeekerLoginController::class, 'update']);
 

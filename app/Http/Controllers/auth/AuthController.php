@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Employers;
 use App\Models\User;
 use App\Supports\Helper;
 use Illuminate\Http\Request;
@@ -24,10 +25,23 @@ use Helper;
 
         return view('auth.login');
     }
+
     public function userdata(){
-        $data= Auth::user();
+//        $data= Auth::user();
+//        return $this->returnData(2000, $data);
+
+
+        $user = Auth::user();
+        $employerData = Employers::where('user_id', $user->id)->get();
+        $data = [
+            'user' => $user,
+            'employer' => $employerData
+        ];
+
         return $this->returnData(2000, $data);
+
     }
+
     public function viewReg()
     {
 
@@ -80,9 +94,9 @@ use Helper;
     }
 
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+      //
     }
 
     public function destroy($id)

@@ -76,8 +76,66 @@ export default {
             return `${window.publicPath}/${imageName}`;
         },
 
-        storageImage : function (imageName) {
-            return `${window.uploadPath}/${imageName}`;
+        // publicImage(imageName) {
+        //     const extension = imageName.split('.').pop().toLowerCase();
+        //     const imagePath = `${window.publicPath}/${imageName}`;
+        //
+        //     // Return the image path or an icon based on the extension
+        //     switch (extension) {
+        //         case 'pdf':
+        //             return 'https://i.ibb.co.com/7NzrJtr/4208479.png';
+        //         case 'jpg':
+        //         case 'jpeg':
+        //             return imagePath;
+        //         case 'png':
+        //             return imagePath;
+        //         case 'doc':
+        //         case 'docx':
+        //             return 'https://i.ibb.co.com/swN9Swx/8242988.png';
+        //         case 'xls':
+        //         case 'xlsx':
+        //             return 'https://i.ibb.co.com/3MfvfVt/8243073.png';
+        //         default:
+        //             return '/images/uploading.avif';
+        //     }
+        // },
+
+
+
+
+        // storageImage : function (imageName) {
+        //     return `${window.uploadPath}/${imageName}`;
+        // },
+
+        isPDF(fileName) {
+            return fileName && fileName.split('.').pop().toLowerCase() === 'pdf';
+        },
+        storageImage(imageName) {
+            if (!imageName || typeof imageName !== 'string') {
+                return 'https://i.ibb.co.com/3ssF0pw/giphy.gif';
+            }
+            const lastDotIndex = imageName.lastIndexOf('.');
+            const extension = lastDotIndex !== -1 ? imageName.substring(lastDotIndex + 1).toLowerCase() : '';
+            const imagePath = `${window.uploadPath}/${imageName}`;
+
+            // Return the image path or an icon based on the extension
+            switch (extension) {
+                case 'pdf':
+                    return imagePath;
+                case 'jpg':
+                case 'jpeg':
+                    return imagePath;
+                case 'png':
+                    return imagePath;
+                case 'doc':
+                case 'docx':
+                    return imagePath;
+                case 'xls':
+                case 'xlsx':
+                    return imagePath;
+                default:
+                    return 'https://i.ibb.co.com/3ssF0pw/giphy.gif';
+            }
         },
 
         clickFileField : function (filedName) {

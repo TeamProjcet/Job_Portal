@@ -1,28 +1,5 @@
 <template>
     <div class="main-header">
-        <div class="main-header-logo">
-            <div class="logo-header" data-background-color="dark">
-                <a href="" class="logo">
-                    <img
-                            src="https://i.ibb.co.com/3WPvxLF/user.png"
-                            alt="navbar brand"
-                            class="navbar-brand"
-                            height="20"
-                    />
-                </a>
-                <div class="nav-toggle">
-                    <button class="btn btn-toggle toggle-sidebar">
-                        <i class="gg-menu-right"></i>
-                    </button>
-                    <button class="btn btn-toggle sidenav-toggler">
-                        <i class="gg-menu-left"></i>
-                    </button>
-                </div>
-                <button class="topbar-toggler more">
-                    <i class="gg-more-vertical-alt"></i>
-                </button>
-            </div>
-        </div>
         <nav class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom">
             <div class="container-fluid">
                 <nav class="navbar navbar-header-left navbar-expand-lg navbar-form nav-search p-0 d-none d-lg-flex">
@@ -35,28 +12,46 @@
                         <input type="text" placeholder="Search ..." class="form-control" />
                     </div>
                 </nav>
+                <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
+                    <li class="nav-item topbar-icon dropdown hidden-caret d-flex d-lg-none">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" aria-haspopup="true">
+                            <i class="fa fa-search"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-search animated fadeIn">
+                            <form class="navbar-left navbar-form nav-search">
+                                <div class="input-group">
+                                    <input type="text" placeholder="Search ..." class="form-control" />
+                                </div>
+                            </form>
+                        </ul>
+                    </li>
 
-
-                <li class="nav-item topbar-user dropdown hidden-caret">
-                    <a class="dropdown-toggle profile-pic" data-bs-toggle="dropdown" href="#" aria-expanded="false">
-                        <div class="d-flex align-items-center bg-success text-white p-2 rounded">
-                            <h5 class="mb-0 me-2">{{ username?.name || 'Guest' }}</h5>
-                            <i class="fa fa-angle-down ms-2"></i>
-                        </div>
-                    </a>
-                    <ul class="dropdown-menu dropdown-user animated fadeIn">
-                        <div class="dropdown-user-scroll scrollbar-outer">
-                            <div class="dropdown-divider"></div>
-                            <li>
-                                <a href="#" @click.prevent="logout" class="dropdown-item">Logout</a>
-                            </li>
-                        </div>
-                    </ul>
-                </li>
-
-
-
-
+                    <li class="nav-item topbar-user dropdown hidden-caret">
+                        <a class="dropdown-toggle profile-pic" data-bs-toggle="dropdown" href="#" aria-expanded="false">
+                            <div class="d-flex align-items-center">
+                                <div style="margin-right: 10px" class="btn bg-success">
+                                    <h5 class="mb-0 me-2">{{ user?.name || 'Guest' }}</h5>
+                                </div>
+                                <div class="avatar-sm" style="border: 1px solid; border-radius: 50px;">
+                                    <template v-for="picture in employer">
+                                        <img :src="storageImage(picture.image)" alt="..." class="avatar-img rounded-circle" />
+                                    </template>
+                                </div>
+                            </div>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user animated fadeIn">
+                            <div class="dropdown-user-scroll scrollbar-outer">
+                                <li>
+                                    <div class="dropdown-divider"></div>
+                                    <router-link to="/admin/employer/profile" class="dropdown-item">My Profile</router-link>
+                                    <div class="dropdown-divider"></div>
+                                    <div class="dropdown-divider"></div>
+                                    <a href="#" @click.prevent="logout" class="dropdown-item">Logout</a>
+                                </li>
+                            </div>
+                        </ul>
+                    </li>
+                </ul>
             </div>
         </nav>
     </div>
@@ -68,29 +63,14 @@
         name: "Header",
         data() {
             return {
-                isAuthenticated: false,
-                username: '', // Corrected variable name
+                user: {},
+                employer: [],
             };
         },
         mounted() {
             this.checkAuthentication();
         },
         methods: {
-            async checkAuthentication() {
-                try {
-                    const response = await axios.get('/userdata');
-                    if (response.data && response.data.result) {
-                        this.username = response.data.result; // Assuming response.data.result has the user info
-                        this.isAuthenticated = true;
-                    } else {
-                        this.username = null; // Reset username if not found
-                        this.isAuthenticated = false;
-                    }
-                } catch (error) {
-                    this.isAuthenticated = false;
-                    console.error('Authentication check failed:', error.response ? error.response.data : error.message);
-                }
-            },
             async logout() {
                 try {
                     await axios.get('/logout');

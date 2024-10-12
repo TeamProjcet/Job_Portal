@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Applications;
 use App\Models\Category;
 use App\Models\Company;
 use App\Models\JobPostModel;
@@ -37,7 +38,8 @@ class FrontendController extends Controller
     public function jobCategory($cateId)
     {
         $data['jobPosts'] = JobPostModel::with('category','company')->where('category_id',$cateId)->get();
-        return response()->json(['result' => $data]);
+        return $this->returnData(2000,$data);
+
     }
 
 
@@ -45,11 +47,21 @@ class FrontendController extends Controller
 
    public function seekerdata()
     {
-        $data = Auth::guard('seeker')->user();
+       $user = Auth::guard('seeker')->user();
 
-        return response()->json(['result' => $data]);
+       if (!$user) {
+           return response()->json(['error' => 'Unauthorized'], 401);
+       }
+
+       $applications = Applications::with('seeker', 'job')->where('seeker_id',  $user->id)->get();
+
+       $data = [
+           'seeker' => $user,
+           'applications' => $applications,
+       ];
+
+        return $this->returnData(2000,$data);
+
     }
-
-
 
 }

@@ -25,25 +25,28 @@ class EmployersController extends Controller
         // Code for showing create form
     }
 
+
     public function store(Request $request)
     {
         $validator = $this->model->Validator($request->all());
-
         if ($validator->fails()) {
-            return response()->json(['result' => $validator->errors(), 'status' => 3000], 100);
+            return response()->json(['result' => $validator->errors(), 'status' => 3000], 422);
         }
-        $this->model->create([
-            'user_id' => Auth::id(),
-            'company_name' => $request->input('company_name'),
-            'company_website' => $request->input('company_website'),
-            'company_address' => $request->input('company_address'),
-            'contact_person' => $request->input('contact_person'),
-            'industry' => $request->input('industry'),
-            'company_description' => $request->input('company_description'),
-        ]);
 
-        return $this->returnData(2000, $this->model);
+        if ($this->model::where('user_id', Auth::id())->exists()) {
+            return response()->json(['message' => 'An employer profile already exists for this user.', 'status' => 3001], 409);
+        }
+
+        $this->model->fill($request->all());
+        $this->model->user_id = Auth::id();
+
+        if ($this->model->save()) {
+            return $this->returnData(2000, $this->model);
+        } else {
+            return response()->json(['message' => 'Failed to create employer profile.', 'status' => 500], 500);
+        }
     }
+
 
     public function show()
     {
@@ -59,7 +62,7 @@ class EmployersController extends Controller
         // Code for showing edit form
     }
 
-    public function update(Request $request, Employers $employers)
+    public function update(Request $request)
     {
         try {
             $validator = $this->model->Validator($request->all());
@@ -67,19 +70,23 @@ class EmployersController extends Controller
             if ($validator->fails()) {
                 return response()->json(['result' => $validator->errors(), 'status' => 3000], 200);
             }
-            $category = $this->model->where('id', $request->input('id'))->first();
-            if ($category) {
-                $category->fill($request->all());
-                $category->update();
 
-                return $this->returnData(2000, $category);
+            $employer = $this->model->where('id', $request->input('id'))->first();
+
+            if ($employer) {
+                $employer->fill($request->all());
+                $employer->save();
+
+                return $this->returnData(2000, $employer);
             }
-            return $this->returnData(3000, null, 'Category not found');
+
+            return $this->returnData(3000, null, 'Employer not found');
 
         } catch (\Exception $e) {
             return response()->json(['result' => null, 'message' => $e->getMessage(), 'status' => 5000]);
         }
     }
+
 
     public function destroy( $id)
     {
@@ -89,9 +96,9 @@ class EmployersController extends Controller
             if ($data){
                 $data->delete();
 
-                return $this->returnData(2000, null, 'Category deleted successfully');
+                return $this->returnData(2000, null, 'employer deleted successfully');
             }
-            return $this->returnData(3000, null, 'Category not found');
+            return $this->returnData(3000, null, 'employer not found');
 
         }catch (\Exception $exception){
             return $this->returnData(5000, $exception->getMessage(), 'Something Wrong');

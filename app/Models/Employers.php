@@ -11,24 +11,24 @@ class Employers extends Model
     use HasFactory;
     protected $fillable = [
         'user_id',
-        'company_name',
         'company_website',
         'company_address',
         'contact_person',
-        'industry',
         'company_description',
+        'bio',
+        'image'
     ];
 
     public function validator($input){
 
         return Validator::make($input, [
-            'employer_id',
-            'company_name',
+            'user_id',
             'company_website',
             'company_address',
             'contact_person',
-            'industry',
             'company_description',
+            'bio',
+            'image'
         ]);
     }
 

@@ -47,4 +47,5 @@ class Applications extends Model
     {
         return $this->belongsTo(Seeker::class, 'seeker_id','id');
     }
+
 }

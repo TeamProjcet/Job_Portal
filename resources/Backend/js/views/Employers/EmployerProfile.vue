@@ -1,66 +1,154 @@
 <template>
     <div class="container mt-5">
-        <div class="card" v-for="(employer, index) in dataList" :key="index">
-            <div class="row no-gutters">
-                <div class="col-md-4">
-                    <img class="card-img" :src="employer.company_logo" alt="Employer Logo" />
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ employer.company_name }}</h5>
-                        <p class="card-text"><strong>Industry:</strong> {{ employer.user_id }}</p>
-                        <p class="card-text"><strong>Industry:</strong> {{ employer.industry }}</p>
-                        <p class="card-text"><strong>Location:</strong> {{ employer.company_address }}</p>
-                        <p class="card-text"><strong>Contact Person:</strong> {{ employer.contact_person }}</p>
-                        <p class="card-text">{{ employer.company_description }}</p>
-                        <div class="contact-info">
-                            <p><strong>Contact:</strong> {{ employer.contact_person }}</p>
-                            <p><strong>Website:</strong> <a :href="employer.company_website" target="_blank">{{ employer.company_website }}</a></p>
-                        </div>
+        <div class="row justify-content-center">
+            <!-- Profile Section -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body text-center position-relative">
+                      <template v-for="items in employer">
+                          <img
+                                  style="width: 100px; height: 100px; border: solid 5px; border-radius: 50px"
+                                  :src="storageImage(items.image)"
+                                  class="img-fluid rounded-circle mx-auto d-block"
+                                  alt="Profile Picture"
+                          >
+
+                      </template>
+                        <h4 class="mt-3">{{user.name}}</h4>
+                        <template v-for="items in employer">
+                            <h5 class="pt-2">Bio</h5>
+                            <p class="text-muted">{{items.bio}}</p>
+                        </template>
+                        <hr>
+                        <h6>Contact Info</h6>
+                        <table class="table table-borderless">
+                            <tbody>
+                            <template v-for="items in employer">
+                                <tr>
+                                    <td><strong>Address:</strong></td>
+                                    <td>{{items.company_address}}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Website:</strong></td>
+                                    <td><a :href="items.company_website" target="_blank">{{items.company_website}}</a></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Phone:</strong></td>
+                                    <td>{{items.contact_person}}</td>
+                                </tr>
+                            </template>
+
+                            <tr>
+                                <td><strong>Email:</strong></td>
+                                <td><a :href="user.email">{{user.email}}</a></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="d-flex p-2 gap-2">
+                        <button @click="openEditModal()" type="button" class="btn btn-success">Save</button>
+                        <template v-for="items in employer">
+                            <button @click="openEditModal(items, items.id)" type="button" class="btn btn-primary">Update</button>
+                        </template>
                     </div>
                 </div>
             </div>
+
+            <!-- Profile Edit Section -->
+            <FormModal class="form-modal" @submit="submitFromData(fromData)">
+                <div>
+                    <div class="mb-3">
+                        <label for="contact_person" class="form-label">Contact Person</label>
+                        <input type="text" class="form-control" v-model="fromData.contact_person">
+                    </div>
+                    <div class="mb-3">
+                        <label for="company_website" class="form-label">Company Website</label>
+                        <input type="url" class="form-control" v-model="fromData.company_website">
+                    </div>
+                    <div class="mb-3">
+                        <label for="company_address" class="form-label">Company Address</label>
+                        <input type="text" class="form-control" v-model="fromData.company_address">
+                    </div>
+                    <div class="mb-3">
+                        <label for="company_description" class="form-label">Company Description</label>
+                        <input type="text" class="form-control" v-model="fromData.company_description">
+                    </div>
+                    <div class="mb-3">
+                        <label for="bio" class="form-label">Bio</label>
+                        <textarea class="form-control" v-model="fromData.bio" rows="4"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Upload your Profile</label>
+                        <div @click="clickFileField('imageField')" class="image_upload" :style="{ 'background-image': 'url(' + publicImage('images/uploading.avif') + ')' }">
+                            <template v-if="fromData.image !== undefined">
+                                <img class="photo" :src="storageImage(fromData.image)">
+                            </template>
+                        </div>
+                        <input @change="uploadImage($event, fromData, 'image')" id="imageField" type="file" name="image"  class="file_field">
+                    </div>
+                </div>
+            </FormModal>
         </div>
     </div>
 </template>
 
-
 <script>
+    import Toast from "vue-toastification";
+    import FormModal from "../../Components/FormModal";
+
     export default {
+        name: "EmployerProfile",
+        components: {FormModal},
         data() {
             return {
-                name: "EmployerList",
+                user: {},
+                employer: [],
 
-                // employer: {
-                //     logo: 'https://via.placeholder.com/150', // Placeholder for logo
-                //     name: 'Example Company',
-                //     industry: 'Technology',
-                //     location: 'San Francisco, CA',
-                //     founded: '2010',
-                //     description: 'Example Company is a leading firm in technology innovation.',
-                //     contact: {
-                //         name: 'John Doe',
-                //         email: 'john@example.com',
-                //     },
-                //     website: 'https://example.com',
-                // },
+                components:{
+                    Toast, FormModal
+                },
             };
         },
-        mounted(){
-          this.getDataList();
+        mounted() {
+            this.checkAuthentication();
+
         },
+
         methods: {
-            // sendMessage() {
-            //     // Implement your messaging logic here
-            //     alert('Message sent!');
-            // },
-        },
-    };
+
+        }
+    }
 </script>
 
 <style scoped>
-    .card-img {
+    .image_upload img {
+        max-width: 100%;
+        max-height: 100%;
+        border-radius: 4px;
+    }
+    .image_upload {
+        height: 120px;
+        width: 25%;
+        background-size: cover;
+        background-repeat: no-repeat;
+        cursor: pointer;
+        border: 2px dashed #007bff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .photo {
+        height: 100%;
         width: 100%;
-        height: auto;
+        border-radius: 4px;
+    }
+    #imageField {
+        display: none;
+    }
+
+    .edit-icon {
+        position: absolute;
+        top: 10px;
+        right: 10px;
     }
 </style>

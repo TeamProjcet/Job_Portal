@@ -50,6 +50,14 @@ const route = [
 
     },
     {
+        path : '/admin/employer/profile',
+        name : 'employer_profile',
+        component : EmployerProfile,
+        meta:{pagetitle:'Profile Update',dataUrl:'api/employer_profile',
+        }
+
+    },
+    {
         path : '/admin/employer/employerfrom',
         name : 'employefrom',
         component :EmployerForm,
@@ -62,14 +70,6 @@ const route = [
         name : 'blogpost',
         component : BlogPostComponent,
         meta:{pagetitle:'Blog Post Table',dataUrl:'api/blogpost',
-        }
-
-    },
-    {
-        path : '/admin/employer/profile',
-        name : 'employerprofile',
-        component : EmployerProfile,
-        meta:{pagetitle:'Blog Post Table',dataUrl:'api/employer',
         }
 
     },

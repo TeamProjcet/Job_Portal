@@ -3,7 +3,9 @@
     <div class="row">
         <div class="card">
             <div class="card-header">
-                <PageTop></PageTop>
+                <div>
+                    <h3 class="fw-bold mb-3 " style="margin-left: 20px">{{$route.meta.pagetitle}}</h3>
+                </div>
             </div>
             <div class="table-responsive">
             <DataTable :tableHeading="tableHeading">

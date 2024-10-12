@@ -557,68 +557,35 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
   name: "Header",
   data: function data() {
     return {
-      isAuthenticated: false,
-      username: '' // Corrected variable name
+      user: {},
+      employer: []
     };
   },
   mounted: function mounted() {
     this.checkAuthentication();
   },
   methods: {
-    checkAuthentication: function checkAuthentication() {
-      var _this = this;
+    logout: function logout() {
       return _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        var response;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) switch (_context.prev = _context.next) {
             case 0:
               _context.prev = 0;
               _context.next = 3;
-              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].get('/userdata');
-            case 3:
-              response = _context.sent;
-              if (response.data && response.data.result) {
-                _this.username = response.data.result; // Assuming response.data.result has the user info
-                _this.isAuthenticated = true;
-              } else {
-                _this.username = null; // Reset username if not found
-                _this.isAuthenticated = false;
-              }
-              _context.next = 11;
-              break;
-            case 7:
-              _context.prev = 7;
-              _context.t0 = _context["catch"](0);
-              _this.isAuthenticated = false;
-              console.error('Authentication check failed:', _context.t0.response ? _context.t0.response.data : _context.t0.message);
-            case 11:
-            case "end":
-              return _context.stop();
-          }
-        }, _callee, null, [[0, 7]]);
-      }))();
-    },
-    logout: function logout() {
-      return _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-          while (1) switch (_context2.prev = _context2.next) {
-            case 0:
-              _context2.prev = 0;
-              _context2.next = 3;
               return axios__WEBPACK_IMPORTED_MODULE_0__["default"].get('/logout');
             case 3:
               window.location.href = '/login';
-              _context2.next = 9;
+              _context.next = 9;
               break;
             case 6:
-              _context2.prev = 6;
-              _context2.t0 = _context2["catch"](0);
-              console.error('Logout Failed:', _context2.t0);
+              _context.prev = 6;
+              _context.t0 = _context["catch"](0);
+              console.error('Logout Failed:', _context.t0);
             case 9:
             case "end":
-              return _context2.stop();
+              return _context.stop();
           }
-        }, _callee2, null, [[0, 6]]);
+        }, _callee, null, [[0, 6]]);
       }))();
     }
   }
@@ -682,7 +649,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      tableHeading: ["Sl", "Name", "Email", "Image", "Job Name", "Company", "Position", "Status", "Resume", "Action"],
+      tableHeading: ["Sl", "Name", "Email", "Image", "Company", "Position", "Status", "Resume", "Action"],
       applylist: [],
       application_status: 0,
       isLoading: false
@@ -936,35 +903,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var vue_toastification__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-toastification */ "./node_modules/vue-toastification/dist/esm/index.js");
+/* harmony import */ var _Components_FormModal__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Components/FormModal */ "./resources/Backend/js/Components/FormModal.vue");
+
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "EmployerProfile",
+  components: {
+    FormModal: _Components_FormModal__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
   data: function data() {
     return {
-      name: "EmployerList"
-
-      // employer: {
-      //     logo: 'https://via.placeholder.com/150', // Placeholder for logo
-      //     name: 'Example Company',
-      //     industry: 'Technology',
-      //     location: 'San Francisco, CA',
-      //     founded: '2010',
-      //     description: 'Example Company is a leading firm in technology innovation.',
-      //     contact: {
-      //         name: 'John Doe',
-      //         email: 'john@example.com',
-      //     },
-      //     website: 'https://example.com',
-      // },
+      user: {},
+      employer: [],
+      components: {
+        Toast: vue_toastification__WEBPACK_IMPORTED_MODULE_0__["default"],
+        FormModal: _Components_FormModal__WEBPACK_IMPORTED_MODULE_1__["default"]
+      }
     };
   },
   mounted: function mounted() {
-    this.getDataList();
+    this.checkAuthentication();
   },
-  methods: {
-    // sendMessage() {
-    //     // Implement your messaging logic here
-    //     alert('Message sent!');
-    // },
-  }
+  methods: {}
 });
 
 /***/ }),
@@ -1001,12 +962,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     this.getDataList();
   },
-  methods: {
-    // Assuming this function retrieves the correct path for images
-    storageImage: function storageImage(imagePath) {
-      return "".concat(uploadPath).concat(imagePath);
-    }
-  }
+  methods: {}
 });
 
 /***/ }),
@@ -1331,15 +1287,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   staticRenderFns: () => (/* binding */ staticRenderFns)
 /* harmony export */ });
 var render = function render() {
-  var _vm$username;
+  var _vm$user;
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
     staticClass: "main-header"
-  }, [_vm._m(0), _vm._v(" "), _c("nav", {
+  }, [_c("nav", {
     staticClass: "navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom"
   }, [_c("div", {
     staticClass: "container-fluid"
+  }, [_vm._m(0), _vm._v(" "), _c("ul", {
+    staticClass: "navbar-nav topbar-nav ms-md-auto align-items-center"
   }, [_vm._m(1), _vm._v(" "), _c("li", {
     staticClass: "nav-item topbar-user dropdown hidden-caret"
   }, [_c("a", {
@@ -1350,18 +1308,44 @@ var render = function render() {
       "aria-expanded": "false"
     }
   }, [_c("div", {
-    staticClass: "d-flex align-items-center bg-success text-white p-2 rounded"
+    staticClass: "d-flex align-items-center"
+  }, [_c("div", {
+    staticClass: "btn bg-success",
+    staticStyle: {
+      "margin-right": "10px"
+    }
   }, [_c("h5", {
     staticClass: "mb-0 me-2"
-  }, [_vm._v(_vm._s(((_vm$username = _vm.username) === null || _vm$username === void 0 ? void 0 : _vm$username.name) || "Guest"))]), _vm._v(" "), _c("i", {
-    staticClass: "fa fa-angle-down ms-2"
-  })])]), _vm._v(" "), _c("ul", {
+  }, [_vm._v(_vm._s(((_vm$user = _vm.user) === null || _vm$user === void 0 ? void 0 : _vm$user.name) || "Guest"))])]), _vm._v(" "), _c("div", {
+    staticClass: "avatar-sm",
+    staticStyle: {
+      border: "1px solid",
+      "border-radius": "50px"
+    }
+  }, [_vm._l(_vm.employer, function (picture) {
+    return [_c("img", {
+      staticClass: "avatar-img rounded-circle",
+      attrs: {
+        src: _vm.storageImage(picture.image),
+        alt: "..."
+      }
+    })];
+  })], 2)])]), _vm._v(" "), _c("ul", {
     staticClass: "dropdown-menu dropdown-user animated fadeIn"
   }, [_c("div", {
     staticClass: "dropdown-user-scroll scrollbar-outer"
-  }, [_c("div", {
+  }, [_c("li", [_c("div", {
     staticClass: "dropdown-divider"
-  }), _vm._v(" "), _c("li", [_c("a", {
+  }), _vm._v(" "), _c("router-link", {
+    staticClass: "dropdown-item",
+    attrs: {
+      to: "/admin/employer/profile"
+    }
+  }, [_vm._v("My Profile")]), _vm._v(" "), _c("div", {
+    staticClass: "dropdown-divider"
+  }), _vm._v(" "), _c("div", {
+    staticClass: "dropdown-divider"
+  }), _vm._v(" "), _c("a", {
     staticClass: "dropdown-item",
     attrs: {
       href: "#"
@@ -1372,46 +1356,9 @@ var render = function render() {
         return _vm.logout.apply(null, arguments);
       }
     }
-  }, [_vm._v("Logout")])])])])])])])]);
+  }, [_vm._v("Logout")])], 1)])])])])])])]);
 };
 var staticRenderFns = [function () {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c("div", {
-    staticClass: "main-header-logo"
-  }, [_c("div", {
-    staticClass: "logo-header",
-    attrs: {
-      "data-background-color": "dark"
-    }
-  }, [_c("a", {
-    staticClass: "logo",
-    attrs: {
-      href: ""
-    }
-  }, [_c("img", {
-    staticClass: "navbar-brand",
-    attrs: {
-      src: "https://i.ibb.co.com/3WPvxLF/user.png",
-      alt: "navbar brand",
-      height: "20"
-    }
-  })]), _vm._v(" "), _c("div", {
-    staticClass: "nav-toggle"
-  }, [_c("button", {
-    staticClass: "btn btn-toggle toggle-sidebar"
-  }, [_c("i", {
-    staticClass: "gg-menu-right"
-  })]), _vm._v(" "), _c("button", {
-    staticClass: "btn btn-toggle sidenav-toggler"
-  }, [_c("i", {
-    staticClass: "gg-menu-left"
-  })])]), _vm._v(" "), _c("button", {
-    staticClass: "topbar-toggler more"
-  }, [_c("i", {
-    staticClass: "gg-more-vertical-alt"
-  })])])]);
-}, function () {
   var _vm = this,
     _c = _vm._self._c;
   return _c("nav", {
@@ -1434,6 +1381,35 @@ var staticRenderFns = [function () {
       placeholder: "Search ..."
     }
   })])]);
+}, function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("li", {
+    staticClass: "nav-item topbar-icon dropdown hidden-caret d-flex d-lg-none"
+  }, [_c("a", {
+    staticClass: "nav-link dropdown-toggle",
+    attrs: {
+      "data-bs-toggle": "dropdown",
+      href: "#",
+      role: "button",
+      "aria-expanded": "false",
+      "aria-haspopup": "true"
+    }
+  }, [_c("i", {
+    staticClass: "fa fa-search"
+  })]), _vm._v(" "), _c("ul", {
+    staticClass: "dropdown-menu dropdown-search animated fadeIn"
+  }, [_c("form", {
+    staticClass: "navbar-left navbar-form nav-search"
+  }, [_c("div", {
+    staticClass: "input-group"
+  }, [_c("input", {
+    staticClass: "form-control",
+    attrs: {
+      type: "text",
+      placeholder: "Search ..."
+    }
+  })])])])]);
 }];
 render._withStripped = true;
 
@@ -1579,7 +1555,7 @@ var staticRenderFns = [function () {
   }, [_c("a", {
     staticClass: "logo",
     attrs: {
-      href: ""
+      href: "/admin/dashboard"
     }
   }, [_c("img", {
     staticClass: "navbar-brand",
@@ -1613,7 +1589,7 @@ var staticRenderFns = [function () {
     staticClass: "collapsed",
     attrs: {
       "data-bs-toggle": "collapse",
-      href: "#dashboard",
+      href: "/admin/dashboard",
       "aria-expanded": "false"
     }
   }, [_c("i", {
@@ -1767,13 +1743,22 @@ var render = function render() {
         src: _vm.storageImage(data.job.image),
         alt: "Image"
       }
-    })]), _vm._v(" "), _c("td", [_vm._v(_vm._s(data.job.category.name))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(data.job.company.name))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(data.job.position))]), _vm._v(" "), _c("td", [_c("span", {
+    })]), _vm._v(" "), _c("td", [_vm._v(_vm._s(data.job.company.name))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(data.job.position))]), _vm._v(" "), _c("td", [_c("span", {
       "class": {
         "bg-success p-1": data.application_status == 1,
         "bg-danger p-1": data.application_status == 2,
         "bg-warning p-1": data.application_status == 0
       }
-    }, [_vm._v("\n                                        " + _vm._s(data.application_status == 0 ? "Pending" : data.application_status == 1 ? "Accepted" : "Rejected") + "\n                                        ")])]), _vm._v(" "), _c("td", [_c("img", {
+    }, [_vm._v("\n                                        " + _vm._s(data.application_status == 0 ? "Pending" : data.application_status == 1 ? "Accepted" : "Rejected") + "\n                                        ")])]), _vm._v(" "), _c("td", [data.image ? [_vm.isPDF(data.image) ? [_c("img", {
+      staticStyle: {
+        width: "100px",
+        height: "100px"
+      },
+      attrs: {
+        src: "https://i.ibb.co.com/7NzrJtr/4208479.png",
+        alt: "PDF Icon"
+      }
+    })] : [_c("img", {
       staticStyle: {
         width: "100px",
         height: "100px"
@@ -1782,7 +1767,16 @@ var render = function render() {
         src: _vm.storageImage(data.image),
         alt: "Image"
       }
-    })]), _vm._v(" "), _c("td", [_c("router-link", {
+    })]] : [_c("img", {
+      staticStyle: {
+        width: "100px",
+        height: "100px"
+      },
+      attrs: {
+        src: "https://i.ibb.co.com/3ssF0pw/giphy.gif",
+        alt: "Default Icon"
+      }
+    })]], 2), _vm._v(" "), _c("td", [_c("router-link", {
       attrs: {
         to: {
           name: "ApplicationView",
@@ -2337,7 +2331,12 @@ var render = function render() {
     staticClass: "card"
   }, [_c("div", {
     staticClass: "card-header"
-  }, [_c("PageTop")], 1), _vm._v(" "), _c("div", {
+  }, [_c("div", [_c("h3", {
+    staticClass: "fw-bold mb-3",
+    staticStyle: {
+      "margin-left": "20px"
+    }
+  }, [_vm._v(_vm._s(_vm.$route.meta.pagetitle))])])]), _vm._v(" "), _c("div", {
     staticClass: "table-responsive"
   }, [_c("DataTable", {
     attrs: {
@@ -2521,47 +2520,265 @@ var render = function render() {
     _c = _vm._self._c;
   return _c("div", {
     staticClass: "container mt-5"
-  }, _vm._l(_vm.dataList, function (employer, index) {
-    return _c("div", {
-      key: index,
-      staticClass: "card"
-    }, [_c("div", {
-      staticClass: "row no-gutters"
-    }, [_c("div", {
-      staticClass: "col-md-4"
-    }, [_c("img", {
-      staticClass: "card-img",
+  }, [_c("div", {
+    staticClass: "row justify-content-center"
+  }, [_c("div", {
+    staticClass: "col-md-6"
+  }, [_c("div", {
+    staticClass: "card"
+  }, [_c("div", {
+    staticClass: "card-body text-center position-relative"
+  }, [_vm._l(_vm.employer, function (items) {
+    return [_c("img", {
+      staticClass: "img-fluid rounded-circle mx-auto d-block",
+      staticStyle: {
+        width: "100px",
+        height: "100px",
+        border: "solid 5px",
+        "border-radius": "50px"
+      },
       attrs: {
-        src: employer.company_logo,
-        alt: "Employer Logo"
+        src: _vm.storageImage(items.image),
+        alt: "Profile Picture"
       }
-    })]), _vm._v(" "), _c("div", {
-      staticClass: "col-md-8"
-    }, [_c("div", {
-      staticClass: "card-body"
-    }, [_c("h5", {
-      staticClass: "card-title"
-    }, [_vm._v(_vm._s(employer.company_name))]), _vm._v(" "), _c("p", {
-      staticClass: "card-text"
-    }, [_c("strong", [_vm._v("Industry:")]), _vm._v(" " + _vm._s(employer.user_id))]), _vm._v(" "), _c("p", {
-      staticClass: "card-text"
-    }, [_c("strong", [_vm._v("Industry:")]), _vm._v(" " + _vm._s(employer.industry))]), _vm._v(" "), _c("p", {
-      staticClass: "card-text"
-    }, [_c("strong", [_vm._v("Location:")]), _vm._v(" " + _vm._s(employer.company_address))]), _vm._v(" "), _c("p", {
-      staticClass: "card-text"
-    }, [_c("strong", [_vm._v("Contact Person:")]), _vm._v(" " + _vm._s(employer.contact_person))]), _vm._v(" "), _c("p", {
-      staticClass: "card-text"
-    }, [_vm._v(_vm._s(employer.company_description))]), _vm._v(" "), _c("div", {
-      staticClass: "contact-info"
-    }, [_c("p", [_c("strong", [_vm._v("Contact:")]), _vm._v(" " + _vm._s(employer.contact_person))]), _vm._v(" "), _c("p", [_c("strong", [_vm._v("Website:")]), _vm._v(" "), _c("a", {
+    })];
+  }), _vm._v(" "), _c("h4", {
+    staticClass: "mt-3"
+  }, [_vm._v(_vm._s(_vm.user.name))]), _vm._v(" "), _vm._l(_vm.employer, function (items) {
+    return [_c("h5", {
+      staticClass: "pt-2"
+    }, [_vm._v("Bio")]), _vm._v(" "), _c("p", {
+      staticClass: "text-muted"
+    }, [_vm._v(_vm._s(items.bio))])];
+  }), _vm._v(" "), _c("hr"), _vm._v(" "), _c("h6", [_vm._v("Contact Info")]), _vm._v(" "), _c("table", {
+    staticClass: "table table-borderless"
+  }, [_c("tbody", [_vm._l(_vm.employer, function (items) {
+    return [_c("tr", [_vm._m(0, true), _vm._v(" "), _c("td", [_vm._v(_vm._s(items.company_address))])]), _vm._v(" "), _c("tr", [_vm._m(1, true), _vm._v(" "), _c("td", [_c("a", {
       attrs: {
-        href: employer.company_website,
+        href: items.company_website,
         target: "_blank"
       }
-    }, [_vm._v(_vm._s(employer.company_website))])])])])])])]);
-  }), 0);
+    }, [_vm._v(_vm._s(items.company_website))])])]), _vm._v(" "), _c("tr", [_vm._m(2, true), _vm._v(" "), _c("td", [_vm._v(_vm._s(items.contact_person))])])];
+  }), _vm._v(" "), _c("tr", [_vm._m(3), _vm._v(" "), _c("td", [_c("a", {
+    attrs: {
+      href: _vm.user.email
+    }
+  }, [_vm._v(_vm._s(_vm.user.email))])])])], 2)])], 2), _vm._v(" "), _c("div", {
+    staticClass: "d-flex p-2 gap-2"
+  }, [_c("button", {
+    staticClass: "btn btn-success",
+    attrs: {
+      type: "button"
+    },
+    on: {
+      click: function click($event) {
+        return _vm.openEditModal();
+      }
+    }
+  }, [_vm._v("Save")]), _vm._v(" "), _vm._l(_vm.employer, function (items) {
+    return [_c("button", {
+      staticClass: "btn btn-primary",
+      attrs: {
+        type: "button"
+      },
+      on: {
+        click: function click($event) {
+          return _vm.openEditModal(items, items.id);
+        }
+      }
+    }, [_vm._v("Update")])];
+  })], 2)])]), _vm._v(" "), _c("FormModal", {
+    staticClass: "form-modal",
+    on: {
+      submit: function submit($event) {
+        return _vm.submitFromData(_vm.fromData);
+      }
+    }
+  }, [_c("div", [_c("div", {
+    staticClass: "mb-3"
+  }, [_c("label", {
+    staticClass: "form-label",
+    attrs: {
+      "for": "contact_person"
+    }
+  }, [_vm._v("Contact Person")]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.fromData.contact_person,
+      expression: "fromData.contact_person"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      type: "text"
+    },
+    domProps: {
+      value: _vm.fromData.contact_person
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.$set(_vm.fromData, "contact_person", $event.target.value);
+      }
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "mb-3"
+  }, [_c("label", {
+    staticClass: "form-label",
+    attrs: {
+      "for": "company_website"
+    }
+  }, [_vm._v("Company Website")]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.fromData.company_website,
+      expression: "fromData.company_website"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      type: "url"
+    },
+    domProps: {
+      value: _vm.fromData.company_website
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.$set(_vm.fromData, "company_website", $event.target.value);
+      }
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "mb-3"
+  }, [_c("label", {
+    staticClass: "form-label",
+    attrs: {
+      "for": "company_address"
+    }
+  }, [_vm._v("Company Address")]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.fromData.company_address,
+      expression: "fromData.company_address"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      type: "text"
+    },
+    domProps: {
+      value: _vm.fromData.company_address
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.$set(_vm.fromData, "company_address", $event.target.value);
+      }
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "mb-3"
+  }, [_c("label", {
+    staticClass: "form-label",
+    attrs: {
+      "for": "company_description"
+    }
+  }, [_vm._v("Company Description")]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.fromData.company_description,
+      expression: "fromData.company_description"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      type: "text"
+    },
+    domProps: {
+      value: _vm.fromData.company_description
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.$set(_vm.fromData, "company_description", $event.target.value);
+      }
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "mb-3"
+  }, [_c("label", {
+    staticClass: "form-label",
+    attrs: {
+      "for": "bio"
+    }
+  }, [_vm._v("Bio")]), _vm._v(" "), _c("textarea", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.fromData.bio,
+      expression: "fromData.bio"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      rows: "4"
+    },
+    domProps: {
+      value: _vm.fromData.bio
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.$set(_vm.fromData, "bio", $event.target.value);
+      }
+    }
+  })]), _vm._v(" "), _c("div", {
+    staticClass: "mb-3"
+  }, [_c("label", {
+    staticClass: "form-label"
+  }, [_vm._v("Upload your Profile")]), _vm._v(" "), _c("div", {
+    staticClass: "image_upload",
+    style: {
+      "background-image": "url(" + _vm.publicImage("images/uploading.avif") + ")"
+    },
+    on: {
+      click: function click($event) {
+        return _vm.clickFileField("imageField");
+      }
+    }
+  }, [_vm.fromData.image !== undefined ? [_c("img", {
+    staticClass: "photo",
+    attrs: {
+      src: _vm.storageImage(_vm.fromData.image)
+    }
+  })] : _vm._e()], 2), _vm._v(" "), _c("input", {
+    staticClass: "file_field",
+    attrs: {
+      id: "imageField",
+      type: "file",
+      name: "image"
+    },
+    on: {
+      change: function change($event) {
+        return _vm.uploadImage($event, _vm.fromData, "image");
+      }
+    }
+  })])])])], 1)]);
 };
-var staticRenderFns = [];
+var staticRenderFns = [function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("td", [_c("strong", [_vm._v("Address:")])]);
+}, function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("td", [_c("strong", [_vm._v("Website:")])]);
+}, function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("td", [_c("strong", [_vm._v("Phone:")])]);
+}, function () {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("td", [_c("strong", [_vm._v("Email:")])]);
+}];
 render._withStripped = true;
 
 
@@ -3243,7 +3460,7 @@ var render = function render() {
       }
     })]), _vm._v(" "), _c("td", [_vm._v(_vm._s(data.date_time))]), _vm._v(" "), _c("td", [_c("span", {
       "class": data.status ? "badge badge-success" : "badge badge-danger"
-    }, [_vm._v("\n                        " + _vm._s(data.status ? "Active" : "Inactive") + "\n                    ")])]), _vm._v(" "), _c("td", [_c("a", {
+    }, [_vm._v("\n                    " + _vm._s(data.status ? "Active" : "Inactive") + "\n                ")])]), _vm._v(" "), _c("td", [_c("a", {
       on: {
         click: function click($event) {
           return _vm.openEditModal(data, data.id);
@@ -3590,7 +3807,7 @@ var render = function render() {
         return _vm.$set(_vm.fromData, "status", 1);
       }
     }
-  }), _vm._v(" Active\n                                ")]), _vm._v(" "), _c("label", [_c("input", {
+  }), _vm._v(" Active\n                            ")]), _vm._v(" "), _c("label", [_c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
@@ -3609,7 +3826,7 @@ var render = function render() {
         return _vm.$set(_vm.fromData, "status", 0);
       }
     }
-  }), _vm._v(" Inactive\n                                ")])])])])])], 1)]);
+  }), _vm._v(" Inactive\n                            ")])])])])])], 1)]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -3697,8 +3914,61 @@ __webpack_require__.r(__webpack_exports__);
     publicImage: function publicImage(imageName) {
       return "".concat(window.publicPath, "/").concat(imageName);
     },
+    // publicImage(imageName) {
+    //     const extension = imageName.split('.').pop().toLowerCase();
+    //     const imagePath = `${window.publicPath}/${imageName}`;
+    //
+    //     // Return the image path or an icon based on the extension
+    //     switch (extension) {
+    //         case 'pdf':
+    //             return 'https://i.ibb.co.com/7NzrJtr/4208479.png';
+    //         case 'jpg':
+    //         case 'jpeg':
+    //             return imagePath;
+    //         case 'png':
+    //             return imagePath;
+    //         case 'doc':
+    //         case 'docx':
+    //             return 'https://i.ibb.co.com/swN9Swx/8242988.png';
+    //         case 'xls':
+    //         case 'xlsx':
+    //             return 'https://i.ibb.co.com/3MfvfVt/8243073.png';
+    //         default:
+    //             return '/images/uploading.avif';
+    //     }
+    // },
+    // storageImage : function (imageName) {
+    //     return `${window.uploadPath}/${imageName}`;
+    // },
+    isPDF: function isPDF(fileName) {
+      return fileName && fileName.split('.').pop().toLowerCase() === 'pdf';
+    },
     storageImage: function storageImage(imageName) {
-      return "".concat(window.uploadPath, "/").concat(imageName);
+      if (!imageName || typeof imageName !== 'string') {
+        return 'https://i.ibb.co.com/3ssF0pw/giphy.gif';
+      }
+      var lastDotIndex = imageName.lastIndexOf('.');
+      var extension = lastDotIndex !== -1 ? imageName.substring(lastDotIndex + 1).toLowerCase() : '';
+      var imagePath = "".concat(window.uploadPath, "/").concat(imageName);
+
+      // Return the image path or an icon based on the extension
+      switch (extension) {
+        case 'pdf':
+          return imagePath;
+        case 'jpg':
+        case 'jpeg':
+          return imagePath;
+        case 'png':
+          return imagePath;
+        case 'doc':
+        case 'docx':
+          return imagePath;
+        case 'xls':
+        case 'xlsx':
+          return imagePath;
+        default:
+          return 'https://i.ibb.co.com/3ssF0pw/giphy.gif';
+      }
     },
     clickFileField: function clickFileField(filedName) {
       $("#".concat(filedName)).click();
@@ -3745,6 +4015,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
 /* harmony import */ var vee_validate__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vee-validate */ "./node_modules/vee-validate/dist/vee-validate.esm.js");
 /* harmony import */ var vue_toastification__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-toastification */ "./node_modules/vue-toastification/dist/esm/index.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator["return"] && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, "catch": function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
+function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
 
 
 
@@ -3852,6 +4126,58 @@ __webpack_require__.r(__webpack_exports__);
       _this.httpReq('post', _this.urlGenaretor('api/upload'), form, {}, function (retData) {
         _this.$set(dataObject, dataModel, retData.result.name);
       });
+    },
+    checkAuthentication: function checkAuthentication() {
+      var _this2 = this;
+      return _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+        var _response$data$result, response;
+        return _regeneratorRuntime().wrap(function _callee$(_context) {
+          while (1) switch (_context.prev = _context.next) {
+            case 0:
+              _context.prev = 0;
+              _context.next = 3;
+              return axios__WEBPACK_IMPORTED_MODULE_2__["default"].get('/userdata');
+            case 3:
+              response = _context.sent;
+              // Check if the response contains valid seeker data
+              if (response.data && (_response$data$result = response.data.result) !== null && _response$data$result !== void 0 && _response$data$result.user) {
+                _this2.user = response.data.result.user;
+                _this2.isAuthenticated = true;
+                _this2.fromData.name = _this2.user.name;
+                _this2.fromData.email = _this2.user.email;
+                if (response.data.result.employer && Array.isArray(response.data.result.employer)) {
+                  _this2.employer = response.data.result.employer.map(function (app) {
+                    return {
+                      id: app.id,
+                      user_id: app.user_id,
+                      company_website: app.company_website,
+                      company_address: app.company_address,
+                      contact_person: app.contact_person,
+                      bio: app.bio,
+                      image: app.image,
+                      company_description: app.company_description
+                    };
+                  });
+                } else {
+                  _this2.employer = [];
+                }
+              } else {
+                _this2.user = null;
+                _this2.isAuthenticated = false;
+              }
+              _context.next = 11;
+              break;
+            case 7:
+              _context.prev = 7;
+              _context.t0 = _context["catch"](0);
+              _this2.isAuthenticated = false;
+              console.error('Authentication check failed:', _context.t0.response ? _context.t0.response.data : _context.t0.message);
+            case 11:
+            case "end":
+              return _context.stop();
+          }
+        }, _callee, null, [[0, 7]]);
+      }))();
     }
   }
 });
@@ -3926,6 +4252,14 @@ var route = [{
     dataUrl: 'api/company'
   }
 }, {
+  path: '/admin/employer/profile',
+  name: 'employer_profile',
+  component: _views_Employers_EmployerProfile__WEBPACK_IMPORTED_MODULE_7__["default"],
+  meta: {
+    pagetitle: 'Profile Update',
+    dataUrl: 'api/employer_profile'
+  }
+}, {
   path: '/admin/employer/employerfrom',
   name: 'employefrom',
   component: _views_Employers_EmployerForm__WEBPACK_IMPORTED_MODULE_6__["default"],
@@ -3940,14 +4274,6 @@ var route = [{
   meta: {
     pagetitle: 'Blog Post Table',
     dataUrl: 'api/blogpost'
-  }
-}, {
-  path: '/admin/employer/profile',
-  name: 'employerprofile',
-  component: _views_Employers_EmployerProfile__WEBPACK_IMPORTED_MODULE_7__["default"],
-  meta: {
-    pagetitle: 'Blog Post Table',
-    dataUrl: 'api/employer'
   }
 }, {
   path: '/admin/seeker/application',
@@ -6365,7 +6691,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.card-img[data-v-da20807a] {\n    width: 100%;\n    height: auto;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.image_upload img[data-v-da20807a] {\n    max-width: 100%;\n    max-height: 100%;\n    border-radius: 4px;\n}\n.image_upload[data-v-da20807a] {\n    height: 120px;\n    width: 25%;\n    background-size: cover;\n    background-repeat: no-repeat;\n    cursor: pointer;\n    border: 2px dashed #007bff;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n.photo[data-v-da20807a] {\n    height: 100%;\n    width: 100%;\n    border-radius: 4px;\n}\n#imageField[data-v-da20807a] {\n    display: none;\n}\n.edit-icon[data-v-da20807a] {\n    position: absolute;\n    top: 10px;\n    right: 10px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

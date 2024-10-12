@@ -3,7 +3,7 @@
         <div class="sidebar-logo">
             <!-- Logo Header -->
             <div class="logo-header" data-background-color="dark">
-                <a href="" class="logo">
+                <a href="/admin/dashboard" class="logo">
                     <img
                             src="https://i.ibb.co.com/6w26Pc2/logo.jpg"
                             alt="navbar brand"
@@ -32,7 +32,7 @@
                     <li class="nav-item active">
                         <a
                                 data-bs-toggle="collapse"
-                                href="#dashboard"
+                                href="/admin/dashboard"
                                 class="collapsed"
                                 aria-expanded="false"
                         >
@@ -40,6 +40,7 @@
                             <p>Dashboard</p>
                         </a>
                     </li>
+
                     <li class="nav-section">
                 <span class="sidebar-mini-icon">
                   <i class="fa fa-ellipsis-h"></i>

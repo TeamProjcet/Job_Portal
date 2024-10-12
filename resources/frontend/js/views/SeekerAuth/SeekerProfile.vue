@@ -1,12 +1,11 @@
 <template>
-
     <div class="container mt-5">
         <!-- Profile Section -->
         <div class="row">
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-body text-center">
-                        <img style="width: 100px; height: 100px; border: solid 5px; border-radius: 50px" :src="storageImage(seeker.profile_picture)"class="img-fluid rounded-circle mx-auto d-block" alt="Profile Picture">
+                        <img  style="width: 100px; height: 100px; border: solid 5px; border-radius: 50px" :src="storageImage(seeker.profile_picture)"class="img-fluid rounded-circle mx-auto d-block" alt="Profile Picture">
                         <h4 class="mt-3">{{seeker.name}}</h4>
                         <h5 class="pt-2">Bio</h5>
                         <p class="text-muted">{{seeker.bio}}</p>
@@ -46,15 +45,25 @@
                                     <thead>
                                     <tr>
                                         <th scope="col">Job Title</th>
-                                        <th scope="col">Company</th>
+                                        <th scope="col">Application Date</th>
                                         <th scope="col">Status</th>
+                                        <th scope="col">Location</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td>Frontend Developer</td>
-                                        <td>Tmss</td>
-                                        <td><span class="badge bg-primary">Pending</span></td>
+                                    <tr v-for="apply in applications" :key="apply.id">
+                                        <td>{{ apply.job.position }}</td>
+                                        <td>{{apply.applied_at}}</td>
+                                        <td>
+                                        <span :class="{
+                                        'text-success p-1 ': apply.application_status == 1,
+                                        'text-danger p-1 ': apply.application_status == 2,
+                                        'text-warning p-1 ': apply.application_status == 0
+                                        }">
+                                        {{ apply.application_status == 0 ? 'Pending' : apply.application_status == 1 ? 'Accepted' : 'Rejected' }}
+                                        </span>
+                                        </td>
+                                        <td>{{apply.job.address}}</td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -121,6 +130,7 @@
         data(){
             return{
                 seeker: {},
+                applications:[],
                 components:{
                     Toast
                 }
@@ -129,24 +139,10 @@
         },
 
         mounted(){
-            this.getSeeker()
+            this.checkAuthentication();
         },
 
         methods:{
-
-            async getSeeker() {
-                try {
-                    const response = await axios.get(`/api/frontend/seekerdata`);
-                    if (response.data && response.data.result) {
-                        this.seeker = response.data.result;
-
-                    } else {
-                        this.error = "No Job details found.";
-                    }
-                } catch (error) {
-                    this.error = "Failed to load Job details.";
-                }
-            },
 
             async submitApplication() {
 

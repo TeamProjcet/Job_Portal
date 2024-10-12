@@ -49,15 +49,32 @@
                                             <textarea class="form-control" rows="5" placeholder="Cover Letter" v-model="fromData.coverLetter"></textarea>
                                         </div>
 
+<!--                                        <div class="col-md-4">-->
+<!--                                            <div class="mb-3">-->
+<!--                                                <label class="form-label">Upload your resume</label>-->
+<!--                                                <div @click="clickFileField('imageField')" class="image_upload" :style="{ 'background-image': 'url(' + publicImage('images/uploading.avif') + ')' }">-->
+<!--                                                    <template v-if="fromData.image !== undefined">-->
+<!--                                                        <img class="photo" :src="storageImage(fromData.image)">-->
+<!--                                                    </template>-->
+<!--                                                </div>-->
+<!--                                                <input  @change="uploadImage($event, fromData, 'image')" type="file" name="image" id="imageField" class="file_field">-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+
                                         <div class="col-md-4">
                                             <div class="mb-3">
                                                 <label class="form-label">Upload your resume</label>
-                                                <div @click="clickFileField('imageField')" class="image_upload" :style="{ 'background-image': 'url(' + publicImage('images/uploading.avif') + ')' }">
-                                                    <template v-if="fromData.image !== undefined">
-                                                        <img class="photo" :src="storageImage(fromData.image)">
+                                                <div @click="clickFileField('imageField')" class="image_upload" :style="{ 'background-image': 'url(' + publicImage('images/uploading.avif') + ')' }" >
+                                                    <template v-if="fromData.image">
+                                                        <template v-if="isPDF(fromData.image)">
+                                                            <img src="https://i.ibb.co.com/7NzrJtr/4208479.png" style="width: 100px; height: 100px" alt="PDF Icon">
+                                                        </template>
+                                                        <template v-else>
+                                                            <img class="photo" :src="storageImage(fromData.image)" style="width: 100px; height: 100px" alt="Image">
+                                                        </template>
                                                     </template>
                                                 </div>
-                                                <input @change="uploadImage($event, fromData, 'image')" type="file" name="image" id="imageField" class="file_field">
+                                                <input @change="uploadImage($event, fromData, 'image')" type="file" name="image" id="imageField" class="file_field" accept=".pdf,image"  />
                                             </div>
                                         </div>
 

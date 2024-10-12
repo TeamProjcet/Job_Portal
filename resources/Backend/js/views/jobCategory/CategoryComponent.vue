@@ -72,10 +72,7 @@
             this.getDataList();
         },
         methods: {
-            // Assuming this function retrieves the correct path for images
-            storageImage(imagePath) {
-                return `${uploadPath}${imagePath}`;
-            }
+
         }
     };
 </script>

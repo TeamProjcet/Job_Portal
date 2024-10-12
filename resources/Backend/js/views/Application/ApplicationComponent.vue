@@ -44,7 +44,6 @@
                                         <!-- Display the image -->
                                         <img :src="storageImage(data.job.image)" style="width: 100px; height: 100px" alt="Image">
                                     </td>
-                                    <td>{{ data.job.category.name}}</td>
                                     <td>{{ data.job.company.name}}</td>
                                     <td>{{ data.job.position}}</td>
                                     <td>
@@ -56,9 +55,22 @@
                                         {{ data.application_status == 0 ? 'Pending' : data.application_status == 1 ? 'Accepted' : 'Rejected' }}
                                         </span>
                                     </td>
+<!--                                    <td>-->
+<!--                                        &lt;!&ndash; Display the image &ndash;&gt;-->
+<!--                                        <img :src="storageImage(data.image)" style="width: 100px; height: 100px" alt="Image">-->
+<!--                                    </td>-->
                                     <td>
-                                        <!-- Display the image -->
-                                        <img :src="storageImage(data.image)" style="width: 100px; height: 100px" alt="Image">
+                                        <template v-if="data.image">
+                                            <template v-if="isPDF(data.image)">
+                                                <img src="https://i.ibb.co.com/7NzrJtr/4208479.png" style="width: 100px; height: 100px" alt="PDF Icon">
+                                            </template>
+                                            <template v-else>
+                                                <img :src="storageImage(data.image)" style="width: 100px; height: 100px" alt="Image">
+                                            </template>
+                                        </template>
+                                        <template v-else>
+                                            <img src="https://i.ibb.co.com/3ssF0pw/giphy.gif" style="width: 100px; height: 100px" alt="Default Icon">
+                                        </template>
                                     </td>
 
                                     <td>
@@ -101,7 +113,7 @@
         components: {DataTable},
         data() {
         return {
-            tableHeading: ["Sl", "Name", "Email","Image","Job Name","Company", "Position","Status","Resume", "Action"],
+            tableHeading: ["Sl", "Name", "Email","Image", "Company", "Position","Status","Resume", "Action"],
             applylist:[],
             application_status : 0,
             isLoading : false,
@@ -119,7 +131,8 @@
         },
         mounted() {
             this.getapplyList();
-            this.getRequiredData(['application_status'])
+            this.getRequiredData(['application_status']);
+
         },
         methods:{
             getapplyList( page=1){

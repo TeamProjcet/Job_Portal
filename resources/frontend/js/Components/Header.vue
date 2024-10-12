@@ -31,7 +31,7 @@
                                     aria-expanded="false"
                                     style="font-size: 16px;"
                             >
-                                {{ seeker?.name || 'Guest' }}
+                                {{ seeker?seeker.name : 'Guest' }}
                             </a>
 
                             <ul class="dropdown-menu dropdown-menu-end mt-2 shadow-sm border-0">

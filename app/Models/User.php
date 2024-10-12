@@ -52,11 +52,25 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    // User.php মডেলে
 
     public function seeker()
     {
-        return $this->hasOne(Seeker::class);
+        return $this->hasMany(Seeker::class);
+    }
+
+    public function applications()
+    {
+        return $this->hasMany(Applications::class);
+    }
+
+    public function company()
+    {
+        return $this->hasMany(Company::class);
+    }
+
+    public function employer()
+    {
+        return $this->hasMany(Employers::class);
     }
 
 }

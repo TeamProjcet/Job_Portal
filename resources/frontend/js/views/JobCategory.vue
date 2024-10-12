@@ -50,16 +50,13 @@
         methods: {
             async getDataList() {
                 if (!this.category_id) {
-                    // console.error("Category ID is not defined.");
                     this.error = "Category ID is not defined.";
                     return;
                 }
                 try {
                     const response = await axios.get(`/api/frontend/jobcate/${this.category_id}`);
-                    this.jobcategory = response.data.result;
-                    // console.log(this.jobcategory);
+                    this.jobcategory = response.data.result;;
                 } catch (error) {
-                    // console.error("Error fetching job data:", error);
                     this.error = "Error fetching job data. Please try again later.";
                 }
             },

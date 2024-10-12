@@ -424,9 +424,8 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
             case 3:
               _yield$axios$get = _context.sent;
               data = _yield$axios$get.data;
-              jobs = data.result.jobData.data; // console.log(jobs)
-              categories = data.result.category; // console.log(categories)
-              // Category with job post count
+              jobs = data.result.jobData.data;
+              categories = data.result.category;
               jobCountMap = jobs.reduce(function (map, _ref) {
                 var category_id = _ref.category_id;
                 map[category_id] = (map[category_id] || 0) + 1;
@@ -497,7 +496,6 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
                 _context.next = 3;
                 break;
               }
-              // console.error("Category ID is not defined.");
               _this.error = "Category ID is not defined.";
               return _context.abrupt("return");
             case 3:
@@ -507,19 +505,18 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
             case 6:
               response = _context.sent;
               _this.jobcategory = response.data.result;
-              // console.log(this.jobcategory);
-              _context.next = 13;
+              ;
+              _context.next = 14;
               break;
-            case 10:
-              _context.prev = 10;
+            case 11:
+              _context.prev = 11;
               _context.t0 = _context["catch"](3);
-              // console.error("Error fetching job data:", error);
               _this.error = "Error fetching job data. Please try again later.";
-            case 13:
+            case 14:
             case "end":
               return _context.stop();
           }
-        }, _callee, null, [[3, 10]]);
+        }, _callee, null, [[3, 11]]);
       }))();
     }
   }
@@ -962,54 +959,25 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
   data: function data() {
     return {
       seeker: {},
+      applications: [],
       components: {
         Toast: vue_toastification__WEBPACK_IMPORTED_MODULE_0__["default"]
       }
     };
   },
   mounted: function mounted() {
-    this.getSeeker();
+    this.checkAuthentication();
   },
   methods: {
-    getSeeker: function getSeeker() {
+    submitApplication: function submitApplication() {
       var _this = this;
       return _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        var response;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) switch (_context.prev = _context.next) {
             case 0:
-              _context.prev = 0;
+              _this.fromData.id = _this.seeker.id;
               _context.next = 3;
-              return axios__WEBPACK_IMPORTED_MODULE_1__["default"].get("/api/frontend/seekerdata");
-            case 3:
-              response = _context.sent;
-              if (response.data && response.data.result) {
-                _this.seeker = response.data.result;
-              } else {
-                _this.error = "No Job details found.";
-              }
-              _context.next = 10;
-              break;
-            case 7:
-              _context.prev = 7;
-              _context.t0 = _context["catch"](0);
-              _this.error = "Failed to load Job details.";
-            case 10:
-            case "end":
-              return _context.stop();
-          }
-        }, _callee, null, [[0, 7]]);
-      }))();
-    },
-    submitApplication: function submitApplication() {
-      var _this2 = this;
-      return _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-          while (1) switch (_context2.prev = _context2.next) {
-            case 0:
-              _this2.fromData.id = _this2.seeker.id;
-              _context2.next = 3;
-              return axios__WEBPACK_IMPORTED_MODULE_1__["default"].put('/api/frontend/seeker/profile', _this2.fromData).then(function (res) {
+              return axios__WEBPACK_IMPORTED_MODULE_1__["default"].put('/api/frontend/seeker/profile', _this.fromData).then(function (res) {
                 if (parseInt(res.data.status) === 2000) {
                   this.$toast.success(" Profile Update successfully");
                 } else {
@@ -1022,9 +990,9 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
               });
             case 3:
             case "end":
-              return _context2.stop();
+              return _context.stop();
           }
-        }, _callee2);
+        }, _callee);
       }))();
     }
   }
@@ -1287,7 +1255,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   staticRenderFns: () => (/* binding */ staticRenderFns)
 /* harmony export */ });
 var render = function render() {
-  var _vm$seeker;
   var _vm = this,
     _c = _vm._self._c;
   return _c("nav", {
@@ -1359,7 +1326,7 @@ var render = function render() {
       "data-bs-toggle": "dropdown",
       "aria-expanded": "false"
     }
-  }, [_vm._v("\n                            " + _vm._s(((_vm$seeker = _vm.seeker) === null || _vm$seeker === void 0 ? void 0 : _vm$seeker.name) || "Guest") + "\n                        ")]), _vm._v(" "), _c("ul", {
+  }, [_vm._v("\n                            " + _vm._s(_vm.seeker ? _vm.seeker.name : "Guest") + "\n                        ")]), _vm._v(" "), _c("ul", {
     staticClass: "dropdown-menu dropdown-menu-end mt-2 shadow-sm border-0"
   }, [_c("li", [_c("router-link", {
     staticClass: "dropdown-item d-flex align-items-center",
@@ -2556,17 +2523,32 @@ var render = function render() {
         return _vm.clickFileField("imageField");
       }
     }
-  }, [_vm.fromData.image !== undefined ? [_c("img", {
-    staticClass: "photo",
+  }, [_vm.fromData.image ? [_vm.isPDF(_vm.fromData.image) ? [_c("img", {
+    staticStyle: {
+      width: "100px",
+      height: "100px"
+    },
     attrs: {
-      src: _vm.storageImage(_vm.fromData.image)
+      src: "https://i.ibb.co.com/7NzrJtr/4208479.png",
+      alt: "PDF Icon"
     }
-  })] : _vm._e()], 2), _vm._v(" "), _c("input", {
+  })] : [_c("img", {
+    staticClass: "photo",
+    staticStyle: {
+      width: "100px",
+      height: "100px"
+    },
+    attrs: {
+      src: _vm.storageImage(_vm.fromData.image),
+      alt: "Image"
+    }
+  })]] : _vm._e()], 2), _vm._v(" "), _c("input", {
     staticClass: "file_field",
     attrs: {
       type: "file",
       name: "image",
-      id: "imageField"
+      id: "imageField",
+      accept: ".pdf,image"
     },
     on: {
       change: function change($event) {
@@ -2595,7 +2577,7 @@ var render = function render() {
     staticClass: "fa fa-angle-right text-primary me-2"
   }), _vm._v("Job Category: " + _vm._s(_vm.job.category.name) + " ")]), _vm._v(" "), _vm._m(2), _vm._v(" "), _c("p", [_c("i", {
     staticClass: "fa fa-angle-right text-primary me-2"
-  }), _vm._v("\n                            Job Nature: " + _vm._s(_vm.job.job_type == 1 ? "Full Time" : _vm.job.job_type == 2 ? "Part Time" : "Not Specified") + "\n                        ")]), _vm._v(" "), _c("p", [_c("i", {
+  }), _vm._v("\n                                Job Nature: " + _vm._s(_vm.job.job_type == 1 ? "Full Time" : _vm.job.job_type == 2 ? "Part Time" : "Not Specified") + "\n                            ")]), _vm._v(" "), _c("p", [_c("i", {
     staticClass: "fa fa-angle-right text-primary me-2"
   }), _vm._v("Salary: " + _vm._s(_vm.job.salary || "Negotiable"))]), _vm._v(" "), _c("p", [_c("i", {
     staticClass: "fa fa-angle-right text-primary me-2"
@@ -2708,7 +2690,7 @@ var render = function render() {
       staticClass: "text-start ps-4"
     }, [_c("h5", {
       staticClass: "mb-3"
-    }, [_vm._v(_vm._s(job.category.name))]), _vm._v(" "), _c("span", {
+    }, [_vm._v(_vm._s(job.position))]), _vm._v(" "), _c("span", {
       staticClass: "text-truncate me-3"
     }, [_c("i", {
       staticClass: "fa fa-map-marker-alt text-primary me-2"
@@ -3121,7 +3103,30 @@ var render = function render() {
     attrs: {
       id: "profileTabContent"
     }
-  }, [_vm._m(2), _vm._v(" "), _c("div", {
+  }, [_c("div", {
+    staticClass: "tab-pane fade show active",
+    attrs: {
+      id: "applied-jobs",
+      role: "tabpanel",
+      "aria-labelledby": "applied-jobs-tab"
+    }
+  }, [_c("div", {
+    staticClass: "card"
+  }, [_c("div", {
+    staticClass: "card-body"
+  }, [_c("table", {
+    staticClass: "table"
+  }, [_vm._m(2), _vm._v(" "), _c("tbody", _vm._l(_vm.applications, function (apply) {
+    return _c("tr", {
+      key: apply.id
+    }, [_c("td", [_vm._v(_vm._s(apply.job.position))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(apply.applied_at))]), _vm._v(" "), _c("td", [_c("span", {
+      "class": {
+        "text-success p-1 ": apply.application_status == 1,
+        "text-danger p-1 ": apply.application_status == 2,
+        "text-warning p-1 ": apply.application_status == 0
+      }
+    }, [_vm._v("\n                                    " + _vm._s(apply.application_status == 0 ? "Pending" : apply.application_status == 1 ? "Accepted" : "Rejected") + "\n                                    ")])]), _vm._v(" "), _c("td", [_vm._v(_vm._s(apply.job.address))])]);
+  }), 0)])])])]), _vm._v(" "), _c("div", {
     staticClass: "tab-pane fade",
     attrs: {
       id: "update-profile",
@@ -3375,20 +3380,7 @@ var staticRenderFns = [function () {
 }, function () {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", {
-    staticClass: "tab-pane fade show active",
-    attrs: {
-      id: "applied-jobs",
-      role: "tabpanel",
-      "aria-labelledby": "applied-jobs-tab"
-    }
-  }, [_c("div", {
-    staticClass: "card"
-  }, [_c("div", {
-    staticClass: "card-body"
-  }, [_c("table", {
-    staticClass: "table"
-  }, [_c("thead", [_c("tr", [_c("th", {
+  return _c("thead", [_c("tr", [_c("th", {
     attrs: {
       scope: "col"
     }
@@ -3396,13 +3388,15 @@ var staticRenderFns = [function () {
     attrs: {
       scope: "col"
     }
-  }, [_vm._v("Company")]), _vm._v(" "), _c("th", {
+  }, [_vm._v("Application Date")]), _vm._v(" "), _c("th", {
     attrs: {
       scope: "col"
     }
-  }, [_vm._v("Status")])])]), _vm._v(" "), _c("tbody", [_c("tr", [_c("td", [_vm._v("Frontend Developer")]), _vm._v(" "), _c("td", [_vm._v("Tmss")]), _vm._v(" "), _c("td", [_c("span", {
-    staticClass: "badge bg-primary"
-  }, [_vm._v("Pending")])])])])])])])]);
+  }, [_vm._v("Status")]), _vm._v(" "), _c("th", {
+    attrs: {
+      scope: "col"
+    }
+  }, [_vm._v("Location")])])]);
 }];
 render._withStripped = true;
 
@@ -3643,8 +3637,61 @@ __webpack_require__.r(__webpack_exports__);
     publicImage: function publicImage(imageName) {
       return "".concat(window.publicPath, "/").concat(imageName);
     },
+    // publicImage(imageName) {
+    //     const extension = imageName.split('.').pop().toLowerCase();
+    //     const imagePath = `${window.publicPath}/${imageName}`;
+    //
+    //     // Return the image path or an icon based on the extension
+    //     switch (extension) {
+    //         case 'pdf':
+    //             return 'https://i.ibb.co.com/7NzrJtr/4208479.png';
+    //         case 'jpg':
+    //         case 'jpeg':
+    //             return imagePath;
+    //         case 'png':
+    //             return imagePath;
+    //         case 'doc':
+    //         case 'docx':
+    //             return 'https://i.ibb.co.com/swN9Swx/8242988.png';
+    //         case 'xls':
+    //         case 'xlsx':
+    //             return 'https://i.ibb.co.com/3MfvfVt/8243073.png';
+    //         default:
+    //             return '/images/uploading.avif';
+    //     }
+    // },
+    // storageImage : function (imageName) {
+    //     return `${window.uploadPath}/${imageName}`;
+    // },
+    isPDF: function isPDF(fileName) {
+      return fileName && fileName.split('.').pop().toLowerCase() === 'pdf';
+    },
     storageImage: function storageImage(imageName) {
-      return "".concat(window.uploadPath, "/").concat(imageName);
+      if (!imageName || typeof imageName !== 'string') {
+        return 'https://i.ibb.co.com/3ssF0pw/giphy.gif';
+      }
+      var lastDotIndex = imageName.lastIndexOf('.');
+      var extension = lastDotIndex !== -1 ? imageName.substring(lastDotIndex + 1).toLowerCase() : '';
+      var imagePath = "".concat(window.uploadPath, "/").concat(imageName);
+
+      // Return the image path or an icon based on the extension
+      switch (extension) {
+        case 'pdf':
+          return imagePath;
+        case 'jpg':
+        case 'jpeg':
+          return imagePath;
+        case 'png':
+          return imagePath;
+        case 'doc':
+        case 'docx':
+          return imagePath;
+        case 'xls':
+        case 'xlsx':
+          return imagePath;
+        default:
+          return 'https://i.ibb.co.com/3ssF0pw/giphy.gif';
+      }
     },
     clickFileField: function clickFileField(filedName) {
       $("#".concat(filedName)).click();
@@ -3825,7 +3872,7 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
     checkAuthentication: function checkAuthentication() {
       var _this2 = this;
       return _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        var response;
+        var _response$data$result, response;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) switch (_context.prev = _context.next) {
             case 0:
@@ -3834,14 +3881,35 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
               return axios__WEBPACK_IMPORTED_MODULE_2__["default"].get('/api/frontend/seekerdata');
             case 3:
               response = _context.sent;
-              if (response.data && response.data.result) {
-                _this2.seeker = response.data.result; // Assuming response.data.result has the user info
+              // Check if the response contains valid seeker data
+              if (response.data && (_response$data$result = response.data.result) !== null && _response$data$result !== void 0 && _response$data$result.seeker) {
+                _this2.seeker = response.data.result.seeker;
                 _this2.isAuthenticated = true;
                 _this2.fromData.name = _this2.seeker.name;
                 _this2.fromData.email = _this2.seeker.email;
+                _this2.fromData.phone = _this2.seeker.phone;
+                _this2.fromData.address = _this2.seeker.address;
+                _this2.fromData.bio = _this2.seeker.bio;
+                _this2.fromData.profile_picture = _this2.seeker.profile_picture;
                 _this2.fromData.seeker_id = _this2.seeker.id;
+                if (response.data.result.applications && Array.isArray(response.data.result.applications)) {
+                  _this2.applications = response.data.result.applications.map(function (app) {
+                    return {
+                      id: app.id,
+                      job_id: app.job_id,
+                      seeker_id: app.seeker_id,
+                      applied_at: app.applied_at,
+                      image: app.image,
+                      coverLetter: app.coverLetter,
+                      application_status: app.application_status,
+                      job: app.job || {}
+                    };
+                  });
+                } else {
+                  _this2.applications = [];
+                }
               } else {
-                _this2.seeker = null; // Reset username if not found
+                _this2.seeker = null;
                 _this2.isAuthenticated = false;
               }
               _context.next = 11;
