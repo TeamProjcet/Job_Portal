@@ -32,7 +32,8 @@
                                 <td>{{index + 1}}</td>
                                 <td>{{data.name}}</td>
                                 <td>{{data.email}}</td>
-                                <td>{{data.company.name}}</td>
+                                <td v-if="data.company && data.company.name">{{data.company.name}}</td>
+                                <td v-else>No Company</td>
 
                                 <td v-if="data.roles && data.roles.length">
                                     <label class="badge bg-primary mx-1">{{data.roles[0].name}}</label>
