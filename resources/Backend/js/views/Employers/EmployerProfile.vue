@@ -23,6 +23,12 @@
                         <h6>Contact Info</h6>
                         <table class="table table-borderless">
                             <tbody>
+                            <template >
+                                <tr v-if="user.company && user.company.name">
+                                    <td><strong>Company Name:</strong></td>
+                                    <td>{{ user.company.name }}</td>
+                                </tr>
+                            </template>
                             <template v-for="items in employer">
                                 <tr>
                                     <td><strong>Address:</strong></td>
@@ -58,23 +64,23 @@
             <FormModal class="form-modal" @submit="submitFromData(fromData)">
                 <div>
                     <div class="mb-3">
-                        <label for="contact_person" class="form-label">Contact Person</label>
+                        <label  class="form-label">Contact Person</label>
                         <input type="text" class="form-control" v-model="fromData.contact_person">
                     </div>
                     <div class="mb-3">
-                        <label for="company_website" class="form-label">Company Website</label>
+                        <label  class="form-label">Company Website</label>
                         <input type="url" class="form-control" v-model="fromData.company_website">
                     </div>
                     <div class="mb-3">
-                        <label for="company_address" class="form-label">Company Address</label>
+                        <label class="form-label">Company Address</label>
                         <input type="text" class="form-control" v-model="fromData.company_address">
                     </div>
                     <div class="mb-3">
-                        <label for="company_description" class="form-label">Company Description</label>
+                        <label class="form-label">Company Description</label>
                         <input type="text" class="form-control" v-model="fromData.company_description">
                     </div>
                     <div class="mb-3">
-                        <label for="bio" class="form-label">Bio</label>
+                        <label  class="form-label">Bio</label>
                         <textarea class="form-control" v-model="fromData.bio" rows="4"></textarea>
                     </div>
                     <div class="mb-3">
@@ -110,7 +116,7 @@
             };
         },
         mounted() {
-            this.checkAuthentication();
+            this.userAuthentication();
 
         },
 

@@ -3,33 +3,44 @@
 namespace App\Http\Controllers;
 
 use App\Models\SavedJobs;
+use App\Supports\Helper;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SavedJobsController extends Controller
 {
-    public function index()
+    use Helper;
+    public function __construct()
     {
-        // Code for displaying a listing of saved jobs
+        $this->model=new SavedJobs();
     }
 
+    public function index()
+    {
+
+    }
     public function create()
     {
-        // Code for showing the form to create a new saved job
     }
 
     public function store(Request $request)
     {
-        // Code for storing a newly created saved job
+        $validator = $this->model->Validator($request->all());
+        if ($validator->fails()) {
+            return $this->returnData(2000, $validator->errors());
+        }
+        $this->model->fill($request->all());
+        $this->model->seeker_id = Auth::guard('seeker')->user()->id();
+        $this->model->save();
+        return $this->returnData(2000, $this->model);
     }
 
     public function show(SavedJobs $savedJobs)
     {
-        // Code for displaying a specific saved job
     }
 
     public function edit(SavedJobs $savedJobs)
     {
-        // Code for showing the form to edit a specific saved job
     }
 
     public function update(Request $request, SavedJobs $savedJobs)
@@ -39,6 +50,6 @@ class SavedJobsController extends Controller
 
     public function destroy(SavedJobs $savedJobs)
     {
-        // Code for deleting a specific saved job
+
     }
 }

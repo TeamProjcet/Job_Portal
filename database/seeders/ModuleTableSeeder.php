@@ -13,10 +13,8 @@ use Illuminate\Database\Seeder;
 
 class ModuleTableSeeder extends Seeder
 {
-
     public function run()
     {
-
         Role::truncate();
         Module::truncate();
         RolePermission::truncate();
@@ -28,27 +26,26 @@ class ModuleTableSeeder extends Seeder
                 'name' => 'Job',
                 'key' => 'job',
                 'link' => '#',
-                'icon' => 'fa-briefcase',  // এখানে আইকনের মান যোগ করা হয়েছে
-                'permission' => ['add', 'view', 'edit', 'delete'],
-                'submeuns' => [
+                'icon' => 'fa-briefcase',
+                'permission' => ['add', 'view', 'edit','update', 'delete'],
+                'submenus' => [
                     ['name' => 'Job Category',
                         'key' => 'category',
                         'link' => '/admin/jobcategory/category',
-                        'icon' => 'fa-folder', // সাবমেনুতে আইকন
-                        'permission' => ['add', 'view', 'edit', 'delete'],
-                        'submeuns' => []
+                        'icon' => 'fa-folder',
+                        'permission' => ['add', 'view', 'edit', 'update','delete'],
                     ],
                     ['name' => 'Company',
                         'key' => 'company',
                         'link' => '/admin/jobcategory/company',
-                        'icon' => 'fa-building', // সাবমেনুতে আইকন
-                        'permission' => ['add', 'view', 'edit', 'delete'],
+                        'icon' => 'fa-building',
+                        'permission' => ['add', 'view', 'edit', 'update','delete'],
                     ],
                     ['name' => 'Job Post',
                         'key' => 'joblist',
                         'link' => '/admin/jobcategory/joblist',
-                        'icon' => 'fa-file-alt', // সাবমেনুতে আইকন
-                        'permission' => ['add', 'view', 'edit', 'delete'],
+                        'icon' => 'fa-file-alt',
+                        'permission' => ['add', 'view', 'edit','update', 'delete'],
                     ]
                 ],
             ],
@@ -56,113 +53,84 @@ class ModuleTableSeeder extends Seeder
                 'name' => 'Blog',
                 'key' => 'blog',
                 'link' => '#',
-                'icon' => 'fa-blog', // এখানে আইকনের মান
-                'permission' => ['add', 'view', 'edit', 'delete'],
-                'submeuns' => [
+                'icon' => 'fa-blog',
+                'permission' => ['add', 'view', 'edit', 'update','delete'],
+                'submenus' => [
                     ['name' => 'Blog Post',
                         'key' => 'blogpost',
                         'link' => '/admin/blog/blogpost',
-                        'icon' => 'fa-pen', // সাবমেনুতে আইকন
-                        'permission' => ['add', 'view', 'edit', 'delete'],
+                        'icon' => 'fa-pen',
+                        'permission' => ['add', 'view', 'edit','update', 'delete'],
                     ],
                 ],
             ],
+            [
+                'name' => 'Application',
+                'key' => 'apply',
+                'link' => '#',
+                'icon' => 'fa-file-alt',
+                'permission' => ['add', 'view', 'edit','update', 'delete'],
+                'submenus' => [
+                    [
+                        'name' => 'Application',
+                        'key' => 'application',
+                        'link' => '/admin/seeker/application',
+                        'icon' => 'fa-pen',
+                        'permission' => ['add', 'view', 'edit','update', 'delete'],
+                    ],
+                ],
+            ],
+            [
+                'name' => 'RolePermission',
+                'key' => 'rolepermission',
+                'link' => '#',
+                'icon' => 'fa-file-alt',
+                'permission' => ['add', 'view', 'edit', 'update','delete'],
+                'submenus' => [
+                    [
+                        'name' => 'Role User Management',
+                        'key' => 'roleusermanagement',
+                        'link' => '/admin/role/rolepermissions',
+                        'icon' => 'fa-users',
+                        'permission' => ['add', 'view', 'edit','update', 'delete'],
+                    ],
+                    [
+                        'name' => 'Role',
+                        'key' => 'role',
+                        'link' => '/admin/role/role',
+                        'icon' => 'fa-user-shield',
+                        'permission' => ['add', 'view', 'edit', 'update','delete'],
+                    ],
+                    [
+                        'name' => 'Role Permission',
+                        'key' => 'rolepermission',
+                        'link' => '/admin/role/permissions',
+                        'icon' => 'fa-lock',
+                        'permission' => ['add', 'view', 'edit','update', 'delete'],
+                    ],
+                ],
+            ]
+
+
         ];
 
-
-
-//        $module = Module::create([
-//            'name' => $moduleData['name'],
-//            'link' => $moduleData['link'],
-//            'parent_id' => $parentId,
-//            'icon' => $moduleData['icon'] ?? null,  // `icon` ফিল্ড এখানে যুক্ত
-//        ]);
-
-//        $role = new Role();
-//        $role->name = 'Admin';
-//        $role->save();
-//
-//        User::where('id', 1)->update([
-//            'role_id' => 1
-//        ]);
-//
-//        foreach ($modules as $eachModule) {
-//            $module = new Module();
-//            $module->name = $eachModule['name'];
-//            $module->link = $eachModule['link'];
-//            $module->save();
-//
-//            $roleModule = new RoleModule();
-//            $roleModule->role_id = $role->id;
-//            $roleModule->module_id = $module->id;
-//            $roleModule->save();
-//
-//            foreach ($eachModule['permission'] as $permission) {
-//                $permissionModel = new Permission();
-//                $permissionModel->module_id = $module->id;
-//                $permissionModel->name = $eachModule['key'] . "_" . $permission;
-//                $permissionModel->save();
-//
-//                $rolePermission = new RolePermission();
-//                $rolePermission->role_id = $role->id;
-//                $rolePermission->permission_id = $permissionModel->id;
-//                $rolePermission->save();
-//
-//            }
-//            foreach ($eachModule['submeuns'] as $submeun) {
-//                $subModule = new Module();
-//                $subModule->parent_id = $module->id;
-//                $subModule->name = $submeun['name'];
-//                $subModule->link = $submeun['link'];
-//                $subModule->save();
-//
-//                $roleModule = new RoleModule();
-//                $roleModule->role_id = $role->id;
-//                $roleModule->module_id = $subModule->id;
-//                $roleModule->save();
-//
-//                foreach ($submeun['permission'] as $permission) {
-//                    $subPermissionModel = new Permission();
-//                    $subPermissionModel->module_id = $module->id;
-//                    $subPermissionModel->name = $submeun['key'] . "_" . $permission;
-//                    $subPermissionModel->save();
-//
-//                    $rolePermission = new RolePermission();
-//                    $rolePermission->role_id = $role->id;
-//                    $rolePermission->permission_id = $subPermissionModel->id;
-//                    $rolePermission->save();
-//
-//                }
-//            }
-//        }
-
-
-
-
         $adminRole = Role::create(['name' => 'Admin']);
-//        $superadminRole = Role::create(['name' => 'Superadmin']);
-
 
         User::where('id', 1)->update(['role_id' => $adminRole->id]);
 
-
         foreach ($modules as $eachModule) {
             $this->RoleWithPermissions($eachModule, $adminRole);
-
         }
     }
 
-
-    private function RoleWithPermissions(array $moduleData, Role $role,  $parentId=0)
+    private function RoleWithPermissions(array $moduleData, Role $role, $parentId = 0)
     {
-
         $module = Module::create([
             'name' => $moduleData['name'],
             'link' => $moduleData['link'],
             'parent_id' => $parentId,
-            'icon' => $moduleData['icon']
+            'icon' => $moduleData['icon'],
         ]);
-
 
         RoleModule::create([
             'role_id' => $role->id,
@@ -181,11 +149,10 @@ class ModuleTableSeeder extends Seeder
             ]);
         }
 
-        if (isset($moduleData['submeuns']) && is_array($moduleData['submeuns'])) {
-            foreach ($moduleData['submeuns'] as $subModuleData) {
+        if (isset($moduleData['submenus']) && is_array($moduleData['submenus'])) {
+            foreach ($moduleData['submenus'] as $subModuleData) {
                 $this->RoleWithPermissions($subModuleData, $role, $module->id);
             }
         }
-
     }
 }

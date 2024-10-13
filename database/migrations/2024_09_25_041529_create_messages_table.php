@@ -13,17 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        if (!Schema::hasTable('messages')) {
-            Schema::create('messages', function (Blueprint $table) {
-                $table->id();
-                $table->unsignedBigInteger('sender_id')->notNull();
-                $table->unsignedBigInteger('receiver_id')->notNull();
-                $table->text('message_content')->notNull();
-                $table->timestamp('sent_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-                $table->timestamp('read_at')->nullable();
-                $table->timestamps();
-            });
-        }
+        Schema::create('messages', function (Blueprint $table) {
+            $table->id();
+//            $table->foreignId('sender_id')->constrained('users')->onDelete('cascade'); // Reference to users table
+//            $table->foreignId('receiver_id')->constrained('users')->onDelete('cascade'); // Reference to users table
+            $table->text('message_content'); // Message content
+            $table->timestamp('sent_at')->useCurrent(); // Sending time
+            $table->timestamp('read_at')->nullable(); // Reading time
+            $table->timestamps();
+        });
     }
 
     /**

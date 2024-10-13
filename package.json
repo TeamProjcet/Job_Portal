@@ -25,7 +25,6 @@
         "webpack": "^5.94.0"
     },
     "dependencies": {
-        "@tinymce/tinymce-vue": "^3.2.8",
         "mix": "^0.0.1",
         "sweetalert2": "^11.14.0",
         "tinymce": "^7.3.0",
@@ -36,6 +35,7 @@
         "vue-tinymce": "^1.0.5",
         "vue-toastification": "^1.7.14",
         "vue2-datepicker": "^3.11.1",
+        "vue2-tinymce-editor": "^0.0.1",
         "vuex": "^3.6.2"
     }
 }

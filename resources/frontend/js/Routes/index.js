@@ -12,6 +12,7 @@ import SeekerProfile from "../views/SeekerAuth/SeekerProfile";
 import JobCategory from "../views/JobCategory";
 import JobCompany from "../views/JobCompany";
 import JobResults from "../views/JobResults";
+import SavedJobsComponent from "../views/SeekerAuth/SavedJobsComponent";
 
 const route = [
     {
@@ -94,6 +95,12 @@ const route = [
         name: 'JobResults',
         component: JobResults,
         props: route => ({ jobs: JSON.parse(route.query.jobs) })
+    },
+    {
+        path:'/seeker/savejobs',
+        name:'savedjobs',
+        component:SavedJobsComponent,
+        meta:{pagetitle:'',dataUrl:'api/frontend/favourites'}
     }
 ];
 export default route;

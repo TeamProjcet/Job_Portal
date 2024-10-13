@@ -160,6 +160,7 @@
                 async submitApplication() {
 
                     this.fromData.job_id = this.job.id;
+                    this.fromData.seeker_id = this.seeker.id;
                     axios.post('/api/frontend/application', this.fromData)
                         .then(function (res) {
                             if (parseInt(res.data.status) === 2000) {

@@ -12,9 +12,14 @@ export default {
 
 
     methods: {
-        getDataList: function () {
+        getDataList: function (page = 1) {
             const _this = this;
-            axios.get(_this.urlGenaretor())
+            axios.get(_this.urlGenaretor()
+                // {params: {
+                //     page : page,
+                //     filter : _this.formFilter,
+                // }}
+            )
                 .then(function (res) {
                     if (parseInt(res.data.status) === 2000) {
                         _this.$store.commit("dataList", res.data.result);
@@ -165,12 +170,12 @@ export default {
                     this.isAuthenticated = true;
 
                     this.fromData.name = this.seeker.name;
-                     this.fromData.email = this.seeker.email;
-                     this.fromData.phone = this.seeker.phone;
-                     this.fromData.address = this.seeker.address;
-                     this.fromData.bio = this.seeker.bio;
-                     this.fromData.profile_picture = this.seeker.profile_picture;
-                     this.fromData.seeker_id = this.seeker.id;
+                    this.fromData.email = this.seeker.email;
+                    this.fromData.phone = this.seeker.phone;
+                    this.fromData.address = this.seeker.address;
+                    this.fromData.bio = this.seeker.bio;
+                    this.fromData.profile_picture = this.seeker.profile_picture;
+                    this.fromData.seeker_id = this.seeker.id;
 
 
                     if (response.data.result.applications && Array.isArray(response.data.result.applications)) {

@@ -16,25 +16,33 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
+
+
         $arrUser=[
             [
                 'name'=> 'Mohon Sarker',
                 'email'=> 'mohon@gmail.com',
                 'password'=> Hash::make('1234'),
+                'role_id' => 1,
+                'company_id' => 1,
             ],
             [
                 'name'=> 'Rabby Hasan',
                 'email'=> 'rabby@gmail.com',
                 'password'=> Hash::make('1234'),
+                'role_id' => 1,
+                'company_id' => 1,
             ],
             [
                 'name'=> ' Jibon Ahamed',
                 'email'=> 'jibon@gmail.com',
                 'password'=> Hash::make('1234'),
+                'role_id' => 1,
+                'company_id' => 1,
             ]
         ];
-//        User::truncate();
 
+        User::truncate();
         User::insert($arrUser);
         }
 

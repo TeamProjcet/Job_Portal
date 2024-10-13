@@ -8,6 +8,11 @@ import EmployerForm from "../views/Employers/EmployerForm";
 import EmployerProfile from "../views/Employers/EmployerProfile";
 import ApplicationComponent from "../views/Application/ApplicationComponent";
 import ApplicationView from "../views/Application/ApplicationView";
+import PermissionComponent from "../views/RolePermission/PermissionComponent";
+import RolePermissionComponent from "../views/RolePermission/RolePermissionComponent";
+import RoleComponent from "../views/RolePermission/RoleComponent";
+import UserRegisComponenet from "../views/RolePermission/UserRegisComponenet";
+import InterviewComponent from "../views/Interview/InterviewComponent";
 
 
 const route = [
@@ -81,6 +86,30 @@ const route = [
         }
 
     },
+    {
+        path: '/admin/role/permissions',
+        name: 'Permission',
+        component: PermissionComponent ,
+        meta:{pagetitle:'Permission Table',dataUrl:'api/permissions',
+        }
+
+    },
+    {
+        path: '/admin/role/rolepermissions',
+        name: 'RolePermission',
+        component: RolePermissionComponent ,
+        meta:{pagetitle:'Users Table',dataUrl:'api/users',
+        }
+
+    },
+    {
+        path: '/admin/role/role',
+        name: 'RoleComponent',
+        component: RoleComponent ,
+        meta:{pagetitle:'Role Table',dataUrl:'api/roles',
+        }
+
+    },
 
     {
         path: '/admin/seeker/application-view/:id',
@@ -88,8 +117,20 @@ const route = [
         component: ApplicationView,
         meta:{pagetitle:'Job Application', dataUrl:'api/frontend/application',},
         props: true
-    }
-
+    },
+    {
+        path: '/admin/user/registration',
+        name: 'UserRegisComponenet',
+        component: UserRegisComponenet,
+        meta:{pagetitle:'User Registration Form', dataUrl:'api/register',},
+        props: true
+    },
+    {
+        path: '/admin/interview',
+        name: 'InterviewComponent',
+        component: InterviewComponent,
+        meta:{pagetitle:'Interview Schedule', dataUrl:'api/interview',},
+    },
 
 ];
 export default route;

@@ -24,7 +24,7 @@ class FrontendController extends Controller
             if ($job_type) {
                 $query->where('job_type', $job_type);
             }
-        })->with('category','company')->paginate(10);
+        })->with('category','company')->paginate(2);
 
         $data['category'] = Category::get();
 
@@ -38,6 +38,8 @@ class FrontendController extends Controller
     public function jobCategory($cateId)
     {
         $data['jobPosts'] = JobPostModel::with('category','company')->where('category_id',$cateId)->get();
+        return $this->returnData(2000,$data);
+
         return $this->returnData(2000,$data);
 
     }
@@ -63,5 +65,7 @@ class FrontendController extends Controller
         return $this->returnData(2000,$data);
 
     }
+
+
 
 }

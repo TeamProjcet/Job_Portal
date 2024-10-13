@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('job_post_models', function (Blueprint $table) {
             $table->id();
+            $table->string('user_id')->constrained()->onDelete('cascade');
             $table->integer('category_id');
             $table->text('position');
             $table->integer('company_id');

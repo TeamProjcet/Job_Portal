@@ -5,7 +5,7 @@
                 <h3 class="fw-bold mb-3 " style="margin-left: 20px">{{$route.meta.pagetitle}}</h3>
             </div>
             <div class="ms-md-auto py-2 py-md-0">
-<!--                <a @click="openEditModal()" class="btn btn-primary btn-round"><i class="fas fa-plus"></i>Add</a>-->
+                <!--                <a @click="openEditModal()" class="btn btn-primary btn-round"><i class="fas fa-plus"></i>Add</a>-->
             </div>
         </div>
         <div class="col-md-12">
@@ -35,18 +35,18 @@
                             <template v-if="!isLoading && applylist.applyData !==undefined">
                                 <div class="table-responsive">
 
-                                <DataTable :tableHeading="tableHeading">
-                                <tr v-for="(data, index) in applylist.applyData.data" :key="index">
-                                    <td>{{ index + 1 }}</td>
-                                    <td>{{ data.seeker.name }}</td>
-                                    <td>{{ data.seeker.email }}</td>
-                                    <td>
-                                        <!-- Display the image -->
-                                        <img :src="storageImage(data.job.image)" style="width: 100px; height: 100px" alt="Image">
-                                    </td>
-                                    <td>{{ data.job.company.name}}</td>
-                                    <td>{{ data.job.position}}</td>
-                                    <td>
+                                    <DataTable :tableHeading="tableHeading">
+                                        <tr v-for="(data, index) in applylist.applyData.data" :key="index">
+                                            <td>{{ index + 1 }}</td>
+                                            <td>{{ data.seeker.name }}</td>
+                                            <td>{{ data.seeker.email }}</td>
+                                            <td>
+                                                <!-- Display the image -->
+                                                <img :src="storageImage(data.job.image)" style="width: 100px; height: 100px" alt="Image">
+                                            </td>
+                                            <td>{{ data.job.company.name}}</td>
+                                            <td>{{ data.job.position}}</td>
+                                            <td>
                                         <span :class="{
                                         'bg-success p-1': data.application_status == 1,
                                         'bg-danger p-1': data.application_status == 2,
@@ -54,38 +54,38 @@
                                         }">
                                         {{ data.application_status == 0 ? 'Pending' : data.application_status == 1 ? 'Accepted' : 'Rejected' }}
                                         </span>
-                                    </td>
-<!--                                    <td>-->
-<!--                                        &lt;!&ndash; Display the image &ndash;&gt;-->
-<!--                                        <img :src="storageImage(data.image)" style="width: 100px; height: 100px" alt="Image">-->
-<!--                                    </td>-->
-                                    <td>
-                                        <template v-if="data.image">
-                                            <template v-if="isPDF(data.image)">
-                                                <img src="https://i.ibb.co.com/7NzrJtr/4208479.png" style="width: 100px; height: 100px" alt="PDF Icon">
-                                            </template>
-                                            <template v-else>
-                                                <img :src="storageImage(data.image)" style="width: 100px; height: 100px" alt="Image">
-                                            </template>
-                                        </template>
-                                        <template v-else>
-                                            <img src="https://i.ibb.co.com/3ssF0pw/giphy.gif" style="width: 100px; height: 100px" alt="Default Icon">
-                                        </template>
-                                    </td>
+                                            </td>
+                                            <!--                                    <td>-->
+                                            <!--                                        &lt;!&ndash; Display the image &ndash;&gt;-->
+                                            <!--                                        <img :src="storageImage(data.image)" style="width: 100px; height: 100px" alt="Image">-->
+                                            <!--                                    </td>-->
+                                            <td>
+                                                <template v-if="data.image">
+                                                    <template v-if="isPDF(data.image)">
+                                                        <img src="https://i.ibb.co.com/7NzrJtr/4208479.png" style="width: 100px; height: 100px" alt="PDF Icon">
+                                                    </template>
+                                                    <template v-else>
+                                                        <img :src="storageImage(data.image)" style="width: 100px; height: 100px" alt="Image">
+                                                    </template>
+                                                </template>
+                                                <template v-else>
+                                                    <img src="https://i.ibb.co.com/3ssF0pw/giphy.gif" style="width: 100px; height: 100px" alt="Default Icon">
+                                                </template>
+                                            </td>
 
-                                    <td>
-                                        <router-link :to="{ name: 'ApplicationView', params: { id: data.id } }">
-                                            <i class="fas fa-eye" style="color: blue; margin-right: 5px; font-size: 20px"></i>
-                                        </router-link>
+                                            <td>
+                                                <router-link :to="{ name: 'ApplicationView', params: { id: data.id } }">
+                                                    <i class="fas fa-eye" style="color: blue; margin-right: 5px; font-size: 20px"></i>
+                                                </router-link>
 
-                                        <a style="cursor: pointer" @click="CategoryDatadelete(data.id)">
-                                            <i class="fas fa-trash-alt" style="color: red; font-size: 20px"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                            </DataTable>
+                                                <a style="cursor: pointer" @click="CategoryDatadelete(data.id)">
+                                                    <i class="fas fa-trash-alt" style="color: red; font-size: 20px"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </DataTable>
                                 </div>
-<!--                                <pagination previousText="PREV" nextText="NEXT" :data="joblist.jobData" @paginateTo="getJobList"></pagination>-->
+                                <!--                                <pagination previousText="PREV" nextText="NEXT" :data="joblist.jobData" @paginateTo="getJobList"></pagination>-->
 
                             </template >
 
@@ -112,14 +112,14 @@
         name: "ApplicationComponent",
         components: {DataTable},
         data() {
-        return {
-            tableHeading: ["Sl", "Name", "Email","Image", "Company", "Position","Status","Resume", "Action"],
-            applylist:[],
-            application_status : 0,
-            isLoading : false,
+            return {
+                tableHeading: ["Sl", "Name", "Email","Image", "Company", "Position","Status","Resume", "Action"],
+                applylist:[],
+                application_status : 0,
+                isLoading : false,
 
-        };
-    },
+            };
+        },
         watch: {
             '$route.query': {
                 handler: function(newValue) {

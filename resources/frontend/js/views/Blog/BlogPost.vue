@@ -12,19 +12,18 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ post.title }}</h5>
                         <p class="card-text">{{ post.description }}</p>
-                        <p class="card-text">Likes: {{ post.likes }}</p>
-                        <button class="btn btn-outline-primary" @click="likePost(post.id)">Like</button>
-<!--                        <button-->
-<!--                                :class="{'btn btn-outline-primary': !post.liked, 'btn btn-primary': post.liked}"-->
-<!--                                @click="likePost(post.id)">-->
-<!--                            {{ post.liked ? 'Liked' : 'Like' }}-->
-<!--                        </button>-->
-                        <router-link
+                        <div class="d-flex  justify-content-between">
+                            <router-link
                                 :to="{ name: 'Blog-Details', params: { id: post.id } }"
                                 class="btn btn-primary"
                         >
                             Read More
                         </router-link>
+                            <div class="fw-bold ">
+                                <p class="">Author:{{post.user.name}}</p></div>
+
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -68,18 +67,6 @@
                 } catch (error) {
                     // console.error("Error fetching blog data:", error);
                     this.error = "Error fetching blog data. Please try again later.";
-                }
-            },
-            async likePost(postId) {
-                try {
-                    const response = await axios.post(`/api/frontend/blogpost/${postId}/like`);
-                    if (response.data.status === 200) {
-                        const post = this.blogpost.find(post => post.id === postId);
-                        post.likes = response.data.likes;
-                        post.liked = response.data.liked;  // Update liked state
-                    }
-                } catch (error) {
-                    this.error = "Error liking the post. Please try again later.";
                 }
             },
         },

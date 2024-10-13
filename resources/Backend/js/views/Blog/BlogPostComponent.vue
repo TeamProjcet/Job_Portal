@@ -117,12 +117,12 @@
     import PageTop from "../../Components/PageTop";
     import DataTable from "../../Components/DataTable";
     import FormModal from "../../Components/FormModal";
-    import Editor from '@tinymce/tinymce-vue'
+
 
     export default {
         name: "BlogPostComponent",
         components: {
-            FormModal, DataTable, PageTop, Editor
+            FormModal, DataTable, PageTop
         },
         data() {
             return {

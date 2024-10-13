@@ -52,6 +52,12 @@ export default {
             return `${baseUrl}/${_this.$route.meta.dataUrl}`
 
         },
+        _show: function (object, colum, defaultData = '') {
+            if (object !== undefined && object !== null && object[colum] !== undefined){
+                return object[colum];
+            }
+            return defaultData;
+        },
 
         publicImage : function (imageName) {
             return `${window.publicPath}/${imageName}`;

@@ -27,14 +27,19 @@
                                     </div>
                                     <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
                                         <div class="d-flex mb-3">
-                                            <a class="btn btn-light btn-square me-3" href=""><i class="far fa-heart text-primary"></i></a>
+                                            <a class="btn btn-light btn-square me-3"><i class="far fa-heart text-primary"></i></a>
                                             <router-link class="btn btn-primary" :to="{ name: 'Details', params: { id: job.id }}">Apply Now</router-link>
                                         </div>
                                         <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Date Line: {{ job.date_time}}</small>
                                     </div>
                                 </div>
                             </div>
-                            <a class="btn btn-primary py-3 px-5" href="">Browse More Jobs</a>
+                            <a v-if="joblist.jobData && joblist.jobData.current_page < joblist.jobData.last_page"
+                               class="btn btn-primary py-3 px-5"
+                               @click="loadMoreJobs">
+                                Browse More Jobs
+                            </a>
+<!--                            <pagination previousText="PREV" nextText="NEXT" :data="joblist.jobData" @paginateTo="getJobList"></pagination>-->
 
                         </template>
                         <template v-else>
@@ -51,15 +56,18 @@
 
 <script>
     import axios from 'axios';
+    import Pagination from "../plugins/pagination/pagination";
 
     export default {
         name: "JobList",
+        components: {Pagination},
         data() {
             return {
                 joblist: [],
                 error: null,
                 isLoading : false,
                 job_type : 1,
+                favourites:[]
             };
         },
         watch: {
@@ -73,6 +81,7 @@
         },
         mounted() {
             this.getJobList();
+            // this.loadFavourites();
             this.getRequiredData(['job_type'])
         },
         methods: {
@@ -88,6 +97,25 @@
                     this.error = "Error fetching job data. Please try again later.";
                 }
             },
+            loadMoreJobs() {
+                if (this.joblist.jobData.current_page < this.joblist.jobData.last_page) {
+                    let nextPage = this.joblist.jobData.current_page + 1;
+                    this.getJobList(nextPage);
+                }
+            },
+            loadFavourites() {
+                axios.get('/api/frontend/favourites')
+                    .then(response => {
+                        this.favourites = response.data;
+                    });
+            },
+            addFavourite(jobId) {
+                axios.post('/api/frontend/favourites', { job_id: jobId })
+                    .then(() => {
+                        this.loadFavourites();
+                    });
+            },
+
         }
     }
 </script>

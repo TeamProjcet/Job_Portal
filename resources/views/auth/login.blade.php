@@ -56,9 +56,7 @@
                     <a href="forgot .html" class="btn btn-link">Forgot password?</a>
                 </div>
                 <button type="submit" class="btn btn-success btn-block mt-3">Login</button>
-                <div class="text-center mt-3">
-                    Not a member? <a href="{{url('/register')}}" class="btn btn-link">Signup now</a>
-                </div>
+
             </form>
         </div>
     </div>

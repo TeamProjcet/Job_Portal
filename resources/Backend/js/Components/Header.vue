@@ -26,32 +26,29 @@
                         </ul>
                     </li>
 
-                    <li class="nav-item topbar-user dropdown hidden-caret">
-                        <a class="dropdown-toggle profile-pic" data-bs-toggle="dropdown" href="#" aria-expanded="false">
-                            <div class="d-flex align-items-center">
-                                <div style="margin-right: 10px" class="btn bg-success">
-                                    <h5 class="mb-0 me-2">{{ user?.name || 'Guest' }}</h5>
-                                </div>
-                                <div class="avatar-sm" style="border: 1px solid; border-radius: 50px;">
-                                    <template v-for="picture in employer">
-                                        <img :src="storageImage(picture.image)" alt="..." class="avatar-img rounded-circle" />
-                                    </template>
-                                </div>
-                            </div>
-                        </a>
-                        <ul class="dropdown-menu dropdown-user animated fadeIn">
-                            <div class="dropdown-user-scroll scrollbar-outer">
-                                <li>
-                                    <div class="dropdown-divider"></div>
-                                    <router-link to="/admin/employer/profile" class="dropdown-item">My Profile</router-link>
-                                    <div class="dropdown-divider"></div>
-                                    <div class="dropdown-divider"></div>
-                                    <a href="#" @click.prevent="logout" class="dropdown-item">Logout</a>
-                                </li>
-                            </div>
-                        </ul>
-                    </li>
-                </ul>
+                <li class="nav-item topbar-user dropdown hidden-caret">
+                    <a class="dropdown-toggle profile-pic" data-bs-toggle="dropdown" href="#" aria-expanded="false">
+                        <div class="d-flex align-items-center bg-success text-white p-2 rounded">
+                            <h5 class="mb-0 me-2">{{ user? user.name : 'Guest' }}</h5>
+                            <i class="fa fa-angle-down ms-2"></i>
+                        </div>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user animated fadeIn">
+                        <div class="dropdown-user-scroll scrollbar-outer">
+                            <li>
+                                <div class="dropdown-divider"></div>
+                                <router-link to="/admin/employer/profile" class="dropdown-item">My Profile</router-link>
+                                <div class="dropdown-divider"></div>
+                                <div class="dropdown-divider"></div>
+                                <a href="#" @click.prevent="logout" class="dropdown-item">Logout</a>
+                            </li>
+                        </div>
+                    </ul>
+                </li>
+
+
+</ul>
+
             </div>
         </nav>
     </div>
@@ -68,7 +65,7 @@
             };
         },
         mounted() {
-            this.checkAuthentication();
+            this.userAuthentication();
         },
         methods: {
             async logout() {
@@ -78,7 +75,8 @@
                 } catch (error) {
                     console.error('Logout Failed:', error);
                 }
-            }
+            },
+
         }
     }
 </script>

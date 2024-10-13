@@ -25,12 +25,9 @@
 
                 <ul class="navbar-nav ms-auto ">
                         <li class="nav-item  dropdown" v-if="isAuthenticated">
-                            <a
-                                    class="nav-link dropdown-toggle bg-success text-white py-2 px-lg-4 rounded-pill fw-bold"
-                                    data-bs-toggle="dropdown"
-                                    aria-expanded="false"
-                                    style="font-size: 16px;"
-                            >
+                            <a class="nav-link dropdown-toggle bg-success text-white py-2 px-lg-4 rounded-pill fw-bold"
+                               data-bs-toggle="dropdown" aria-expanded="false"  style="font-size: 16px;" >
+<!--                                {{ _show(seeker, 'name', 'Guest') }}-->
                                 {{ seeker?seeker.name : 'Guest' }}
                             </a>
 
@@ -61,7 +58,9 @@
 </template>
 
 <script>
-    import axios from 'axios'
+    import axios from 'axios';
+    import {Toast} from "vue-toastification";
+
     export default {
         name: "Header",
         data() {
@@ -76,14 +75,34 @@
         methods: {
             async seekerlogout() {
                 try {
+                    const _this=this;
                     const response = await axios.post('/api/frontend/seekerlogout');
                     if (response.data.status === 2000) {
-                        this.$router.push('/');
+                        _this.$toast.success("Logout  successfully!");
+
                     }
                 } catch (error) {
                     console.error('Logout Failed:', error);
                 }
-            }
+            },
+            // async checkAuthentication() {
+            //     try {
+            //         const response = await axios.get('/api/frontend/seekerdata');
+            //         if (response.data && response.data.result) {
+            //             this.seeker = response.data.result; // Assuming response.data.result has the user info
+            //             this.isAuthenticated = true;
+            //             this.fromData.name = this.seeker.name;
+            //             this.fromData.email = this.seeker.email;
+            //             this.fromData.seeker_id = this.seeker.id;
+            //         } else {
+            //             this.seeker = null;
+            //             this.isAuthenticated = false;
+            //         }
+            //     } catch (error) {
+            //         this.isAuthenticated = false;
+            //         console.error('Authentication check failed:', error.response ? error.response.data : error.message);
+            //     }
+            // },
     }
     }
 </script>
