@@ -9,6 +9,7 @@ import EmployerProfile from "../views/Employers/EmployerProfile";
 import Newsletter from "../views/Visitor/Newsletter";
 import Contact from "../views/Visitor/Contact";
 import ApplicationComponent from "../views/Application/ApplicationComponent";
+import BlogCommentComponent from "../views/Blog/BlogCommentComponent";
 
 
 const route = [
@@ -66,6 +67,14 @@ const route = [
         }
 
     },
+    // {
+    //     path : '/admin/blog/blogcomment',
+    //     name : 'blogcomment',
+    //     component : BlogCommentComponent,
+    //     meta:{pagetitle:'Blog Comment Table',dataUrl:'api/frontend/blogcomment',
+    //     }
+    //
+    // },
     {
         path : '/admin/employer/profile',
         name : 'employerprofile',

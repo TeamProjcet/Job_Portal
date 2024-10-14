@@ -91,6 +91,11 @@
                                         <span class="sub-item">Blog Post</span>
                                     </router-link>
                                 </li>
+                                <li>
+                                    <router-link to="/admin/blog/blogcomment">
+                                        <span class="sub-item">Blog Comment</span>
+                                    </router-link>
+                                </li>
 
 
                             </ul>

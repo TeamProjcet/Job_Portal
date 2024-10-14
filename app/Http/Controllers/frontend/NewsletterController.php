@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 class NewsletterController extends Controller
 {
 use Helper;
+
+
     public function index()
     {
         $data = Newsletter::all();

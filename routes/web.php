@@ -52,7 +52,8 @@ Route::prefix('api/frontend/')->group(function () {
     Route::post('/seekerlogout', [\App\Http\Controllers\frontend\SeekerLoginController::class, 'logout']);
     Route::resource('/newsletter', \App\Http\Controllers\frontend\NewsletterController::class);
     Route::resource('/contact', \App\Http\Controllers\frontend\ContactController::class);
-//    Route::post('/contact', [\App\Http\Controllers\frontend\ContactController::class, 'store']);
+//    Route::resource('/blogcomment', \App\Http\Controllers\frontend\BlogCommentController::class);
+    Route::post('/blogcomment', [\App\Http\Controllers\frontend\BlogCommentController::class, 'store']);
 
 });
 
