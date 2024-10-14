@@ -116,7 +116,7 @@
                     });
 
                     if (response.status === 200) {
-                        alert('Thank you for contacting us!');
+                        this.$toast.success("Thank you for contacting us!");
                         // Clear the form fields
                         this.name = '';
                         this.email = '';

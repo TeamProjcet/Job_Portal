@@ -84,7 +84,7 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
             case 3:
               response = _context.sent;
               if (response.status === 200) {
-                alert('Thank you for subscribing!');
+                _this.$toast.success("Thank you for subscribing!");
                 _this.email = ''; // clear the input field
               }
               _context.next = 11;
@@ -423,7 +423,7 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
             case 3:
               response = _context.sent;
               if (response.status === 200) {
-                alert('Thank you for contacting us!');
+                _this.$toast.success("Thank you for contacting us!");
                 // Clear the form fields
                 _this.name = '';
                 _this.email = '';

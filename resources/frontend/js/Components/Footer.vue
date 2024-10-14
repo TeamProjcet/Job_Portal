@@ -86,7 +86,7 @@
                     });
 
                     if (response.status === 200) {
-                        alert('Thank you for subscribing!');
+                        this.$toast.success("Thank you for subscribing!");
                         this.email = ''; // clear the input field
                     }
                 } catch (error) {
