@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('blog_comments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('seeker_id')->constrained()->onDelete('cascade');  // Link to seekers table
-            $table->foreignId('blog_id')->constrained()->onDelete('cascade');    // Link to blogs table
+            $table->integer('seeker_id');  // Link to seekers table
+            $table->integer('blog_id');    // Link to blogs table
             $table->text('comments');
             $table->timestamps();
         });

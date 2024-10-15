@@ -3,6 +3,7 @@ const helper = function (store, router) {
         store.state.updateId = '';
         store.state.formType = 1;
         store.state.fromData = {};
+        store.state.dataList = {};
 
         next(true);
     });

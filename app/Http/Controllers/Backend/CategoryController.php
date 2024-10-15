@@ -14,6 +14,13 @@ class CategoryController extends Controller
 
     public function __construct()
     {
+        $this->middleware(function ($request, $next) {
+            if (!$this->can(request()->route()->action['as'])){
+                return $this->returnData(5000, null, 'You are not authorized to access this page');
+            }
+            return $next($request);
+        });
+
         $this->model = new Category();
     }
 
@@ -32,6 +39,10 @@ class CategoryController extends Controller
 
     public function store(Request $request)
     {
+        if (!$this->can('category_view')){
+            return $this->returnData(5000, '', 'You only have access to this module');
+        }
+
         $validator = $this->model->Validator($request->all());
 
         if ($validator->fails()) {

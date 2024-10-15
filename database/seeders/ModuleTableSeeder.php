@@ -31,10 +31,10 @@ class ModuleTableSeeder extends Seeder
                 'submenus' => [
                     [
                         'name' => 'Job Category',
-                        'key' => 'category',
+                        'key' => 'categories',
                         'link' => '/admin/jobcategory/category',
                         'icon' => 'fas fa-folder',
-                        'permission' => ['add', 'view', 'edit', 'update', 'delete'],
+                        'permission' => ['store', 'index', 'edit', 'update', 'destroy'],
                     ],
                     [
                         'name' => 'Company',
@@ -181,7 +181,7 @@ class ModuleTableSeeder extends Seeder
         foreach ($moduleData['permission'] as $permission) {
             $permissionModel = Permission::create([
                 'module_id' => $module->id,
-                'name' => $moduleData['key'] . "_" . $permission,
+                'name' => $moduleData['key'] . "." . $permission,
             ]);
 
             RolePermission::create([
