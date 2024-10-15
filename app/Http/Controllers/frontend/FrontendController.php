@@ -24,7 +24,7 @@ class FrontendController extends Controller
             if ($job_type) {
                 $query->where('job_type', $job_type);
             }
-        })->with('category','company')->paginate(2);
+        })->with('category','company')->paginate(12);
 
         $data['category'] = Category::get();
 

@@ -15,7 +15,7 @@
 
 
                     <h6 class="card-title mt-4">Cover Letter</h6>
-                    <p>{{application.coverLetter}}</p>
+                    <p v-html="application.coverLetter"></p>
                 </div>
                 <p>
                     <strong>Status:</strong>

@@ -71,7 +71,7 @@ const route = [
 
     },
     {
-            path : '/admin/blog/blogpost',
+        path : '/admin/blog/blogpost',
         name : 'blogpost',
         component : BlogPostComponent,
         meta:{pagetitle:'Blog Post Table',dataUrl:'api/blogpost',

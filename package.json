@@ -25,6 +25,7 @@
         "webpack": "^5.94.0"
     },
     "dependencies": {
+        "date-fns": "^4.1.0",
         "mix": "^0.0.1",
         "sweetalert2": "^11.14.0",
         "tinymce": "^7.3.0",

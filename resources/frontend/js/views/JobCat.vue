@@ -1,10 +1,10 @@
 <template>
     <!-- Category Start -->
-    <div class="container-xxl py-5">
-        <div class="container">
-            <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Explore By Category</h1>
-            <div class="row g-4 overflow-auto" style="max-height: 400px;"> <!-- Adjust max-height as needed -->
-                <div class="col-lg-4 col-md-4 col-sm-4 wow fadeInUp" data-wow-delay="0.1s" v-for="jobcat in jobcateg" :key="jobcat.id">
+    <div class="container mt-4">
+        <div class="container mt-4">
+            <h1 class="text-center mb-5 " >Explore By Category</h1>
+            <div class="row g-4 " style="max-height: 400px;"> <!-- Adjust max-height as needed -->
+                <div class="col-lg-4 col-md-4 col-sm-4"  v-for="jobcat in jobcateg" :key="jobcat.id">
                     <a class="cat-item rounded p-4">
                         <img class="flex-shrink-0 img-fluid border rounded" :src="storageImage(jobcat.image)" alt="" style="width: 80px; height: 80px;">
                         <router-link :to="{ name: 'jobcategory', params: { category_id: jobcat.id } }">

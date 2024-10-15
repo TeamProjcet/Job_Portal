@@ -18,8 +18,10 @@ return new class extends Migration
             $table->integer('job_id');
             $table->integer('seeker_id');
             $table->string('image');
-            $table->string('coverLetter');
-            $table->text('portfolio');
+            $table->text('coverLetter');
+            $table->integer('phone')->nullable();
+            $table->string('address')->nullable();
+            $table->string('portfolio');
             $table->string('application_status')->default(0);
             $table->timestamp('applied_at')->useCurrent();
             $table->timestamps();

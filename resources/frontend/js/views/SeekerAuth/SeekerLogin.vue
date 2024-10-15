@@ -48,7 +48,7 @@
                     .then(function (res) {
                         if (parseInt(res.data.status) === 2000) {
                             _this.$toast.success("Login successful!");
-                            _this.$router.push('/');
+                            // _this.$router.push('/');
                         } else {
                             _this.$toast.error("Invalid credentials!");
                         }
@@ -75,5 +75,5 @@
 </script>
 
 <style scoped>
-    /* এখানে আপনার স্টাইল যুক্ত করুন */
+
 </style>

@@ -31,8 +31,13 @@
                     </div>
 
                     <div class="mb-3">
+                        <label class="form-label">Vacancy</label>
+                        <input type="text" class="form-control" v-validate="'required'" v-model="fromData.vacancy" name="title">
+                    </div>
+
+                    <div class="mb-3">
                         <label class="form-label">Salary</label>
-                        <input type="number" class="form-control" v-validate="'required'" v-model="fromData.salary" name="salary">
+                        <input type="text" class="form-control" v-validate="'required'" v-model="fromData.salary" name="salary">
                     </div>
 
                     <div class="mb-3">

@@ -42,7 +42,7 @@
                                             <td>{{ data.seeker.email }}</td>
                                             <td>
                                                 <!-- Display the image -->
-                                                <img :src="storageImage(data.job.image)" style="width: 100px; height: 100px" alt="Image">
+                                                <img :src="storageImage(data.seeker.profile_picture)" style="width: 100px; height: 100px" alt="Image">
                                             </td>
                                             <td>{{ data.job.company.name}}</td>
                                             <td>{{ data.job.position}}</td>
@@ -55,10 +55,7 @@
                                         {{ data.application_status == 0 ? 'Pending' : data.application_status == 1 ? 'Accepted' : 'Rejected' }}
                                         </span>
                                             </td>
-                                            <!--                                    <td>-->
-                                            <!--                                        &lt;!&ndash; Display the image &ndash;&gt;-->
-                                            <!--                                        <img :src="storageImage(data.image)" style="width: 100px; height: 100px" alt="Image">-->
-                                            <!--                                    </td>-->
+
                                             <td>
                                                 <template v-if="data.image">
                                                     <template v-if="isPDF(data.image)">

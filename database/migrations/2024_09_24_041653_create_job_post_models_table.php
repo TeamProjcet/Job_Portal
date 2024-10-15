@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('category_id');
             $table->text('position');
             $table->integer('company_id');
+            $table->integer('vacancy');
             $table->string('address');
             $table->text('details');
             $table->string('image')->nullable();

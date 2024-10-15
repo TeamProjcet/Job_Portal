@@ -13,6 +13,8 @@ class Applications extends Model
         'job_id',
         'seeker_id',
         'image',
+        'phone',
+        'address',
         'coverLetter',
         'portfolio',
     ];
@@ -21,6 +23,8 @@ class Applications extends Model
             'job_id'=>'required ',
             'seeker_id' => 'required',
             'image'=>'required',
+            'phone'=>'required',
+            'address'=>'required',
             'portfolio'=>'required  ',
             'coverLetter'=>'required ',
         ]);

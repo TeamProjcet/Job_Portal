@@ -1,15 +1,15 @@
 <template>
-    <div class="container-xxl bg-white p-0">
+    <div class="">
         <!-- Header Start -->
-        <div class="container-xxl py-5 bg-dark page-header mb-5">
+        <div class=" py-5 bg-dark page-header mb-5">
             <div class="container my-5 pt-5 pb-4">
-                <h1 class="display-3 text-white mb-3 animated slideInDown">Job Detail</h1>
+                <h1 class="display-3 text-white mb-3  slideInDown">Job Detail</h1>
             </div>
         </div>
         <!-- Header End -->
 
         <!-- Job Detail Start -->
-        <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="container-xxl py-5 " >
             <div class="container">
                 <div class="row gy-5 gx-4" >
                     <div class="col-lg-8" >
@@ -38,6 +38,12 @@
                                         <div class="col-12 col-sm-6">
                                             <input type="email" class="form-control" placeholder="Your Email" v-model="fromData.email" readonly>
                                         </div>
+                                        <div class="col-12 col-sm-6">
+                                            <input type="text" class="form-control" placeholder="Your Phone" v-model="fromData.phone">
+                                        </div>
+                                        <div class="col-12 col-sm-6">
+                                            <input type="text" class="form-control" placeholder="Your Address" v-model="fromData.address">
+                                        </div>
                                         <div class="col-12">
                                             <label class="form-label"> Portfolio/Linkdin/Github</label>
 
@@ -45,21 +51,11 @@
                                         </div>
 
 
-                                        <div class="col-12">
-                                            <textarea class="form-control" rows="5" placeholder="Cover Letter" v-model="fromData.coverLetter"></textarea>
+                                        <div class="mb-3">
+                                            <label class="form-label"> Cover Letter</label>
+                                            <editor v-model="fromData.coverLetter"  name="details" :init="tinymceInit"/>
                                         </div>
 
-<!--                                        <div class="col-md-4">-->
-<!--                                            <div class="mb-3">-->
-<!--                                                <label class="form-label">Upload your resume</label>-->
-<!--                                                <div @click="clickFileField('imageField')" class="image_upload" :style="{ 'background-image': 'url(' + publicImage('images/uploading.avif') + ')' }">-->
-<!--                                                    <template v-if="fromData.image !== undefined">-->
-<!--                                                        <img class="photo" :src="storageImage(fromData.image)">-->
-<!--                                                    </template>-->
-<!--                                                </div>-->
-<!--                                                <input  @change="uploadImage($event, fromData, 'image')" type="file" name="image" id="imageField" class="file_field">-->
-<!--                                            </div>-->
-<!--                                        </div>-->
 
                                         <div class="col-md-4">
                                             <div class="mb-3">
@@ -94,18 +90,18 @@
                     </div>
 
                     <div class="col-lg-4">
-                        <div v-if="job" class="bg-light rounded p-5 mb-4 wow slideInUp" data-wow-delay="0.1s">
+                        <div v-if="job" class="bg-light rounded p-5 mb-4 ">
                             <h4 class="mb-4">Job Summary</h4>
-                            <p><i class="fa fa-angle-right text-primary me-2"></i>Published On: {{ job.date_time }}</p>
+                            <p><i class="fa fa-angle-right text-primary me-2"></i>Published On: {{formatDate(job.created_at)}}</p>
                             <p><i class="fa fa-angle-right text-primary me-2"></i>Job Category: {{job.category.name}} </p>
-                            <p><i class="fa fa-angle-right text-primary me-2"></i>Vacancy: 01</p>
+                            <p><i class="fa fa-angle-right text-primary me-2"></i>Vacancy: {{job.vacancy}}</p>
                             <p>
                                 <i class="fa fa-angle-right text-primary me-2"></i>
                                 Job Nature: {{ job.job_type == 1 ? 'Full Time' : (job.job_type == 2 ? 'Part Time' : 'Not Specified') }}
                             </p>
                             <p><i class="fa fa-angle-right text-primary me-2"></i>Salary: {{ job.salary || 'Negotiable' }}</p>
                             <p><i class="fa fa-angle-right text-primary me-2"></i>Location: {{ job.address }}</p>
-                            <p class="m-0"><i class="fa fa-angle-right text-primary me-2"></i>Date Line: 2024-10-05</p>
+                            <p class="m-0"><i class="fa fa-angle-right text-primary me-2"></i>Date Line: {{formatDate(job.date_time)}}</p>
                         </div>
                     </div>
                 </div>
@@ -118,7 +114,8 @@
 <script>
     import axios from 'axios';
     import Toast from "vue-toastification";
-
+    import  format from 'date-fns/format';
+    import   parseISO from 'date-fns/format';
     export default {
         name: "JobDetails",
         props: ['id'],
@@ -131,8 +128,15 @@
                 isAuthenticated:false,
 
                 components:{
-                    Toast
-                }
+                    Toast, format, parseISO
+                },
+
+                tinymceInit:{
+                    height: 300,
+                    menubar: false,
+                    plugins: 'link image code',
+                    toolbar: 'undo redo | styleselect | bold italic | link image | code',
+                },
 
             };
         },
@@ -141,6 +145,18 @@
             this.checkAuthentication();
         },
         methods: {
+            formatDate(dateString) {
+                if (!dateString) {
+                    return "Date not available";
+                }
+                const parsedDate = new Date(dateString);
+                if (isNaN(parsedDate.getTime())) {
+                    return "Invalid date";
+                }
+                return format(parsedDate, 'MMMM d, yyyy');
+            },
+
+
             async getJobDetails() {
                 const _this=this;
                 try {

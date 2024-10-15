@@ -48,7 +48,7 @@
                         <h4 class="text-section">Menu Items</h4>
                     </li>
 
-<!--                    -->
+
 
                     <li class="nav-item" v-for="">
                         <a data-bs-toggle="collapse" href="#base">
@@ -77,28 +77,6 @@
                         </div>
                     </li>
 
-                    <!-- --------------------- -->
-
-                    <li class="nav-item">
-                        <a data-bs-toggle="collapse" href="#base2">
-                            <i class="fab fa-blogger-b"></i>
-                            <p>Blog</p>
-                            <span class="caret"></span>
-                        </a>
-                        <div class="collapse" id="base2">
-                            <ul class="nav nav-collapse">
-                                <li>
-                                    <router-link to="/admin/blog/blogpost">
-                                        <span class="sub-item">Blog Post</span>
-                                    </router-link>
-                                </li>
-
-
-                            </ul>
-                        </div>
-                    </li>
-
-<!--                    -->
 
                     <li class="nav-item">
                         <a data-bs-toggle="collapse" href="#base4">
@@ -140,6 +118,45 @@
                             </ul>
                         </div>
                     </li>
+
+
+                    <li class="nav-item">
+                        <a data-bs-toggle="collapse" href="#base2">
+                            <i class="fab fa-blogger-b"></i>
+                            <p>Blog</p>
+                            <span class="caret"></span>
+                        </a>
+                        <div class="collapse" id="base2">
+                            <ul class="nav nav-collapse">
+                                <li>
+                                    <router-link to="/admin/blog/blogpost">
+                                        <span class="sub-item">Blog Post</span>
+                                    </router-link>
+                                </li>
+
+
+                            </ul>
+                        </div>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a data-bs-toggle="collapse" href="#base0">
+                            <i class="fas fa-handshake"></i>
+                            <p>Partnerships</p>
+                            <span class="caret"></span>
+                        </a>
+                        <div class="collapse" id="base0">
+                            <ul class="nav nav-collapse">
+                                <li>
+                                    <router-link to="/admin/blog/blogpost">
+                                        <span class="sub-item">Collaborations</span>
+                                    </router-link>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
 
                 </ul>
             </div>

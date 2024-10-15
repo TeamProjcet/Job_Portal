@@ -85,24 +85,6 @@
                     console.error('Logout Failed:', error);
                 }
             },
-            // async checkAuthentication() {
-            //     try {
-            //         const response = await axios.get('/api/frontend/seekerdata');
-            //         if (response.data && response.data.result) {
-            //             this.seeker = response.data.result; // Assuming response.data.result has the user info
-            //             this.isAuthenticated = true;
-            //             this.fromData.name = this.seeker.name;
-            //             this.fromData.email = this.seeker.email;
-            //             this.fromData.seeker_id = this.seeker.id;
-            //         } else {
-            //             this.seeker = null;
-            //             this.isAuthenticated = false;
-            //         }
-            //     } catch (error) {
-            //         this.isAuthenticated = false;
-            //         console.error('Authentication check failed:', error.response ? error.response.data : error.message);
-            //     }
-            // },
     }
     }
 </script>
