@@ -113,7 +113,6 @@
 
 <script>
     import axios from 'axios';
-    import Toast from "vue-toastification";
     import  format from 'date-fns/format';
     import   parseISO from 'date-fns/format';
     export default {
@@ -128,7 +127,7 @@
                 isAuthenticated:false,
 
                 components:{
-                    Toast, format, parseISO
+                    format, parseISO
                 },
 
                 tinymceInit:{
@@ -171,7 +170,6 @@
                     _this.error = "Failed to load Job details.";
                 }
             },
-
 
                 async submitApplication() {
                 const _this=this;

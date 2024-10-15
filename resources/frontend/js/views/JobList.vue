@@ -22,24 +22,24 @@
                                     <span class="text-muted">
                                 {{ job.company.name }}
                                 </span>
-                                </router-link>
+                                    </router-link>
+                                </div>
+                                <div class="logo-container">
+                                    <img style="height: 80px" :src="storageImage(job.image)" alt="Company Logo" class="company-logo" />
+                                </div>
                             </div>
-                            <div class="logo-container">
-                                <img style="height: 80px" :src="storageImage(job.image)" alt="Company Logo" class="company-logo" />
+                            <div class="d-flex gap-2 p-3">
+                                <router-link :to="{ name: 'Details', params: { id: job.id }}" class="btn btn-primary">Apply Now</router-link>
+                                <button @click="saveJob(job)" class="btn btn-danger">Save Job</button>
                             </div>
-                        </div>
-                        <div class="d-flex gap-2 p-3">
-                            <router-link :to="{ name: 'Details', params: { id: job.id }}" class="btn btn-primary">Apply Now</router-link>
-                            <button class="btn btn-danger">Save Job</button>
                         </div>
                     </div>
-                </div>
-                <a v-if="joblist.jobData && joblist.jobData.current_page < joblist.jobData.last_page"
-                   class="btn btn-primary py-3 px-5 mt-3"
-                   @click="loadMoreJobs">
-                    Browse More Jobs
-                </a>
-            </template>
+                    <a v-if="joblist.jobData && joblist.jobData.current_page < joblist.jobData.last_page"
+                       class="btn btn-primary py-3 px-5 mt-3"
+                       @click="loadMoreJobs">
+                        Browse More Jobs
+                    </a>
+                </template>
 
             <template v-else>
                 <span class="dataLoader"><i class="fa fa-spin fa-spinner"></i></span>
@@ -54,6 +54,7 @@
     import axios from 'axios';
     import Pagination from "../plugins/pagination/pagination";
     import  format  from 'date-fns/format';
+
     export default {
         name: "JobList",
         components: {Pagination, format},
@@ -62,6 +63,7 @@
                 joblist: [],
                 error: null,
                 isLoading : false,
+                isAuthenticated:false
             };
         },
         watch: {
@@ -75,6 +77,9 @@
         },
         mounted() {
             this.getJobList();
+
+            this.checkAuthentication();
+
             this.getRequiredData(['job_type'])
         },
         methods: {
@@ -103,6 +108,34 @@
                     this.error = "Error fetching job data. Please try again later.";
                 }
             },
+
+
+            // async saveJob(job) {
+            //     try {
+            //         const response = await axios.post('/api/saved', {
+            //             job_id: job.id
+            //         });
+            //         console.log(response.data.message);
+            //     } catch (error) {
+            //         console.error('Error saving job:', error);
+            //     }
+            // },
+            async saveJob(job) {
+                if (!this.isAuthenticated) {
+                    // Redirect to login or show a modal
+                    this.$router.push( '/seekerlogin' ); // Assuming you have a route named 'Login'
+                    return;
+                }
+
+                try {
+                    const response = await axios.post('/api/saved', {
+                        job_id: job.id
+                    });
+                } catch (error) {
+                    console.error('Error saving job:', error);
+                }
+            },
+
 
 
         }

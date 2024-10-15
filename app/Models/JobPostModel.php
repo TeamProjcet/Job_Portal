@@ -39,6 +39,7 @@ class JobPostModel extends Model
         return $this->belongsTo(Company::class,'company_id','id');
     }
 
+
     public function applications()
     {
         return $this->hasMany(Applications::class);

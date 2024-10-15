@@ -52,21 +52,11 @@
         <div class="container-fluid mt-4" >
             <div class="container mt-4">
                 <h1 class="text-center mb-5">Our Trusted Clients!!!</h1>
-                <div class="owl-carousel testimonial-carousel">
+                <div class="">
                     <div class="row">
-                        <div class="col-md-4 mb-4 testimonial-item">
+                        <div class="col-md-4 mb-4 " v-for="(partner, index) in partnership" :key="index">
                             <div class="card">
-                                <img style="width: 200px; height: 120px; margin: auto" src="https://i.ibb.co/gZHFWB6/usaid.png" class="card-img-top" alt="Image 1">
-                            </div>
-                        </div>
-                        <div class="col-md-4 mb-4 testimonial-item">
-                            <div class="card">
-                                <img style="width: 200px; height: 120px; margin: auto" src="https://i.ibb.co/rmF79HL/yamaha.png" class="card-img-top" alt="Image 2">
-                            </div>
-                        </div>
-                        <div class="col-md-4 mb-4 testimonial-item">
-                            <div class="card">
-                                <img style="width: 200px; height: 120px; margin: auto" src="https://i.ibb.co/XWptrcR/fonterra.png" class="card-img-top" alt="Image 3">
+                                <img style="width: 200px; height: 120px; margin: auto " :src="storageImage(partner.logo)" class="card-img-top p-2" alt="Image 1">
                             </div>
                         </div>
                     </div>
@@ -82,9 +72,16 @@
     import JobList from "./JobList";
     import JobCat from "./JobCat";
     import Search from "./Search";
+    import axios from 'axios';
+
     export default {
         name: "Dashboard",
         components: {Search, JobCat, JobList},
+        data() {
+            return {
+                partnership: [],
+            };
+        },
         mounted() {
                 $('.header-carousel').owlCarousel({
                     loop: true,
@@ -95,22 +92,31 @@
                     autoplayHoverPause: true,
                 });
 
-
-            $('.testimonial-carousel').owlCarousel({
-                items: 1,
-                loop: true,
-                autoplay: true,
-                autoplayTimeout: 5000,
-                autoplayHoverPause: true,
-            });
+            this.getPartnership();
 
         },
+
+        methods:{
+            async getPartnership() {
+                try {
+                    const response = await axios.get('/api/partnership');
+                    if (response.data && response.data.result) {
+                        this.partnership = response.data.result;
+                    } else {
+                        throw new Error("Unexpected response format");
+                    }
+                } catch (error) {
+                    // console.error("Error fetching blog data:", error);
+                    this.error = "Error fetching blog data. Please try again later.";
+                }
+            },
+        }
     }
 </script>
 
 <style scoped>
     .testimonial-item {
-        overflow: hidden; /* Ensures the image doesn't overflow the card */
+        overflow: hidden;
         transition: transform 0.3s ease;
     }
 
@@ -119,7 +125,7 @@
     }
 
     .testimonial-item:hover .card img {
-        transform: scale(1.1); /* Slightly enlarges the image */
-        opacity: 0.8; /* Makes the image slightly transparent */
+        transform: scale(1.1);
+        opacity: 0.8;
     }
 </style>
