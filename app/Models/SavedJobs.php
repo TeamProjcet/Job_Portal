@@ -12,31 +12,19 @@ class SavedJobs extends Model
     protected $fillable = [
         'seeker_id',
         'job_id',
-        'saved_at',
     ];
-    public function validator($input){
-        return Validator::make($input,[
-            'job_id'=>'required ',
-            'seeker_id' => 'required',
+
+    public function validator($input)
+    {
+        return Validator::make($input, [
+            'seeker_id',
+            'job_id' => 'required',
         ]);
     }
-//
-//    public function jobSeeker()
-//    {
-//        return $this->belongsTo(JobSeekers::class, 'id', 'seeker_id');
-//    }
-//
-//    public function job()
-//    {
-//        return $this->belongsTo(JobPostModel::class, 'id', 'job_id');
-//    }
 
     public function seeker()
     {
-        return $this->belongsTo(Seeker::class,'seeker_id','id');
+        return $this->belongsTo(Seeker::class, 'seeker_id', 'id');
     }
-//    public function job()
-//    {
-//        return $this->belongsTo(JobPostModel::class, 'job_id','id');
-//    }
+
 }

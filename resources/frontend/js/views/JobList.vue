@@ -30,7 +30,7 @@
                             </div>
                             <div class="d-flex gap-2 p-3">
                                 <router-link :to="{ name: 'Details', params: { id: job.id }}" class="btn btn-primary">Apply Now</router-link>
-                                <button class="btn btn-danger">Save Job</button>
+                                <button @click="saveJob(job)" class="btn btn-danger">Save Job</button>
                             </div>
                         </div>
                     </div>
@@ -54,6 +54,7 @@
     import axios from 'axios';
     import Pagination from "../plugins/pagination/pagination";
     import  format  from 'date-fns/format';
+
     export default {
         name: "JobList",
         components: {Pagination, format},
@@ -62,6 +63,7 @@
                 joblist: [],
                 error: null,
                 isLoading : false,
+                isAuthenticated:false
             };
         },
         watch: {
@@ -75,7 +77,8 @@
         },
         mounted() {
             this.getJobList();
-            // this.loadFavourites();
+            this.checkAuthentication();
+
             this.getRequiredData(['job_type'])
         },
         methods: {
@@ -104,6 +107,34 @@
                     this.error = "Error fetching job data. Please try again later.";
                 }
             },
+
+
+            // async saveJob(job) {
+            //     try {
+            //         const response = await axios.post('/api/saved', {
+            //             job_id: job.id
+            //         });
+            //         console.log(response.data.message);
+            //     } catch (error) {
+            //         console.error('Error saving job:', error);
+            //     }
+            // },
+            async saveJob(job) {
+                if (!this.isAuthenticated) {
+                    // Redirect to login or show a modal
+                    this.$router.push( '/seekerlogin' ); // Assuming you have a route named 'Login'
+                    return;
+                }
+
+                try {
+                    const response = await axios.post('/api/saved', {
+                        job_id: job.id
+                    });
+                } catch (error) {
+                    console.error('Error saving job:', error);
+                }
+            },
+
 
 
         }

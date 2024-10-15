@@ -149,7 +149,7 @@
                         <div class="collapse" id="base0">
                             <ul class="nav nav-collapse">
                                 <li>
-                                    <router-link to="/admin/blog/blogpost">
+                                    <router-link to="/admin/client/partnership">
                                         <span class="sub-item">Collaborations</span>
                                     </router-link>
                                 </li>

@@ -29,6 +29,7 @@ Route::prefix('api')->group(function () {
     Route::resource('/saved', \App\Http\Controllers\SavedJobsController ::class);
     Route::resource('/companyreviews', \App\Http\Controllers\CompanyReviewsController ::class);
     Route::resource('/blogpost', \App\Http\Controllers\Backend\BlogController::class);
+    Route::resource('/partnership', \App\Http\Controllers\PartnershipController::class);
 
     Route::post('upload', [\App\Http\Controllers\Backend\UploadController::class, 'upload']);
     Route::post('/required_data', [\App\Http\Controllers\SupportController::class, 'requireData']);
@@ -51,7 +52,6 @@ Route::prefix('api/frontend')->group(function () {
     Route::get('jobcate/{cateId}', [\App\Http\Controllers\frontend\FrontendController::class, 'jobCategory'])->name('web.cat');
     Route::post('seekerregis', [\App\Http\Controllers\frontend\SeekerLoginController::class, 'store']);
     Route::post('seekerlogin', [\App\Http\Controllers\frontend\SeekerLoginController::class, 'login']);
-//    Route::post('blogpost/{id}/like', [\App\Http\Controllers\Backend\BlogController::class, 'like']);
     Route::post('seekerlogout', [\App\Http\Controllers\frontend\SeekerLoginController::class, 'logout']);
     Route::put('seeker/profile', [\App\Http\Controllers\frontend\SeekerLoginController::class, 'update']);
     Route::resource('favourites',\App\Http\Controllers\SavedJobsController::class);

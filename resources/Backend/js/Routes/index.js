@@ -13,6 +13,7 @@ import RolePermissionComponent from "../views/RolePermission/RolePermissionCompo
 import RoleComponent from "../views/RolePermission/RoleComponent";
 import UserRegisComponenet from "../views/RolePermission/UserRegisComponenet";
 import InterviewComponent from "../views/Interview/InterviewComponent";
+import Partnership from "../views/Partnership/Partnership";
 
 
 const route = [
@@ -75,6 +76,14 @@ const route = [
         name : 'blogpost',
         component : BlogPostComponent,
         meta:{pagetitle:'Blog Post Table',dataUrl:'api/blogpost',
+        }
+
+    },
+    {
+        path : '/admin/client/partnership',
+        name : 'partnership',
+        component : Partnership,
+        meta:{pagetitle:'Client Partnership Table',dataUrl:'api/partnership',
         }
 
     },

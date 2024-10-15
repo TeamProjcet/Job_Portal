@@ -25,7 +25,7 @@
                             <img style="height: 80px" :src="storageImage(jobcat.image)" alt="Company Logo" class="company-logo" />
                         </div>
                     </div>
-                    <div class="d-flex gap-2 justify-content-center p-3">
+                    <div class="d-flex gap-2  p-3">
                         <router-link :to="{ name: 'Details', params: { id: jobcat.id }}" class="btn btn-primary">Apply Now</router-link>
                         <button class="btn btn-danger">Save Job</button>
                     </div>
@@ -70,7 +70,7 @@
                 }
                 try {
                     const response = await axios.get(`/api/frontend/jobcate/${this.category_id}`);
-                    this.jobcategory = response.data.result;;
+                    this.jobcategory = response.data.result;
                 } catch (error) {
                     this.error = "Error fetching job data. Please try again later.";
                 }
