@@ -32,7 +32,7 @@ class JobPostModel extends Model
         return $this->belongsTo(Category::class,'category_id','id');
     }
     public function user(){
-        return $this->belongsTo(User::class,'category_id','id');
+        return $this->belongsTo(User::class);
     }
     public function company(){
         return $this->belongsTo(Company::class,'company_id','id');

@@ -13,7 +13,7 @@
                         <img :src="storageImage(data.image)" style="width: 100px; height: 100px" alt="Image">
                     </td>
                     <td>
-                        <a
+                        <a v-if="can('category_edit')"
                            @click="openEditModal(data, data.id)">
                             <i class="fas fa-edit" style="color: blue;"></i>
                         </a>

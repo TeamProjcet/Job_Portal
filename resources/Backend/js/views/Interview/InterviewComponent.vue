@@ -24,29 +24,43 @@
             </div>
 
       <FormModal @submit="submitFromData(fromData)">
-<!--          <div v-if="seekers.length > 0">-->
-<!--              <label >Select Seeker:</label>-->
-<!--              <select v-model="form.seeker_id">-->
-<!--                  <option v-for="seeker in seekers" :key="seeker.id" :value="seeker.seeker_id">-->
-<!--                      Seeker ID: {{ seeker.seeker_id }}-->
-<!--                  </option>-->
-<!--              </select>-->
-<!--          </div>-->
 
-<!--          <div v-else>-->
-<!--              <p>No seekers found for this job.</p>-->
-<!--          </div>-->
-          <label >Interview Date:</label>
-          <input type="date" class="form-control" v-model="fromData.interview_date" required>
+          <div class="mb-3">
+              <label class="form-label">Job Name</label>
+              <select v-model="fromData.job_id" name="job_id" v-validate="'required'" class="form-control">
+                  <template v-for="(item, index) in requireData.jobData" >
+                      <option :value="item.id">{{item.position}}</option>
+                  </template>
+              </select>
+          </div>
 
-          <label >Interview Time:</label>
-          <input type="time"  class="form-control"  v-model="fromData.interview_time" required>
+          <div class="mb-3">
+              <label >Location:</label>
+              <input type="text" v-validate="'required'" class="form-control" v-model="fromData.location" name="location">
 
-          <label >Location:</label>
-          <input type="text"  class="form-control"  v-model="fromData.interview_location" required>
+          </div>
+
+          <div class="mb-3">
+
+              <label >Interview Date:</label>
+              <input type="date" v-validate="'required'" class="form-control" v-model="fromData.interview_date" name="interview_date">
+
+          </div>
+
+          <div class="mb-3">
+
+              <label >Interview Time:</label>
+              <input type="time" v-validate="'required'" class="form-control"  v-model="fromData.interview_time" name="interview_time">
+
+          </div>
+
+          <div class="mb-3">
+              <label class="form-label">Notic</label>
+              <editor type="text"  v-validate="'required'" class="form-control" v-model="fromData.notic" name="notic"></editor>
+          </div>
 
 
-<!--          <p v-if="message">{{ message }}</p>-->
+
       </FormModal>
     </div>
     </div>
@@ -59,17 +73,23 @@
     import FormModal from "../../Components/FormModal";
     import PageTop from "../../Components/PageTop";
     import DataTable from "../../Components/DataTable";
+    import axios from "axios";
     export default {
         name: "InterviewComponent",
         components: {DataTable, PageTop, FormModal},
         data(){
             return{
                 tableHeading:["SL","name","Action"],
+                jobdata:[],
 
             }
         },
         mounted() {
-            this.getRequiredData(['application'])
+            this.getRequiredData(['jobData']);
+        },
+        methods:{
+
+
         }
     }
 </script>
@@ -79,48 +99,4 @@
 </style>
 
 
-<!--<script>-->
-<!--    export default {-->
-<!--        data() {-->
-<!--            return {-->
-<!--                seekers: [],-->
-<!--                form: {-->
-<!--                    job_id: 1, // Example job ID, replace dynamically-->
-<!--                    seeker_id: '',-->
-<!--                    interview_date: '',-->
-<!--                    interview_time: '',-->
-<!--                    interview_location: '',-->
-<!--                },-->
-<!--                message: ''-->
-<!--            };-->
-<!--        },-->
-<!--        mounted() {-->
-<!--            this.fetchSeekers();-->
-<!--        },-->
-<!--        methods: {-->
-<!--            fetchSeekers() {-->
-<!--                axios.get(`/api/jobs/${this.form.job_id}/seekers`)-->
-<!--                    .then(response => {-->
-<!--                        this.seekers = response.data;-->
-<!--                    })-->
-<!--                    .catch(error => {-->
-<!--                        console.error('Error fetching seekers:', error);-->
-<!--                    });-->
-<!--            },-->
-<!--            scheduleInterview() {-->
-<!--                axios.post('/api/interviews', this.form)-->
-<!--                    .then(response => {-->
-<!--                        this.message = response.data.message;-->
-<!--                        this.form.seeker_id = '';-->
-<!--                        this.form.interview_date = '';-->
-<!--                        this.form.interview_time = '';-->
-<!--                        this.form.interview_location = '';-->
-<!--                    })-->
-<!--                    .catch(error => {-->
-<!--                        console.error('Error scheduling interview:', error);-->
-<!--                    });-->
-<!--            }-->
-<!--        }-->
-<!--    };-->
-<!--</script>-->
 

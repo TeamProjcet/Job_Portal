@@ -3,14 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Models\InterviewSchedule;
+use App\Supports\Helper;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class InterviewScheduleController extends Controller
 {
+    use Helper;
+    public function __construct()
+    {
+        $this->model=new InterviewSchedule();
+    }
+
     public function index()
     {
-        $interviews = InterviewSchedule::with('job', 'jobSeeker', 'employer')->get();
-        return response()->json($interviews);
+//        $interviews = InterviewSchedule::with('job', 'jobSeeker', 'employer')->get();
+//        return response()->json($interviews);
     }
 
     public function create()
@@ -19,6 +27,18 @@ class InterviewScheduleController extends Controller
 
     public function store(Request $request)
     {
+
+        $validator = $this->model->Validator($request->all());
+
+        if ($validator->fails()) {
+            return $this->returnData(3000, $validator->errors());
+        }
+
+        $this->model->fill($request->all());
+        $this->model->user_id = Auth::id();
+        $this->model->save();
+
+        return $this->returnData(2000,$this->model);
     }
 
     public function show(InterviewSchedule $interviewSchedule)

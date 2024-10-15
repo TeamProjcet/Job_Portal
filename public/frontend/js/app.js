@@ -893,15 +893,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
-/* harmony import */ var _plugins_pagination_pagination__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../plugins/pagination/pagination */ "./resources/frontend/js/plugins/pagination/pagination.vue");
-
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "JobList",
-  components: {
-    Pagination: _plugins_pagination_pagination__WEBPACK_IMPORTED_MODULE_0__["default"]
-  },
   data: function data() {
     return {
       joblist: [],
@@ -932,7 +927,7 @@ __webpack_require__.r(__webpack_exports__);
       try {
         this.isLoading = true;
         this.joblist = {};
-        axios__WEBPACK_IMPORTED_MODULE_1__["default"].get("/api/frontend/joblist?job_type=".concat(this.job_type, "&page=").concat(page)).then(function (response) {
+        axios__WEBPACK_IMPORTED_MODULE_0__["default"].get("/api/frontend/joblist?job_type=".concat(this.job_type, "&page=").concat(page)).then(function (response) {
           _this.isLoading = false;
           _this.joblist = response.data.result;
         });
@@ -948,16 +943,15 @@ __webpack_require__.r(__webpack_exports__);
     },
     loadFavourites: function loadFavourites() {
       var _this2 = this;
-      axios__WEBPACK_IMPORTED_MODULE_1__["default"].get('/api/frontend/favourites').then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_0__["default"].get('/api/frontend/favourites').then(function (response) {
         _this2.favourites = response.data;
       });
     },
     addFavourite: function addFavourite(jobId) {
-      var _this3 = this;
-      axios__WEBPACK_IMPORTED_MODULE_1__["default"].post('/api/frontend/favourites', {
+      axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/frontend/favourites', {
         job_id: jobId
-      }).then(function () {
-        _this3.loadFavourites();
+      }).then(function (response) {
+        return 'success';
       });
     }
   }
@@ -1185,16 +1179,7 @@ __webpack_require__.r(__webpack_exports__);
           _this.errorMessage = error.response.data.message || "An error occurred.";
         }
       });
-    } // async submitLogin() {
-    //     try {
-    //         const response = await axios.post('api/frontend/seekerlogin', this.credentials);
-    //         const token = response.data.data.token;
-    //         localStorage.setItem('token', token);
-    //         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-    //     } catch (error) {
-    //         console.error("Login failed:", error.response ? error.response.data : error.message);
-    //     }
-    // }
+    }
   }
 });
 
@@ -1234,7 +1219,7 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
     this.checkAuthentication();
   },
   methods: {
-    submitApplication: function submitApplication() {
+    submitProfile: function submitProfile() {
       var _this = this;
       return _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
         return _regeneratorRuntime().wrap(function _callee$(_context) {
@@ -3037,7 +3022,16 @@ var render = function render() {
       staticClass: "col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center"
     }, [_c("div", {
       staticClass: "d-flex mb-3"
-    }, [_vm._m(0, true), _vm._v(" "), _c("router-link", {
+    }, [_c("a", {
+      staticClass: "btn btn-light btn-square me-3",
+      on: {
+        click: function click($event) {
+          return _vm.addFavourite(job.id);
+        }
+      }
+    }, [_c("i", {
+      staticClass: "far fa-heart text-primary"
+    })]), _vm._v(" "), _c("router-link", {
       staticClass: "btn btn-primary",
       attrs: {
         to: {
@@ -3052,22 +3046,18 @@ var render = function render() {
     }, [_c("i", {
       staticClass: "far fa-calendar-alt text-primary me-2"
     }), _vm._v("Date Line: " + _vm._s(job.date_time))])])])]);
-  }), _vm._v(" "), _vm.joblist.jobData && _vm.joblist.jobData.current_page < _vm.joblist.jobData.last_page ? _c("a", {
-    staticClass: "btn btn-primary py-3 px-5",
+  }), _vm._v(" "), _c("pagination", {
+    attrs: {
+      previousText: "PREV",
+      nextText: "NEXT",
+      data: _vm.joblist.jobData
+    },
     on: {
-      click: _vm.loadMoreJobs
+      paginateTo: _vm.getJobList
     }
-  }, [_vm._v("\n                                Browse More Jobs\n                            ")]) : _vm._e()] : [_vm._m(1)]], 2)])])])]);
+  })] : [_vm._m(0)]], 2)])])])]);
 };
 var staticRenderFns = [function () {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c("a", {
-    staticClass: "btn btn-light btn-square me-3"
-  }, [_c("i", {
-    staticClass: "far fa-heart text-primary"
-  })]);
-}, function () {
   var _vm = this,
     _c = _vm._self._c;
   return _c("span", {
@@ -3460,9 +3450,9 @@ var render = function render() {
     staticClass: "pt-2"
   }, [_vm._v("Bio")]), _vm._v(" "), _c("p", {
     staticClass: "text-muted"
-  }, [_vm._v(_vm._s(_vm.seeker.bio))]), _vm._v(" "), _c("hr"), _vm._v(" "), _c("h6", [_vm._v("Skills")]), _vm._v(" "), _vm._m(0), _vm._v(" "), _c("hr"), _vm._v(" "), _c("h6", [_vm._v("Contact Info")]), _vm._v(" "), _c("p", [_c("strong", [_vm._v("Email:")]), _vm._v(" " + _vm._s(_vm.seeker.email))]), _vm._v(" "), _c("p", [_c("strong", [_vm._v("Phone:")]), _vm._v(" +880" + _vm._s(_vm.seeker.phone))])])])]), _vm._v(" "), _c("div", {
+  }, [_vm._v(_vm._s(_vm.seeker.bio))]), _vm._v(" "), _c("hr"), _vm._v(" "), _c("hr"), _vm._v(" "), _c("h6", [_vm._v("Contact Info")]), _vm._v(" "), _c("p", [_c("strong", [_vm._v("Email:")]), _vm._v(" " + _vm._s(_vm.seeker.email))]), _vm._v(" "), _c("p", [_c("strong", [_vm._v("Phone:")]), _vm._v(" +880" + _vm._s(_vm.seeker.phone))])])])]), _vm._v(" "), _c("div", {
     staticClass: "col-md-8"
-  }, [_vm._m(1), _vm._v(" "), _c("div", {
+  }, [_vm._m(0), _vm._v(" "), _c("div", {
     staticClass: "tab-content mt-3",
     attrs: {
       id: "profileTabContent"
@@ -3480,7 +3470,7 @@ var render = function render() {
     staticClass: "card-body"
   }, [_c("table", {
     staticClass: "table"
-  }, [_vm._m(2), _vm._v(" "), _c("tbody", _vm._l(_vm.applications, function (apply) {
+  }, [_vm._m(1), _vm._v(" "), _c("tbody", _vm._l(_vm.applications, function (apply) {
     return _c("tr", {
       key: apply.id
     }, [_c("td", [_vm._v(_vm._s(apply.job.position))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(apply.applied_at))]), _vm._v(" "), _c("td", [_c("span", {
@@ -3489,7 +3479,9 @@ var render = function render() {
         "text-danger p-1 ": apply.application_status == 2,
         "text-warning p-1 ": apply.application_status == 0
       }
-    }, [_vm._v("\n                                    " + _vm._s(apply.application_status == 0 ? "Pending" : apply.application_status == 1 ? "Accepted" : "Rejected") + "\n                                    ")])]), _vm._v(" "), _c("td", [_vm._v(_vm._s(apply.job.address))])]);
+    }, [_vm._v("\n                                    " + _vm._s(apply.application_status == 0 ? "Pending" : apply.application_status == 1 ? "Accepted" : "Rejected") + "\n                                    ")])]), _vm._v(" "), _c("td", [_vm._v(_vm._s(apply.job.address))]), _vm._v(" "), apply.application_status == 1 ? _c("td", [_c("button", {
+      staticClass: "btn btn-info btn-sm"
+    }, [_vm._v("\n                                        Interview Schedule\n                                    ")])]) : _vm._e()]);
   }), 0)])])])]), _vm._v(" "), _c("div", {
     staticClass: "tab-pane fade",
     attrs: {
@@ -3508,7 +3500,7 @@ var render = function render() {
     on: {
       submit: function submit($event) {
         $event.preventDefault();
-        return _vm.submitApplication.apply(null, arguments);
+        return _vm.submitProfile.apply(null, arguments);
       }
     }
   }, [_c("div", {
@@ -3697,20 +3689,6 @@ var staticRenderFns = [function () {
   var _vm = this,
     _c = _vm._self._c;
   return _c("ul", {
-    staticClass: "list-unstyled"
-  }, [_c("li", {
-    staticClass: "badge bg-primary"
-  }, [_vm._v("JavaScript")]), _vm._v(" "), _c("li", {
-    staticClass: "badge bg-primary"
-  }, [_vm._v("PHP")]), _vm._v(" "), _c("li", {
-    staticClass: "badge bg-primary"
-  }, [_vm._v("Vue.js")]), _vm._v(" "), _c("li", {
-    staticClass: "badge bg-primary"
-  }, [_vm._v("Laravel")])]);
-}, function () {
-  var _vm = this,
-    _c = _vm._self._c;
-  return _c("ul", {
     staticClass: "nav nav-tabs",
     attrs: {
       id: "profileTab",
@@ -3760,7 +3738,11 @@ var staticRenderFns = [function () {
     attrs: {
       scope: "col"
     }
-  }, [_vm._v("Location")])])]);
+  }, [_vm._v("Location")]), _vm._v(" "), _c("th", {
+    attrs: {
+      scope: "col"
+    }
+  }, [_vm._v("interview")])])]);
 }];
 render._withStripped = true;
 
@@ -3945,153 +3927,154 @@ render._withStripped = true;
 /*!****************************************************!*\
   !*** ./resources/frontend/js/Mixin/commonMixin.js ***!
   \****************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ (() => {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  data: function data() {
-    return {};
-  },
-  methods: {
-    openModal: function openModal() {
-      var modalId = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-      var fromData = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-      var callback = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-      var _this = this;
-      var modal_id = modalId ? modalId : 'myModal';
-      $("#".concat(modal_id)).modal('show');
-      _this.$store.commit('fromData', fromData);
-      if (typeof callback == 'function') {
-        callback(true);
-      }
-    },
-    openEditModal: function openEditModal(data, id) {
-      this.$store.commit('updateId', id);
-      this.$store.commit('formType', 2);
-      this.openModal(false, data);
-    },
-    openEdit: function openEdit(data, id) {
-      var _this = this;
-      this.$store.commit('updateId', id);
-      this.$store.commit('formType', 2);
-      _this.urlGenaretor('api/createjob');
-    },
-    closeModal: function closeModal() {
-      var modalId = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'myModal';
-      var fromData = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-      var _this = this;
-      $("#".concat(modalId)).modal('hide');
-      _this.$store.commit('fromData', {});
-      _this.$store.commit('updateId', '');
-      _this.$store.commit('formType', 1);
-    },
-    urlGenaretor: function urlGenaretor() {
-      var customUrl = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-      var _this = this;
-      if (customUrl) {
-        return "".concat(baseUrl, "/").concat(customUrl);
-      }
-      return "".concat(baseUrl, "/").concat(_this.$route.meta.dataUrl);
-    },
-    _show: function _show(object, colum) {
-      var defaultData = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
-      if (object !== undefined && object !== null && object[colum] !== undefined) {
-        return object[colum];
-      }
-      return defaultData;
-    },
-    publicImage: function publicImage(imageName) {
-      return "".concat(window.publicPath, "/").concat(imageName);
-    },
-    // publicImage(imageName) {
-    //     const extension = imageName.split('.').pop().toLowerCase();
-    //     const imagePath = `${window.publicPath}/${imageName}`;
-    //
-    //     // Return the image path or an icon based on the extension
-    //     switch (extension) {
-    //         case 'pdf':
-    //             return 'https://i.ibb.co.com/7NzrJtr/4208479.png';
-    //         case 'jpg':
-    //         case 'jpeg':
-    //             return imagePath;
-    //         case 'png':
-    //             return imagePath;
-    //         case 'doc':
-    //         case 'docx':
-    //             return 'https://i.ibb.co.com/swN9Swx/8242988.png';
-    //         case 'xls':
-    //         case 'xlsx':
-    //             return 'https://i.ibb.co.com/3MfvfVt/8243073.png';
-    //         default:
-    //             return '/images/uploading.avif';
-    //     }
-    // },
-    // storageImage : function (imageName) {
-    //     return `${window.uploadPath}/${imageName}`;
-    // },
-    isPDF: function isPDF(fileName) {
-      return fileName && fileName.split('.').pop().toLowerCase() === 'pdf';
-    },
-    storageImage: function storageImage(imageName) {
-      if (!imageName || typeof imageName !== 'string') {
-        return 'https://i.ibb.co.com/3ssF0pw/giphy.gif';
-      }
-      var lastDotIndex = imageName.lastIndexOf('.');
-      var extension = lastDotIndex !== -1 ? imageName.substring(lastDotIndex + 1).toLowerCase() : '';
-      var imagePath = "".concat(window.uploadPath, "/").concat(imageName);
-
-      // Return the image path or an icon based on the extension
-      switch (extension) {
-        case 'pdf':
-          return imagePath;
-        case 'jpg':
-        case 'jpeg':
-          return imagePath;
-        case 'png':
-          return imagePath;
-        case 'doc':
-        case 'docx':
-          return imagePath;
-        case 'xls':
-        case 'xlsx':
-          return imagePath;
-        default:
-          return 'https://i.ibb.co.com/3ssF0pw/giphy.gif';
-      }
-    },
-    clickFileField: function clickFileField(filedName) {
-      $("#".concat(filedName)).click();
-    }
-  },
-  computed: {
-    fromData: function fromData() {
-      return this.$store.state.fromData;
-    },
-    dataList: function dataList() {
-      return this.$store.state.dataList;
-    },
-    requireData: function requireData() {
-      return this.$store.state.requireData;
-    },
-    updateId: function updateId() {
-      return this.$store.state.updateId;
-    },
-    formType: function formType() {
-      return this.$store.state.formType;
-    },
-    Config: function Config() {
-      return this.$store.state.Config;
-    },
-    permissions: function permissions() {
-      return this.$store.state.permissions;
-    }
-  }
-});
+// import axios from 'axios';
+//
+// export default {
+//     data(){
+//         return{}
+//     },
+//     methods:{
+//         openModal: function (modalId = false, fromData = {}, callback = false) {
+//             const _this = this;
+//             let modal_id = modalId ? modalId : 'myModal';
+//             $(`#${modal_id}`).modal('show');
+//             _this.$store.commit('fromData', fromData);
+//
+//             if (typeof callback == 'function') {
+//                 callback(true)
+//             }
+//
+//
+//         },
+//         openEditModal(data, id) {
+//
+//             this.$store.commit('updateId', id);
+//             this.$store.commit('formType', 2);
+//
+//             this.openModal(false, data)
+//
+//         },
+//
+//         openEdit(data, id) {
+//
+//             const _this=this;
+//             this.$store.commit('updateId', id);
+//             this.$store.commit('formType', 2);
+//             _this.urlGenaretor('api/createjob')
+//
+//
+//         },
+//
+//         closeModal: function (modalId = 'myModal', fromData = {}) {
+//             const _this = this;
+//             $(`#${modalId}`).modal('hide');
+//             _this.$store.commit('fromData', {});
+//             _this.$store.commit('updateId', '');
+//             _this.$store.commit('formType', 1);
+//         },
+//         urlGenaretor: function (customUrl = false) {
+//             const _this = this;
+//             if (customUrl) {
+//                 return `${baseUrl}/${customUrl}`;
+//
+//             }
+//             return `${baseUrl}/${_this.$route.meta.dataUrl}`
+//
+//         },
+//         _show: function (object, colum, defaultData = '') {
+//             if (object !== undefined && object !== null && object[colum] !== undefined){
+//                 return object[colum];
+//             }
+//             return defaultData;
+//         },
+//
+//         publicImage : function (imageName) {
+//             return `${window.publicPath}/${imageName}`;
+//         },
+//
+//         // publicImage(imageName) {
+//         //     const extension = imageName.split('.').pop().toLowerCase();
+//         //     const imagePath = `${window.publicPath}/${imageName}`;
+//         //
+//         //     // Return the image path or an icon based on the extension
+//         //     switch (extension) {
+//         //         case 'pdf':
+//         //             return 'https://i.ibb.co.com/7NzrJtr/4208479.png';
+//         //         case 'jpg':
+//         //         case 'jpeg':
+//         //             return imagePath;
+//         //         case 'png':
+//         //             return imagePath;
+//         //         case 'doc':
+//         //         case 'docx':
+//         //             return 'https://i.ibb.co.com/swN9Swx/8242988.png';
+//         //         case 'xls':
+//         //         case 'xlsx':
+//         //             return 'https://i.ibb.co.com/3MfvfVt/8243073.png';
+//         //         default:
+//         //             return '/images/uploading.avif';
+//         //     }
+//         // },
+//
+//
+//         // storageImage : function (imageName) {
+//         //     return `${window.uploadPath}/${imageName}`;
+//         // },
+//         isPDF(fileName) {
+//             return fileName && fileName.split('.').pop().toLowerCase() === 'pdf';
+//         },
+//         storageImage(imageName) {
+//             if (!imageName || typeof imageName !== 'string') {
+//                 return 'https://i.ibb.co.com/3ssF0pw/giphy.gif';
+//             }
+//             const lastDotIndex = imageName.lastIndexOf('.');
+//             const extension = lastDotIndex !== -1 ? imageName.substring(lastDotIndex + 1).toLowerCase() : '';
+//             const imagePath = `${window.uploadPath}/${imageName}`;
+//
+//             // Return the image path or an icon based on the extension
+//             switch (extension) {
+//                 case 'pdf':
+//                     return imagePath;
+//                 case 'jpg':
+//                 case 'jpeg':
+//                     return imagePath;
+//                 case 'png':
+//                     return imagePath;
+//                 case 'doc':
+//                 case 'docx':
+//                     return imagePath;
+//                 case 'xls':
+//                 case 'xlsx':
+//                     return imagePath;
+//                 default:
+//                     return 'https://i.ibb.co.com/3ssF0pw/giphy.gif';
+//             }
+//         },
+//         clickFileField : function (filedName) {
+//             $(`#${filedName}`).click();
+//         }
+//     },
+//     computed: {
+//         fromData() {
+//             return this.$store.state.fromData;
+//         },
+//         dataList() {
+//             return this.$store.state.dataList;
+//         },
+//         requireData() {
+//             return this.$store.state.requireData;
+//         },
+//         updateId() {
+//             return this.$store.state.updateId;
+//         },
+//         formType() {
+//             return this.$store.state.formType;
+//         },
+//
+//     }
+// }
 
 /***/ }),
 
@@ -4183,58 +4166,6 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
           _this.errorMessage = error.response.data.message || "An error occurred.";
         }
       });
-    },
-    submitFromData: function submitFromData() {
-      var fromData = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-      var optParms = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-      var callback = arguments.length > 2 ? arguments[2] : undefined;
-      var _this = this;
-      var method = _this.formType === 2 && _this.updateId ? 'put' : 'post';
-      var url = _this.formType === 2 && _this.updateId ? "".concat(_this.urlGenaretor(), "/").concat(_this.updateId) : _this.urlGenaretor();
-      _this.$validator.validateAll().then(function (valid) {
-        if (valid) {
-          (0,axios__WEBPACK_IMPORTED_MODULE_2__["default"])({
-            method: method,
-            url: url,
-            data: fromData
-          }).then(function (res) {
-            if (parseInt(res.data.status) === 2000) {
-              if (optParms.modalForm === undefined) {
-                _this.closeModal();
-              }
-              if (optParms.reloadList === undefined) {
-                _this.getDataList();
-              }
-              if (typeof callback === 'function') {
-                callback(res.data.result);
-              }
-              _this.$toast.success("Category  successfully!");
-            } else if (parseInt(res.data.status) === 3000) {
-              $.each(res.data.result, function (index, errorValue) {
-                _this.$validator.errors.add({
-                  id: index,
-                  field: index,
-                  name: index,
-                  msg: errorValue[0]
-                });
-              });
-            } else {
-              _this.$toast.error("Category  Unsuccessfully!");
-            }
-          });
-        }
-      });
-    },
-    CategoryDatadelete: function CategoryDatadelete(id, index) {
-      var _this = this;
-
-      // _this.DeleteToster(function (isConfirmedelete) {
-      var url = "".concat(_this.urlGenaretor(), "/").concat(id);
-      _this.httpReq('delete', url, {}, {}, function (retData) {
-        _this.getDataList();
-        _this.$toast.success("Data Delete successfully!");
-      });
-      // })
     },
     uploadImage: function uploadImage(event, dataObject, dataModel) {
       var callback = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
@@ -4475,12 +4406,6 @@ var getters = {
   },
   requireData: function requireData(state) {
     return state.requireData;
-  },
-  Config: function Config(state) {
-    return state.Config;
-  },
-  permissions: function permissions(state) {
-    return state.permissions;
   }
 };
 
@@ -4541,12 +4466,6 @@ var mutations = {
   },
   requireData: function requireData(state, data) {
     state.requireData = data;
-  },
-  Config: function Config(state, data) {
-    state.Config = data;
-  },
-  permissions: function permissions(state, data) {
-    state.permissions = data;
   }
 };
 
@@ -4568,9 +4487,7 @@ var state = {
   dataList: {},
   fromData: {},
   updateId: '',
-  formType: 1,
-  permissions: [],
-  Config: {}
+  formType: 1
 };
 
 /***/ }),
@@ -4678,9 +4595,10 @@ __webpack_require__.r(__webpack_exports__);
     publicImage: function publicImage(imageName) {
       return "".concat(window.publicPath, "/").concat(imageName);
     },
-    storageImage: function storageImage(imageName) {
-      return "".concat(window.uploadPath, "/").concat(imageName);
-    },
+    // storageImage: function (imageName) {
+    //     return `${window.uploadPath}/${imageName}`;
+    // },
+
     clickFileField: function clickFileField(filedName) {
       $("#".concat(filedName)).click();
     },
@@ -4691,13 +4609,35 @@ __webpack_require__.r(__webpack_exports__);
       }
       return defaultData;
     },
-    can: function can(permissionName) {
-      var _this = this;
-      var hasPermission = _this.permissions.includes(permissionName);
-      if (hasPermission) {
-        return ture;
+    isPDF: function isPDF(fileName) {
+      return fileName && fileName.split('.').pop().toLowerCase() === 'pdf';
+    },
+    storageImage: function storageImage(imageName) {
+      if (!imageName || typeof imageName !== 'string') {
+        return 'https://i.ibb.co.com/3ssF0pw/giphy.gif';
       }
-      return false;
+      var lastDotIndex = imageName.lastIndexOf('.');
+      var extension = lastDotIndex !== -1 ? imageName.substring(lastDotIndex + 1).toLowerCase() : '';
+      var imagePath = "".concat(window.uploadPath, "/").concat(imageName);
+
+      // Return the image path or an icon based on the extension
+      switch (extension) {
+        case 'pdf':
+          return imagePath;
+        case 'jpg':
+        case 'jpeg':
+          return imagePath;
+        case 'png':
+          return imagePath;
+        case 'doc':
+        case 'docx':
+          return imagePath;
+        case 'xls':
+        case 'xlsx':
+          return imagePath;
+        default:
+          return 'https://i.ibb.co.com/3ssF0pw/giphy.gif';
+      }
     }
   },
   computed: {
@@ -4715,12 +4655,6 @@ __webpack_require__.r(__webpack_exports__);
     },
     formType: function formType() {
       return this.$store.state.formType;
-    },
-    Config: function Config() {
-      return this.$store.state.Config;
-    },
-    permissions: function permissions() {
-      return this.$store.state.permissions;
     }
   }
 });
@@ -4752,16 +4686,19 @@ __webpack_require__.r(__webpack_exports__);
     getDataList: function getDataList() {
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       var _this = this;
-      axios__WEBPACK_IMPORTED_MODULE_2__["default"].get(_this.urlGenaretor()
-      // {params: {
-      //     page : page,
-      //     filter : _this.formFilter,
-      // }}
-      ).then(function (res) {
+      axios__WEBPACK_IMPORTED_MODULE_2__["default"].get(_this.urlGenaretor(), {
+        params: {
+          page: page,
+          filter: _this.formFilter
+        }
+      }).then(function (res) {
         if (parseInt(res.data.status) === 2000) {
           _this.$store.commit("dataList", res.data.result);
+        } else if (parseInt(res.data.status) === 5000) {
+          // Handle error case
         }
-        if (parseInt(res.data.status) === 5000) {}
+      })["catch"](function (error) {
+        console.error(error);
       });
     },
     getRequiredData: function getRequiredData(array) {
@@ -4836,7 +4773,7 @@ __webpack_require__.r(__webpack_exports__);
               if (typeof callback === 'function') {
                 callback(res.data.result);
               }
-              _this.$toast.success("Category  successfully!");
+              _this.$toast.success(" successfully!");
             } else if (parseInt(res.data.status) === 3000) {
               $.each(res.data.result, function (index, errorValue) {
                 _this.$validator.errors.add({
@@ -44947,44 +44884,48 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
 /* harmony import */ var _App_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./App.vue */ "./resources/frontend/js/App.vue");
 /* harmony import */ var _Routes__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Routes */ "./resources/frontend/js/Routes/index.js");
-/* harmony import */ var _Mixin_httpMxin__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Mixin/httpMxin */ "./resources/frontend/js/Mixin/httpMxin.js");
-/* harmony import */ var _Mixin_commonMixin__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Mixin/commonMixin */ "./resources/frontend/js/Mixin/commonMixin.js");
-/* harmony import */ var _resources_utilsMixin_utilsHttpMixin__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../resources/utilsMixin/utilsHttpMixin */ "./resources/utilsMixin/utilsHttpMixin.js");
-/* harmony import */ var _resources_utilsMixin_utilsCommonMixin__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../resources/utilsMixin/utilsCommonMixin */ "./resources/utilsMixin/utilsCommonMixin.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _Store__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Store */ "./resources/frontend/js/Store/index.js");
-/* harmony import */ var vee_validate__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! vee-validate */ "./node_modules/vee-validate/dist/vee-validate.esm.js");
-/* harmony import */ var _helper__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./helper */ "./resources/frontend/js/helper.js");
-/* harmony import */ var vue_toastification__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! vue-toastification */ "./node_modules/vue-toastification/dist/esm/index.js");
-/* harmony import */ var vue_toastification_dist_index_css__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! vue-toastification/dist/index.css */ "./node_modules/vue-toastification/dist/index.css");
-/* harmony import */ var vue_sweetalert2__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! vue-sweetalert2 */ "./node_modules/vue-sweetalert2/dist/vue-sweetalert.mjs");
-/* harmony import */ var sweetalert2_dist_sweetalert2_min_css__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! sweetalert2/dist/sweetalert2.min.css */ "./node_modules/sweetalert2/dist/sweetalert2.min.css");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
+/* harmony import */ var _plugins_pagination_pagination__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./plugins/pagination/pagination */ "./resources/frontend/js/plugins/pagination/pagination.vue");
+/* harmony import */ var _Mixin_httpMxin__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Mixin/httpMxin */ "./resources/frontend/js/Mixin/httpMxin.js");
+/* harmony import */ var _Mixin_commonMixin__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Mixin/commonMixin */ "./resources/frontend/js/Mixin/commonMixin.js");
+/* harmony import */ var _Mixin_commonMixin__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_Mixin_commonMixin__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _resources_utilsMixin_utilsHttpMixin__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../resources/utilsMixin/utilsHttpMixin */ "./resources/utilsMixin/utilsHttpMixin.js");
+/* harmony import */ var _resources_utilsMixin_utilsCommonMixin__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../resources/utilsMixin/utilsCommonMixin */ "./resources/utilsMixin/utilsCommonMixin.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _Store__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./Store */ "./resources/frontend/js/Store/index.js");
+/* harmony import */ var vee_validate__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! vee-validate */ "./node_modules/vee-validate/dist/vee-validate.esm.js");
+/* harmony import */ var _helper__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./helper */ "./resources/frontend/js/helper.js");
+/* harmony import */ var vue_toastification__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! vue-toastification */ "./node_modules/vue-toastification/dist/esm/index.js");
+/* harmony import */ var vue_toastification_dist_index_css__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! vue-toastification/dist/index.css */ "./node_modules/vue-toastification/dist/index.css");
+/* harmony import */ var vue_sweetalert2__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! vue-sweetalert2 */ "./node_modules/vue-sweetalert2/dist/vue-sweetalert.mjs");
+/* harmony import */ var sweetalert2_dist_sweetalert2_min_css__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! sweetalert2/dist/sweetalert2.min.css */ "./node_modules/sweetalert2/dist/sweetalert2.min.css");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
 
 
 vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
 
 
 
+vue__WEBPACK_IMPORTED_MODULE_0__["default"].component('pagination', _plugins_pagination_pagination__WEBPACK_IMPORTED_MODULE_4__["default"]);
+
 // common-function define and create
 
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].mixin(_Mixin_httpMxin__WEBPACK_IMPORTED_MODULE_4__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].mixin(_resources_utilsMixin_utilsHttpMixin__WEBPACK_IMPORTED_MODULE_6__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].mixin(_Mixin_commonMixin__WEBPACK_IMPORTED_MODULE_5__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].mixin(_resources_utilsMixin_utilsCommonMixin__WEBPACK_IMPORTED_MODULE_7__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0__["default"].mixin(_Mixin_httpMxin__WEBPACK_IMPORTED_MODULE_5__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0__["default"].mixin(_resources_utilsMixin_utilsHttpMixin__WEBPACK_IMPORTED_MODULE_7__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0__["default"].mixin((_Mixin_commonMixin__WEBPACK_IMPORTED_MODULE_6___default()));
+vue__WEBPACK_IMPORTED_MODULE_0__["default"].mixin(_resources_utilsMixin_utilsCommonMixin__WEBPACK_IMPORTED_MODULE_8__["default"]);
 
 // store management
 
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_8__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_9__["default"]);
 
-var store = new vuex__WEBPACK_IMPORTED_MODULE_8__["default"].Store(_Store__WEBPACK_IMPORTED_MODULE_9__.store);
+var store = new vuex__WEBPACK_IMPORTED_MODULE_9__["default"].Store(_Store__WEBPACK_IMPORTED_MODULE_10__.store);
 
 // input field global error handling
 
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vee_validate__WEBPACK_IMPORTED_MODULE_10__["default"], {
+vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vee_validate__WEBPACK_IMPORTED_MODULE_11__["default"], {
   events: 'input',
   fieldsBagName: ''
 });
@@ -44996,16 +44937,16 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 
 // small common-function
 
-(0,_helper__WEBPACK_IMPORTED_MODULE_11__["default"])(store, router);
+(0,_helper__WEBPACK_IMPORTED_MODULE_12__["default"])(store, router);
 
 // alret massage
 
 
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vue_toastification__WEBPACK_IMPORTED_MODULE_12__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vue_toastification__WEBPACK_IMPORTED_MODULE_13__["default"]);
 
 // alret massage
 
-vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vue_sweetalert2__WEBPACK_IMPORTED_MODULE_14__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vue_sweetalert2__WEBPACK_IMPORTED_MODULE_15__["default"]);
 
 
 var vue = new vue__WEBPACK_IMPORTED_MODULE_0__["default"]({
@@ -45014,7 +44955,7 @@ var vue = new vue__WEBPACK_IMPORTED_MODULE_0__["default"]({
     App: _App_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   router: router,
-  axios: axios__WEBPACK_IMPORTED_MODULE_16__["default"],
+  axios: axios__WEBPACK_IMPORTED_MODULE_17__["default"],
   store: store
 });
 })();

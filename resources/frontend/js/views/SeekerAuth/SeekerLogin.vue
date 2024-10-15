@@ -49,6 +49,7 @@
                         if (parseInt(res.data.status) === 2000) {
                             _this.$toast.success("Login successful!");
                             _this.$router.push('/');
+
                         } else {
                             _this.$toast.error("Invalid credentials!");
                         }
@@ -59,16 +60,7 @@
                         }
                     });
             },
-            // async submitLogin() {
-            //     try {
-            //         const response = await axios.post('api/frontend/seekerlogin', this.credentials);
-            //         const token = response.data.data.token;
-            //         localStorage.setItem('token', token);
-            //         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-            //     } catch (error) {
-            //         console.error("Login failed:", error.response ? error.response.data : error.message);
-            //     }
-            // }
+
 
         }
     };

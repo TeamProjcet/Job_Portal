@@ -49,97 +49,114 @@
                     </li>
 
 <!--                    -->
-
-                    <li class="nav-item" v-for="">
-                        <a data-bs-toggle="collapse" href="#base">
-                            <i class="fas fa-layer-group"></i>
-                            <p>Job</p>
-                            <span class="caret"></span>
-                        </a>
-                        <div class="collapse" id="base">
-                            <ul class="nav nav-collapse">
-                                <li>
-                                    <router-link to="/admin/jobcategory/category">
-                                        <span class="sub-item">Job Category</span>
-                                    </router-link>
-                                </li>
-                                <li>
-                                    <router-link to="/admin/jobcategory/company">
-                                        <span class="sub-item">Company List</span>
-                                    </router-link>
-                                </li>
-                                <li>
-                                    <router-link to="/admin/jobcategory/joblist">
-                                        <span class="sub-item">Job Post</span>
-                                    </router-link>
-                                </li>
-                            </ul>
-                        </div>
+                    <li class="nav-item" v-for="(menu, mindex) in Config.menus" :key="mindex">
+                        <template v-if="menu.sub_menus.length > 0">
+                            <a :data-bs-toggle="'collapse'" :href="'#collapse' + mindex">
+                                <i :class="menu.icon"></i>
+                                <p>{{ menu.name }}</p>
+                                <span class="caret"></span>
+                            </a>
+                            <div class="collapse" :id="'collapse' + mindex">
+                                <ul class="nav nav-collapse">
+                                    <li v-for="(subMenu, sindex) in menu.sub_menus" :key="sindex">
+                                        <router-link class="nav-link" :to="subMenu.link">
+                                            <i :class="subMenu.icon"></i> {{ subMenu.name }}
+                                        </router-link>
+                                    </li>
+                                </ul>
+                            </div>
+                        </template>
                     </li>
+<!--                    <li class="nav-item" v-for="">-->
+<!--                        <a data-bs-toggle="collapse" href="#base">-->
+<!--                            <i class="fas fa-layer-group"></i>-->
+<!--                            <p>Job</p>-->
+<!--                            <span class="caret"></span>-->
+<!--                        </a>-->
+<!--                        <div class="collapse" id="base">-->
+<!--                            <ul class="nav nav-collapse">-->
+<!--                                <li>-->
+<!--                                    <router-link to="/admin/jobcategory/category">-->
+<!--                                        <span class="sub-item">Job Category</span>-->
+<!--                                    </router-link>-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <router-link to="/admin/jobcategory/company">-->
+<!--                                        <span class="sub-item">Company List</span>-->
+<!--                                    </router-link>-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <router-link to="/admin/jobcategory/joblist">-->
+<!--                                        <span class="sub-item">Job Post</span>-->
+<!--                                    </router-link>-->
+<!--                                </li>-->
+<!--                            </ul>-->
+<!--                        </div>-->
+<!--                    </li>-->
 
                     <!-- --------------------- -->
 
-                    <li class="nav-item">
-                        <a data-bs-toggle="collapse" href="#base2">
-                            <i class="fab fa-blogger-b"></i>
-                            <p>Blog</p>
-                            <span class="caret"></span>
-                        </a>
-                        <div class="collapse" id="base2">
-                            <ul class="nav nav-collapse">
-                                <li>
-                                    <router-link to="/admin/blog/blogpost">
-                                        <span class="sub-item">Blog Post</span>
-                                    </router-link>
-                                </li>
+<!--                    <li class="nav-item">-->
+<!--                        <a data-bs-toggle="collapse" href="#base2">-->
+<!--                            <i class="fab fa-blogger-b"></i>-->
+<!--                            <p>Blog</p>-->
+<!--                            <span class="caret"></span>-->
+<!--                        </a>-->
+<!--                        <div class="collapse" id="base2">-->
+<!--                            <ul class="nav nav-collapse">-->
+<!--                                <li>-->
+<!--                                    <router-link to="/admin/blog/blogpost">-->
+<!--                                        <span class="sub-item">Blog Post</span>-->
+<!--                                    </router-link>-->
+<!--                                </li>-->
 
 
-                            </ul>
-                        </div>
-                    </li>
+<!--                            </ul>-->
+<!--                        </div>-->
+<!--                    </li>-->
 
 <!--                    -->
 
-                    <li class="nav-item">
-                        <a data-bs-toggle="collapse" href="#base4">
-                            <i class="fas fa-clipboard-list"></i>
-                            <p>Aplication</p>
-                            <span class="caret"></span>
-                        </a>
-                        <div class="collapse" id="base4">
-                            <ul class="nav nav-collapse">
-                                <li>
-                                    <router-link to="/admin/seeker/application">
-                                        <span class="sub-item">Aplication</span>
-                                    </router-link>
-                                </li>
+<!--                    <li class="nav-item">-->
+<!--                        <a data-bs-toggle="collapse" href="#base4">-->
+<!--                            <i class="fas fa-clipboard-list"></i>-->
+<!--                            <p>Aplication</p>-->
+<!--                            <span class="caret"></span>-->
+<!--                        </a>-->
+<!--                        <div class="collapse" id="base4">-->
+<!--                            <ul class="nav nav-collapse">-->
+<!--                                <li>-->
+<!--                                    <router-link to="/admin/seeker/application">-->
+<!--                                        <span class="sub-item">Aplication</span>-->
+<!--                                    </router-link>-->
+<!--                                </li>-->
 
 
-                            </ul>
-                        </div>
-                    </li>
+<!--                            </ul>-->
+<!--                        </div>-->
+<!--                    </li>-->
 
-                    <li class="nav-item">
-                        <a data-bs-toggle="collapse" href="#base5" aria-expanded="false">
-                            <i class="fas fa-shield-alt"></i>
-                            <p>Role Permission</p>
-                            <span class="caret"></span>
-                        </a>
-                        <div class="collapse" id="base5">
-                            <ul class="nav nav-collapse">
-                                <li>
-                                    <router-link to="/admin/role/rolepermissions">
-                                        <span class="sub-item">Role User Management</span>
-                                    </router-link>
-                                </li>
-                                <li>
-                                    <router-link to="/admin/role/permissions">
-                                        <span class="sub-item">Permission</span>
-                                    </router-link>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
+<!--                    <li class="nav-item">-->
+<!--                        <a data-bs-toggle="collapse" href="#base5" aria-expanded="false">-->
+<!--                            <i class="fas fa-shield-alt"></i>-->
+<!--                            <p>Role Permission</p>-->
+<!--                            <span class="caret"></span>-->
+<!--                        </a>-->
+<!--                        <div class="collapse" id="base5">-->
+<!--                            <ul class="nav nav-collapse">-->
+<!--                                <li>-->
+<!--                                    <router-link to="/admin/role/rolepermissions">-->
+<!--                                        <span class="sub-item">Role User Management</span>-->
+<!--                                    </router-link>-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <router-link to="/admin/role/permissions">-->
+<!--                                        <span class="sub-item">Permission</span>-->
+<!--                                    </router-link>-->
+<!--                                </li>-->
+<!--                            </ul>-->
+<!--                        </div>-->
+<!--                    </li>-->
 
                 </ul>
             </div>
@@ -153,19 +170,23 @@
         mounted() {
             this.getconfigurations();
         },
+
         methods:{
             getconfigurations:function () {
                 const _this=this;
                 const url=_this.urlGenaretor('api/configurations');
                 _this.httpReq('get',url,{},{},function(retData){
-                    _this.$store.commit('Config',retData.result);
-                    // console.log(this.$store.commit('Config',retData.result));
+                _this.$store.commit('Config',retData.result);
+
                     _this.$store.commit('permissions',retData.result.permissions)
 
 
                 })
             }
-        }
+
+
+        },
+
     }
 </script>
 

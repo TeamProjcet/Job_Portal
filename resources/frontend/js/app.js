@@ -6,6 +6,9 @@ Vue.use(VueRouter);
 import App from './App.vue'
 import route from './Routes'
 
+import Pagination from "./plugins/pagination/pagination";
+Vue.component('pagination',Pagination);
+
 // common-function define and create
 import httpMixin from "./Mixin/httpMxin"
 import commonMixin from "./Mixin/commonMixin"
