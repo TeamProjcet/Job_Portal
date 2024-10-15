@@ -6,7 +6,10 @@ import CompanyComponent from "../views/jobCategory/CompanyComponent";
 import BlogPostComponent from "../views/Blog/BlogPostComponent";
 import EmployerForm from "../views/Employers/EmployerForm";
 import EmployerProfile from "../views/Employers/EmployerProfile";
+import Newsletter from "../views/Visitor/Newsletter";
+import Contact from "../views/Visitor/Contact";
 import ApplicationComponent from "../views/Application/ApplicationComponent";
+import BlogCommentComponent from "../views/Blog/BlogCommentComponent";
 import ApplicationView from "../views/Application/ApplicationView";
 import PermissionComponent from "../views/RolePermission/PermissionComponent";
 import RolePermissionComponent from "../views/RolePermission/RolePermissionComponent";
@@ -77,14 +80,21 @@ const route = [
 
     },
     {
-        path: '/admin/blog/blogpost',
-        name: 'blogpost',
-        component: BlogPostComponent,
-        meta: {
-            pagetitle: 'Blog Post Table', dataUrl: 'api/blogpost',
+        path : '/admin/blog/blogpost',
+        name : 'blogpost',
+        component : BlogPostComponent,
+        meta:{pagetitle:'Blog Post Table',dataUrl:'api/blogpost',
         }
 
     },
+    // {
+    //     path : '/admin/blog/blogcomment',
+    //     name : 'blogcomment',
+    //     component : BlogCommentComponent,
+    //     meta:{pagetitle:'Blog Comment Table',dataUrl:'api/frontend/blogcomment',
+    //     }
+    //
+    // },
     {
         path: '/admin/seeker/application',
         name: 'application',
@@ -142,6 +152,18 @@ const route = [
         component: InterviewComponent,
         meta: {pagetitle: 'Interview Schedule', dataUrl: 'api/interview',},
     },
+    {
+        path: '/admin/visitor/newsletter',
+        name: 'newsletter',
+        component: Newsletter,
+        meta: { pagetitle: 'Newsletter Subscriptions', dataUrl: 'api/frontend/newsletter' },
+    },
+    {
+        path: '/admin/visitor/contact',
+        name: 'contact',
+        component: Contact,
+        meta: { pagetitle: 'Visitor Contact Info', dataUrl: 'api/frontend/contact' },
+    }
 
 ];
 export default route;

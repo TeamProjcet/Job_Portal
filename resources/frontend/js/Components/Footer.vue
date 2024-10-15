@@ -29,15 +29,21 @@
                         <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
+
                 <div class="col-lg-3 col-md-6">
-                    <h5 class="text-white mb-4">Newsletter</h5>
-                    <p>Feel free to get in touch with us.
-                        We always open to discussing new projects, creative ideas or opportunities to be part of your visions.</p>
-                    <div class="position-relative mx-auto" style="max-width: 400px;">
-                        <input class="form-control bg-transparent w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
-                        <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
-                    </div>
+                    <form @submit.prevent="subscribeNewsletter">
+                        <h5 class="text-white mb-4">Newsletter</h5>
+                        <p>Feel free to get in touch with us. We always open to discussing new projects, creative ideas,
+                            or opportunities to be part of your visions.</p>
+                        <div class="position-relative mx-auto" style="max-width: 400px;">
+                            <input v-model="email" class="form-control bg-transparent w-100 py-3 ps-4 pe-5" type="email" placeholder="Your email" required>
+                            <button type="submit" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">
+                                SignUp
+                            </button>
+                        </div>
+                    </form>
                 </div>
+
             </div>
         </div>
         <div class="container">
@@ -45,8 +51,6 @@
                 <div class="row">
                     <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
                         &copy; <a class="border-bottom" href="#">Job Portal</a>, All Right Reserved.
-
-                        <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
                         Designed By <a class="border-bottom" href="#">Tmss Ict Ltd</a>
                     </div>
                     <div class="col-md-6 text-center text-md-end">
@@ -65,10 +69,35 @@
 </template>
 
 <script>
+    import axios from 'axios';
+
     export default {
-        name: "Footer"
+        name: "Footer",
+        data() {
+            return {
+                email: '' // to store the email input
+            };
+        },
+        methods: {
+            async subscribeNewsletter() {
+                try {
+                    const response = await axios.post('/api/frontend/newsletter', {
+                        email: this.email
+                    });
+
+                    if (response.status === 200) {
+                        this.$toast.success("Thank you for subscribing!");
+                        this.email = ''; // clear the input field
+                    }
+                } catch (error) {
+                    console.error('Failed to subscribe:', error);
+                    alert('There was an error. Please try again later.');
+                }
+            }
+        }
     }
 </script>
+
 
 <style scoped>
 

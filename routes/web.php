@@ -49,13 +49,15 @@ Route::prefix('api/frontend')->group(function () {
     Route::get('joblist', [\App\Http\Controllers\frontend\FrontendController::class, 'joblist']);
     Route::get('seekerdata', [\App\Http\Controllers\frontend\FrontendController::class, 'seekerdata']);
     Route::get('jobcate/{cateId}', [\App\Http\Controllers\frontend\FrontendController::class, 'jobCategory'])->name('web.cat');
-    Route::post('seekerregis', [\App\Http\Controllers\frontend\SeekerLoginController::class, 'store']);
-    Route::post('seekerlogin', [\App\Http\Controllers\frontend\SeekerLoginController::class, 'login']);
-//    Route::post('blogpost/{id}/like', [\App\Http\Controllers\Backend\BlogController::class, 'like']);
-    Route::post('seekerlogout', [\App\Http\Controllers\frontend\SeekerLoginController::class, 'logout']);
-    Route::put('seeker/profile', [\App\Http\Controllers\frontend\SeekerLoginController::class, 'update']);
-    Route::resource('favourites',\App\Http\Controllers\SavedJobsController::class);
-    Route::resource('application', \App\Http\Controllers\frontend\ApplicationController::class);
+    Route::post('/seekerregis', [\App\Http\Controllers\frontend\SeekerLoginController::class, 'store']);
+    Route::post('/seekerlogin', [\App\Http\Controllers\frontend\SeekerLoginController::class, 'login']);
+    Route::post('/blogpost/{id}/like', [\App\Http\Controllers\Backend\BlogController::class, 'like']);
+    Route::post('/seekerlogout', [\App\Http\Controllers\frontend\SeekerLoginController::class, 'logout']);
+    Route::resource('/newsletter', \App\Http\Controllers\frontend\NewsletterController::class);
+    Route::resource('/contact', \App\Http\Controllers\frontend\ContactController::class);
+//    Route::resource('/blogcomment', \App\Http\Controllers\frontend\BlogCommentController::class);
+    Route::post('/blogcomment', [\App\Http\Controllers\frontend\BlogCommentController::class, 'store']);
+
 });
 
 Route::view('/{any}', 'frontend')->where('any', '.*');

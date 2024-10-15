@@ -26,28 +26,28 @@
                         </ul>
                     </li>
 
-                <li class="nav-item topbar-user dropdown hidden-caret">
-                    <a class="dropdown-toggle profile-pic" data-bs-toggle="dropdown" href="#" aria-expanded="false">
-                        <div class="d-flex align-items-center bg-success text-white p-2 rounded">
-                            <h5 class="mb-0 me-2">{{ user? user.name : 'Guest' }}</h5>
-                            <i class="fa fa-angle-down ms-2"></i>
-                        </div>
-                    </a>
-                    <ul class="dropdown-menu dropdown-user animated fadeIn">
-                        <div class="dropdown-user-scroll scrollbar-outer">
-                            <li>
-                                <div class="dropdown-divider"></div>
-                                <router-link to="/admin/employer/profile" class="dropdown-item">My Profile</router-link>
-                                <div class="dropdown-divider"></div>
-                                <div class="dropdown-divider"></div>
-                                <a href="#" @click.prevent="logout" class="dropdown-item">Logout</a>
-                            </li>
-                        </div>
-                    </ul>
-                </li>
+                    <li class="nav-item topbar-user dropdown hidden-caret">
+                        <a class="dropdown-toggle profile-pic" data-bs-toggle="dropdown" href="#" aria-expanded="false">
+                            <div class="d-flex align-items-center bg-success text-white p-2 rounded">
+                                <h5 class="mb-0 me-2">{{ user? user.name : 'Guest' }}</h5>
+                                <i class="fa fa-angle-down ms-2"></i>
+                            </div>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user animated fadeIn">
+                            <div class="dropdown-user-scroll scrollbar-outer">
+                                <li>
+                                    <div class="dropdown-divider"></div>
+                                    <router-link to="/admin/employer/profile" class="dropdown-item">My Profile</router-link>
+                                    <div class="dropdown-divider"></div>
+                                    <div class="dropdown-divider"></div>
+                                    <a href="#" @click.prevent="logout" class="dropdown-item">Logout</a>
+                                </li>
+                            </div>
+                        </ul>
+                    </li>
 
 
-</ul>
+                </ul>
 
             </div>
         </nav>
