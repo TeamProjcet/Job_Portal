@@ -548,6 +548,7 @@
                 }
             ],
             "time": "2023-06-01T07:04:22+00:00"
+<<<<<<< HEAD
         },
         {
             "name": "fruitcake/laravel-cors",
@@ -628,6 +629,8 @@
             ],
             "abandoned": true,
             "time": "2022-02-23T14:53:22+00:00"
+=======
+>>>>>>> 6849b059f4e3e7294bd9eff1c537fcf1b9548639
         },
         {
             "name": "fruitcake/php-cors",
@@ -8202,12 +8205,12 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {},
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": "^8.0.2"
     },
-    "platform-dev": [],
+    "platform-dev": {},
     "plugin-api-version": "2.6.0"
 }

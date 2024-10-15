@@ -54,8 +54,13 @@ Route::prefix('api/frontend')->group(function () {
     Route::post('seekerlogin', [\App\Http\Controllers\frontend\SeekerLoginController::class, 'login']);
     Route::post('seekerlogout', [\App\Http\Controllers\frontend\SeekerLoginController::class, 'logout']);
     Route::put('seeker/profile', [\App\Http\Controllers\frontend\SeekerLoginController::class, 'update']);
-    Route::resource('favourites',\App\Http\Controllers\SavedJobsController::class);
-    Route::resource('application', \App\Http\Controllers\frontend\ApplicationController::class);
+    Route::post('/seekerlogout', [\App\Http\Controllers\frontend\SeekerLoginController::class, 'logout']);
+    Route::resource('/application', \App\Http\Controllers\frontend\ApplicationController::class);
+    Route::resource('/newsletter', \App\Http\Controllers\frontend\NewsletterController::class);
+    Route::resource('/contact', \App\Http\Controllers\frontend\ContactController::class);
+//    Route::resource('/blogcomment', \App\Http\Controllers\frontend\BlogCommentController::class);
+    Route::post('/blogcomment', [\App\Http\Controllers\frontend\BlogCommentController::class, 'store']);
+
 });
 
 Route::view('/{any}', 'frontend')->where('any', '.*');

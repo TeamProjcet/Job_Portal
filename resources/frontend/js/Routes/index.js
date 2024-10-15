@@ -12,6 +12,8 @@ import SeekerProfile from "../views/SeekerAuth/SeekerProfile";
 import JobCategory from "../views/JobCategory";
 import JobCompany from "../views/JobCompany";
 import JobResults from "../views/JobResults";
+import Newsletter from "../views/Newsletter";
+import BlogCommentComponent from "../../../Backend/js/views/Blog/BlogCommentComponent";
 import SavedJobsComponent from "../views/SeekerAuth/SavedJobsComponent";
 
 const route = [
@@ -89,6 +91,14 @@ const route = [
         name: 'jobcompany',
         component: JobCompany,
         props: true
+    },
+    {
+        path : '/admin/blog/blogcomment',
+        name : 'blogcomment',
+        component : BlogCommentComponent,
+        meta:{pagetitle:'Blog Comment Table',dataUrl:'api/frontend/blogcomment',
+        }
+
     },
     {
         path: '/results',

@@ -6,9 +6,10 @@
                     <PageTop></PageTop>
                 </div>
                 <DataTable :tableHeading="tableHeading">
-                    <tr >
-                        <td>1</td>
-                        <td>df</td>
+                    <tr v-for="(data, index) in dataList" :key="data.id">
+                        <td>{{index + 1}}</td>
+                        <td>{{data.job.position}}</td>
+                        <td>{{data.user.name}}</td>
 
                         <td>
                             <a
@@ -79,12 +80,13 @@
         components: {DataTable, PageTop, FormModal},
         data(){
             return{
-                tableHeading:["SL","name","Action"],
+                tableHeading:["SL","Employe Name","Email","Job name","Location","Date","Time","Notic","Status","Action"],
                 jobdata:[],
 
             }
         },
         mounted() {
+            this.getDataList();
             this.getRequiredData(['jobData']);
         },
         methods:{

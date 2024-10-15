@@ -77,6 +77,7 @@
         },
         mounted() {
             this.getJobList();
+
             this.checkAuthentication();
 
             this.getRequiredData(['job_type'])

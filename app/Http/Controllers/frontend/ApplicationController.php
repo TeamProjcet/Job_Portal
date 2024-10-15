@@ -43,7 +43,7 @@ class ApplicationController extends Controller
 
     public function show($id)
     {
-        $post = Applications::with('job', 'seeker')->findOrFail($id);
+        $post = $this->model->with('job', 'seeker')->findOrFail($id);
         return response()->json(['result' => $post]);
     }
 
@@ -54,22 +54,18 @@ class ApplicationController extends Controller
 
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'status' => 'required',
-        ]);
+
 
         $application = Applications::find($id);
         if (!$application) {
             return response()->json(['message' => 'Application not found'], 404);
         }
 
-        $application->application_status = $request->status;
+        $application->application_status = $request->application_status;
+        $application->interview_status = $request->interview_status;
         $application->save();
 
-        return response()->json([
-            'message' => 'Application status updated successfully',
-            'application' => $application
-        ]);
+        return $this->returnData(2000,$application);
     }
 
 
