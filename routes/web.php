@@ -32,7 +32,7 @@ Route::prefix('api')->group(function () {
 
     Route::post('upload', [\App\Http\Controllers\Backend\UploadController::class, 'upload']);
     Route::post('/required_data', [\App\Http\Controllers\SupportController::class, 'requireData']);
-    Route::post('/configurations', [\App\Http\Controllers\SupportController::class, 'getconfigurations']);
+    Route::get('/configurations', [\App\Http\Controllers\SupportController::class, 'getconfigurations']);
     Route::get('backendData',[\App\Http\Controllers\Backend\BackendController::class,'backendData']);
     Route::resource('users',\App\Http\Controllers\UserController::class);
     Route::resource('permissions',\App\Http\Controllers\PermissionController::class);

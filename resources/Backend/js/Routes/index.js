@@ -17,96 +17,107 @@ import InterviewComponent from "../views/Interview/InterviewComponent";
 
 const route = [
     {
-        path : '/admin/dashboard',
-        name : 'dashboard',
-        component : Dashboard
+        path: '/admin/dashboard',
+        name: 'dashboard',
+        component: Dashboard
     },
     {
-        path : '/admin/jobcategory/category',
-        name : 'category',
-        component : CategoryComponent,
-        meta:{pagetitle:'Job Category',dataUrl:'api/categories',
+        path: '/admin/jobcategory/category',
+        name: 'category',
+        component: CategoryComponent,
+        meta: {
+            pagetitle: 'Job Category', dataUrl: 'api/categories',
         }
 
     },
     {
-        path : '/admin/jobcategory/joblist',
-        name : 'joblist',
-        component : JobListCommponent,
-        meta:{pagetitle:'Job List Table',dataUrl:'api/joblist',
+        path: '/admin/jobcategory/joblist',
+        name: 'joblist',
+        component: JobListCommponent,
+        meta: {
+            pagetitle: 'Job List Table', dataUrl: 'api/joblist',
         }
 
     },
     {
-        path : '/admin/jobcategory/createjob',
-        name : 'createjob',
-        component : CreateJobComponent,
-        meta:{pagetitle:'Job Create Table',dataUrl:'api/createjob',
+        path: '/admin/jobcategory/createjob',
+        name: 'createjob',
+        component: CreateJobComponent,
+        meta: {
+            pagetitle: 'Job Create Table', dataUrl: 'api/createjob',
         }
 
     },
 
     {
-        path : '/admin/jobcategory/company',
-        name : 'company',
-        component : CompanyComponent,
-        meta:{pagetitle:'Job Company Table',dataUrl:'api/company',
+        path: '/admin/jobcategory/company',
+        name: 'company',
+        component: CompanyComponent,
+        meta: {
+            pagetitle: 'Job Company Table', dataUrl: 'api/company',
         }
 
     },
     {
-        path : '/admin/employer/profile',
-        name : 'employer_profile',
-        component : EmployerProfile,
-        meta:{pagetitle:'Profile Update',dataUrl:'api/employer_profile',
+        path: '/admin/employer/profile',
+        name: 'employer_profile',
+        component: EmployerProfile,
+        meta: {
+            pagetitle: 'Profile Update', dataUrl: 'api/employer_profile',
         }
 
     },
     {
-        path : '/admin/employer/employerfrom',
-        name : 'employefrom',
-        component :EmployerForm,
-        meta:{pagetitle:' Employer Table',dataUrl:'api/employerfrom',
+        path: '/admin/employer/employerfrom',
+        name: 'employefrom',
+        component: EmployerForm,
+        meta: {
+            pagetitle: ' Employer Table', dataUrl: 'api/employerfrom',
         }
 
     },
     {
-        path : '/admin/blog/blogpost',
-        name : 'blogpost',
-        component : BlogPostComponent,
-        meta:{pagetitle:'Blog Post Table',dataUrl:'api/blogpost',
+        path: '/admin/blog/blogpost',
+        name: 'blogpost',
+        component: BlogPostComponent,
+        meta: {
+            pagetitle: 'Blog Post Table', dataUrl: 'api/blogpost',
         }
 
     },
     {
-        path : '/admin/seeker/application',
-        name : 'application',
-        component : ApplicationComponent,
-        meta:{pagetitle:'Application Table',dataUrl:'api/frontend/application',
+        path: '/admin/seeker/application',
+        name: 'application',
+        component: ApplicationComponent,
+        meta: {
+            pagetitle: 'Application Table', dataUrl: 'api/frontend/application',
         }
 
     },
     {
         path: '/admin/role/permissions',
         name: 'Permission',
-        component: PermissionComponent ,
-        meta:{pagetitle:'Permission Table',dataUrl:'api/permissions',
+        component: PermissionComponent,
+        meta: {
+            pagetitle: 'Permission Table', dataUrl: 'api/permissions',
         }
 
     },
     {
         path: '/admin/role/rolepermissions',
         name: 'RolePermission',
-        component: RolePermissionComponent ,
-        meta:{pagetitle:'Users Table',dataUrl:'api/users',
+        component: RolePermissionComponent,
+        meta: {
+            pagetitle: 'Users Table', dataUrl: 'api/users',
         }
 
     },
     {
         path: '/admin/role/role',
         name: 'RoleComponent',
-        component: RoleComponent ,
-        meta:{pagetitle:'Role Table',dataUrl:'api/roles',
+        component: RoleComponent,
+        meta: {
+            pagetitle: 'Role Table', dataUrl: 'api/roles',
         }
 
     },
@@ -115,21 +126,21 @@ const route = [
         path: '/admin/seeker/application-view/:id',
         name: 'ApplicationView',
         component: ApplicationView,
-        meta:{pagetitle:'Job Application', dataUrl:'api/frontend/application',},
+        meta: {pagetitle: 'Job Application', dataUrl: 'api/frontend/application',},
         props: true
     },
     {
         path: '/admin/user/registration',
         name: 'UserRegisComponenet',
         component: UserRegisComponenet,
-        meta:{pagetitle:'User Registration Form', dataUrl:'api/register',},
+        meta: {pagetitle: 'User Registration Form', dataUrl: 'api/register',},
         props: true
     },
     {
         path: '/admin/interview',
         name: 'InterviewComponent',
         component: InterviewComponent,
-        meta:{pagetitle:'Interview Schedule', dataUrl:'api/interview',},
+        meta: {pagetitle: 'Interview Schedule', dataUrl: 'api/interview',},
     },
 
 ];

@@ -1,6 +1,4 @@
 
-
-
 export const mutations={
     dataList(state,data){
         state.dataList = data;
@@ -23,4 +21,4 @@ export const mutations={
     permissions(state ,data){
         state.permissions=data;
     },
-}
+};

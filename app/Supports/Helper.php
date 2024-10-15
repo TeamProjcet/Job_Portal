@@ -24,14 +24,21 @@ trait Helper
         return response()->json($data);
 
     }
-//    public function can($permissionName)
-//    {
-//        $permissions = $this->authPermissions();
-//        if (in_array($permissionName, $permissions)){
-//            return true;
-//        };
-//        return false;
-//    }
+    public function can($permissionName)
+    {
+        $permissions = $this->authPermissions();
+        if (in_array($permissionName, $permissions)){
+            return true;
+        };
+        return false;
+    }
+    public function authPermissions()
+    {
+        return DB::table('permissions')
+            ->join('role_permissions', 'permissions.id', '=', 'role_permissions.permission_id')
+            ->where('role_id', auth()->user()->role_id)
+            ->get()->pluck('name')->toArray();
+    }
 
 
 }

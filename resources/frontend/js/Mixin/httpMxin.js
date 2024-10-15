@@ -85,67 +85,8 @@ export default {
         },
 
 
-        submitFromData: function (fromData = {}, optParms = {}, callback) {
-            const _this = this;
-
-            let method = (_this.formType === 2 && _this.updateId) ? 'put' : 'post';
-            let url = (_this.formType === 2 && _this.updateId) ? `${_this.urlGenaretor()}/${_this.updateId}` : _this.urlGenaretor();
-
-            _this.$validator.validateAll().then(valid => {
-                if (valid) {
-                    axios({
-                        method: method,
-                        url: url,
-                        data: fromData
-
-                    }).then(function (res) {
-                        if (parseInt(res.data.status) === 2000) {
-
-                            if (optParms.modalForm === undefined) {
-                                _this.closeModal();
-                            }
-                            if (optParms.reloadList === undefined) {
-                                _this.getDataList();
-                            }
-                            if (typeof callback === 'function') {
-                                callback(res.data.result);
-                            }
-                            _this.$toast.success("Category  successfully!");
-
-                        } else if (parseInt(res.data.status) === 3000) {
-                            $.each(res.data.result, function (index, errorValue) {
-                                _this.$validator.errors.add({
-                                    id: index,
-                                    field: index,
-                                    name: index,
-                                    msg: errorValue[0],
-                                });
-                            })
-
-                        } else {
-                            _this.$toast.error("Category  Unsuccessfully!");
-
-                        }
-                    });
-                }
-            });
-        },
 
 
-        CategoryDatadelete: function(id , index) {
-            const _this = this;
-
-            // _this.DeleteToster(function (isConfirmedelete) {
-            let url=`${_this.urlGenaretor()}/${id}`;
-            _this.httpReq('delete',url,{},{},function (retData) {
-                _this.getDataList();
-                _this.$toast.success("Data Delete successfully!");
-
-
-            })
-            // })
-
-        },
 
         uploadImage : function (event, dataObject, dataModel, callback = false) {
             const _this = this;

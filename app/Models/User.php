@@ -80,4 +80,14 @@ class User extends Authenticatable
         return $this->belongsTo(Company::class, 'company_id');
     }
 
+    public function hasPermission($permission)
+    {
+        foreach ($this->roles as $role) {
+            if ($role->permissions->contains('key', $permission)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

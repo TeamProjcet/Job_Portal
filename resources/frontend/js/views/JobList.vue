@@ -1,51 +1,51 @@
 <template>
     <!-- Jobs Start -->
-        <div class="container mt-4">
-            <h1 class="text-center mb-5 ">Job Listing</h1>
-                <div class="row">
-                <template v-if="!isLoading && joblist.jobData !== undefined">
-                    <div class="col-sm-4 mb-4" v-for="(job, index) in joblist.jobData.data" :key="job.id">
-                        <div class="card mb-3 shadow-sm">
-                            <div class="card-body d-flex justify-content-between">
-                                <div class="job-details">
-                                    <div class="job-title-text mb-3">
-                                        <router-link :to="{ name: 'Details', params: { id: job.id }}" class="job-link text-decoration-none">
-                                            <h5 class="card-title text-primary">
-                                                <i class="bi bi-briefcase"></i>
-                                                {{truncateString(job.position, 20)}}
-                                            </h5>
-                                        </router-link>
-                                    </div>
-                                    <router-link :to="{ name: 'jobcompany', params: { company_id : job.company_id }}" class="comp-name-text mb-2">
-                                        <i class="bi bi-building"></i>
-                                        <strong>Company:</strong>
-                                        <span class="text-muted">
-                                {{ job.company.name }}
-                                </span>
+    <div class="container mt-4">
+        <h1 class="text-center mb-5 ">Job Listing</h1>
+        <div class="row">
+            <template v-if="!isLoading && joblist.jobData !== undefined">
+                <div class="col-sm-4 mb-4" v-for="(job, index) in joblist.jobData.data" :key="job.id">
+                    <div class="card mb-3 shadow-sm">
+                        <div class="card-body d-flex justify-content-between">
+                            <div class="job-details">
+                                <div class="job-title-text mb-3">
+                                    <router-link :to="{ name: 'Details', params: { id: job.id }}" class="job-link text-decoration-none">
+                                        <h5 class="card-title text-primary">
+                                            <i class="bi bi-briefcase"></i>
+                                            {{truncateString(job.position, 20)}}
+                                        </h5>
                                     </router-link>
                                 </div>
-                                <div class="logo-container">
-                                    <img style="height: 80px" :src="storageImage(job.image)" alt="Company Logo" class="company-logo" />
-                                </div>
+                                <router-link :to="{ name: 'jobcompany', params: { company_id : job.company_id }}" class="comp-name-text mb-2">
+                                    <i class="bi bi-building"></i>
+                                    <strong>Company:</strong>
+                                    <span class="text-muted">
+                                {{ job.company.name }}
+                                </span>
+                                </router-link>
                             </div>
-                            <div class="d-flex gap-2 p-3">
-                                <router-link :to="{ name: 'Details', params: { id: job.id }}" class="btn btn-primary">Apply Now</router-link>
-                                <button class="btn btn-danger">Save Job</button>
+                            <div class="logo-container">
+                                <img style="height: 80px" :src="storageImage(job.image)" alt="Company Logo" class="company-logo" />
                             </div>
                         </div>
+                        <div class="d-flex gap-2 p-3">
+                            <router-link :to="{ name: 'Details', params: { id: job.id }}" class="btn btn-primary">Apply Now</router-link>
+                            <button class="btn btn-danger">Save Job</button>
+                        </div>
                     </div>
-                    <a v-if="joblist.jobData && joblist.jobData.current_page < joblist.jobData.last_page"
-                       class="btn btn-primary py-3 px-5 mt-3"
-                       @click="loadMoreJobs">
-                        Browse More Jobs
-                    </a>
-                </template>
-
-                <template v-else>
-                    <span class="dataLoader"><i class="fa fa-spin fa-spinner"></i></span>
-                </template>
                 </div>
-            </div>
+                <a v-if="joblist.jobData && joblist.jobData.current_page < joblist.jobData.last_page"
+                   class="btn btn-primary py-3 px-5 mt-3"
+                   @click="loadMoreJobs">
+                    Browse More Jobs
+                </a>
+            </template>
+
+            <template v-else>
+                <span class="dataLoader"><i class="fa fa-spin fa-spinner"></i></span>
+            </template>
+        </div>
+    </div>
     <!-- Jobs End -->
 </template>
 
@@ -125,6 +125,3 @@
         height: auto;
     }
 </style>
-
-
-

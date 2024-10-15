@@ -32,7 +32,7 @@ class ApplicationController extends Controller
         $validator = $this->model->Validator($request->all());
 
         if ($validator->fails()) {
-            return $this->returnData(3000, $validator->errors()); // Use proper status code for validation errors
+            return $this->returnData(3000, $validator->errors());
         }
 
         $this->model->fill($request->all());

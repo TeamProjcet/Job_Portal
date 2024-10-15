@@ -81,6 +81,22 @@ class ModuleTableSeeder extends Seeder
                 ],
             ],
             [
+                'name' => 'Interview',
+                'key' => 'Interview',
+                'link' => '#',
+                'icon' => 'fa-file-alt',
+                'permission' => ['add', 'view', 'edit','update', 'delete'],
+                'submenus' => [
+                    [
+                        'name' => 'Interview Schedules',
+                        'key' => 'InterviewSchedules',
+                        'link' => '/admin/interview',
+                        'icon' => 'fa-pen',
+                        'permission' => ['add', 'view', 'edit','update', 'delete'],
+                    ],
+                ],
+            ],
+            [
                 'name' => 'RolePermission',
                 'key' => 'rolepermission',
                 'link' => '#',

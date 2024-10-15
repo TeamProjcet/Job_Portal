@@ -40,17 +40,13 @@ class BlogController extends Controller
         }
         $this->model->fill($request->all());
         $this->model->user_id = Auth::id();
+
         $this->model->save();
         return $this->returnData(2000, $this->model);
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show($id)
     {
         $post = blog::with('company')->findOrFail($id);

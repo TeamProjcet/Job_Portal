@@ -4,31 +4,34 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Validator;
 
 class InterviewSchedule extends Model
 {
     use HasFactory;
     protected $fillable = [
         'job_id',
-        'seeker_id',
-        'employer_id',
+        'user_id',
+        'location',
+        'notic',
         'interview_date',
         'interview_time',
-        'interview_status',
     ];
+    public function validator($input){
+        return Validator::make($input,[
+            'job_id'=>'required ',
+            'location'=>'required ',
+            'notic'=>'required ',
+            'interview_date'=>'required ',
+        ]);
+    }
 
     public function job()
     {
-        return $this->belongsTo(JobPostModel::class, 'id', 'job_id');
+        return $this->belongsTo(JobPostModel::class, 'job_id', 'id');
+    }
+    public function user(){
+        return $this->belongsTo(User::class);
     }
 
-    public function jobSeeker()
-    {
-        return $this->belongsTo(JobSeekers::class, 'id', 'seeker_id');
-    }
-
-    public function employer()
-    {
-        return $this->belongsTo(Employers::class, 'id', 'employer_id');
-    }
 }

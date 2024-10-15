@@ -14,22 +14,26 @@ export default {
     methods: {
         getDataList: function (page = 1) {
             const _this = this;
-            axios.get(_this.urlGenaretor()
-                // {params: {
-                //     page : page,
-                //     filter : _this.formFilter,
-                // }}
-            )
+            axios.get(_this.urlGenaretor(), {
+                params: {
+                    page: page,
+                    filter: _this.formFilter,
+                }
+            })
                 .then(function (res) {
                     if (parseInt(res.data.status) === 2000) {
                         _this.$store.commit("dataList", res.data.result);
 
+                    } else if (parseInt(res.data.status) === 5000) {
+                        // Handle error case
                     }
-                    if (parseInt(res.data.status) === 5000) {
-
-                    }
+                })
+                .catch(function (error) {
+                    console.error(error);
                 });
         },
+
+
         getRequiredData: function (array) {
             const _this = this;
             _this.httpReq('post', _this.urlGenaretor('api/required_data'), array, {}, function (retData) {
@@ -110,7 +114,7 @@ export default {
                             if (typeof callback === 'function') {
                                 callback(res.data.result);
                             }
-                            _this.$toast.success("Category  successfully!");
+                            _this.$toast.success(" successfully!");
 
                         } else if (parseInt(res.data.status) === 3000) {
                             $.each(res.data.result, function (index, errorValue) {

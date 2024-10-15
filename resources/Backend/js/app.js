@@ -16,6 +16,10 @@ Vue.use(VueAxios, axios)
 import { Vue2TinymceEditor } from "vue2-tinymce-editor";
 Vue.component('Editor', Vue2TinymceEditor);
 
+import Pagination from "./plugins/pagination/pagination";
+Vue.component('pagination',Pagination);
+
+
 // common-function define and create
 import httpMixin from "./Mixin/httpMxin"
 import commonMixin from "./Mixin/commonMixin"

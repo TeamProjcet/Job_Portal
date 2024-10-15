@@ -8,7 +8,7 @@
                         <h3 class="fw-bold mb-3 " style="margin-left: 20px">{{$route.meta.pagetitle}}</h3>
                     </div>
                     <div class="ms-md-auto py-2 py-md-0">
-                        <router-link to="/admin/jobcategory/createjob"  class="btn btn-primary btn-round"><i class="fas fa-plus"></i>Add</router-link>
+                        <router-link v-if="can('joblist_add')" to="/admin/jobcategory/createjob"  class="btn btn-primary btn-round"><i class="fas fa-plus"></i>Add</router-link>
                     </div>
                 </div>
             </div>
@@ -27,16 +27,27 @@
                     </td>
                     <td>
 
-                        <a @click="openEditModal(data, data.id)">
+                        <a v-if="can('joblist_edit')" @click="openEditModal(data, data.id)">
                             <i class="fas fa-edit" style="color: blue;"></i>
                         </a>
 
-                        <a @click="CategoryDatadelete(data.id, index)">
+                        <a v-if="can('joblist_delete')" @click="CategoryDatadelete(data.id, index)">
                             <i class="fas fa-trash-alt" style="color: red;"></i>
                         </a>
                     </td>
                 </tr>
             </DataTable>
+            <template>
+<!--                <pagination-->
+<!--                        :current-page="pagination.current_page"-->
+<!--                        :total="pagination.total"-->
+<!--                        :per-page="10"-->
+<!--                        @paginate="getDataList"-->
+<!--                        previousText="PREV"-->
+<!--                        nextText="NEXT"-->
+<!--                ></pagination>-->
+                <pagination previousText="PREV" nextText="NEXT" :data="dataList" @paginateTo="getDataList"></pagination>
+            </template>
             <FormModal class="form-modal"  @submit="submitFromData(fromData)">
                 <div class="row">
                         <div class="mb-3">

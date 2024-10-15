@@ -21,4 +21,4 @@ export const getters = {
     permissions(state){
         return state.permissions;
     }
-}
+};
