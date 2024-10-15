@@ -75,7 +75,6 @@
         },
         mounted() {
             this.getJobList();
-            // this.loadFavourites();
             this.getRequiredData(['job_type'])
         },
         methods: {

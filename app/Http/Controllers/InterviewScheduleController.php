@@ -17,8 +17,11 @@ class InterviewScheduleController extends Controller
 
     public function index()
     {
-//        $interviews = InterviewSchedule::with('job', 'jobSeeker', 'employer')->get();
-//        return response()->json($interviews);
+        $user = auth()->user();
+        $data = $this->model->with('job','user')
+            ->where('user_id', $user->id)
+            ->get();
+        return $this->returnData(2000, $data);
     }
 
     public function create()

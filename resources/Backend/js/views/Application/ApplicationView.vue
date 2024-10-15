@@ -10,13 +10,13 @@
                     <p><strong>Name:</strong> {{application.seeker.name}}</p>
                     <p><strong>Email:</strong> {{application.seeker.email}}</p>
                     <p><strong>Address:</strong>{{application.job.address}}</p>
-                    <p><strong>Birth/NID No:</strong> 5684 5684 675</p>
-                    <p><strong>Phone:</strong> 01700000000</p>
+                    <p><strong>Phone:</strong> {{application.phone}}</p>
 
 
                     <h6 class="card-title mt-4">Cover Letter</h6>
                     <p v-html="application.coverLetter"></p>
                 </div>
+                <div>
                 <p>
                     <strong>Status:</strong>
                     <select v-model="applicationStatus" @change="updateApplicationStatus">
@@ -25,6 +25,16 @@
                         <option value="2">Rejected</option>
                     </select>
                 </p>
+                <p>
+                    <strong>InterView:</strong>
+                    <select v-model="interviewStatus" @change="updateApplicationStatus">
+                        <option value="0">Scheduled</option>
+                        <option value="1">Completed</option>
+                        <option value="2">Selected</option>
+                        <option value="3">Rejected</option>
+                    </select>
+                </p>
+                </div>
             </div>
             <div class="col-md-5" v-if="application">
                 <iframe
@@ -49,6 +59,7 @@
                 application: null,
                 isLoading: true,
                 applicationStatus: 0,
+                interviewStatus: 0,
                 components:{
                     Toast
                 }
@@ -65,6 +76,7 @@
                     const response = await axios.get(`/api/frontend/application/${id}`);
                     this.application = response.data.result;
                     this.applicationStatus = this.application.application_status;
+                    this.interviewStatus = this.application.interview_status;
                 } catch (error) {
                     console.error('Error fetching application data:', error);
                 } finally {
@@ -75,10 +87,11 @@
                 try {
                     const id = this.$route.params.id;
                     const response = await axios.put(`/api/frontend/application/${id}`, {
-                        status: this.applicationStatus,
+                        application_status: this.applicationStatus,
+                        interview_status: this.interviewStatus,
                     });
                     this.application.application_status = this.applicationStatus;
-                    // console.log('Application status updated:', response.data);
+                    this.application.interview_status = this.interviewStatus;
                     this.$toast.success('Application status updated successfully!');
                 } catch (error) {
                     console.error('Error updating application status:', error);

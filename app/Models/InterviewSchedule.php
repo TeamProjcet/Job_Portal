@@ -28,7 +28,7 @@ class InterviewSchedule extends Model
 
     public function job()
     {
-        return $this->belongsTo(JobPostModel::class, 'job_id', 'id');
+        return $this->belongsTo(JobPostModel::class );
     }
     public function user(){
         return $this->belongsTo(User::class);

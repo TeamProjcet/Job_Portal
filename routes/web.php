@@ -52,7 +52,9 @@ Route::prefix('api/frontend')->group(function () {
     Route::post('/seekerregis', [\App\Http\Controllers\frontend\SeekerLoginController::class, 'store']);
     Route::post('/seekerlogin', [\App\Http\Controllers\frontend\SeekerLoginController::class, 'login']);
     Route::post('/blogpost/{id}/like', [\App\Http\Controllers\Backend\BlogController::class, 'like']);
+    Route::put('seeker/profile', [\App\Http\Controllers\frontend\SeekerLoginController::class, 'update']);
     Route::post('/seekerlogout', [\App\Http\Controllers\frontend\SeekerLoginController::class, 'logout']);
+    Route::resource('/application', \App\Http\Controllers\frontend\ApplicationController::class);
     Route::resource('/newsletter', \App\Http\Controllers\frontend\NewsletterController::class);
     Route::resource('/contact', \App\Http\Controllers\frontend\ContactController::class);
 //    Route::resource('/blogcomment', \App\Http\Controllers\frontend\BlogCommentController::class);

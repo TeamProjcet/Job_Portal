@@ -174,7 +174,7 @@
 
 
                 async submitApplication() {
-
+                const _this=this;
                     this.fromData.job_id = this.job.id;
                     this.fromData.seeker_id = this.seeker.id;
                     axios.post('/api/frontend/application', this.fromData)

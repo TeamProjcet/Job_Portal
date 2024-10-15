@@ -39,8 +39,8 @@
                                     <tr>
                                         <th scope="col">Job Title</th>
                                         <th scope="col">Application Date</th>
-                                        <th scope="col">Status</th>
                                         <th scope="col">Location</th>
+                                        <th scope="col">Status</th>
                                         <th scope="col">interview</th>
                                     </tr>
                                     </thead>
@@ -48,22 +48,36 @@
                                     <tr v-for="apply in applications" :key="apply.id">
                                         <td>{{ apply.job.position }}</td>
                                         <td>{{apply.applied_at}}</td>
+                                        <td>{{apply.job.address}}</td>
+
                                         <td>
                                         <span :class="{
-                                        'text-success p-1 ': apply.application_status == 1,
-                                        'text-danger p-1 ': apply.application_status == 2,
-                                        'text-warning p-1 ': apply.application_status == 0
+                                        'bg-primary p-1 ': apply.application_status == 1,
+                                        'bg-danger p-1 ': apply.application_status == 2,
+                                        'bg-warning p-1 ': apply.application_status == 0
                                         }">
-                                        {{ apply.application_status == 0 ? 'Pending' : apply.application_status == 1 ? 'Accepted' : 'Rejected' }}
+                                            <label class="badge text-white mx-1" >{{ apply.application_status == 0 ? 'Pending' : apply.application_status == 1 ? 'Accepted' : 'Rejected' }}</label>
                                         </span>
                                         </td>
-                                        <td>{{apply.job.address}}</td>
-                                        <td v-if="apply.application_status == 1" >
-                                            <button class="btn btn-info btn-sm" >
-                                            Interview Schedule
-                                        </button>
+                                        <td>
+                                            {{apply.interview_status}}
 
-                                    </td>
+<!--                                            <span :class="{-->
+<!--                                        'bg-primary p-1 ': apply.interview_status == 1,-->
+<!--                                        'bg-danger p-1 ': apply.interview_status == 2,-->
+<!--                                        'bg-warning p-1 ': apply.interview_status == 0-->
+<!--                                        }">-->
+
+<!--                                            <label class="" >{{ apply.interview_status == 0 ? 'Scheduled' : apply.interview_status == 1 ? 'Completed' : apply.interview_status == 2 ? 'Selected' : 'Rejected' }}</label>-->
+<!--                                        </span>-->
+
+                                        </td>
+<!--                                        <td  >-->
+<!--                                            <button class="btn btn-info btn-sm" >-->
+<!--                                            Interview Schedule-->
+<!--                                        </button>-->
+
+<!--                                    </td>-->
                                     </tr>
                                     </tbody>
                                 </table>
