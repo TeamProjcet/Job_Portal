@@ -10,13 +10,6 @@
                         <h5 class="pt-2">Bio</h5>
                         <p class="text-muted">{{seeker.bio}}</p>
                         <hr>
-                        <h6>Skills</h6>
-                        <ul class="list-unstyled">
-                            <li class="badge bg-primary">JavaScript</li>
-                            <li class="badge bg-primary">PHP</li>
-                            <li class="badge bg-primary">Vue.js</li>
-                            <li class="badge bg-primary">Laravel</li>
-                        </ul>
                         <hr>
                         <h6>Contact Info</h6>
                         <p><strong>Email:</strong> {{seeker.email}}</p>
@@ -48,6 +41,7 @@
                                         <th scope="col">Application Date</th>
                                         <th scope="col">Status</th>
                                         <th scope="col">Location</th>
+                                        <th scope="col">interview</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -64,6 +58,12 @@
                                         </span>
                                         </td>
                                         <td>{{apply.job.address}}</td>
+                                        <td v-if="apply.application_status == 1" >
+                                            <button class="btn btn-info btn-sm" >
+                                            Interview Schedule
+                                        </button>
+
+                                    </td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -74,7 +74,7 @@
                     <div class="tab-pane fade" id="update-profile" role="tabpanel" aria-labelledby="update-profile-tab">
                         <div class="card">
                             <div class="card-body">
-                                <form id="updateProfileForm" @submit.prevent="submitApplication">
+                                <form id="updateProfileForm" @submit.prevent="submitProfile">
                                     <div class="mb-3">
                                         <label for="name" class="form-label">Name</label>
                                         <input type="text" class="form-control" id="name" v-model="fromData.name" readonly>
@@ -144,7 +144,7 @@
 
         methods:{
 
-            async submitApplication() {
+            async submitProfile() {
 
                 this.fromData.id = this.seeker.id;
              await axios.put('/api/frontend/seeker/profile', this.fromData)

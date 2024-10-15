@@ -12,4 +12,8 @@ class Module extends Model
     {
         return $this->hasMany(Permission::class, 'module_id'); // Ensure the foreign key is correct
     }
+    public function sub_menus()
+    {
+        return $this->hasMany(Module::class, 'parent_id', 'id');
+    }
 }

@@ -5,15 +5,21 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body text-center position-relative">
-                      <template v-for="items in employer">
-                          <img
-                                  style="width: 100px; height: 100px; border: solid 5px; border-radius: 50px"
-                                  :src="storageImage(items.image)"
-                                  class="img-fluid rounded-circle mx-auto d-block"
-                                  alt="Profile Picture"
-                          >
+                        <div>
+                            <img  v-if="!employer.length" src="https://www.w3schools.com/howto/img_avatar.png" class="w-50 img-fluid rounded-circle mx-auto d-block"
+                                  alt="Profile Picture">
+                            <template v-for="items in employer">
+                                <img v-if="employer.length"
+                                        style="width: 100px; height: 100px; border: solid 5px; border-radius: 50px"
+                                        :src="storageImage(items.image)"
+                                        class=" img-fluid rounded-circle mx-auto d-block"
+                                        alt="Profile Picture"
+                                >
 
-                      </template>
+                            </template>
+                        </div>
+
+
                         <h4 class="mt-3">{{user.name}}</h4>
                         <template v-for="items in employer">
                             <h5 class="pt-2">Bio</h5>
@@ -52,9 +58,10 @@
                         </table>
                     </div>
                     <div class="d-flex p-2 gap-2">
-                        <button @click="openEditModal()" type="button" class="btn btn-success">Save</button>
+                        <button v-if="!employer.length" @click="openEditModal()" type="button" class="btn btn-success">Save</button>
+
                         <template v-for="items in employer">
-                            <button @click="openEditModal(items, items.id)" type="button" class="btn btn-primary">Update</button>
+                            <button v-if="employer.length" @click="openEditModal(items, items.id)" type="button" class="btn btn-primary">Update</button>
                         </template>
                     </div>
                 </div>
@@ -121,7 +128,9 @@
         },
 
         methods: {
-
+            defaultImage() {
+                return 'https://www.w3schools.com/howto/img_avatar.png';
+            }
         }
     }
 </script>

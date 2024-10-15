@@ -15,10 +15,5 @@ export const getters = {
     requireData(state){
         return state.requireData;
     },
-    Config(state){
-        return state.Config;
-    },
-    permissions(state){
-        return state.permissions;
-    }
+
 }

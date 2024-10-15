@@ -21,7 +21,6 @@ class SavedJobs extends Model
             'job_id' => 'required',
         ]);
     }
-
     public function seeker()
     {
         return $this->belongsTo(Seeker::class, 'seeker_id', 'id');

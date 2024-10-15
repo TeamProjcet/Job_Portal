@@ -6,6 +6,9 @@ Vue.use(VueRouter);
 import App from './App.vue'
 import route from './Routes'
 
+import Pagination from "./plugins/pagination/pagination";
+Vue.component('pagination',Pagination);
+
 import { Vue2TinymceEditor } from "vue2-tinymce-editor";
 Vue.component('Editor', Vue2TinymceEditor);
 

@@ -118,55 +118,13 @@
                             _this.$toast.success("Permissions updated successfully!");
                         })
                         .catch(error => {
-                            console.error('Error updating permissions:', error);
                             _this.$toast.error("Error updating permissions!");
                         });
                 } catch (error) {
-                    console.error('Error updating permissions:', error);
                     _this.$toast.error("Error updating permissions!");
                 }
             },
-            // setPermission: function (event, object, id, baseObject = false) {
-            //     const _this = this;
-            //     if (event.target.checked) {
-            //         if (!object.includes(id)) {
-            //             object.push(id);
-            //         }
-            //
-            //         if (typeof baseObject === 'object' && baseObject.permissions) {
-            //             baseObject.permissions.forEach(permission => {
-            //                 if (!_this.selectedPermissions.includes(permission.id)) {
-            //                     _this.selectedPermissions.push(permission.id);
-            //                 }
-            //             });
-            //         }
-            //     } else {
-            //         var index = object.indexOf(id);
-            //         if (index !== -1) {
-            //             object.splice(index, 1);
-            //         }
-            //
-            //         if (typeof baseObject === 'object' && baseObject.permissions) {
-            //             baseObject.permissions.forEach(permission => {
-            //                 var dataIndex = _this.selectedPermissions.indexOf(permission.id);
-            //                 if (dataIndex !== -1) {
-            //                     _this.selectedPermissions.splice(dataIndex, 1);
-            //                 }
-            //             });
-            //         }
-            //     }
-            //
-            //     // API কল এবং সেভ করা
-            //     var url = _this.urlGenaretor(`api/roles/${this.selectedRole}/permissions`);
-            //     axios.post(url, { permissions: this.selectedPermissions, modules: this.selectedModules })
-            //         .then(response => {
-            //             _this.$toast.success("Permissions updated successfully!");
-            //         })
-            //         .catch(error => {
-            //             console.error('Error updating permissions:', error);
-            //             _this.$toast.error("Error updating permissions!");
-            //         });
-            // }
+
 
         }
 
