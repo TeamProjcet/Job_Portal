@@ -15,14 +15,18 @@ class SavedJobsController extends Controller
         $this->model=new SavedJobs();
     }
 
+
     public function index()
     {
+        $savedJobs = SavedJobs::with('seeker', 'job')->get();
+        return $this->returnData(2000,  $savedJobs);
 
     }
+
     public function create()
     {
-    }
 
+    }
 
 
     public function store(Request $request)
@@ -57,8 +61,19 @@ class SavedJobsController extends Controller
         // Code for updating a specific saved job
     }
 
-    public function destroy(SavedJobs $savedJobs)
+    public function destroy($id)
     {
+        try {
+            $data = $this->model->where('id',$id)->first();
+            if ($data){
+                $data->delete();
 
+                return $this->returnData(2000, null, 'save job deleted successfully');
+            }
+            return $this->returnData(3000, null, 'save job not found');
+
+        }catch (\Exception $exception){
+            return $this->returnData(5000, $exception->getMessage(), 'Something Wrong');
+        }
     }
 }

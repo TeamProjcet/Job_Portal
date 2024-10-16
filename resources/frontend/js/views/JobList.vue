@@ -60,6 +60,7 @@
         components: {Pagination, format},
         data() {
             return {
+                savedJobs: new Set(),
                 joblist: [],
                 error: null,
                 isLoading : false,
@@ -110,20 +111,14 @@
             },
 
 
-            // async saveJob(job) {
-            //     try {
-            //         const response = await axios.post('/api/saved', {
-            //             job_id: job.id
-            //         });
-            //         console.log(response.data.message);
-            //     } catch (error) {
-            //         console.error('Error saving job:', error);
-            //     }
-            // },
             async saveJob(job) {
                 if (!this.isAuthenticated) {
-                    // Redirect to login or show a modal
-                    this.$router.push( '/seekerlogin' ); // Assuming you have a route named 'Login'
+                    this.$router.push('/seekerlogin');
+                    return;
+                }
+
+                if (this.savedJobs.has(job.id)) {
+                    this.$toast.info('Job is already saved!');
                     return;
                 }
 
@@ -131,12 +126,14 @@
                     const response = await axios.post('/api/saved', {
                         job_id: job.id
                     });
+
+                    this.savedJobs.add(job.id);
+                    this.$toast.success('Job saved successfully!');
                 } catch (error) {
                     console.error('Error saving job:', error);
+                    this.$toast.error('Error saving job. Please try again.');
                 }
             },
-
-
 
         }
     }

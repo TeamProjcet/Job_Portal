@@ -7,6 +7,7 @@ use App\Models\Applications;
 use App\Models\Category;
 use App\Models\Company;
 use App\Models\JobPostModel;
+use App\Models\SavedJobs;
 use App\Models\Seeker;
 use App\Supports\Helper;
 use Illuminate\Http\Request;
@@ -30,7 +31,6 @@ class FrontendController extends Controller
 
         $data['company'] = Company::get();
 
-
         return $this->returnData(2000,$data);
     }
 
@@ -40,10 +40,7 @@ class FrontendController extends Controller
         $data['jobPosts'] = JobPostModel::with('category','company')->where('category_id',$cateId)->get();
         return $this->returnData(2000,$data);
 
-        return $this->returnData(2000,$data);
-
     }
-
 
 
 

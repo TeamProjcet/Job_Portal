@@ -82,23 +82,9 @@
                                         <span class="sub-item">Collaborations</span>
                                     </router-link>
                                 </li>
-                                <li>
-                                    <router-link to="/admin/blog/blogcomment">
-                                        <span class="sub-item">Blog Comment</span>
-                                    </router-link>
-                                </li>
-
-
                             </ul>
                         </div>
                     </li>
-
-<!--                    -->
-
-                            
-
-
-                   
                 </ul>
             </div>
         </div>

@@ -171,26 +171,28 @@
                 }
             },
 
-                async submitApplication() {
-                const _this=this;
-                    this.fromData.job_id = this.job.id;
-                    this.fromData.seeker_id = this.seeker.id;
-                    axios.post('/api/frontend/application', this.fromData)
-                        .then(function (res) {
-                            if (parseInt(res.data.status) === 2000) {
-                                this.$toast.success(" Application submitted successfully");
+            async submitApplication() {
+                this.fromData.job_id = this.job.id;
+                this.fromData.seeker_id = this.seeker.id;
 
-                            } else {
-                                this.$toast.error("Application failed!");
-                            }
-                        })
-                        .catch(function (error) {
-                            if (error.response) {
-                                _this.error = "No Job details found.";
+                try {
+                    const res = await axios.post('/api/frontend/application', this.fromData);
 
-                            }
-                        });
-                },
+                    if (parseInt(res.data.status) === 2000) {
+                        this.$toast.success("Application submitted successfully");
+                    } else {
+                        this.$toast.error("Application failed!");
+                    }
+                } catch (error) {
+                    if (error.response) {
+                        this.error = "No Job details found.";
+                        this.$toast.error(this.error);
+                    } else {
+                        this.$toast.error("An unexpected error occurred.");
+                    }
+                }
+            }
+
 
         }
     };
