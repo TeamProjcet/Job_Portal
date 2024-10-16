@@ -16,6 +16,7 @@
                         <div class="d-flex align-items-center mb-5">
                             <img class="flex-shrink-0 img-fluid border rounded" :src="storageImage(job.image)" alt="" style="width: 80px; height: 80px;">
                             <div class="text-start ps-4">
+
                                 <h3 class="mb-3">{{ job.position }}</h3>
                                 <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>{{ job.address }}</span>
                                 <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i>{{ job.job_type == 1 ? 'Full Time' : (job.job_type == 2 ? 'Part Time' : 'Not Specified') }}</span>
@@ -39,7 +40,7 @@
                                             <input type="email" class="form-control" placeholder="Your Email" v-model="fromData.email" readonly>
                                         </div>
                                         <div class="col-12 col-sm-6">
-                                            <input type="text" class="form-control" placeholder="Your Phone" v-model="fromData.phone">
+                                            <input type="number" class="form-control" placeholder="Your Phone" v-model="fromData.phone">
                                         </div>
                                         <div class="col-12 col-sm-6">
                                             <input type="text" class="form-control" placeholder="Your Address" v-model="fromData.address">
@@ -159,7 +160,7 @@
             async getJobDetails() {
                 const _this=this;
                 try {
-                    const response = await axios.get(`/api/joblist/${this.id}`);
+                    const response = await axios.get(`/api/frontend/detailsData/${this.id}`);
                     if (response.data && response.data.result) {
                         _this.job = response.data.result;
                     } else {
@@ -171,26 +172,23 @@
                 }
             },
 
-                async submitApplication() {
-                const _this=this;
-                    this.fromData.job_id = this.job.id;
-                    this.fromData.seeker_id = this.seeker.id;
-                    axios.post('/api/frontend/application', this.fromData)
-                        .then(function (res) {
-                            if (parseInt(res.data.status) === 2000) {
-                                this.$toast.success(" Application submitted successfully");
+            async submitApplication() {
+                this.fromData.job_id = this.job.id;
+                this.fromData.seeker_id = this.seeker.id;
 
-                            } else {
-                                this.$toast.error("Application failed!");
-                            }
-                        })
-                        .catch(function (error) {
-                            if (error.response) {
-                                _this.error = "No Job details found.";
+                try {
+                    const response = await axios.post('/api/application', this.fromData);
+                    if (parseInt(response.data.status) === 2000) {
+                        this.$toast.success("Application submitted successfully");
+                    } else {
+                        this.$toast.error("Application failed!");
+                    }
+                } catch (error) {
+                    console.error("Error submitting application:", error);
+                    this.$toast.error("Application submission failed!");
+                }
+            }
 
-                            }
-                        });
-                },
 
         }
     };

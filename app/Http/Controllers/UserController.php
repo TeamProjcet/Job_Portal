@@ -12,6 +12,18 @@ use Illuminate\Support\Facades\Session;
 class UserController extends Controller
 {
     use Helper;
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            if (!$this->can(request()->route()->action['as'])){
+                return $this->returnData(5000, null, 'You are not authorized to access this page');
+            }
+            return $next($request);
+        });
+
+        $this->model=new User();
+    }
+
     public function index()
     {
 //        $users = User::with('company')->get()->map(function($user) {
@@ -25,13 +37,21 @@ class UserController extends Controller
 
     public function create()
     {
-        //
+
     }
 
 
     public function store(Request $request)
     {
+        $validator = $this->model->Validator($request->all());
 
+        if ($validator->fails()) {
+            return $this->returnData(3000,$validator->errors());
+        }
+        $this->model->fill($request->all());
+        $this->model->password = Hash::make($request->password);
+        $this->model->save();
+        return $this->returnData(2000, $this->model);
     }
 
 

@@ -69,31 +69,7 @@
                     </li>
               
        
-                    <li class="nav-item">
-                        <a data-bs-toggle="collapse" href="#base0">
-                            <i class="fas fa-handshake"></i>
-                            <p>Partnerships</p>
-                            <span class="caret"></span>
-                        </a>
-                        <div class="collapse" id="base0">
-                            <ul class="nav nav-collapse">
-                                <li>
-                                    <router-link to="/admin/client/partnership">
-                                        <span class="sub-item">Collaborations</span>
-                                    </router-link>
-                                </li>
-                                <li>
-                                    <router-link to="/admin/blog/blogcomment">
-                                        <span class="sub-item">Blog Comment</span>
-                                    </router-link>
-                                </li>
 
-
-                            </ul>
-                        </div>
-                    </li>
-
-<!--                    -->
 
                             
 

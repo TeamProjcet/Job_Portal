@@ -16,24 +16,35 @@
                     <h6 class="card-title mt-4">Cover Letter</h6>
                     <p v-html="application.coverLetter"></p>
                 </div>
-                <div>
-                <p>
-                    <strong>Status:</strong>
-                    <select v-model="applicationStatus" @change="updateApplicationStatus">
-                        <option value="0">Pending</option>
-                        <option value="1">Accepted</option>
-                        <option value="2">Rejected</option>
-                    </select>
-                </p>
-                <p>
-                    <strong>InterView:</strong>
-                    <select v-model="interviewStatus" @change="updateApplicationStatus">
-                        <option value="0">Scheduled</option>
-                        <option value="1">Completed</option>
-                        <option value="2">Selected</option>
-                        <option value="3">Rejected</option>
-                    </select>
-                </p>
+                <div class="row">
+                    <div class="col-md-4">
+                    <p>
+                        <strong>Status:</strong>
+                        <select v-model="applicationStatus" @change="updateApplicationStatus">
+                            <option value="0">Pending</option>
+                            <option value="1">Accepted</option>
+                            <option value="2">Rejected</option>
+                        </select>
+                    </p>
+                    <p>
+                        <strong>InterView:</strong>
+                        <select v-model="interviewStatus" @change="updateApplicationStatus">
+                            <option value="0">Scheduled</option>
+                            <option value="1">Completed</option>
+                            <option value="2">Selected</option>
+                            <option value="3">Rejected</option>
+                        </select>
+                    </p>
+                    </div>
+                    <div class="col-md-7">
+                    <form @submit.prevent="updateApplicationStatus">
+
+                        <label>Note</label>
+                        <textarea type="text" v-model="note" class="form-control" name="note"/>
+
+                        <button type="submit"  class="btn btn-success mt-2">submit</button>
+                    </form>
+                    </div>
                 </div>
             </div>
             <div class="col-md-5" v-if="application">
@@ -60,6 +71,7 @@
                 isLoading: true,
                 applicationStatus: 0,
                 interviewStatus: 0,
+                note:'',
                 components:{
                     Toast
                 }
@@ -73,7 +85,7 @@
             async getApplicationDetails() {
                 const id = this.$route.params.id;
                 try {
-                    const response = await axios.get(`/api/frontend/application/${id}`);
+                    const response = await axios.get(`/api/application/${id}`);
                     this.application = response.data.result;
                     this.applicationStatus = this.application.application_status;
                     this.interviewStatus = this.application.interview_status;
@@ -86,17 +98,21 @@
             async updateApplicationStatus() {
                 try {
                     const id = this.$route.params.id;
-                    const response = await axios.put(`/api/frontend/application/${id}`, {
+                    const response = await axios.put(`/api/application/${id}`, {
                         application_status: this.applicationStatus,
                         interview_status: this.interviewStatus,
+                        note: this.note, // Correct note field usage
                     });
                     this.application.application_status = this.applicationStatus;
                     this.application.interview_status = this.interviewStatus;
+                    this.note = '';
                     this.$toast.success('Application status updated successfully!');
+
                 } catch (error) {
                     console.error('Error updating application status:', error);
                 }
-            },
+            }
+
         }
     }
 </script>

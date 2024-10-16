@@ -59,25 +59,14 @@
                                             <label class="badge text-white mx-1" >{{ apply.application_status == 0 ? 'Pending' : apply.application_status == 1 ? 'Accepted' : 'Rejected' }}</label>
                                         </span>
                                         </td>
-                                        <td>
-                                            {{apply.interview_status}}
 
-<!--                                            <span :class="{-->
-<!--                                        'bg-primary p-1 ': apply.interview_status == 1,-->
-<!--                                        'bg-danger p-1 ': apply.interview_status == 2,-->
-<!--                                        'bg-warning p-1 ': apply.interview_status == 0-->
-<!--                                        }">-->
 
-<!--                                            <label class="" >{{ apply.interview_status == 0 ? 'Scheduled' : apply.interview_status == 1 ? 'Completed' : apply.interview_status == 2 ? 'Selected' : 'Rejected' }}</label>-->
-<!--                                        </span>-->
+                                        <td  >
+                                            <router-link :to="{ name: 'interviewtable', params: { id: apply.id } }" class="btn btn-info btn-sm" >
+                                            Interview Schedule
+                                        </router-link>
 
-                                        </td>
-<!--                                        <td  >-->
-<!--                                            <button class="btn btn-info btn-sm" >-->
-<!--                                            Interview Schedule-->
-<!--                                        </button>-->
-
-<!--                                    </td>-->
+                                    </td>
                                     </tr>
                                     </tbody>
                                 </table>

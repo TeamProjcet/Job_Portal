@@ -40,10 +40,13 @@ class FrontendController extends Controller
         $data['jobPosts'] = JobPostModel::with('category','company')->where('category_id',$cateId)->get();
         return $this->returnData(2000,$data);
 
-        return $this->returnData(2000,$data);
-
     }
 
+    public function detailsData($id)
+    {
+        $job = JobPostModel::findOrFail($id)->load('category', 'company');
+        return $this->returnData(2000,$job);
+    }
 
 
 
@@ -54,10 +57,8 @@ class FrontendController extends Controller
        if (!$user) {
            return response()->json(['error' => 'Unauthorized'], 401);
        }
-
        $applications = Applications::with('seeker', 'job')->where('seeker_id',  $user->id)->get();
-
-       $data = [
+        $data = [
            'seeker' => $user,
            'applications' => $applications,
        ];
@@ -65,6 +66,7 @@ class FrontendController extends Controller
         return $this->returnData(2000,$data);
 
     }
+
 
 
 

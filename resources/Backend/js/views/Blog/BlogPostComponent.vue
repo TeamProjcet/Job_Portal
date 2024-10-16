@@ -19,10 +19,10 @@
                     </span>
                     </td>
                     <td>
-                        <a @click="openEditModal(data , data.id)">
+                        <a v-if="can('blogpost.edit')" @click="openEditModal(data , data.id)">
                             <i class="fas fa-edit" style="color: blue;"></i>
                         </a>
-                        <a @click="CategoryDatadelete(data.id, index)">
+                        <a v-if="can('blogpost.destroy')" @click="CategoryDatadelete(data.id, index)">
                             <i class="fas fa-trash-alt" style="color: red;"></i>
                         </a>
                     </td>

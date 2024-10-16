@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('role_modules', function (Blueprint $table) {
             $table->id();
-            $table->string('module_id');
-            $table->string('role_id');
+            $table->integer('module_id');
+            $table->integer('role_id');
             $table->timestamps();
         });
     }

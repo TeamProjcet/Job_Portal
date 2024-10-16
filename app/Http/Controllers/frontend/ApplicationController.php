@@ -4,31 +4,50 @@ namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Applications;
-use App\Models\blog;
 use App\Supports\Helper;
 use Illuminate\Http\Request;
 
 class ApplicationController extends Controller
 {
     use Helper;
+
     public function __construct()
     {
-        $this->model=new Applications();
+//        $this->middleware(function ($request, $next) {
+//            if (!$this->can(request()->route()->action['as'])) {
+//                return $this->returnData(5000, null, 'You are not authorized to access this page');
+//            }
+//            return $next($request);
+//        });
+        $this->model = new Applications();
     }
+
     public function index()
     {
-        $data = $this->model->with('job', 'seeker')->get();
+        if (!$this->can('application.index')) {
+            return $this->returnData(5000, null, 'You are not authorized to access this page');
+        }
+
+        $user = auth()->user();
+        $data = Applications::with(['job.category', 'job.company', 'seeker'])
+            ->whereHas('job', function ($query) use ($user) {
+                $query->where('user_id', $user->id);
+            })->get();
+
         return $this->returnData(2000, $data);
     }
 
-
     public function create()
     {
-        // Code for showing the form to create a new application
+// Code for showing the form to create a new application
     }
 
     public function store(Request $request)
     {
+        if (!$this->can('application.store')) {
+            return $this->returnData(5000, null, 'You are not authorized to access this page');
+        }
+
         $validator = $this->model->Validator($request->all());
 
         if ($validator->fails()) {
@@ -38,23 +57,32 @@ class ApplicationController extends Controller
         $this->model->fill($request->all());
         $this->model->save();
 
-        return $this->returnData(2000,$this->model);
+        return $this->returnData(2000, $this->model);
     }
 
     public function show($id)
     {
+        if (!$this->can('application.show')) {
+            return $this->returnData(5000, null, 'You are not authorized to access this page');
+        }
+
         $post = $this->model->with('job', 'seeker')->findOrFail($id);
-        return response()->json(['result' => $post]);
+        return $this->returnData(2000, $post);
     }
 
     public function edit(Applications $applications)
     {
-        // Code for showing the form to edit a specific application
+        if (!$this->can('application.edit')) {
+            return $this->returnData(5000, null, 'You are not authorized to access this page');
+        }
+// Code for showing the form to edit a specific application
     }
 
     public function update(Request $request, $id)
     {
-
+        if (!$this->can('application.update')) {
+            return $this->returnData(5000, null, 'You are not authorized to access this page');
+        }
 
         $application = Applications::find($id);
         if (!$application) {
@@ -63,25 +91,28 @@ class ApplicationController extends Controller
 
         $application->application_status = $request->application_status;
         $application->interview_status = $request->interview_status;
+        $application->note = $request->note;
         $application->save();
 
-        return $this->returnData(2000,$application);
+        return $this->returnData(2000, $application);
     }
-
 
     public function destroy($id)
     {
+        if (!$this->can('application.destroy')) {
+            return $this->returnData(5000, null, 'You are not authorized to access this page');
+        }
+
         try {
-            $data = $this->model->where('id',$id)->first();
-            if ($data){
+            $data = $this->model->where('id', $id)->first();
+            if ($data) {
                 $data->delete();
-
-                return $this->returnData(2000, null, 'Category deleted successfully');
+                return $this->returnData(2000, null, 'Application deleted successfully');
             }
-            return $this->returnData(3000, null, 'Category not found');
+            return $this->returnData(3000, null, 'Application not found');
 
-        }catch (\Exception $exception){
-            return $this->returnData(5000, $exception->getMessage(), 'Something Wrong');
+        } catch (\Exception $exception) {
+            return $this->returnData(5000, $exception->getMessage(), 'Something went wrong');
         }
     }
 }

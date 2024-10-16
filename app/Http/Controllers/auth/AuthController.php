@@ -60,15 +60,7 @@ use Helper;
 
     public function store(Request $request)
     {
-        $validator = $this->model->Validator($request->all());
 
-        if ($validator->fails()) {
-            return $this->returnData(3000,$validator->errors());
-        }
-        $this->model->fill($request->all());
-        $this->model->password = Hash::make($request->password);
-        $this->model->save();
-        return $this->returnData(2000, $this->model);
     }
     public function logout(){
         Auth::logout();

@@ -1,3 +1,4 @@
+
 <template>
     <div class="row">
         <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4" >
@@ -5,25 +6,24 @@
                 <h3 class="fw-bold mb-3 " style="margin-left: 20px">{{$route.meta.pagetitle}}</h3>
             </div>
             <div class="ms-md-auto py-2 py-md-0">
-                <!--                <a @click="openEditModal()" class="btn btn-primary btn-round"><i class="fas fa-plus"></i>Add</a>-->
             </div>
         </div>
         <div class="col-md-12">
             <!-- Menu Tabs -->
-            <ul class="nav nav-tabs" id="profileTab" role="tablist">
-                <li class="nav-item">
-                    <router-link :to="`/admin/seeker/application?application_status=0`" class="nav-link"
-                                 :class="(parseInt($route.query.application_status) === 0 || $route.query.application_status === undefined) ? 'active' : ''" >
-                        <h6 class="mt-n1 mb-0">Pending Jobs</h6>
-                    </router-link>
-                </li>
-                <li class="nav-item" v-for="(applystatus, index) in requireData.application_status" :key="index">
-                    <router-link :to="`/admin/seeker/application?application_status=${applystatus.value}`" class="nav-link"
-                                 :class="(parseInt(applystatus.value) === parseInt($route.query.application_status)) ? 'active' : ''" >
-                        <h6 class="mt-n1 mb-0">{{applystatus.name}}</h6>
-                    </router-link>
-                </li>
-            </ul>
+<!--            <ul class="nav nav-tabs" id="profileTab" role="tablist">-->
+<!--                <li class="nav-item">-->
+<!--                    <router-link :to="`/admin/seeker/application?application_status=0`" class="nav-link"-->
+<!--                                 :class="(parseInt($route.query.application_status) === 0 || $route.query.application_status === undefined) ? 'active' : ''" >-->
+<!--                        <h6 class="mt-n1 mb-0">Pending Jobs</h6>-->
+<!--                    </router-link>-->
+<!--                </li>-->
+<!--                <li class="nav-item" v-for="(applystatus, index) in requireData.application_status" :key="index">-->
+<!--                    <router-link :to="`/admin/seeker/application?application_status=${applystatus.value}`" class="nav-link"-->
+<!--                                 :class="(parseInt(applystatus.value) === parseInt($route.query.application_status)) ? 'active' : ''" >-->
+<!--                        <h6 class="mt-n1 mb-0">{{applystatus.name}}</h6>-->
+<!--                    </router-link>-->
+<!--                </li>-->
+<!--            </ul>-->
 
             <!-- Tab Content -->
             <div class="tab-content mt-3" id="profileTabContent">
@@ -32,11 +32,11 @@
                     <div class="card">
                         <div class="card-body">
 
-                            <template v-if="!isLoading && applylist.applyData !==undefined">
+                            <template v-if="!isLoading && dataList !==undefined">
                                 <div class="table-responsive">
 
                                     <DataTable :tableHeading="tableHeading">
-                                        <tr v-for="(data, index) in applylist.applyData.data" :key="index">
+                                        <tr v-for="(data, index) in dataList" :key="index">
                                             <td>{{ index + 1 }}</td>
                                             <td>{{ data.seeker.name }}</td>
                                             <td>{{ data.seeker.email }}</td>
@@ -71,11 +71,11 @@
                                             </td>
 
                                             <td>
-                                                <router-link :to="{ name: 'ApplicationView', params: { id: data.id } }">
+                                                <router-link v-if="can('application.show')" :to="{ name: 'ApplicationView', params: { id: data.id } }">
                                                     <i class="fas fa-eye" style="color: blue; margin-right: 5px; font-size: 20px"></i>
                                                 </router-link>
 
-                                                <a style="cursor: pointer" @click="CategoryDatadelete(data.id)">
+                                                <a v-if="can('application.destroy')" style="cursor: pointer" @click="CategoryDatadelete(data.id)">
                                                     <i class="fas fa-trash-alt" style="color: red; font-size: 20px"></i>
                                                 </a>
                                             </td>
@@ -127,26 +127,27 @@
             }
         },
         mounted() {
-            this.getapplyList();
+            this.getDataList();
+            // this.getapplyList();
             this.getRequiredData(['application_status']);
 
         },
         methods:{
-            getapplyList( page=1){
-                this.isLoading = true;
-                this.applylist={};
-                try{
-                    axios.get(`/api/backendData?application_status=${this.application_status}&page=${page}`).then((response)=>{
-                        this.isLoading = false;
-                        this.applylist=response.data.result;
-                    })
-                }catch(error) {
-                    this.error = "Error fetching apply data. Please try again later.";
-
-                }
-
-
-            }
+            // getapplyList( page=1){
+            //     this.isLoading = true;
+            //     this.applylist={};
+            //     try{
+            //         axios.get(`/api/backendData?application_status=${this.application_status}&page=${page}`).then((response)=>{
+            //             this.isLoading = false;
+            //             this.applylist=response.data.result;
+            //         })
+            //     }catch(error) {
+            //         this.error = "Error fetching apply data. Please try again later.";
+            //
+            //     }
+            //
+            //
+            // }
         }
     }
 </script>
