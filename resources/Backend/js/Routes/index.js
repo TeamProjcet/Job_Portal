@@ -88,14 +88,14 @@ const route = [
         }
 
     },
-    // {
-    //     path : '/admin/blog/blogcomment',
-    //     name : 'blogcomment',
-    //     component : BlogCommentComponent,
-    //     meta:{pagetitle:'Blog Comment Table',dataUrl:'api/frontend/blogcomment',
-    //     }
-    //
-    // },
+    {
+        path : '/admin/blog/blogcomment',
+        name : 'blogcomment',
+        component : BlogCommentComponent,
+        meta:{pagetitle:'Blog Comment Table',dataUrl:'api/frontend/blogcomment',
+        }
+
+    },
     {
         path : '/admin/client/partnership',
         name : 'partnership',

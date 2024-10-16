@@ -53,6 +53,8 @@ const route = [
         path: '/blog-details/:id',
         name: 'Blog-Details',
         component: BlogDetails,
+        meta:{dataUrl:'api/blog-comment',
+        },
         props: true
     },
     {
@@ -92,14 +94,7 @@ const route = [
         component: JobCompany,
         props: true
     },
-    {
-        path : '/admin/blog/blogcomment',
-        name : 'blogcomment',
-        component : BlogCommentComponent,
-        meta:{pagetitle:'Blog Comment Table',dataUrl:'api/frontend/blogcomment',
-        }
 
-    },
     {
         path: '/results',
         name: 'JobResults',

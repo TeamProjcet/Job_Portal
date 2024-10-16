@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('blogs', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('company_id');
+            $table->integer('company_id');
             $table->string('title');
             $table->text('description');
             $table->boolean('status')->default(1);

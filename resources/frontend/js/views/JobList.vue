@@ -94,9 +94,6 @@
                 return str;
             },
 
-
-
-
             getJobList( page = 1) {
                 try {
                     this.isLoading = true;

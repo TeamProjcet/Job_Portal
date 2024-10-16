@@ -11,7 +11,7 @@
                     />
                     <div class="card-body">
                         <h5 class="card-title">{{ post.title }}</h5>
-                        <p class="card-text">{{ post.description }}</p>
+                        <p class="card-text font">{{truncateString(post.description, 200)}}</p>
                         <div class="d-flex  justify-content-between">
                             <router-link
                                 :to="{ name: 'Blog-Details', params: { id: post.id } }"
@@ -19,8 +19,6 @@
                         >
                             Read More
                         </router-link>
-                            <div class="fw-bold ">
-                                <p class="">Author:{{post.user.name}}</p></div>
 
                         </div>
 
@@ -56,6 +54,21 @@
         },
 
         methods: {
+
+            truncateString(str, length) {
+                if (str) {
+                    const tempElement = document.createElement('div');
+                    tempElement.innerHTML = str;
+                    const plainText = tempElement.textContent || tempElement.innerText || '';
+
+                    if (plainText.length > length) {
+                        return plainText.substring(0, length) + '...';
+                    }
+                    return plainText;
+                }
+                return '';
+            },
+
             async getPosts() {
                 try {
                     const response = await axios.get('/api/blogpost');
@@ -65,7 +78,6 @@
                         throw new Error("Unexpected response format");
                     }
                 } catch (error) {
-                    // console.error("Error fetching blog data:", error);
                     this.error = "Error fetching blog data. Please try again later.";
                 }
             },

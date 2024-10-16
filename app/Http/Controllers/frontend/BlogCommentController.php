@@ -20,7 +20,8 @@ class BlogCommentController extends Controller
 
     public function index()
     {
-
+        $savedJobs = BlogComment::with('seeker', 'blog')->get();
+        return $this->returnData(2000,  $savedJobs);
     }
 
 
@@ -33,7 +34,6 @@ class BlogCommentController extends Controller
     public function store(Request $request)
     {
         $validator = $this->model->Validator($request->all());
-
         if ($validator->fails()) {
             return $this->returnData(3000, $validator->errors());
         }

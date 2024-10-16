@@ -22,13 +22,11 @@ class BlogComment extends Model
         ]);
     }
 
-    // Define relationship with seeker (author of the comment)
     public function seeker(){
         return $this->belongsTo(Seeker::class,'seeker_id','id' );
     }
 
-    // Define relationship with blog (the blog post the comment is related to)
     public function blog(){
-        return $this->belongsTo(blog::class,'blog_id','id'); // Capitalize 'Blog'
+        return $this->belongsTo(blog::class,'blog_id','id');
     }
 }

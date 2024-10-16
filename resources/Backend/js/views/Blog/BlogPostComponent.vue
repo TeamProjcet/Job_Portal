@@ -60,7 +60,7 @@
 
                 <div class="mb-3">
                     <label class="form-label">Details</label>
-                    <editor v-model="fromData.details" v-validate="'required'" name="details" :init="tinymceInit"/>
+                    <editor v-model="fromData.description" v-validate="'required'" name="details" :init="tinymceInit"/>
                 </div>
 
                 <div class="row">
