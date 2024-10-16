@@ -105,19 +105,11 @@ const route = [
 
     },
     {
-        path : '/admin/client/partnership',
-        name : 'partnership',
-        component : Partnership,
-        meta:{pagetitle:'Client Partnership Table',dataUrl:'api/partnership',
-        }
-
-    },
-    {
         path: '/admin/seeker/application',
         name: 'application',
         component: ApplicationComponent,
         meta: {
-            pagetitle: 'Application Table', dataUrl: 'api/frontend/application',
+            pagetitle: 'Application Table', dataUrl: 'api/application',
             
         }
 
@@ -154,14 +146,14 @@ const route = [
         path: '/admin/seeker/application-view/:id',
         name: 'ApplicationView',
         component: ApplicationView,
-        meta: {pagetitle: 'Job Application', dataUrl: 'api/frontend/application',},
+        meta: {pagetitle: 'Job Application', dataUrl: 'api/application',},
         props: true
     },
     {
         path: '/admin/user/registration',
         name: 'UserRegisComponenet',
         component: UserRegisComponenet,
-        meta: {pagetitle: 'User Registration Form', dataUrl: 'api/register',},
+        meta: {pagetitle: 'User Registration Form', dataUrl: 'api/users',},
         props: true
     },
     {

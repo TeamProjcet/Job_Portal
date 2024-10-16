@@ -14,6 +14,12 @@ class JobPostController extends Controller
 
     public function __construct()
     {
+        $this->middleware(function ($request, $next) {
+            if (!$this->can(request()->route()->action['as'])){
+                return $this->returnData(5000, null, 'You are not authorized to access this page');
+            }
+            return $next($request);
+        });
         $this->model = new JobPostModel();
     }
 
@@ -22,7 +28,7 @@ class JobPostController extends Controller
         $user = auth()->user();
         $data = $this->model->with('category','company')
             ->where('user_id', $user->id)
-            ->paginate(5);
+            ->get();
         return $this->returnData(2000, $data);
     }
 
@@ -51,8 +57,7 @@ class JobPostController extends Controller
 
     public function show($id)
     {
-        $job = JobPostModel::findOrFail($id)->load('category', 'company');
-        return response()->json(['result' => $job]);
+
     }
 
 

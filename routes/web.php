@@ -31,7 +31,7 @@ Route::prefix('api')->group(function () {
     Route::resource('blogpost', \App\Http\Controllers\Backend\BlogController::class);
     Route::resource('blog-comment', \App\Http\Controllers\frontend\BlogCommentController::class);
     Route::resource('/partnership', \App\Http\Controllers\PartnershipController::class);
-
+    Route::resource('/application', \App\Http\Controllers\frontend\ApplicationController::class);
     Route::post('upload', [\App\Http\Controllers\Backend\UploadController::class, 'upload']);
     Route::post('/required_data', [\App\Http\Controllers\SupportController::class, 'requireData']);
     Route::get('/configurations', [\App\Http\Controllers\SupportController::class, 'getconfigurations']);
@@ -49,6 +49,7 @@ Route::prefix('api')->group(function () {
 
 Route::prefix('api/frontend')->group(function () {
     Route::get('joblist', [\App\Http\Controllers\frontend\FrontendController::class, 'joblist']);
+    Route::get('detailsData/{id}', [\App\Http\Controllers\frontend\FrontendController::class, 'detailsData']);
     Route::get('seekerdata', [\App\Http\Controllers\frontend\FrontendController::class, 'seekerdata']);
     Route::get('jobcate/{cateId}', [\App\Http\Controllers\frontend\FrontendController::class, 'jobCategory'])->name('web.cat');
     Route::post('seekerregis', [\App\Http\Controllers\frontend\SeekerLoginController::class, 'store']);
@@ -56,7 +57,6 @@ Route::prefix('api/frontend')->group(function () {
     Route::post('seekerlogout', [\App\Http\Controllers\frontend\SeekerLoginController::class, 'logout']);
     Route::put('seeker/profile', [\App\Http\Controllers\frontend\SeekerLoginController::class, 'update']);
     Route::post('/seekerlogout', [\App\Http\Controllers\frontend\SeekerLoginController::class, 'logout']);
-    Route::resource('/application', \App\Http\Controllers\frontend\ApplicationController::class);
     Route::resource('/newsletter', \App\Http\Controllers\frontend\NewsletterController::class);
     Route::resource('/contact', \App\Http\Controllers\frontend\ContactController::class);
     Route::post('/blogcomment', [\App\Http\Controllers\frontend\BlogCommentController::class, 'store']);

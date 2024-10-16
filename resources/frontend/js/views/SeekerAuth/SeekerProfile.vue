@@ -60,7 +60,14 @@
                                             <label class="badge text-white mx-1">{{ apply.application_status == 0 ? 'Pending' : apply.application_status == 1 ? 'Accepted' : 'Rejected' }}</label>
                                         </span>
                                         </td>
-                                        <td>{{ apply.interview_status }}</td>
+
+
+                                        <td  >
+                                            <router-link :to="{ name: 'interviewtable', params: { id: apply.id } }" class="btn btn-info btn-sm" >
+                                            Interview Schedule
+                                        </router-link>
+
+                                    </td>
                                     </tr>
                                     </tbody>
                                 </table>

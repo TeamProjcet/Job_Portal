@@ -13,11 +13,11 @@
                         <img :src="storageImage(data.image)" style="width: 100px; height: 100px" alt="Image">
                     </td>
                     <td>
-                        <a v-if="can('category_edit')"
+                        <a v-if="can(' categories.edit')"
                            @click="openEditModal(data, data.id)">
                             <i class="fas fa-edit" style="color: blue;"></i>
                         </a>
-                        <a v-if="can('category_delete')" @click="CategoryDatadelete(data.id, index)">
+                        <a v-if="can(' categories.destory')" @click="CategoryDatadelete(data.id, index)">
                             <i class="fas fa-trash-alt" style="color: red;"></i>
                         </a>
                     </td>

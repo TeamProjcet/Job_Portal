@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('portfolio');
             $table->string('application_status')->default(0);
             $table->string('interview_status')->default(0);
-            $table->timestamp('applied_at')->useCurrent();
+            $table->text('note')->nullable();
             $table->timestamps();
         });
     }

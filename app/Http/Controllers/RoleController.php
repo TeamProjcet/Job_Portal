@@ -11,48 +11,72 @@ use Illuminate\Http\Request;
 class RoleController extends Controller
 {
     use Helper;
-public function __construct(){
-    $this->model=new Role();
-}
+
+    public function __construct()
+    {
+
+//    $this->middleware(function ($request, $next) {
+//        if (!$this->can(request()->route()->action['as'])){
+//            return $this->returnData(5000, null, 'You are not authorized to access this page');
+//        }
+//        return $next($request);
+//    });
+        $this->model = new Role();
+    }
+
     public function index()
     {
-        $role=Role::all();
-        return $this->returnData(2000,$role);
+        if (!$this->can('roles.index')) {
+            return $this->returnData(5000, null, 'You are not authorized to access this page');
+        }
+        $role = Role::all();
+        return $this->returnData(2000, $role);
     }
 
     public function getRolePermissions($roleId)
     {
         try {
+            if (!$this->can('roles.getRolePermissions')) {
+                return $this->returnData(5000, null, 'You are not authorized to access this page');
+            }
 
-            $data['role_modules'] = RoleModule::where('role_id', $roleId)->get()->pluck('module_id')->toArray();
+            $data['role_modules'] = RoleModule::where('role_id', $roleId)->pluck('module_id')->toArray();
             $data['role_permissions'] = RolePermission::where('role_id', $roleId)->pluck('permission_id')->toArray();
 
-            return $this->returnData(2000,$data);
+            return $this->returnData(2000, $data);
 
         } catch (\Exception $e) {
-            return $this->returnData(3000);
+            return $this->returnData(3000, null, 'An error occurred while fetching role permissions');
         }
     }
+
     public function updateRolePermissions(Request $request, $roleId)
     {
+        try {
+            if (!$this->can('roles.updateRolePermissions')) {
+                return $this->returnData(5000, null, 'You are not authorized to access this page');
+            }
 
-        $request->validate([
-            'permissions' => 'required|array',
-            'permissions.*' => 'exists:permissions,id',
-            'modules' => 'required|array',
-            'modules.*' => 'exists:modules,id',
-        ]);
+            $request->validate([
+                'permissions' => 'required|array',
+                'permissions.*' => 'exists:permissions,id',
+                'modules' => 'required|array',
+                'modules.*' => 'exists:modules,id',
+            ]);
 
-        $role = Role::find($roleId);
+            $role = Role::find($roleId);
+            if (!$role) {
+                return response()->json(['message' => 'Role not found'], 404);
+            }
 
-        if (!$role) {
-            return response()->json(['message' => 'Role not found'], 404);
+            $role->permissions()->sync($request->permissions);
+            $role->modules()->sync($request->modules);
+
+            return $this->returnData(2000, 'Permissions updated successfully');
+
+        } catch (\Exception $e) {
+            return $this->returnData(3000, null, 'An error occurred while updating permissions');
         }
-
-        $role->permissions()->sync($request->permissions);
-        $role->modules()->sync($request->modules);
-
-        return $this->returnData(2000,'Permissions updated successfully');
     }
 
     public function create()
@@ -62,10 +86,14 @@ public function __construct(){
 
     public function store(Request $request)
     {
+        if (!$this->can('roles.store')) {
+            return $this->returnData(5000, null, 'You are not authorized to access this page');
+
+    }
         $validator = $this->model->Validator($request->all());
 
         if ($validator->fails()) {
-            return $this->returnData(3000,$validator->errors());
+            return $this->returnData(3000, $validator->errors());
         }
         $this->model->fill($request->all());
         $this->model->save();
@@ -75,11 +103,16 @@ public function __construct(){
 
 
     public function show($id)
-    {    $roleModules = RoleModule::where('role_id', $id)->get();
+    {
+        if (!$this->can('roles.show')) {
+            return $this->returnData(5000, null, 'You are not authorized to access this page');
+        }
+
+        $roleModules = RoleModule::where('role_id', $id)->get();
         $data['role_modules'] = collect($roleModules)->pluck('module_id')->toArray();
         $data['role_permissions'] = collect($roleModules)->pluck('permission_id')->toArray();
 
-        return $this->returnData(2000,$data);
+        return $this->returnData(2000, $data);
     }
 
 
@@ -94,10 +127,14 @@ public function __construct(){
     public function update(Request $request)
     {
         try {
+            if (!$this->can('roles.update')) {
+                return $this->returnData(5000, null, 'You are not authorized to access this page');
+
+        }
             $validator = $this->model->Validator($request->all());
 
             if ($validator->fails()) {
-                return $this->returnData(3000,$validator->errors());
+                return $this->returnData(3000, $validator->errors());
 
             }
             $data = $this->model->where('id', $request->input('id'))->first();
@@ -117,15 +154,19 @@ public function __construct(){
     public function destroy($id)
     {
         try {
-            $data = $this->model->where('id',$id)->first();
-            if ($data){
+            if (!$this->can('roles.destroy')) {
+                return $this->returnData(5000, null, 'You are not authorized to access this page');
+
+        }
+            $data = $this->model->where('id', $id)->first();
+            if ($data) {
                 $data->delete();
 
                 return $this->returnData(2000, null, ' deleted successfully');
             }
             return $this->returnData(3000, null, ' not found');
 
-        }catch (\Exception $exception){
+        } catch (\Exception $exception) {
             return $this->returnData(5000, $exception->getMessage(), 'Something Wrong');
         }
     }

@@ -8,7 +8,7 @@
                         <h3 class="fw-bold mb-3 " style="margin-left: 20px">{{$route.meta.pagetitle}}</h3>
                     </div>
                     <div class="ms-md-auto py-2 py-md-0">
-                        <router-link v-if="can('joblist_add')" to="/admin/jobcategory/createjob"  class="btn btn-primary btn-round"><i class="fas fa-plus"></i>Add</router-link>
+                        <router-link v-if="can('joblist.store')" to="/admin/jobcategory/createjob"  class="btn btn-primary btn-round"><i class="fas fa-plus"></i>Add</router-link>
                     </div>
                 </div>
             </div>
@@ -27,11 +27,11 @@
                     </td>
                     <td>
 
-                        <a v-if="can('joblist_edit')" @click="openEditModal(data, data.id)">
+                        <a v-if="can('joblist.edit')" @click="openEditModal(data, data.id)">
                             <i class="fas fa-edit" style="color: blue;"></i>
                         </a>
 
-                        <a v-if="can('joblist_delete')" @click="CategoryDatadelete(data.id, index)">
+                        <a v-if="can('joblist.destroy')" @click="CategoryDatadelete(data.id, index)">
                             <i class="fas fa-trash-alt" style="color: red;"></i>
                         </a>
                     </td>

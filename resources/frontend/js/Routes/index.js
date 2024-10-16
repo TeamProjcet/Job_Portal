@@ -12,9 +12,9 @@ import SeekerProfile from "../views/SeekerAuth/SeekerProfile";
 import JobCategory from "../views/JobCategory";
 import JobCompany from "../views/JobCompany";
 import JobResults from "../views/JobResults";
-import Newsletter from "../views/Newsletter";
 import BlogCommentComponent from "../../../Backend/js/views/Blog/BlogCommentComponent";
 import SavedJobsComponent from "../views/SeekerAuth/SavedJobsComponent";
+import InterviewNoticeComponent from "../views/SeekerAuth/InterviewNoticeComponent";
 
 const route = [
     {
@@ -106,6 +106,14 @@ const route = [
         name:'savedjobs',
         component:SavedJobsComponent,
         meta:{pagetitle:'',dataUrl:'api/frontend/favourites'}
+    },
+    {
+        path:'/seeker/interviewtable/:id',
+        name:'interviewtable',
+        component:InterviewNoticeComponent,
+        meta:{pagetitle:'Interview Notice Table'},
+        props: true
+
     }
 ];
 export default route;

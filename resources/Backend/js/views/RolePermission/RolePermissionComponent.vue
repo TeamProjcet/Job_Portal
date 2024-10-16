@@ -40,10 +40,10 @@
                                 </td>
                                 <td v-else>No Role Assigned</td>
                                 <td>
-                                    <a v-if="can('rolepermission_edit')" @click="openEditModal(data, data.id)">
+                                    <a v-if="can('users.edit')" @click="openEditModal(data, data.id)">
                                         <i class="fas fa-edit" style="color: blue;"></i>
                                     </a>
-                                    <a v-if="can('rolepermission_delete')" @click="CategoryDatadelete(data.id, index)">
+                                    <a v-if="can('users.destroy')" @click="CategoryDatadelete(data.id, index)">
                                         <i class="fas fa-trash-alt" style="color: red;"></i>
                                     </a>
                                 </td>

@@ -16,6 +16,16 @@ class ContactController extends Controller
      * @return \Illuminate\Http\Response
      */
     use Helper;
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            if (!$this->can(request()->route()->action['as'])){
+                return $this->returnData(5000, null, 'You are not authorized to access this page');
+            }
+            return $next($request);
+        });
+    }
+
     public function index()
     {
         $data = Contact::all();
