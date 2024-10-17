@@ -29,7 +29,6 @@ Route::prefix('api')->group(function () {
     Route::resource('/saved', \App\Http\Controllers\SavedJobsController ::class);
     Route::resource('/companyreviews', \App\Http\Controllers\CompanyReviewsController ::class);
     Route::resource('blogpost', \App\Http\Controllers\Backend\BlogController::class);
-    Route::resource('blog-comment', \App\Http\Controllers\frontend\BlogCommentController::class);
     Route::resource('/partnership', \App\Http\Controllers\PartnershipController::class);
     Route::resource('/application', \App\Http\Controllers\frontend\ApplicationController::class);
     Route::post('upload', [\App\Http\Controllers\Backend\UploadController::class, 'upload']);

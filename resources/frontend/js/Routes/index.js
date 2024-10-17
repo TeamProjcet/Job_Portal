@@ -34,7 +34,9 @@ const route = [
     {
         path : '/job-list',
         name : 'List',
-        component : JobList
+        component : JobList,
+        meta:{dataUrl:'api/frontend/joblist',
+        },
     },
     {
         path : '/job-details/:id',
@@ -46,6 +48,8 @@ const route = [
         path: '/blog-post',
         name: 'Blog-Post',
         component: BlogPost,
+        meta:{dataUrl:'api/frontend/joblist',
+        },
     },
     {
         path: '/blog-details/:id',

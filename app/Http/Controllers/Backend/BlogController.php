@@ -14,11 +14,18 @@ class BlogController extends Controller
 
     public function __construct()
     {
+        $this->middleware(function ($request, $next) {
+            if (!$this->can(request()->route()->action['as'])){
+                return $this->returnData(5000, null, 'You are not authorized to access this page');
+            }
+            return $next($request);
+        });
         $this->model = new blog();
     }
 
     public function index()
     {
+
         $user = auth()->user();
         $data = $this->model->with('user', 'company')->where('user_id', $user->id)->get();
         return $this->returnData(2000, $data);
@@ -33,6 +40,7 @@ class BlogController extends Controller
 
     public function store(Request $request)
     {
+
         $validator = $this->model->Validator($request->all());
 
         if ($validator->fails()) {
@@ -50,8 +58,8 @@ class BlogController extends Controller
 
     public function show($id)
     {
-        $post = blog::with('company')->findOrFail($id);
-        return response()->json(['result' => $post]);
+//        $post = blog::with('company')->findOrFail($id);
+//        return response()->json(['result' => $post]);
     }
 
 

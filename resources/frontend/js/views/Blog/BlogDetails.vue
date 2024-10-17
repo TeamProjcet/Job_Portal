@@ -122,10 +122,10 @@
 
             async getPostDetails() {
                 try {
-                    const response = await axios.get(`/api/blogpost/${this.id}`);
+                    const response = await axios.get(`/api/frontend/detailsData/${this.id}`);
 
                     if (response.data && response.data.result) {
-                        this.post = response.data.result;
+                        this.post = response.data.result.post;
                     } else {
                         this.error = "No blog details found.";
                     }
@@ -137,15 +137,15 @@
             async blogComment() {
                 this.fromData.blog_id = this.post.id;
                 try {
-                    const response = await axios.post('/api/blog-comment', this.fromData);
+                    const response = await axios.post('/api/frontend/blogcomment', this.fromData);
                     if (parseInt(response.data.status) === 2000) {
-                        this.$toast.success("Application submitted successfully");
+                        this.$toast.success("Comment Submited successfully");
                     } else {
-                        this.$toast.error("Application failed!");
+                        this.$toast.error("Comment Submited  failed!");
                     }
                 } catch (error) {
-                    console.error("Error submitting application:", error);
-                    this.$toast.error("Application submission failed!");
+                    console.error("Error submitting Comment:", error);
+                    this.$toast.error("Comment submission failed!");
                 }
             }
         }

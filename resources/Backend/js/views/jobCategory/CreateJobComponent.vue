@@ -32,7 +32,7 @@
 
                     <div class="mb-3">
                         <label class="form-label">Vacancy</label>
-                        <input type="text" class="form-control" v-validate="'required'" v-model="fromData.vacancy" name="title">
+                        <input type="number" class="form-control" v-validate="'required'" v-model="fromData.vacancy" name="title">
                     </div>
 
                     <div class="mb-3">
@@ -51,7 +51,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Location</label>
+                        <div class="form-label">Location</div>
                         <input type="text" class="form-control" v-validate="'required'" v-model="fromData.address" placeholder="Enter address" name="address">
                     </div>
                 </div>
@@ -60,7 +60,7 @@
                     <div class="mb-3">
                         <label class="form-label">Job Type</label>
                         <select v-model="fromData.job_type" name="job_type" v-validate="'required'" class="form-control">
-                            <option value="">Select Job Type</option>
+                            <option value="" disabled>Select Job Type</option>
                             <template v-for="(type, index) in requireData.job_type">
                                 <option :value="type.value">{{type.name}}</option>
                             </template>
