@@ -1,7 +1,7 @@
 <template>
     <div class="container mt-4">
         <div class="row">
-            <div class="col-sm-4 mb-4" v-for="jobcom in jobcompany.jobPosts" :key="jobcom.id">
+            <div class="col-sm-4 mb-4" v-for="jobcom in jobcompany" :key="jobcom.id">
                 <div class="card mb-3 shadow-sm">
                     <div class="card-body d-flex justify-content-between">
                         <div class="job-details">
@@ -48,7 +48,7 @@
             };
         },
         mounted() {
-            this.getDataList();
+            this.companyList();
         },
         methods: {
 
@@ -59,14 +59,14 @@
                 return str;
             },
 
-            async getDataList() {
+            async companyList() {
                 if (!this.company_id) {
                     this.error = "company ID is not defined.";
                     return;
                 }
                 try {
                     const response = await axios.get(`/api/frontend/jobcate/${this.company_id}`);
-                    this.jobcompany = response.data.result;
+                    this.jobcompany = response.data.result.companycate;
                 } catch (error) {
                     this.error = "Error fetching job data. Please try again later.";
                 }

@@ -105,7 +105,6 @@ export default {
             try {
                 const response = await axios.get('/api/frontend/seekerdata');
 
-                // Check if the response contains valid seeker data
                 if (response.data && response.data.result?.seeker) {
                     this.seeker = response.data.result.seeker;
                     this.isAuthenticated = true;

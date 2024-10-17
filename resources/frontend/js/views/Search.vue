@@ -47,7 +47,7 @@
         methods: {
             async getDataList() {
                 try {
-                    const response = await axios.get('/api/joblist');
+                    const response = await axios.get('/api/frontend/joblist');
                     this.jobPosts = response.data.result;
                 } catch (error) {
                     console.error("Error fetching job posts:", error);
@@ -65,10 +65,10 @@
             },
 
             redirectToResults() {
-                const regex = new RegExp(this.keyword, 'i'); // 'i' flag makes it case-insensitive
+                const regex = new RegExp(this.keyword, 'i');
 
                 const filteredJobPosts = this.jobPosts.filter(job => {
-                    const matchesKeyword = regex.test(job.position); // Test the position against the regex
+                    const matchesKeyword = regex.test(job.position);
                     const matchesCompany = this.selectedCompany ? job.company.id === this.selectedCompany : true;
                     return matchesKeyword && matchesCompany;
                 });

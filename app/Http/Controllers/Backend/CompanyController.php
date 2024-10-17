@@ -25,8 +25,8 @@ class CompanyController extends Controller
 
     public function index()
     {
-        $data = $this->model->get();
-        return $this->returnData(2000, $data);
+            $data = $this->model->get();
+            return $this->returnData(2000, $data);
     }
 
 

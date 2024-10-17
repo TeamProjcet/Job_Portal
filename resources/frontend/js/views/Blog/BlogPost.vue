@@ -1,7 +1,7 @@
 <template>
     <div class="container-xxl py-5">
         <div class="row">
-            <div class="col-md-4" v-for="post in blog_filter" :key="post.id">
+            <div class="col-md-4" v-for="post in dataList.blogpost" :key="post.id">
                 <div class="card mb-4">
                     <img
                             style="height: 200px"
@@ -44,13 +44,15 @@
         },
 
         computed: {
+
             blog_filter() {
                 return this.blogpost.filter(post => post.status === 1); // status active on post show
             },
         },
 
         mounted() {
-            this.getPosts();
+            this.getDataList();
+            // this.getPosts();
         },
 
         methods: {
@@ -69,18 +71,18 @@
                 return '';
             },
 
-            async getPosts() {
-                try {
-                    const response = await axios.get('/api/blogpost');
-                    if (response.data && response.data.result) {
-                        this.blogpost = response.data.result;
-                    } else {
-                        throw new Error("Unexpected response format");
-                    }
-                } catch (error) {
-                    this.error = "Error fetching blog data. Please try again later.";
-                }
-            },
+            // async getPosts() {
+            //     try {
+            //         const response = await axios.get('/api/blogpost');
+            //         if (response.data && response.data.result) {
+            //             this.blogpost = response.data.result;
+            //         } else {
+            //             throw new Error("Unexpected response format");
+            //         }
+            //     } catch (error) {
+            //         this.error = "Error fetching blog data. Please try again later.";
+            //     }
+            // },
         },
 
     };

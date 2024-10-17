@@ -162,7 +162,7 @@
                 try {
                     const response = await axios.get(`/api/frontend/detailsData/${this.id}`);
                     if (response.data && response.data.result) {
-                        _this.job = response.data.result;
+                        _this.job = response.data.result.job;
                     } else {
                         _this.error = "No Job details found.";
                     }

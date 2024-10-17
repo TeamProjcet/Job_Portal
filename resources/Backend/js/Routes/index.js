@@ -48,7 +48,7 @@ const route = [
         name: 'createjob',
         component: CreateJobComponent,
         meta: {
-            pagetitle: 'Job Create Table', dataUrl: 'api/createjob',
+            pagetitle: 'Job Create Table', dataUrl: 'api/joblist',
         }
 
     },

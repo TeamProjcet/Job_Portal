@@ -34,11 +34,11 @@
                             </div>
                         </div>
                     </div>
-                    <a v-if="joblist.jobData && joblist.jobData.current_page < joblist.jobData.last_page"
-                       class="btn btn-primary py-3 px-5 mt-3"
-                       @click="loadMoreJobs">
-                        Browse More Jobs
-                    </a>
+<!--                    <a v-if="joblist.jobData && joblist.jobData.current_page < joblist.jobData.last_page"-->
+<!--                       class="btn btn-primary py-3 px-5 mt-3"-->
+<!--                       @click="loadMoreJobs">-->
+<!--                        Browse More Jobs-->
+<!--                    </a>-->
                 </template>
 
             <template v-else>
@@ -93,19 +93,21 @@
                 }
                 return str;
             },
-
-            getJobList( page = 1) {
-                try {
-                    this.isLoading = true;
-                    this.joblist = {};
-                    axios.get(`/api/frontend/joblist`).then((response)=>{
+            getJobList(page = 1) {
+                this.isLoading = true;
+                this.joblist = {}; // Reset job list
+                axios.get(`/api/frontend/joblist?page=${page}`)
+                    .then((response) => {
                         this.isLoading = false;
                         this.joblist = response.data.result;
+                    })
+                    .catch((error) => {
+                        this.isLoading = false;
+                        this.error = "Error fetching job data. Please try again later.";
+                        console.error('Error fetching job data:', error);
                     });
-                } catch (error) {
-                    this.error = "Error fetching job data. Please try again later.";
-                }
             },
+
 
 
             async saveJob(job) {
