@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Applications;
 use App\Supports\Helper;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ApplicationController extends Controller
 {
@@ -42,22 +43,38 @@ class ApplicationController extends Controller
 // Code for showing the form to create a new application
     }
 
+
     public function store(Request $request)
     {
+        // Check authorization
         if (!$this->can('application.store')) {
             return $this->returnData(5000, null, 'You are not authorized to access this page');
         }
 
+        // Validate request data
         $validator = $this->model->Validator($request->all());
-
         if ($validator->fails()) {
             return $this->returnData(3000, $validator->errors());
         }
 
-        $this->model->fill($request->all());
-        $this->model->save();
+        $seekerId = Auth::guard('seeker')->user()->id;
 
-        return $this->returnData(2000, $this->model);
+        // Check if the application already exists
+        $existingJob = $this->model::where('job_id', $request->job_id)
+            ->where('seeker_id', $seekerId)
+            ->first();
+
+        if ($existingJob) {
+            return $this->returnData(4000, null, 'You have already applied for this job');
+        }
+
+        // Create a new application
+        $application = new $this->model; // Create a new instance
+        $application->fill($request->all());
+        $application->seeker_id = $seekerId; // Set the seeker ID
+        $application->save();
+
+        return $this->returnData(2000, $application);
     }
 
     public function show($id)

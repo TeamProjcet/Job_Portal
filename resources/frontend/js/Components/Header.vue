@@ -22,34 +22,30 @@
 
                 <router-link to="/contact" class="nav-item nav-link">Contact</router-link>
 
-
-                <ul class="navbar-nav ms-auto ">
-                        <li class="nav-item  dropdown" v-if="isAuthenticated">
-                            <a class="nav-link dropdown-toggle bg-success text-white py-2 px-lg-4 rounded-pill fw-bold"
-                               data-bs-toggle="dropdown" aria-expanded="false"  style="font-size: 16px;" >
-<!--                                {{ _show(seeker, 'name', 'Guest') }}-->
-                                {{ seeker?seeker.name : 'Guest' }}
-                            </a>
-
-                            <ul class="dropdown-menu dropdown-menu-end mt-2 shadow-sm border-0">
-                                <li>
-                                    <router-link to="/seekerprofile" class="dropdown-item d-flex align-items-center">
-                                        <i class="fas fa-user me-2"></i> User Profile
-                                    </router-link>
-                                </li>
-                                <li>
-                                    <button  @click.prevent="seekerlogout" class="dropdown-item d-flex align-items-center">
-                                        <i class="fas fa-sign-out-alt me-2"></i> Logout
-                                    </button>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item" v-else>
-                            <router-link to="/seekerlogin" class="nav-link">
-                                <button class="btn btn-success rounded-pill px-4 py-2">Login</button>
+                <div>
+                    <div class="nav-item dropdown" v-if="isAuthenticated">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            <img src="https://i.ibb.co.com/3WPvxLF/user.png" alt="User Avatar" class="rounded-circle" width="30" height="30">
+                            {{ seeker?seeker.name : 'Guest' }}
+                        </a>
+                        <div class="dropdown-menu rounded-0 m-0">
+                            <router-link to="/seekerprofile" class="dropdown-item d-flex align-items-center">
+                                <i class="fas fa-user me-2"></i> My Profile
                             </router-link>
-                        </li>
-                    </ul>
+                            <button  @click.prevent="seekerlogout" class="dropdown-item d-flex align-items-center">
+                                <i class="fas fa-sign-out-alt me-2"></i> Logout
+                            </button>
+                        </div>
+                    </div>
+
+                    <div v-else>
+                        <router-link to="/seekerlogin" class="nav-item nav-link " >
+                            <i class="fas fa-sign-in-alt me-2"></i> Login
+                        </router-link>
+                    </div>
+
+                </div>
+
             </div>
             <a href="" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Post A Job<i class="fa fa-arrow-right ms-3"></i></a>
         </div>
@@ -59,8 +55,6 @@
 
 <script>
     import axios from 'axios';
-    import {Toast} from "vue-toastification";
-
     export default {
         name: "Header",
         data() {

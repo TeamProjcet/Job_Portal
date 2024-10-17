@@ -12,8 +12,6 @@ import SeekerProfile from "../views/SeekerAuth/SeekerProfile";
 import JobCategory from "../views/JobCategory";
 import JobCompany from "../views/JobCompany";
 import JobResults from "../views/JobResults";
-import BlogCommentComponent from "../../../Backend/js/views/Blog/BlogCommentComponent";
-import SavedJobsComponent from "../views/SeekerAuth/SavedJobsComponent";
 import InterviewNoticeComponent from "../views/SeekerAuth/InterviewNoticeComponent";
 
 const route = [
@@ -101,12 +99,7 @@ const route = [
         component: JobResults,
         props: route => ({ jobs: JSON.parse(route.query.jobs) })
     },
-    {
-        path:'/seeker/savejobs',
-        name:'savedjobs',
-        component:SavedJobsComponent,
-        meta:{pagetitle:'',dataUrl:'api/frontend/favourites'}
-    },
+
     {
         path:'/seeker/interviewtable/:id',
         name:'interviewtable',

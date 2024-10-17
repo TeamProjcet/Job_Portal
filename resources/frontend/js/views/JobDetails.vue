@@ -31,7 +31,7 @@
                         <div>
                             <div v-if="isAuthenticated">
                                 <h4 class="mb-4">Apply For The Job</h4>
-                                <form @submit.prevent="submitApplication">
+                                <form @submit.prevent="submitApplication()">
                                     <div class="row g-3">
                                         <div class="col-12 col-sm-6">
                                             <input type="text" class="form-control" placeholder="Your Name" v-model="fromData.name" readonly>
@@ -177,7 +177,7 @@
                 this.fromData.seeker_id = this.seeker.id;
 
                 try {
-                    const res = await axios.post('/api/frontend/application', this.fromData);
+                    const res = await axios.post('/api/application', this.fromData);
 
                     if (parseInt(res.data.status) === 2000) {
                         this.$toast.success("Application submitted successfully");
