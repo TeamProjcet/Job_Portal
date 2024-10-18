@@ -16,6 +16,14 @@ class SeekerLoginController extends Controller
     use Helper;
 
 
+    public function index(){
+        $user = Auth::guard('seeker')->user();
+        if (!$user) {
+            return $this->returnData(5000, null, 'User is not logged in');
+        }
+        $authName = Seeker::where('id', $user->id)->get();
+        return $this->returnData(2000, $authName);
+    }
     public function store(Request $request)
     {
         $request->validate([

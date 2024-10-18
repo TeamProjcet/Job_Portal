@@ -14,7 +14,7 @@ class Contact extends Model
     public function validator($input){
         return Validator::make($input, [
             'name'=> 'required',
-            'email'=> 'required|email',
+            'email'=>'required',
             'subject'=> 'nullable',
             'message'=> 'required|string',
         ]);

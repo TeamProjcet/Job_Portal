@@ -35,12 +35,13 @@
                         <h5 class="text-white mb-4">Newsletter</h5>
                         <p>Feel free to get in touch with us. We always open to discussing new projects, creative ideas,
                             or opportunities to be part of your visions.</p>
-                        <div class="position-relative mx-auto" style="max-width: 400px;">
-                            <input v-model="email" class="form-control bg-transparent w-100 py-3 ps-4 pe-5" type="email" placeholder="Your email" required>
-                            <button type="submit" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">
+                        <div class="position-relative mx-auto d-flex" style="max-width: 400px;">
+                            <input v-model="fromData.email" name="email" class="form-control me-2" type="email" placeholder="Your email" required>
+                            <button type="submit" class="btn btn-primary">
                                 SignUp
                             </button>
                         </div>
+
                     </form>
                 </div>
 
@@ -75,23 +76,22 @@
         name: "Footer",
         data() {
             return {
-                email: '' // to store the email input
             };
         },
         methods: {
             async subscribeNewsletter() {
                 try {
-                    const response = await axios.post('/api/frontend/newsletter', {
-                        email: this.email
-                    });
-
-                    if (response.status === 200) {
-                        this.$toast.success("Thank you for subscribing!");
-                        this.email = ''; // clear the input field
+                    const response = await axios.post('/api/frontend/newsletter', this.fromData);
+                    if (response.data.success) {
+                        this.$toast.success(response.data.message);
                     }
                 } catch (error) {
-                    console.error('Failed to subscribe:', error);
-                    alert('There was an error. Please try again later.');
+                    if (error.response && error.response.status === 422) {
+                        this.$toast.error(error.response.data.message);
+                    } else {
+                        console.error('Failed to subscribe:', error);
+                        this.$toast.error('There was an error. Please try again later.');
+                    }
                 }
             }
         }

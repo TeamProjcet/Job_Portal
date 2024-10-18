@@ -13,9 +13,6 @@ class BackendController extends Controller
 
     public function backendData()
     {
-//        if (!$this->can(' application.index')) {
-//            return $this->returnData(5000, null, 'You are not authorized to access this page');
-//        }
         $user = auth()->user();
 
         $data['applyData'] = Applications::with(['job.category', 'job.company', 'seeker'])

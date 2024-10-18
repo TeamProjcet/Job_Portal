@@ -17,6 +17,7 @@ import RoleComponent from "../views/RolePermission/RoleComponent";
 import UserRegisComponenet from "../views/RolePermission/UserRegisComponenet";
 import InterviewComponent from "../views/Interview/InterviewComponent";
 import Partnership from "../views/Partnership/Partnership";
+import FrontendManage from "../views/FrontendManagement/FrontendManage";
 
 
 const route = [
@@ -173,6 +174,12 @@ const route = [
         name: 'contact',
         component: Contact,
         meta: { pagetitle: 'Visitor Contact Info', dataUrl: 'api/frontend/contact' },
+    },
+    {
+        path: '/admin/frontend/manage',
+        name: 'frontendmanage',
+        component: FrontendManage,
+        meta: { pagetitle: 'Frontend Management Table', dataUrl: 'api/frontend' },
     }
 
 ];

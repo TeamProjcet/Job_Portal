@@ -28,12 +28,12 @@ class FrontendController extends Controller
 //                $query->where('job_type', $job_type);
 //            }
 //        })->with('category','company')->paginate(12);
-        $data['jobData'] = JobPostModel::with('category','company')->where('status',1)->paginate(12);
+        $data['jobData'] = JobPostModel::with('category','company')->where('status',1)->orderBy('id','DESC')->paginate(15);
 
         $data['category'] = Category::get();
 
-        $data['company'] = Company::get();
-        $data['blogpost']=blog::with('user','company')->where('status',1)->get();
+//        $data['company'] = Company::get();
+        $data['blogpost']=blog::with('user','company')->where('status',1)->orderBy('id','DESC')->get();
 
         return $this->returnData(2000,$data);
     }
@@ -41,8 +41,8 @@ class FrontendController extends Controller
 
     public function jobCategory($cateId)
     {
-        $data['jobPosts'] = JobPostModel::with('category','company')->where('category_id',$cateId)->get();
-        $data['companycate'] = JobPostModel::with('category','company')->where('company_id',$cateId)->get();
+        $data['jobPosts'] = JobPostModel::with('category','company')->where('category_id',$cateId)->orderBy('id','DESC')->get();
+        $data['companycate'] = JobPostModel::with('category','company')->where('company_id',$cateId)->orderBy('id','DESC')->get();
         return $this->returnData(2000,$data);
 
     }
@@ -60,10 +60,10 @@ class FrontendController extends Controller
     {
        $user = Auth::guard('seeker')->user();
 
-       if (!$user) {
-           return response()->json(['error' => 'Unauthorized'], 401);
-       }
-       $applications = Applications::with('seeker', 'job')->where('seeker_id',  $user->id)->get();
+        if (!$user) {
+            return $this->returnData(5000, null, 'User is not logged in');
+        }
+       $applications = Applications::with( 'job')->where('seeker_id',  $user->id)->orderBy('id','DESC')->get();
         $data = [
            'seeker' => $user,
            'applications' => $applications,

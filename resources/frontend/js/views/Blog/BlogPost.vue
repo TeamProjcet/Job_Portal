@@ -1,6 +1,12 @@
 <template>
-    <div class="container-xxl py-5">
+    <div class="container-xxl py-5 shadow p-4 rounded">
         <div class="row">
+            <h3 class="d-flex justify-content-center my-4" >
+
+                    <span class="badge bg-primary  py-3 px-3 container-fluid">
+                 Blog & Article
+                   </span>
+            </h3>
             <div class="col-md-4" v-for="post in dataList.blogpost" :key="post.id">
                 <div class="card mb-4">
                     <img
@@ -45,9 +51,6 @@
 
         computed: {
 
-            blog_filter() {
-                return this.blogpost.filter(post => post.status === 1); // status active on post show
-            },
         },
 
         mounted() {

@@ -50,8 +50,13 @@
 
         <!-- Testimonial Start -->
         <div class="container-fluid mt-4" >
-            <div class="container mt-4">
-                <h1 class="text-center mb-5">Our Trusted Clients!!!</h1>
+            <div class="container mt-4">     <h3 class="d-flex justify-content-center my-4" >
+
+                    <span class="badge bg-primary  py-3 px-3 container-fluid">
+                 Our Trusted Clients!!!
+                   </span>
+            </h3>
+
                 <div class="">
                     <div class="row">
                         <div class="col-md-4 mb-4 " v-for="(partner, index) in partnership" :key="index">
@@ -71,7 +76,7 @@
 <script>
     import JobList from "./JobList";
     import JobCat from "./JobCat";
-    import Search from "./Search";
+    import Search from "./Searching/Search";
     import axios from 'axios';
 
     export default {

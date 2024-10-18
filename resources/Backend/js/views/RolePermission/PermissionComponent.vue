@@ -19,9 +19,9 @@
                     <div class="overflow-auto my-3">
                         <table class="role-permission-table">
                             <thead >
-                            <tr>
+                            <tr class="text-centerN">
                                 <th>Modules</th>
-                                <th colspan="4">Permissions</th>
+                                <th colspan="7">Permissions</th>
                             </tr>
                             </thead>
                             <tbody>

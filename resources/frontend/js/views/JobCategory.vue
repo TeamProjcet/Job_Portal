@@ -1,6 +1,12 @@
 <template>
-    <div class="container mt-4">
+    <div class="container mt-4 shadow p-4 rounded">
         <div class="row">
+            <h3 class="d-flex justify-content-center my-4" >
+
+                    <span class="badge bg-primary  py-3 px-3 container-fluid">
+                 Job Listing
+                   </span>
+            </h3>
             <div class="col-sm-4 mb-4" v-for="jobcat in jobcategory.jobPosts" :key="jobcat.id">
                 <div class="card mb-3 shadow-sm">
                     <div class="card-body d-flex justify-content-between">
@@ -26,7 +32,7 @@
                         </div>
                     </div>
                     <div class="d-flex gap-2  p-3">
-                        <router-link :to="{ name: 'Details', params: { id: jobcat.id }}" class="btn btn-primary">Apply Now</router-link>
+                        <router-link :to="{ name: 'Details', params: { id: jobcat.id }}" class="btn btn-primary">Apply Now Or View</router-link>
                         <button class="btn btn-danger">Save Job</button>
                     </div>
                 </div>

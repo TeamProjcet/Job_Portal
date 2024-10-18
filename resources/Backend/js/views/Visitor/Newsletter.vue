@@ -10,7 +10,7 @@
                         <td>{{ index+1 }}</td>
                         <td>{{ data.email }}</td>
                         <td>
-                            <a  @click="CategoryDatadelete(data.id)">
+                            <a v-if="can('newsletter.destroy')" @click="CategoryDatadelete(data.id)">
                                 <i class="fas fa-trash-alt" style="color: red;"></i>
                             </a>
                         </td>

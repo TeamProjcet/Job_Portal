@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 //backend route
 
 Route::get('login', [\App\Http\Controllers\auth\AuthController::class, 'index'])->name('login');
+Route::get('userAuth', [\App\Http\Controllers\auth\AuthController::class, 'userAuth']);
 Route::get('userdata', [\App\Http\Controllers\auth\AuthController::class, 'userdata']);
 Route::get('logout', [\App\Http\Controllers\auth\AuthController::class, 'logout'])->name('logout');
 //Route::resource('/register', \App\Http\Controllers\auth\AuthController::class);
@@ -51,10 +52,11 @@ Route::prefix('api/frontend')->group(function () {
     Route::get('detailsData/{id}', [\App\Http\Controllers\frontend\FrontendController::class, 'detailsData']);
     Route::get('seekerdata', [\App\Http\Controllers\frontend\FrontendController::class, 'seekerdata']);
     Route::get('jobcate/{cateId}', [\App\Http\Controllers\frontend\FrontendController::class, 'jobCategory'])->name('web.cat');
+    Route::get('seekerAuth', [\App\Http\Controllers\frontend\SeekerLoginController::class, 'index']);
     Route::post('seekerregis', [\App\Http\Controllers\frontend\SeekerLoginController::class, 'store']);
     Route::post('seekerlogin', [\App\Http\Controllers\frontend\SeekerLoginController::class, 'login']);
     Route::post('seekerlogout', [\App\Http\Controllers\frontend\SeekerLoginController::class, 'logout']);
-    Route::put('seeker/profile', [\App\Http\Controllers\frontend\SeekerLoginController::class, 'update']);
+    Route::post('seeker/profile', [\App\Http\Controllers\frontend\SeekerLoginController::class, 'update']);
     Route::post('/seekerlogout', [\App\Http\Controllers\frontend\SeekerLoginController::class, 'logout']);
     Route::resource('/newsletter', \App\Http\Controllers\frontend\NewsletterController::class);
     Route::resource('/contact', \App\Http\Controllers\frontend\ContactController::class);

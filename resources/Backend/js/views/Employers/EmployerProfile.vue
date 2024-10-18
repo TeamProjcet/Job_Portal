@@ -45,7 +45,7 @@
                                     <td><a :href="items.company_website" target="_blank">{{items.company_website}}</a></td>
                                 </tr>
                                 <tr>
-                                    <td><strong>Phone:</strong></td>
+                                    <td><strong>Contact_Person:</strong></td>
                                     <td>{{items.contact_person}}</td>
                                 </tr>
                             </template>
@@ -58,49 +58,51 @@
                         </table>
                     </div>
                     <div class="d-flex p-2 gap-2">
-                        <button v-if="!employer.length" @click="openEditModal()" type="button" class="btn btn-success">Save</button>
+                        <button v-if="!employer.length" @click="openEditModal()" type="button" class="btn btn-success">Save Profile</button>
 
                         <template v-for="items in employer">
-                            <button v-if="employer.length" @click="openEditModal(items, items.id)" type="button" class="btn btn-primary">Update</button>
+                            <button v-if="employer.length" @click="openEditModal(items, items.id)" type="button" class="btn btn-primary">Update Profile</button>
                         </template>
                     </div>
                 </div>
             </div>
 
-            <!-- Profile Edit Section -->
-            <FormModal class="form-modal" @submit="submitFromData(fromData)">
-                <div>
-                    <div class="mb-3">
-                        <label  class="form-label">Contact Person</label>
-                        <input type="text" class="form-control" v-model="fromData.contact_person">
-                    </div>
-                    <div class="mb-3">
-                        <label  class="form-label">Company Website</label>
-                        <input type="url" class="form-control" v-model="fromData.company_website">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Company Address</label>
-                        <input type="text" class="form-control" v-model="fromData.company_address">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Company Description</label>
-                        <input type="text" class="form-control" v-model="fromData.company_description">
-                    </div>
-                    <div class="mb-3">
-                        <label  class="form-label">Bio</label>
-                        <textarea class="form-control" v-model="fromData.bio" rows="4"></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Upload your Profile</label>
-                        <div @click="clickFileField('imageField')" class="image_upload" :style="{ 'background-image': 'url(' + publicImage('images/uploading.avif') + ')' }">
-                            <template v-if="fromData.image !== undefined">
-                                <img class="photo" :src="storageImage(fromData.image)">
-                            </template>
+            <template>
+                    <FormModal class="form-modal" @submit="submitFromData(fromData)">
+                        <div>
+                            <div class="mb-3">
+                                <label class="form-label">Contact Person</label>
+                                <input type="text" class="form-control" v-model="fromData.contact_person">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Company Website</label>
+                                <input type="url" class="form-control" v-model="fromData.company_website">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Company Address</label>
+                                <input type="text" class="form-control" v-model="fromData.company_address">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Company Description</label>
+                                <input type="text" class="form-control" v-model="fromData.company_description">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Bio</label>
+                                <textarea class="form-control" v-model="fromData.bio" rows="4"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Upload your Profile</label>
+                                <div @click="clickFileField('imageField')" class="image_upload" :style="{ 'background-image': 'url(' + publicImage('images/uploading.avif') + ')' }">
+                                    <template v-if="fromData.image !== undefined">
+                                        <img class="photo" :src="storageImage(fromData.image)">
+                                    </template>
+                                </div>
+                                <input @change="uploadImage($event, fromData, 'image')" id="imageField" type="file" name="image" class="file_field">
+                            </div>
                         </div>
-                        <input @change="uploadImage($event, fromData, 'image')" id="imageField" type="file" name="image"  class="file_field">
-                    </div>
-                </div>
-            </FormModal>
+                    </FormModal>
+
+            </template>
         </div>
     </div>
 </template>
@@ -108,6 +110,7 @@
 <script>
     import Toast from "vue-toastification";
     import FormModal from "../../Components/FormModal";
+    import axios from 'axios'
 
     export default {
         name: "EmployerProfile",
@@ -123,14 +126,24 @@
             };
         },
         mounted() {
-            this.userAuthentication();
+            this.userdata();
 
         },
 
         methods: {
             defaultImage() {
                 return 'https://www.w3schools.com/howto/img_avatar.png';
-            }
+            },
+            async userdata() {
+                try {
+                    const response = await axios.get('/userdata');
+                    this.user = response.data.result.user;
+                    this.employer = response.data.result.employer;
+                } catch (error) {
+                    console.error('Error fetching saved jobs:', error);
+                }
+            },
+
         }
     }
 </script>

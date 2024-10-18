@@ -3,13 +3,12 @@
         <!-- Header Start -->
         <div class=" py-5 bg-dark page-header mb-5">
             <div class="container my-5 pt-5 pb-4">
-                <h1 class="display-3 text-white mb-3  slideInDown">Job Detail</h1>
+                <h1 class="display-3 text-white mb-3  slideInDown">Job Details</h1>
             </div>
         </div>
         <!-- Header End -->
-
         <!-- Job Detail Start -->
-        <div class="container-xxl py-5 " >
+        <div class="container-xxl py-5 shadow p-4 rounded" >
             <div class="container">
                 <div class="row gy-5 gx-4" >
                     <div class="col-lg-8" >
@@ -142,7 +141,7 @@
         },
         mounted() {
             this.getJobDetails();
-            this.checkAuthentication();
+            this.authData();
         },
         methods: {
             formatDate(dateString) {

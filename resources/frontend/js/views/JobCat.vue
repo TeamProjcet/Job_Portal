@@ -1,6 +1,11 @@
 <template>
     <!-- Category Start -->
-    <div class="container mt-4">
+    <div class="container mt-4 shadow p-4 rounded">
+        <h3 class="d-flex justify-content-center my-4" >
+                    <span class="badge bg-primary  py-3 px-3 container-fluid">
+                    Explore By Category
+                   </span>
+        </h3>
         <div class="container mt-4">
             <h1 class="text-center mb-5 " >Explore By Category</h1>
             <div class="row g-4 " style="max-height: 400px;"> <!-- Adjust max-height as needed -->

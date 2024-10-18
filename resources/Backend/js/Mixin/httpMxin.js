@@ -135,43 +135,8 @@ export default {
 
 
 methods:{
-    async userAuthentication() {
-        try {
-            const response = await axios.get('/userdata');
-
-            // Check if the response contains valid seeker data
-            if (response.data && response.data.result?.user) {
-                this.user = response.data.result.user;
-                this.isAuthenticated = true;
-
-                this.fromData.name = this.user.name;
-                this.fromData.email = this.user.email;
 
 
-
-                if (response.data.result.employer && Array.isArray(response.data.result.employer)) {
-                    this.employer = response.data.result.employer.map(app => ({
-                        id: app.id,
-                        user_id: app.user_id,
-                        company_website: app.company_website,
-                        company_address:app.company_address,
-                        contact_person: app.contact_person,
-                        bio: app.bio,
-                        image: app.image,
-                        company_description: app.company_description ,
-                    }));
-                } else {
-                    this.employer = [];
-                }
-            } else {
-                this.user = null;
-                this.isAuthenticated = false;
-            }
-        } catch (error) {
-            this.isAuthenticated = false;
-            console.error('Authentication check failed:', error.response ? error.response.data : error.message);
-        }
-    }
 
 }
 }

@@ -3,7 +3,7 @@
         <div class="sidebar-logo">
             <!-- Logo Header -->
             <div class="logo-header" data-background-color="dark">
-                <a href="/admin/dashboard" class="logo">
+                <router-link to="/admin/dashboard" class="logo">
                     <img
                             src="https://i.ibb.co.com/6w26Pc2/logo.jpg"
                             alt="navbar brand"
@@ -11,7 +11,7 @@
                             height="40"
                             width="50"
                     />
-                </a>
+                </router-link>
                 <div class="nav-toggle">
                     <button class="btn btn-toggle toggle-sidebar">
                         <i class="gg-menu-right"></i>
@@ -30,15 +30,15 @@
             <div class="sidebar-content">
                 <ul class="nav nav-secondary">
                     <li class="nav-item active">
-                        <a
+                        <router-link
                                 data-bs-toggle="collapse"
-                                href="/admin/dashboard"
+                                to="/admin/dashboard"
                                 class="collapsed"
                                 aria-expanded="false"
                         >
                             <i class="fas fa-home"></i>
                             <p>Dashboard</p>
-                        </a>
+                        </router-link>
                     </li>
 
                     <li class="nav-section">

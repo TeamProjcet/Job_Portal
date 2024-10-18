@@ -6,22 +6,27 @@ use App\Http\Controllers\Controller;
 use App\Models\Newsletter;
 use App\Supports\Helper;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class NewsletterController extends Controller
 {
 use Helper;
     public function __construct()
     {
-        $this->middleware(function ($request, $next) {
-            if (!$this->can(request()->route()->action['as'])){
-                return $this->returnData(5000, null, 'You are not authorized to access this page');
-            }
-            return $next($request);
-        });
+//        $this->middleware(function ($request, $next) {
+//            if (!$this->can(request()->route()->action['as'])){
+//                return $this->returnData(5000, null, 'You are not authorized to access this page');
+//            }
+//            return $next($request);
+//        });
+        $this->model=new Newsletter();
     }
 
     public function index()
     {
+        if (!$this->can('newsletter.index')) {
+            return $this->returnData(5000, null, 'You are not authorized to access this page');
+        }
         $data = Newsletter::all();
         return $this->returnData(2000, $data);
 
@@ -36,14 +41,20 @@ use Helper;
 
     public function store(Request $request)
     {
-        $request->validate([
-            'email' => 'required|email|unique:newsletters,email',
-        ]);
+        $validator = $this->model->validator($request->all());
 
-        $data = Newsletter::create([
-            'email' => $request->email,
-        ]);
-        return $this->returnData(2000, $data);
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'You have already subscribed with this email address.',
+            ], 422);
+        }
+        Newsletter::create($request->only('email'));
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Thank you for subscribing!',
+        ], 200);
     }
 
 
@@ -67,6 +78,9 @@ use Helper;
 
     public function destroy($id)
     {
+        if (!$this->can('newsletter.destroy')) {
+            return $this->returnData(5000, null, 'You are not authorized to access this page');
+        }
         try {
             $newsletter = Newsletter::find($id);
             if ($newsletter) {

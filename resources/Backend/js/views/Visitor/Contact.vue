@@ -13,7 +13,7 @@
                         <td>{{ data.subject }}</td>
                         <td>{{ data.message }}</td>
                         <td>
-                            <a  @click="CategoryDatadelete(data.id)">
+                            <a v-if="can('contact.destroy')" @click="CategoryDatadelete(data.id)">
                                 <i class="fas fa-trash-alt" style="color: red;"></i>
                             </a>
                         </td>

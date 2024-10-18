@@ -11,7 +11,7 @@ import BlogPost from "../views/Blog/BlogPost";
 import SeekerProfile from "../views/SeekerAuth/SeekerProfile";
 import JobCategory from "../views/JobCategory";
 import JobCompany from "../views/JobCompany";
-import JobResults from "../views/JobResults";
+import JobResults from "../views/Searching/JobResults";
 import InterviewNoticeComponent from "../views/SeekerAuth/InterviewNoticeComponent";
 
 const route = [
@@ -55,7 +55,7 @@ const route = [
         path: '/blog-details/:id',
         name: 'Blog-Details',
         component: BlogDetails,
-        meta:{dataUrl:'api/blog-comment',
+        meta:{dataUrl:'api/frontend/blogcomment',
         },
         props: true
     },
@@ -80,7 +80,7 @@ const route = [
         path : '/seekerprofile',
         name : 'seekerprofile',
         component : SeekerProfile,
-        meta:{pagetitle:'',dataUrl:'api/frontend/seekerprofile'
+        meta:{pagetitle:'',dataUrl:'api/frontend/seeker/profile'
             
         },
     },

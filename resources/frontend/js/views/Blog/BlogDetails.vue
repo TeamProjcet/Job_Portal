@@ -1,5 +1,6 @@
 <template>
-    <div class="container-xxl py-5">
+
+    <div class="container-xxl py-5 shadow p-4 rounded">
         <header class="mb-4">
             <h1>{{post.title}}</h1>
             <p class="text-muted">
@@ -103,7 +104,7 @@
         },
         mounted() {
             this.getPostDetails();
-            this.checkAuthentication();
+            this.authData();
 
         },
 

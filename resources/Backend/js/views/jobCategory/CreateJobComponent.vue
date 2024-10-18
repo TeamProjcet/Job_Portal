@@ -74,7 +74,7 @@
 
 
                     <div class="mb-3">
-                        <label class="form-label">Date</label>
+                        <label class="form-label">Date Line</label>
                         <div>
                             <date-picker class="w-100" placeholder="" v-validate="'required'" v-model="fromData.date_time" name="date_time" valueType="format"></date-picker>
                         </div>

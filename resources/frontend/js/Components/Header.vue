@@ -28,6 +28,7 @@
                             <img src="https://i.ibb.co.com/3WPvxLF/user.png" alt="User Avatar" class="rounded-circle" width="30" height="30">
                             {{ seeker?seeker.name : 'Guest' }}
                         </a>
+
                         <div class="dropdown-menu rounded-0 m-0">
                             <router-link to="/seekerprofile" class="dropdown-item d-flex align-items-center">
                                 <i class="fas fa-user me-2"></i> My Profile
@@ -64,7 +65,7 @@
             };
         },
         mounted() {
-            this.checkAuthentication();
+            this.authData();
         },
         methods: {
             async seekerlogout() {
@@ -72,6 +73,8 @@
                     const _this=this;
                     const response = await axios.post('/api/frontend/seekerlogout');
                     if (response.data.status === 2000) {
+                        this.isAuthenticated = false;
+                        this.seeker = {};
                         _this.$toast.success("Logout  successfully!");
 
                     }
@@ -79,7 +82,25 @@
                     console.error('Logout Failed:', error);
                 }
             },
-    }
+            // async authData() {
+            //     try {
+            //         const response = await axios.get('/api/frontend/seekerAuth');
+            //
+            //         if (response.data.result && response.data.result.length > 0) {
+            //             this.seeker = response.data.result[0];
+            //             this.isAuthenticated = true;
+            //         } else {
+            //             this.isAuthenticated = false;
+            //             this.seeker = {};
+            //         }
+            //
+            //     } catch (error) {
+            //         this.isAuthenticated = false;
+            //         this.seeker = {};
+            //         console.error('Error fetching authentication data:', error);
+            //     }
+            // }
+        }
     }
 </script>
 

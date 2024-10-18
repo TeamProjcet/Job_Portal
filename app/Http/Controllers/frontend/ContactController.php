@@ -10,102 +10,73 @@ use Illuminate\Http\Request;
 
 class ContactController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     use Helper;
     public function __construct()
     {
-        $this->middleware(function ($request, $next) {
-            if (!$this->can(request()->route()->action['as'])){
-                return $this->returnData(5000, null, 'You are not authorized to access this page');
-            }
-            return $next($request);
-        });
+//        $this->middleware(function ($request, $next) {
+//            if (!$this->can(request()->route()->action['as'])){
+//                return $this->returnData(5000, null, 'You are not authorized to access this page');
+//            }
+//            return $next($request);
+//        });
+        $this->model=new Contact();
     }
 
     public function index()
     {
+        if (!$this->can('contact.index')) {
+            return $this->returnData(5000, null, 'You are not authorized to access this page');
+        }
         $data = Contact::all();
         return $this->returnData(2000, $data);
 
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|string',
-            'email' => 'required|email',
-            'subject' => 'nullable|string',
-            'message' => 'required|string',
-        ]);
+        $validator = $this->model->Validator($request->all());
 
-        // Store the contact data
-        Contact::create($validated);
+        if ($validator->fails()) {
+            return $this->returnData(3000,$validator->errors());
+        }
+        $this->model->fill($request->all());
+        $this->model->save();
+        return $this->returnData(2000, $this->model);
 
-        return response()->json(['message' => 'Contact message received!'], 200);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Contact  $contact
-     * @return \Illuminate\Http\Response
-     */
+
     public function show(Contact $contact)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Contact  $contact
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit(Contact $contact)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Contact  $contact
-     * @return \Illuminate\Http\Response
-     */
+
+
     public function update(Request $request, Contact $contact)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Contact  $contact
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy($id)
     {
+        if (!$this->can('contact.destroy')) {
+            return $this->returnData(5000, null, 'You are not authorized to access this page');
+        }
         try {
             $data = Contact::find($id);
             if ($data) {

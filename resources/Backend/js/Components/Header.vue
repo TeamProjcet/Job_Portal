@@ -65,7 +65,8 @@
             };
         },
         mounted() {
-            this.userAuthentication();
+            // this.userAuthentication();
+            this.userAuthData();
         },
         methods: {
             async logout() {
@@ -76,6 +77,20 @@
                     console.error('Logout Failed:', error);
                 }
             },
+            async userAuthData() {
+                try {
+                    const response = await axios.get('/userAuth');
+                    if (response.data.result) {
+                        this.user = response.data.result;
+                    } else {
+                        this.user = {};
+                    }
+                } catch (error) {
+                    this.user = {};
+                    console.error('Error fetching authentication data:', error);
+                }
+            },
+
 
         }
     }

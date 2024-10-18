@@ -13,6 +13,7 @@
                         <h6>Contact Info</h6>
                         <p><strong>Email:</strong> {{ seeker.email }}</p>
                         <p><strong>Phone:</strong> +880{{ seeker.phone }}</p>
+                        <p><strong>Address:</strong> {{ seeker.address }}</p>
                     </div>
                 </div>
             </div>
@@ -49,7 +50,9 @@
                                     <tbody>
                                     <tr v-for="apply in applications" :key="apply.id">
                                         <td>{{ apply.job.position }}</td>
-                                        <td>{{ apply.applied_at }}</td>
+<!--                                        <td>{{ new Date(apply.created_at).toLocaleDateString() }}</td>-->
+                                        <td>{{formatDate(apply.created_at)}}</td>
+
                                         <td>{{ apply.job.address }}</td>
                                         <td>
                                         <span :class="{
@@ -113,7 +116,7 @@
                     <div class="tab-pane fade" id="update-profile" role="tabpanel" aria-labelledby="update-profile-tab">
                         <div class="card">
                             <div class="card-body">
-                                <form id="updateProfileForm" @submit.prevent="submitProfile">
+                                <form id="updateProfileForm" @submit.prevent="submitFromData(fromData)">
                                     <div class="mb-3">
                                         <label for="name" class="form-label">Name</label>
                                         <input type="text" class="form-control" id="name" v-model="fromData.name" readonly>
@@ -178,7 +181,7 @@
         },
 
         mounted(){
-            this.checkAuthentication();
+            this.seekerdata();
             this.SavedJobs();
         },
 
@@ -193,29 +196,19 @@
                 return str;
             },
 
-            async submitProfile() {
-                this.fromData.id = this.seeker.id;
-             await axios.put('/api/frontend/seeker/profile', this.fromData)
-                    .then(function (res) {
-                        if (parseInt(res.data.status) === 2000) {
-                            this.$toast.success(" Profile Update successfully");
-
-                        } else {
-                            this.$toast.error("Profile Update failed!");
-                        }
-                    })
-                    .catch(function (error) {
-                        if (error.response) {
-                            this.error = "No Job details found.";
-
-                        }
-                    });
-            },
-
             async SavedJobs() {
                 try {
                     const response = await axios.get('/api/saved');
                     this.savedJobs = response.data.result;
+                } catch (error) {
+                    console.error('Error fetching saved jobs:', error);
+                }
+            },
+            async seekerdata() {
+                try {
+                    const response = await axios.get('/api/frontend/seekerdata');
+                    this.applications = response.data.result.applications;
+                    this.seeker = response.data.result.seeker;
                 } catch (error) {
                     console.error('Error fetching saved jobs:', error);
                 }
