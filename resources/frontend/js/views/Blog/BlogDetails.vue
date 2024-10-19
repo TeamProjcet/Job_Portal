@@ -35,10 +35,8 @@
                 </a>
             </div>
 
-            <!-- Comment display section -->
             <div class="row col-md-6 mt-5">
                 <h4>Comments</h4>
-                <!--                v-if="comments.length > 0"-->
                 <div v-for="comm in comment">
                     <div class="card mb-3">
                         <div class="card-body d-flex align-items-start">
@@ -95,7 +93,7 @@
         data() {
             return {
                 post: {},
-                commentShow: {},
+                comment: {},
                 isAuthenticated:false,
                 error: null,
 
@@ -147,27 +145,6 @@
                console.error('Error fetching comments:', error);
            }
             },
-
-
-            // async blogCommentData() {
-            //     try {
-            //         const response = await axios.get(`/api/frontend/joblist`);
-            //
-            //         if (response.data && response.data.status === 2000 && response.data.result) {
-            //             this.commentShow = response.data.result.map(comment => ({
-            //                 seekerId: comment.seeker_id,
-            //                 blogId: comment.blog_id,
-            //                 comments: comment.comments,
-            //                 seekerName: comment.seeker.name,
-            //             }));
-            //         } else {
-            //             this.error = "No blog comments found.";
-            //         }
-            //     } catch (error) {
-            //         this.error = "Failed to load blog comment.";
-            //         console.error(error); // Log the error for debugging
-            //     }
-            // },
 
             async blogComment() {
                 this.fromData.blog_id = this.post.id;
