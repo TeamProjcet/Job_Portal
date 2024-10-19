@@ -13,12 +13,12 @@
                                 <label >Interview Status:</label>
 
                                 <span :class="{
-                    'bg-primary p-1 ': application.interview_status == 1,
-                    'bg-secondary p-1': application.interview_status == 2,
+                    'bg-secondary p-1 ': application.interview_status == 1,
+                    'bg-primary p-1': application.interview_status == 2,
                     'bg-info p-1 ': application.interview_status == 0,
                     'bg-danger p-1 ': application.interview_status == 3,
                 }">
-                    <label class="badge mx-1 text-white"> {{ application.interview_status == 0 ? 'Scheduled' : application.interview_status == 1 ? 'Completed' : application.interview_status == 2 ? 'Selected' : 'Rejected' }}</label>
+                    <label class="badge mx-1 text-white"> {{ application.interview_status == 0 ? 'Scheduled' : application.interview_status == 1 ? 'Selected' : application.interview_status == 2 ? 'Completed' : 'Rejected' }}</label>
                 </span>
                             </td>
                         </tr>

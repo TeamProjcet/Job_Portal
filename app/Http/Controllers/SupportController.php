@@ -55,15 +55,40 @@ class SupportController extends Controller
 
             ];
         }
-        if (in_array('application_status',$array)){
-            $data['application_status']=[
+        if (in_array('application_status',$array)) {
+            $data['application_status'] = [
                 [
-                    'name'=>'Accept',
+                    'name' => 'Pending',
+                    'value' => 0
+                ],
+                [
+                    'name' => 'Accepted',
+                    'value' => 1
+                ],
+                [
+                    'name' => 'Recjeted',
+                    'value' => 2
+                ],
+            ];
+        }
+            if (in_array('interview_status',$array)){
+            $data['interview_status']=[
+                [
+                    'name'=>'Scheduled',
+                    'value'=>0
+                ],
+                [
+                    'name'=>'Selected',
                     'value'=>1
                 ],
                 [
-                    'name'=>'Recjeted',
+                    'name'=>'Completed',
                     'value'=>2
+                ],
+
+                [
+                    'name'=>'Rejected',
+                    'value'=>3
                 ],
             ];
         }

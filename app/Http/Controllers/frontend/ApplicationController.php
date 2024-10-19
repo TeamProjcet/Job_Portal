@@ -46,20 +46,15 @@ class ApplicationController extends Controller
 
     public function store(Request $request)
     {
-        // Check authorization
         if (!$this->can('application.store')) {
             return $this->returnData(5000, null, 'You are not authorized to access this page');
         }
 
-        // Validate request data
         $validator = $this->model->Validator($request->all());
         if ($validator->fails()) {
             return $this->returnData(3000, $validator->errors());
         }
-
         $seekerId = Auth::guard('seeker')->user()->id;
-
-        // Check if the application already exists
         $existingJob = $this->model::where('job_id', $request->job_id)
             ->where('seeker_id', $seekerId)
             ->first();
@@ -68,10 +63,9 @@ class ApplicationController extends Controller
             return $this->returnData(4000, null, 'You have already applied for this job');
         }
 
-        // Create a new application
-        $application = new $this->model; // Create a new instance
+        $application = new $this->model;
         $application->fill($request->all());
-        $application->seeker_id = $seekerId; // Set the seeker ID
+        $application->seeker_id = $seekerId;
         $application->save();
 
         return $this->returnData(2000, $application);
@@ -95,17 +89,16 @@ class ApplicationController extends Controller
 // Code for showing the form to edit a specific application
     }
 
+
     public function update(Request $request, $id)
     {
         if (!$this->can('application.update')) {
             return $this->returnData(5000, null, 'You are not authorized to access this page');
         }
-
         $application = Applications::find($id);
         if (!$application) {
             return response()->json(['message' => 'Application not found'], 404);
         }
-
         $application->application_status = $request->application_status;
         $application->interview_status = $request->interview_status;
         $application->note = $request->note;

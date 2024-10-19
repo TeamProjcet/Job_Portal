@@ -138,6 +138,8 @@ export default {
                     this.isAuthenticated = true;
                     this.fromData.name = this.seeker.name;
                     this.fromData.email = this.seeker.email;
+                    this.fromData.phone = this.seeker.phone;
+                    this.fromData.address = this.seeker.address;
                 } else {
                     this.isAuthenticated = false;
                     this.seeker = {};

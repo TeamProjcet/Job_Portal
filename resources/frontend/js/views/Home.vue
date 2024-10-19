@@ -49,7 +49,7 @@
 
 
         <!-- Testimonial Start -->
-        <div class="container-fluid mt-4" >
+        <div class="container mt-4 shadow p-4 rounded" >
             <div class="container mt-4">     <h3 class="d-flex justify-content-center my-4" >
 
                     <span class="badge bg-primary  py-3 px-3 container-fluid">

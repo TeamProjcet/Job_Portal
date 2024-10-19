@@ -7,7 +7,6 @@
                    </span>
         </h3>
         <div class="container mt-4">
-            <h1 class="text-center mb-5 " >Explore By Category</h1>
             <div class="row g-4 " style="max-height: 400px;"> <!-- Adjust max-height as needed -->
                 <div class="col-lg-4 col-md-4 col-sm-4"  v-for="jobcat in jobcateg" :key="jobcat.id">
                     <a class="cat-item rounded p-4">

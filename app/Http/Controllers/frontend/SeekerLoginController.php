@@ -87,6 +87,10 @@ class SeekerLoginController extends Controller
             'address' => 'nullable|string|max:255',
             'bio' => 'nullable|string|max:1000',
             'profile_picture' => 'nullable|string',
+            'skills' => 'nullable',
+            'education' => 'nullable',
+            'experience' => 'nullable',
+
         ]);
 
         $data = Auth::guard('seeker')->user();
@@ -96,7 +100,9 @@ class SeekerLoginController extends Controller
         $data->phone = $request->input('phone', $data->phone);
         $data->address = $request->input('address', $data->address);
         $data->bio = $request->input('bio', $data->bio);
-        $data->profile_picture = $request->input('profile_picture', $data->profile_picture);
+        $data->skills = $request->input('skills', $data->skills);
+        $data->education = $request->input('education', $data->education);
+        $data->experience = $request->input('experience', $data->experience);
 
         $data->save();
 

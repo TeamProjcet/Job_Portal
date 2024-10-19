@@ -9,6 +9,7 @@
             </div>
         </div>
         <div class="col-md-12">
+
             <!-- Menu Tabs -->
 <!--            <ul class="nav nav-tabs" id="profileTab" role="tablist">-->
 <!--                <li class="nav-item">-->
@@ -24,6 +25,68 @@
 <!--                    </router-link>-->
 <!--                </li>-->
 <!--            </ul>-->
+            <div class="container">
+                <!-- First Row -->
+                <div class="row mb-3">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-label fw-bold">Interview Status</label>
+                            <select class="form-control" >
+                                <option disabled>Select Interview Status</option>
+                                <template v-for="(status,index) in requireData.interview_status"  >
+                                    <option :value="status.value">{{status.name}}</option>
+                                </template>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-label fw-bold">Application Status</label>
+                            <select class="form-select" >
+                                <option disabled>Select Application Status</option>
+                                <template v-for="(status,index) in requireData.application_status"  >
+                                    <option :value="status.value">{{status.name}}</option>
+                                </template>
+
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Second Row -->
+                <div class="row mb-3">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-label fw-bold">Address</label>
+                            <select class="form-select" @change="">
+                                <option value="date">Sort by Date</option>
+                                <option value="status">Sort by Status</option>
+                                <option value="name">Sort by Name</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-label fw-bold">Education</label>
+                            <select class="form-select" @change="">
+                                <option value="date">Sort by Date</option>
+                                <option value="status">Sort by Status</option>
+                                <option value="name">Sort by Name</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="form-label fw-bold">Skills</label>
+                            <select class="form-select" @change="">
+                                <option value="date">Sort by Date</option>
+                                <option value="status">Sort by Status</option>
+                                <option value="name">Sort by Name</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <!-- Tab Content -->
             <div class="tab-content mt-3" id="profileTabContent">
@@ -129,7 +192,7 @@
         mounted() {
             this.getDataList();
             // this.getapplyList();
-            this.getRequiredData(['application_status']);
+            this.getRequiredData(['application_status','interview_status']);
 
         },
         methods:{

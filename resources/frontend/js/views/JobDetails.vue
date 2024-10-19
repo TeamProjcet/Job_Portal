@@ -39,10 +39,10 @@
                                             <input type="email" class="form-control" placeholder="Your Email" v-model="fromData.email" readonly>
                                         </div>
                                         <div class="col-12 col-sm-6">
-                                            <input type="number" class="form-control" placeholder="Your Phone" v-model="fromData.phone">
+                                            <input type="number" class="form-control" placeholder="Your Phone" v-model="fromData.phone" readonly>
                                         </div>
                                         <div class="col-12 col-sm-6">
-                                            <input type="text" class="form-control" placeholder="Your Address" v-model="fromData.address">
+                                            <input type="text" class="form-control" placeholder="Your Address" v-model="fromData.address" readonly>
                                         </div>
                                         <div class="col-12">
                                             <label class="form-label"> Portfolio/Linkdin/Github</label>
@@ -125,7 +125,6 @@
                     category: {},
                 },
                 isAuthenticated:false,
-
                 components:{
                     format, parseISO
                 },
@@ -179,13 +178,13 @@
                     const res = await axios.post('/api/application', this.fromData);
 
                     if (parseInt(res.data.status) === 2000) {
-                        this.$toast.success("Application submitted successfully");
+                        this.$toast.success("Application Submitted Successfully");
                     } else {
-                        this.$toast.error("Application failed!");
+                        this.$toast.error("You Have Already Applied For This Job!");
                     }
                 } catch (error) {
                     if (error.response) {
-                        this.error = "No Job details found.";
+                        this.error = "No Application found.";
                         this.$toast.error(this.error);
                     } else {
                         this.$toast.error("An unexpected error occurred.");

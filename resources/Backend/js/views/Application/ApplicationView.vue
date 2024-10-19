@@ -9,9 +9,18 @@
                 <div class="card-body">
                     <p><strong>Name:</strong> {{application.seeker.name}}</p>
                     <p><strong>Email:</strong> {{application.seeker.email}}</p>
+                    <p><strong>Expreince:</strong> {{application.seeker.experience}}</p>
+                    <p v-if="parsedSkills && parsedSkills.length">
+                        <strong>Skills:</strong>
+                        <label class="badge mx-1" v-for="(Skills, index) in parsedSkills" :key="index">{{ Skills }}</label>
+                    </p>
+                    <p v-if="parsedEducation && parsedEducation.length">
+                        <strong>Education:</strong>
+                        <label class="badge  mx-1" v-for="(educat, index) in parsedEducation" :key="index">{{ educat }}</label>
+                    </p>
+
                     <p><strong>Address:</strong>{{application.job.address}}</p>
                     <p><strong>Phone:</strong> {{application.phone}}</p>
-
 
                     <h6 class="card-title mt-4">Cover Letter</h6>
                     <p v-html="application.coverLetter"></p>
@@ -21,18 +30,20 @@
                     <p>
                         <strong>Status:</strong>
                         <select v-model="applicationStatus" @change="updateApplicationStatus">
-                            <option value="0">Pending</option>
-                            <option value="1">Accepted</option>
-                            <option value="2">Rejected</option>
+                            <option disabled>Select application Status</option>
+                            <template v-for="(status,index) in requireData.application_status"  >
+                                <option :value="status.value">{{status.name}}</option>
+
+                            </template>
                         </select>
                     </p>
                     <p>
                         <strong>InterView:</strong>
                         <select v-model="interviewStatus" @change="updateApplicationStatus">
-                            <option value="0">Scheduled</option>
-                            <option value="1">Completed</option>
-                            <option value="2">Selected</option>
-                            <option value="3">Rejected</option>
+                            <option disabled>Select Interview Status</option>
+                            <template v-for="(status,index) in requireData.interview_status"  >
+                                <option :value="status.value">{{status.name}}</option>
+                            </template>
                         </select>
                     </p>
                     </div>
@@ -78,8 +89,10 @@
             };
         },
 
+
         mounted() {
             this.getApplicationDetails();
+            this.getRequiredData(['application_status','interview_status']);
         },
         methods: {
             async getApplicationDetails() {

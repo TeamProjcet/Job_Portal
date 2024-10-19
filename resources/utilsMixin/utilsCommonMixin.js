@@ -138,7 +138,21 @@ export default {
         formType() {
             return this.$store.state.formType;
         },
+            parsedEducation() {
+                try {
+                    return JSON.parse(this.application.seeker.education);
+                } catch (error) {
+                    return [];
+                }
+            } ,
+            parsedSkills() {
+                try {
+                    return JSON.parse(this.application.seeker.skills);
+                } catch (error) {
+                    return [];
+                }
+            }
+        },
 
-    }
 
 }
