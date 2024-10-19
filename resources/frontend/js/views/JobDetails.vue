@@ -182,7 +182,7 @@
                     if (parseInt(res.data.status) === 2000) {
                         this.$toast.success("Application submitted successfully");
                     } else {
-                        this.$toast.error("Application failed!");
+                        this.$toast.error("You have already applied for this job!");
                     }
                 } catch (error) {
                     if (error.response) {

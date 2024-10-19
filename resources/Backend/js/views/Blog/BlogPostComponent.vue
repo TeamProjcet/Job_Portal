@@ -7,7 +7,6 @@
             </div>
             <DataTable :tableHeading="tableHeading">
 
-
                 <tr v-for="(data, index) in dataList" :key="index">
                     <td>{{ index + 1 }}</td>
                     <td>{{data.company.name}}</td>
@@ -23,8 +22,9 @@
                             <i class="fas fa-edit" style="color: blue;"></i>
                         </a>
                         <a v-if="can('blogpost.destroy')" @click="CategoryDatadelete(data.id, index)">
-                            <i class="fas fa-trash-alt" style="color: red;"></i>
+                            <i class="fas fa-trash-alt" style="color: red; margin-left: 10px"></i>
                         </a>
+                        <router-link style="margin-left: 10px"  :to="`/admin/blog/viewblogcomment/${data.id}`">View Comment</router-link>
                     </td>
                 </tr>
 
@@ -60,7 +60,7 @@
 
                 <div class="mb-3">
                     <label class="form-label">Details</label>
-                    <editor v-model="fromData.description" v-validate="'required'" name="details" :init="tinymceInit"/>
+                    <editor v-model="fromData.description" v-validate="'required'" name="description" :init="tinymceInit"/>
                 </div>
 
                 <div class="row">

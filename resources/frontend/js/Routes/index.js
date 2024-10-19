@@ -55,7 +55,7 @@ const route = [
         path: '/blog-details/:id',
         name: 'Blog-Details',
         component: BlogDetails,
-        meta:{dataUrl:'api/blog-comment',
+        meta:{dataUrl:'api/frontend/blogcomment',
         },
         props: true
     },

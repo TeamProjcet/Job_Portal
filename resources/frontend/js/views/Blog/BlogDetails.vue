@@ -39,13 +39,13 @@
             <div class="row col-md-6 mt-5">
                 <h4>Comments</h4>
                 <!--                v-if="comments.length > 0"-->
-                <div>
+                <div v-for="comm in comment">
                     <div class="card mb-3">
                         <div class="card-body d-flex align-items-start">
                             <img src="https://i.ibb.co.com/3WPvxLF/user.png" alt="User Avatar" class="rounded-circle" style="width: 50px; height: 50px; margin-right: 15px;">
                             <div>
-                                <h5 class="card-title">abc</h5>
-                                <p class="card-text">nice blog</p>
+                                <h5 class="card-title">{{comm.seeker.name}}</h5>
+                                <p class="card-text">{{comm.comments}}</p>
                             </div>
                         </div>
                     </div>
@@ -95,6 +95,7 @@
         data() {
             return {
                 post: {},
+                commentShow: {},
                 isAuthenticated:false,
                 error: null,
 
@@ -103,6 +104,7 @@
         },
         mounted() {
             this.getPostDetails();
+            this.blogCommentData();
             this.checkAuthentication();
 
         },
@@ -122,7 +124,7 @@
 
             async getPostDetails() {
                 try {
-                    const response = await axios.get(`/api/frontend/detailsData/${this.id}`);
+                    const response = await axios.get(`/api/frontend/blogDetails/${this.id}`);
 
                     if (response.data && response.data.result) {
                         this.post = response.data.result.post;
@@ -133,6 +135,39 @@
                     this.error = "Failed to load blog details.";
                 }
             },
+       async blogCommentData() {
+           if (!this.id) {
+               this.error = "Category ID is not defined.";
+               return;
+           }
+           try {
+               const response = await axios.get(`/api/frontend/jobcate/${this.id}`);
+               this.comment = response.data.result.blogComment;
+           } catch (error) {
+               console.error('Error fetching comments:', error);
+           }
+            },
+
+
+            // async blogCommentData() {
+            //     try {
+            //         const response = await axios.get(`/api/frontend/joblist`);
+            //
+            //         if (response.data && response.data.status === 2000 && response.data.result) {
+            //             this.commentShow = response.data.result.map(comment => ({
+            //                 seekerId: comment.seeker_id,
+            //                 blogId: comment.blog_id,
+            //                 comments: comment.comments,
+            //                 seekerName: comment.seeker.name,
+            //             }));
+            //         } else {
+            //             this.error = "No blog comments found.";
+            //         }
+            //     } catch (error) {
+            //         this.error = "Failed to load blog comment.";
+            //         console.error(error); // Log the error for debugging
+            //     }
+            // },
 
             async blogComment() {
                 this.fromData.blog_id = this.post.id;
