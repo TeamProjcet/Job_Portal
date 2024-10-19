@@ -146,7 +146,7 @@
                         <h4 class="mb-0">Update Seeker Profile</h4>
                     </div>
                     <div class="card-body">
-                        <form id="updateProfileForm" @submit.prevent="submitFromData(fromData)">
+                        <form id="updateProfileForm" @submit="submitFromData(fromData)">
                             <div class="row">
                                 <!-- Name and Email -->
                                 <div class="col-md-6 mb-3">

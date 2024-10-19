@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\BlogController;
 use App\Http\Controllers\Controller;
 use App\Models\Applications;
 use App\Models\blog;
+use App\Models\BlogComment;
 use App\Models\Category;
 use App\Models\Company;
 use App\Models\JobPostModel;
@@ -38,11 +39,11 @@ class FrontendController extends Controller
         return $this->returnData(2000,$data);
     }
 
-
     public function jobCategory($cateId)
     {
-        $data['jobPosts'] = JobPostModel::with('category','company')->where('category_id',$cateId)->orderBy('id','DESC')->get();
-        $data['companycate'] = JobPostModel::with('category','company')->where('company_id',$cateId)->orderBy('id','DESC')->get();
+        $data['jobPosts'] = JobPostModel::with('category','company')->where('category_id',$cateId)->get();
+        $data['companycate'] = JobPostModel::with('category','company')->where('company_id',$cateId)->get();
+        $data['blogComment'] = BlogComment::with('seeker')->where('blog_id',$cateId)->get();
         return $this->returnData(2000,$data);
 
     }
@@ -50,8 +51,12 @@ class FrontendController extends Controller
     public function detailsData($id)
     {
         $data['job'] = JobPostModel::findOrFail($id)->load('category', 'company');
-        $data['post'] = blog::with('company')->findOrFail($id);
+        return $this->returnData(2000,$data);
+    }
 
+    public function blogDetails($id)
+    {
+        $data['post'] = blog::with('company')->findOrFail($id);
         return $this->returnData(2000,$data);
     }
 

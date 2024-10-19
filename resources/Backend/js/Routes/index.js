@@ -17,6 +17,7 @@ import RoleComponent from "../views/RolePermission/RoleComponent";
 import UserRegisComponenet from "../views/RolePermission/UserRegisComponenet";
 import InterviewComponent from "../views/Interview/InterviewComponent";
 import Partnership from "../views/Partnership/Partnership";
+import ViewBlgoComment from "../views/Blog/ViewBlgoComment";
 import FrontendManage from "../views/FrontendManagement/FrontendManage";
 
 
@@ -93,8 +94,15 @@ const route = [
         path : '/admin/blog/blogcomment',
         name : 'blogcomment',
         component : BlogCommentComponent,
-        meta:{pagetitle:'Blog Comment Table',dataUrl:'api/frontend/blogcomment',
+        meta:{pagetitle:'Blog Comment Table',dataUrl:'api/blogcomment',
         }
+
+    },
+    {
+        path : '/admin/blog/viewblogcomment/:postId',
+        name : 'viewblogcomment',
+        component : ViewBlgoComment,
+        meta:{pagetitle:'View Blog Comment Table',dataUrl:'api/blogcomment',}
 
     },
     {

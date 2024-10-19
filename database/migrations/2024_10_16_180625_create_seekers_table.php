@@ -21,6 +21,13 @@ return new class extends Migration
             $table->text('experience')->nullable();
             $table->text('skills')->nullable();
             $table->string('password');
+            $table->string('phone')->nullable();
+            $table->string('address')->nullable();
+            $table->string('bio')->nullable();
+            $table->string('profile_picture')->nullable();
+            $table->string('skills')->nullable();
+            $table->string('education')->nullable();
+            $table->string('experience')->nullable();
             $table->timestamps();
         });
     }

@@ -96,7 +96,7 @@ export default {
         },
         storageImage(imageName) {
             if (!imageName || typeof imageName !== 'string') {
-                return 'https://i.ibb.co.com/3ssF0pw/giphy.gif';
+                return 'https://i.ibb.co.com/pbhTkkr/images.png';
             }
             const lastDotIndex = imageName.lastIndexOf('.');
             const extension = lastDotIndex !== -1 ? imageName.substring(lastDotIndex + 1).toLowerCase() : '';
@@ -118,7 +118,7 @@ export default {
                 case 'xlsx':
                     return imagePath;
                 default:
-                    return 'https://i.ibb.co.com/3ssF0pw/giphy.gif';
+                    return 'https://i.ibb.co.com/pbhTkkr/images.png';
             }
         },
     },

@@ -140,6 +140,9 @@ export default {
                     this.fromData.email = this.seeker.email;
                     this.fromData.phone = this.seeker.phone;
                     this.fromData.address = this.seeker.address;
+                    this.fromData.experience = this.seeker.experience;
+                    this.fromData.bio = this.seeker.bio;
+                    this.fromData.profile_picture = this.seeker.profile_picture;
                 } else {
                     this.isAuthenticated = false;
                     this.seeker = {};

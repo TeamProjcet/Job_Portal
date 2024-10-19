@@ -21,6 +21,7 @@ class BlogCommentController extends Controller
     public function index()
     {
         $savedJobs = BlogComment::with('seeker', 'blog')->get();
+//        dd($savedJobs);
         return $this->returnData(2000,  $savedJobs);
     }
 
@@ -64,15 +65,16 @@ class BlogCommentController extends Controller
     public function destroy($id)
     {
         try {
-            $data = BlogComment::find($id);
-            if ($data) {
+            $data = $this->model->where('id',$id)->first();
+            if ($data){
                 $data->delete();
-                return response()->json(['message' => 'Blog Comment deleted successfully.'], 200);
-            } else {
-                return response()->json(['message' => 'Blog Comment not found.'], 404);
+
+                return $this->returnData(2000, null, 'save job deleted successfully');
             }
-        } catch (\Exception $e) {
-            return response()->json(['message' => 'Something went wrong, please try again later.'], 500);
+            return $this->returnData(3000, null, 'save job not found');
+
+        }catch (\Exception $exception){
+            return $this->returnData(5000, $exception->getMessage(), 'Something Wrong');
         }
     }
 }

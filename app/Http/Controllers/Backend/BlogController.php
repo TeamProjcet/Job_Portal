@@ -58,8 +58,8 @@ class BlogController extends Controller
 
     public function show($id)
     {
-//        $post = blog::with('company')->findOrFail($id);
-//        return response()->json(['result' => $post]);
+        $post = blog::with('company')->findOrFail($id);
+        return response()->json(['result' => $post]);
     }
 
 
