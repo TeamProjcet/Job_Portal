@@ -88,6 +88,17 @@ To get started with the Job Portal Site, follow these instructions:
     
 </br></br>
 - **env file create from .env.example:**
+    ````jsx
+    DB_CONNECTION=mysql
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_DATABASE=job_portal
+    DB_USERNAME=root
+    DB_PASSWORD=root
+    ````
+</br>
+
+-  **Check your PHP version**
     
     ```jsx
     php -v
@@ -99,7 +110,7 @@ To get started with the Job Portal Site, follow these instructions:
     - Check the PHP version required by the project (usually in the `composer.json` file under `platform` or `require`):
         
         ```jsx
-           sudo apt install php7.4  # Replace with the version you need
+           sudo apt install php8.1  # Replace with the version you need
         ```
         
         ```jsx
@@ -154,7 +165,7 @@ To get started with the Job Portal Site, follow these instructions:
         
         npm run serve
 </br></br>
-    Backend:
+ 5. Backend:
         ````bash
    
         php artisan serve
