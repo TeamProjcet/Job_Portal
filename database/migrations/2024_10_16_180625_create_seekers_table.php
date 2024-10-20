@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('seekers', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('email')->unique();
+            $table->string('email');
             $table->text('education')->nullable();
             $table->text('experience')->nullable();
             $table->text('skills')->nullable();
@@ -24,13 +24,11 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
             $table->string('bio')->nullable();
-            $table->string('profile_picture')->nullable();
-            $table->string('skills')->nullable();
-            $table->string('education')->nullable();
-            $table->string('experience')->nullable();
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }
+
 
     /**
      * Reverse the migrations.

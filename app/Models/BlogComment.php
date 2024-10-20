@@ -16,7 +16,7 @@ class BlogComment extends Model
     ];
     public function validator($input){
         return Validator::make($input,[
-            'seeker_id'=>'required ',
+            'seeker_id'=>'',
             'blog_id'=>'required ',
             'comments'=>'required ',
         ]);

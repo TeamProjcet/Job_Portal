@@ -6,7 +6,7 @@
 <div class="card">
     <div class="card-body text-center">
         <img style="width: 100px; height: 100px; border: solid 5px; border-radius: 50px"
-             :src="storageImage(seeker.profile_picture)"
+             :src="storageImage(seeker.image)"
              class="img-fluid rounded-circle mx-auto d-block" alt="Profile Picture">
         <h4 class="mt-3">{{ seeker.name }}</h4>
         <h5 class="pt-2">Bio</h5>
@@ -16,12 +16,12 @@
         <p class="text-muted">{{ seeker.experience }}</p>
         <hr>
         <h6>Skills:</h6>
-        <p v-if="parsedSkills.length">
+        <p v-if="parsedSkills">
                 <label class="badge bg-primary mx-1" v-for="(Skills, index) in parsedSkills" :key="index">{{ Skills }}</label>
         </p>
         <hr>
         <h6>Education:</h6>
-        <p v-if="parsedEducation.length">
+        <p v-if="parsedEducation">
                 <label class="badge bg-primary mx-1" v-for="(educat, index) in parsedEducation" :key="index">{{ educat }}</label>
         </p>
 
@@ -146,7 +146,7 @@
                         <h4 class="mb-0">Update Seeker Profile</h4>
                     </div>
                     <div class="card-body">
-                        <form id="updateProfileForm" @submit="submitFromData(fromData)">
+                        <form id="updateProfileForm" @submit.prevent="submitFromData(fromData)">
                             <div class="row">
                                 <!-- Name and Email -->
                                 <div class="col-md-6 mb-3">

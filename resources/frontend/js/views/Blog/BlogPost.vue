@@ -1,5 +1,5 @@
 <template>
-    <div class="container-xxl py-5 shadow p-4 rounded">
+    <div class="container mt-4 shadow p-4 rounded">
         <div class="row">
             <h3 class="d-flex justify-content-center my-4" >
 
@@ -17,7 +17,7 @@
                     />
                     <div class="card-body">
                         <h5 class="card-title">{{ post.title }}</h5>
-                        <p class="card-text font">{{truncateString(post.description, 200)}}</p>
+                        <p class="card-text font">{{truncateString(post.description, 180)}}</p>
                         <div class="d-flex  justify-content-between">
                             <router-link
                                 :to="{ name: 'Blog-Details', params: { id: post.id } }"
@@ -37,7 +37,7 @@
 </template>
 
 <script>
-    import axios from 'axios';
+
 
     export default {
         name: "BlogPost",
@@ -55,11 +55,9 @@
 
         mounted() {
             this.getDataList();
-            // this.getPosts();
         },
 
         methods: {
-
             truncateString(str, length) {
                 if (str) {
                     const tempElement = document.createElement('div');
@@ -74,18 +72,6 @@
                 return '';
             },
 
-            // async getPosts() {
-            //     try {
-            //         const response = await axios.get('/api/blogpost');
-            //         if (response.data && response.data.result) {
-            //             this.blogpost = response.data.result;
-            //         } else {
-            //             throw new Error("Unexpected response format");
-            //         }
-            //     } catch (error) {
-            //         this.error = "Error fetching blog data. Please try again later.";
-            //     }
-            // },
         },
 
     };

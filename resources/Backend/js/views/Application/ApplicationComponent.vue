@@ -1,87 +1,65 @@
-
 <template>
     <div class="row">
-        <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4" >
+        <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
             <div>
-                <h3 class="fw-bold mb-3 " style="margin-left: 20px">{{$route.meta.pagetitle}}</h3>
+                <h3 class="fw-bold mb-3" style="margin-left: 20px">{{$route.meta.pagetitle}}</h3>
             </div>
-            <div class="ms-md-auto py-2 py-md-0">
-            </div>
+            <div class="ms-md-auto py-2 py-md-0"></div>
         </div>
         <div class="col-md-12">
-
-            <!-- Menu Tabs -->
-<!--            <ul class="nav nav-tabs" id="profileTab" role="tablist">-->
-<!--                <li class="nav-item">-->
-<!--                    <router-link :to="`/admin/seeker/application?application_status=0`" class="nav-link"-->
-<!--                                 :class="(parseInt($route.query.application_status) === 0 || $route.query.application_status === undefined) ? 'active' : ''" >-->
-<!--                        <h6 class="mt-n1 mb-0">Pending Jobs</h6>-->
-<!--                    </router-link>-->
-<!--                </li>-->
-<!--                <li class="nav-item" v-for="(applystatus, index) in requireData.application_status" :key="index">-->
-<!--                    <router-link :to="`/admin/seeker/application?application_status=${applystatus.value}`" class="nav-link"-->
-<!--                                 :class="(parseInt(applystatus.value) === parseInt($route.query.application_status)) ? 'active' : ''" >-->
-<!--                        <h6 class="mt-n1 mb-0">{{applystatus.name}}</h6>-->
-<!--                    </router-link>-->
-<!--                </li>-->
-<!--            </ul>-->
-            <div class="container">
+            <div class="">
                 <!-- First Row -->
-                <div class="row mb-3">
-                    <div class="col-md-4">
+                <div class="d-flex">
+                    <div class="col-md-2">
                         <div class="form-group">
                             <label class="form-label fw-bold">Interview Status</label>
-                            <select class="form-control" >
-                                <option disabled>Select Interview Status</option>
-                                <template v-for="(status,index) in requireData.interview_status"  >
-                                    <option :value="status.value">{{status.name}}</option>
+                            <select class="form-select" v-model="selectedInterviewStatus" @change="filterData">
+                                <option value="">Select Interview Status</option>
+                                <template v-for="(status, index) in requireData.interview_status" >
+                                    <option :value="status.value">{{ status.name }}</option>
                                 </template>
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-2">
                         <div class="form-group">
                             <label class="form-label fw-bold">Application Status</label>
-                            <select class="form-select" >
-                                <option disabled>Select Application Status</option>
-                                <template v-for="(status,index) in requireData.application_status"  >
-                                    <option :value="status.value">{{status.name}}</option>
+                            <select class="form-select" v-model="selectedApplicationStatus" @change="filterData">
+                                <option value="">Select Application Status</option>
+                                <template v-for="(status, index) in requireData.application_status">
+                                    <option :value="status.value">{{ status.name }}</option>
                                 </template>
-
                             </select>
                         </div>
                     </div>
-                </div>
 
-                <!-- Second Row -->
-                <div class="row mb-3">
-                    <div class="col-md-4">
+                    <div class="col-md-2">
                         <div class="form-group">
                             <label class="form-label fw-bold">Address</label>
-                            <select class="form-select" @change="">
-                                <option value="date">Sort by Date</option>
-                                <option value="status">Sort by Status</option>
-                                <option value="name">Sort by Name</option>
+                            <select class="form-select" v-model="selectedAddress" @change="filterData">
+                                <option value="">Filtering</option>
+                                <option value="Dhaka">Dhaka</option>
+                                <option value="Chittagong">Chittagong</option>
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-2">
                         <div class="form-group">
                             <label class="form-label fw-bold">Education</label>
-                            <select class="form-select" @change="">
-                                <option value="date">Sort by Date</option>
-                                <option value="status">Sort by Status</option>
-                                <option value="name">Sort by Name</option>
+                            <select class="form-select" v-model="selectedEducation" @change="filterData">
+                                <option value="">Filtering</option>
+                                <option value="Diploma in Engineering">Diploma in Engineering</option>
+                                <option value="Bachelor's Degree">Bachelor's Degree</option>
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-2">
                         <div class="form-group">
                             <label class="form-label fw-bold">Skills</label>
-                            <select class="form-select" @change="">
-                                <option value="date">Sort by Date</option>
-                                <option value="status">Sort by Status</option>
-                                <option value="name">Sort by Name</option>
+                            <select class="form-select" v-model="selectedSkills" @change="filterData">
+                                <option value="">Filtering</option>
+                                <option value="Python">Python</option>
+                                <option value="Java">Java</option>
                             </select>
                         </div>
                     </div>
@@ -95,30 +73,27 @@
                     <div class="card">
                         <div class="card-body">
 
-                            <template v-if="!isLoading && dataList !==undefined">
+                            <template v-if="!isLoading && dataList !== undefined">
                                 <div class="table-responsive">
-
                                     <DataTable :tableHeading="tableHeading">
-                                        <tr v-for="(data, index) in dataList" :key="index">
+                                        <tr v-for="(data, index) in displayedData" :key="index">
                                             <td>{{ index + 1 }}</td>
                                             <td>{{ data.seeker.name }}</td>
                                             <td>{{ data.seeker.email }}</td>
                                             <td>
-                                                <!-- Display the image -->
-                                                <img :src="storageImage(data.seeker.profile_picture)" style="width: 100px; height: 100px" alt="Image">
+                                                <img :src="storageImage(data.seeker.image)" style="width: 100px; height: 100px" alt="Image">
                                             </td>
-                                            <td>{{ data.job.company.name}}</td>
-                                            <td>{{ data.job.position}}</td>
+                                            <td>{{ data.job.company.name }}</td>
+                                            <td>{{ data.job.position }}</td>
                                             <td>
-                                        <span :class="{
-                                        'bg-success p-1': data.application_status == 1,
-                                        'bg-danger p-1': data.application_status == 2,
-                                        'bg-warning p-1': data.application_status == 0
-                                        }">
-                                        {{ data.application_status == 0 ? 'Pending' : data.application_status == 1 ? 'Accepted' : 'Rejected' }}
-                                        </span>
+                                                <span :class="{
+                                                    'bg-success p-1': data.application_status == 1,
+                                                    'bg-danger p-1': data.application_status == 2,
+                                                    'bg-warning p-1': data.application_status == 0
+                                                }">
+                                                    {{ data.application_status == 0 ? 'Pending' : data.application_status == 1 ? 'Accepted' : 'Rejected' }}
+                                                </span>
                                             </td>
-
                                             <td>
                                                 <template v-if="data.image">
                                                     <template v-if="isPDF(data.image)">
@@ -132,12 +107,10 @@
                                                     <img src="https://i.ibb.co.com/3ssF0pw/giphy.gif" style="width: 100px; height: 100px" alt="Default Icon">
                                                 </template>
                                             </td>
-
                                             <td>
                                                 <router-link v-if="can('application.show')" :to="{ name: 'ApplicationView', params: { id: data.id } }">
                                                     <i class="fas fa-eye" style="color: blue; margin-right: 5px; font-size: 20px"></i>
                                                 </router-link>
-
                                                 <a v-if="can('application.destroy')" style="cursor: pointer" @click="CategoryDatadelete(data.id)">
                                                     <i class="fas fa-trash-alt" style="color: red; font-size: 20px"></i>
                                                 </a>
@@ -145,83 +118,78 @@
                                         </tr>
                                     </DataTable>
                                 </div>
-                                <!--                                <pagination previousText="PREV" nextText="NEXT" :data="joblist.jobData" @paginateTo="getJobList"></pagination>-->
-
-                            </template >
-
+                            </template>
 
                             <template v-else>
                                 <span class="dataLoader"><i class="fa fa-spin fa-spinner"></i></span>
-
                             </template>
                         </div>
                     </div>
                 </div>
-                <!-- Update Profile Section -->
-
             </div>
         </div>
-
     </div>
 </template>
 
 <script>
-    import axios from 'axios';
     import DataTable from "../../Components/DataTable";
+
     export default {
         name: "ApplicationComponent",
-        components: {DataTable},
+        components: { DataTable },
         data() {
             return {
-                tableHeading: ["Sl", "Name", "Email","Image", "Company", "Position","Status","Resume", "Action"],
-                applylist:[],
-                application_status : 0,
-                isLoading : false,
-
+                tableHeading: ["Sl", "Name", "Email", "Image", "Company", "Position", "Status", "Resume", "Action"],
+                application_status: 0,
+                isLoading: false,
+                selectedAddress: '',
+                selectedEducation: '',
+                selectedSkills: '',
+                selectedInterviewStatus: '',
+                selectedApplicationStatus: '',
+                filteredData: [],
             };
         },
         watch: {
             '$route.query': {
-                handler: function(newValue) {
+                handler() {
                     this.application_status = this.$route.query.application_status;
-                    this.getapplyList();
+                    this.getDataList();
                 },
                 deep: true
             }
         },
+        computed: {
+            displayedData() {
+                return this.filteredData.length > 0 ? this.filteredData : this.dataList;
+            }
+        },
         mounted() {
             this.getDataList();
-            // this.getapplyList();
-            this.getRequiredData(['application_status','interview_status']);
-
+            this.getRequiredData(['application_status', 'interview_status']);
         },
-        methods:{
-            // getapplyList( page=1){
-            //     this.isLoading = true;
-            //     this.applylist={};
-            //     try{
-            //         axios.get(`/api/backendData?application_status=${this.application_status}&page=${page}`).then((response)=>{
-            //             this.isLoading = false;
-            //             this.applylist=response.data.result;
-            //         })
-            //     }catch(error) {
-            //         this.error = "Error fetching apply data. Please try again later.";
-            //
-            //     }
-            //
-            //
-            // }
+        methods: {
+            filterData() {
+                this.filteredData = this.dataList.filter(item => {
+                    const seeker = item.seeker;
+                    const matchesAddress = !this.selectedAddress || seeker.address == this.selectedAddress;
+                    const matchesEducation = !this.selectedEducation || JSON.parse(seeker.education).includes(this.selectedEducation);
+                    const matchesSkills = !this.selectedSkills || JSON.parse(seeker.skills).includes(this.selectedSkills);
+                    const matchesInterviewStatus = !this.selectedInterviewStatus || item.interview_status == this.selectedInterviewStatus;
+                    const matchesApplicationStatus = !this.selectedApplicationStatus || item.application_status == this.selectedApplicationStatus;
+                    return matchesAddress && matchesEducation && matchesSkills && matchesInterviewStatus && matchesApplicationStatus;
+                });
+
+            },
         }
-    }
+    };
 </script>
 
 <style scoped>
-    .dataLoader{
+    .dataLoader {
         margin-left: 50%;
     }
-    .dataLoader i{
+    .dataLoader i {
         font-size: 50px;
-
     }
-
 </style>

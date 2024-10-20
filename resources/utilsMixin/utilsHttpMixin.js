@@ -136,20 +136,19 @@ export default {
         },
 
 
-        CategoryDatadelete: function(id , index) {
+        CategoryDatadelete: function(id, index) {
             const _this = this;
-
-            // _this.DeleteToster(function (isConfirmedelete) {
-            let url=`${_this.urlGenaretor()}/${id}`;
-            _this.httpReq('delete',url,{},{},function (retData) {
-                _this.getDataList();
-                _this.$toast.success("Data Delete successfully!");
-
-
-            })
-            // })
-
+            _this.DeleteToster((isConfirmed) => {
+                if (isConfirmed) {
+                    const url = `${_this.urlGenaretor()}/${id}`;
+                    _this.httpReq('delete', url, {}, {}, (retData) => {
+                        _this.getDataList();
+                        _this.$toast.success("Data deleted successfully!");
+                    });
+                }
+            });
         },
+
 
         uploadImage : function (event, dataObject, dataModel, callback = false) {
             const _this = this;

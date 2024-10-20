@@ -12,7 +12,7 @@ use Laravel\Sanctum\HasApiTokens;
 class Seeker extends Authenticatable
 {
     use HasFactory,Notifiable, HasApiTokens;
-    protected $fillable = ['name','email','phone','address','bio','profile_picture','skills','education','experience',];
+    protected $fillable = ['name','email','phone','address','bio','image','skills','education','experience',];
 
     protected $hidden = [
         'password',
@@ -22,7 +22,7 @@ class Seeker extends Authenticatable
         return Validator::make($input,[
             'name'=>'required ',
             'email' => 'required',
-            'profile_picture'=>'',
+            'image'=>'',
             'phone'=>'',
             'address'=>'',
             'bio'=>'  ',

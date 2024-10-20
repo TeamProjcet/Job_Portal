@@ -121,7 +121,36 @@ export default {
                     return 'https://i.ibb.co.com/pbhTkkr/images.png';
             }
         },
+
+        DeleteToster: function (callback = false, confirmMessage = null, confirmTitle = null) {
+            const _this = this;
+            let message = confirmMessage || "You won't be able to revert this!";
+            let title = confirmTitle || "Are you sure?";
+
+            _this.$swal.fire({
+                title: title,
+                text: message,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'Cancel'
+            }).then((result) => {
+                if (typeof callback === 'function') {
+                    if (result.isConfirmed) {
+                        callback(true);
+                    } else {
+                        callback(false);
+                    }
+                }
+            });
+        },
+
     },
+
+
+
     computed: {
         fromData() {
             return this.$store.state.fromData;

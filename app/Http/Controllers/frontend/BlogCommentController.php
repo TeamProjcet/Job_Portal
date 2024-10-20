@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\BlogComment;
 use App\Supports\Helper;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BlogCommentController extends Controller
 {
@@ -38,7 +39,11 @@ class BlogCommentController extends Controller
         if ($validator->fails()) {
             return $this->returnData(3000, $validator->errors());
         }
+        $seekerId = Auth::guard('seeker')->user()->id;
+
         $this->model->fill($request->all());
+        $this->model->seeker_id = $seekerId;
+
         $this->model->save();
         return $this->returnData(2000, $this->model);
     }
