@@ -98,6 +98,7 @@ class SeekerLoginController extends Controller
         $data->name = $request->input('name');
         $data->email = $request->input('email');
         $data->phone = $request->input('phone', $data->phone);
+        $data->image = $request->input('image', $data->image);
         $data->address = $request->input('address', $data->address);
         $data->bio = $request->input('bio', $data->bio);
         $data->skills = $request->input('skills', $data->skills);

@@ -19,9 +19,16 @@ import InterviewComponent from "../views/Interview/InterviewComponent";
 import Partnership from "../views/Partnership/Partnership";
 import ViewBlgoComment from "../views/Blog/ViewBlgoComment";
 import FrontendManage from "../views/FrontendManagement/FrontendManage";
+import NotFoundPage from "../views/NotFoundPage";
 
 
 const route = [
+    {
+        path: '*',
+        name: 'NotFoundPage',
+        component: NotFoundPage,
+        meta: { pagetitle: 'Frontend Management Table', },
+    },
     {
         path: '/admin/dashboard',
         name: 'dashboard',
@@ -99,7 +106,7 @@ const route = [
 
     },
     {
-        path : '/admin/blog/viewblogcomment/:postId',
+        path : '/admin/blog/viewblogcomment/:id',
         name : 'viewblogcomment',
         component : ViewBlgoComment,
         meta:{pagetitle:'View Blog Comment Table',dataUrl:'api/blogcomment',}
@@ -188,7 +195,7 @@ const route = [
         name: 'frontendmanage',
         component: FrontendManage,
         meta: { pagetitle: 'Frontend Management Table', dataUrl: 'api/frontend' },
-    }
+    } ,
 
 ];
 export default route;

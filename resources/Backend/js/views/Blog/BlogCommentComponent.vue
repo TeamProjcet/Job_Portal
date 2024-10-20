@@ -5,12 +5,12 @@
                 <h3 class="fw-bold mb-3 " style="margin-left: 20px">{{$route.meta.pagetitle}}</h3>
             </div>
             <DataTable :tableHeading="tableHeading">
-                    <tr v-for="(data, index) in commentShow" :key="data.id">
+                    <tr v-for="(data, index) in dataList" :key="data.id">
                         <td>{{ index + 1 }}</td>
                         <td>{{ data.seekerName }}</td>
                         <td>{{ data.comments }}</td>
                         <td>
-                            <a @click="CategoryDatadelete(data.id, index)">
+                            <a v-if="can('blogcomment.destroy')" @click="CategoryDatadelete(data.id, index)">
                                 <i class="fas fa-trash-alt" style="color: red;"></i>
                             </a>
                         </td>
@@ -38,27 +38,28 @@
             };
         },
         mounted(){
-            this.blogCommentShow()
+            this.getDataList();
+            // this.blogCommentShow();
         },
 
         methods: {
-            async blogCommentShow() {
-                try {
-                    const response = await axios.get(`/api/blogcomment`);
-
-                    if (response.data && response.data.result) {
-                        this.commentShow = response.data.result.map(comment => ({
-                            id: comment.id,
-                            comments: comment.comments,
-                            seekerName: comment.seeker.name,
-                        }));
-                    } else {
-                        this.error = "No blog details found.";
-                    }
-                } catch (error) {
-                    this.error = "Failed to load blog details.";
-                }
-            },
+            // async blogCommentShow() {
+            //     try {
+            //         const response = await axios.get(`/api/blogcomment`);
+            //
+            //         if (response.data && response.data.result) {
+            //             this.commentShow = response.data.result.map(comment => ({
+            //                 id: comment.id,
+            //                 comments: comment.comments,
+            //                 seekerName: comment.seeker.name,
+            //             }));
+            //         } else {
+            //             this.error = "No blog details found.";
+            //         }
+            //     } catch (error) {
+            //         this.error = "Failed to load blog details.";
+            //     }
+            // },
 
 
         }

@@ -7,7 +7,7 @@
             <DataTable :tableHeading="tableHeading">
                 <tr v-for="(data, index) in dataList" :key="index">
                     <td>{{index + 1}}</td>
-                    <td>{{data.partnership}}</td>
+                    <td>{{data.name}}</td>
                     <td>
                         <!-- Display the image -->
                         <img :src="storageImage(data.logo)" style="width: 100px; height: 100px" alt="Image">
@@ -15,7 +15,7 @@
                     <td>
                         <a v-if="can('partnership.edit')" @click="openEditModal(data, data.id)">
                             <i class="fas fa-edit" style="color: blue;"></i></a>
-                        <a v-if="can('partnership.destory')" @click="CategoryDatadelete(data.id, index)">
+                        <a v-if="can('partnership.destroy')" @click="CategoryDatadelete(data.id, index)">
                             <i class="fas fa-trash-alt" style="color: red;"></i>
                         </a>
                     </td>
@@ -30,10 +30,20 @@
                     <label>Partnership Name</label>
                     <input
                             v-validate="'required'"
-                            v-model="fromData.partnership"
+                            v-model="fromData.name"
                             class="form-control"
                             name="name"
                             type="text"
+                    />
+                </div>
+                <div class="col-md-12">
+                    <label>Company Website Link</label>
+                    <input
+                            v-validate="'required'"
+                            v-model="fromData.weblink"
+                            class="form-control"
+                            name="weblink"
+                            type="url"
                     />
                 </div>
                 <div class="row">

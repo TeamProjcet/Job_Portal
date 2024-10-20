@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\BlogComment;
 use App\Supports\Helper;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BlogCommentController extends Controller
 {
@@ -20,9 +21,16 @@ class BlogCommentController extends Controller
 
     public function index()
     {
-        $savedJobs = BlogComment::with('seeker', 'blog')->get();
-//        dd($savedJobs);
-        return $this->returnData(2000,  $savedJobs);
+        if (!$this->can('blogcomment.index')) {
+            return $this->returnData(5000, null, 'You are not authorized to access this page');
+        }
+        $user = auth()->user();
+        $data = BlogComment::with('seeker', 'blog')
+            ->whereHas('blog', function ($query) use ($user) {
+                $query->where('user_id', $user->id);
+            })->get();
+
+        return $this->returnData(2000, $data);
     }
 
 
@@ -38,15 +46,22 @@ class BlogCommentController extends Controller
         if ($validator->fails()) {
             return $this->returnData(3000, $validator->errors());
         }
+        $seeker = Auth::guard('seeker')->user()->id;
         $this->model->fill($request->all());
+        $this->model->seeker_id = $seeker;
         $this->model->save();
         return $this->returnData(2000, $this->model);
     }
 
 
-        public function show($id)
+    public function show($id)
     {
-        //
+        if (!$this->can('blogcomment.show')) {
+            return $this->returnData(5000, null, 'You are not authorized to access this page');
+        }
+       $data= $this->model->with('seeker')->where('blog_id', $id)->get();
+        return $this->returnData(2000,$data);
+
     }
 
 
@@ -64,14 +79,17 @@ class BlogCommentController extends Controller
 
     public function destroy($id)
     {
+        if (!$this->can('blogcomment.destroy')) {
+            return $this->returnData(5000, null, 'You are not authorized to access this page');
+        }
         try {
             $data = $this->model->where('id',$id)->first();
             if ($data){
                 $data->delete();
 
-                return $this->returnData(2000, null, 'save job deleted successfully');
+                return $this->returnData(2000, null, 'Comment deleted successfully');
             }
-            return $this->returnData(3000, null, 'save job not found');
+            return $this->returnData(3000, null, 'Comment not found');
 
         }catch (\Exception $exception){
             return $this->returnData(5000, $exception->getMessage(), 'Something Wrong');

@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
             $table->string('bio')->nullable();
-            $table->string('profile_picture')->nullable();
+            $table->string('image')->nullable();
             $table->string('skills')->nullable();
             $table->string('education')->nullable();
             $table->string('experience')->nullable();

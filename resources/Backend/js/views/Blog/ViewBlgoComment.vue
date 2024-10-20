@@ -10,7 +10,7 @@
                     <td>{{ data.seeker.name }}</td>
                     <td>{{ data.comments }}</td>
                     <td>
-                        <a @click="CategoryDatadelete(data.id, index)">
+                        <a v-if="can('blogcomment.destroy')" @click="CategoryDatadelete(data.id, index)">
                             <i class="fas fa-trash-alt" style="color: red;"></i>
                         </a>
                     </td>
@@ -32,7 +32,7 @@
         data() {
             return {
                 tableHeading: ['#', 'User', 'Comment', 'Actions'],
-                postId: this.$route.params.postId,
+                postId: this.$route.params.id,
                 comments: [],
             }
         },
@@ -46,8 +46,8 @@
                     return;
                 }
                 try {
-                    const response = await axios.get(`/api/frontend/jobcate/${this.postId}`);
-                    this.comments = response.data.result.blogComment;
+                    const response = await axios.get(`/api/blogcomment/${this.postId}`);
+                    this.comments = response.data.result;
                 } catch (error) {
                     console.error('Error fetching comments:', error);
                 }

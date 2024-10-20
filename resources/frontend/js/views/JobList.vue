@@ -32,11 +32,14 @@
                         </div>
                         <div class="d-flex gap-2 p-3">
                             <router-link :to="{ name: 'Details', params: { id: job.id }}" class="btn btn-primary">Apply Now Or View</router-link>
-                            <button
+                            <a
                                     @click="saveJob(job)"
-                                    :class="{'btn btn-danger': !saveds.has(job.id), 'btn btn-secondary': saveds.has(job.id)}">
-                                {{ saveds.has(job.id) ? 'Saved' : 'Save Job' }}
-                            </button>
+                                    :class="{'btn btn-info': saveds.includes(job.id), 'btn btn-secondary': !saveds.includes(job.id)}">
+                                    <span v-if="saveds.includes(job.id)">
+                                        <i class="fa fa-check"></i>
+                                    </span>
+                                {{ saveds.includes(job.id) ? ' ' : ' Save Job' }}
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -51,7 +54,6 @@
     <!-- Jobs End -->
 </template>
 
-
 <script>
     import axios from 'axios';
     import Pagination from "../plugins/pagination/pagination";
@@ -63,7 +65,7 @@
         data() {
             return {
                 savedJobs: new Set(),
-                saveds: new Set(),
+                saveds: [],
                 joblist: {jobData: { data: [] }},
                 error: null,
                 isLoading : false,
@@ -110,11 +112,7 @@
                     });
             },
 
-
-
-
-
-        }
+        },
     }
 </script>
 

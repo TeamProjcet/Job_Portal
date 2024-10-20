@@ -12,10 +12,9 @@
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <h5 class="text-white mb-4">Important Links</h5>
-                    <a class="btn btn-link text-white-50" href="https://tmss-bd.org/">tmss</a>
-                    <a class="btn btn-link text-white-50" href="https://tmss-ict.com/">tmss ict</a>
-                    <a class="btn btn-link text-white-50" href="https://tisibogra.com/frontend">tisi bogra</a>
-                    <a class="btn btn-link text-white-50" href="https://bdgovtjob.net/">bd govt job</a>
+                    <template v-for="data in partnership" >
+                    <a class="btn btn-link text-white-50" :href="data.weblink" target="_blank" rel="noopener noreferrer">{{data.name}}</a>
+                    </template>
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <h5 class="text-white mb-4">Contact</h5>
@@ -76,8 +75,15 @@
         name: "Footer",
         data() {
             return {
+                partnership:[]
+
             };
         },
+        mounted(){
+            this.getPartnership();
+
+        },
+
         methods: {
             async subscribeNewsletter() {
                 try {
@@ -93,7 +99,15 @@
                         this.$toast.error('There was an error. Please try again later.');
                     }
                 }
-            }
+            },
+            async getPartnership() {
+                try {
+                    const response = await axios.get('/api/frontend/joblist');
+                    this.partnership = response.data.result.partner;
+                } catch (error) {
+                    this.error = "Error fetching blog data. Please try again later.";
+                }
+        }
         }
     }
 </script>

@@ -13,8 +13,15 @@ import JobCategory from "../views/JobCategory";
 import JobCompany from "../views/JobCompany";
 import JobResults from "../views/Searching/JobResults";
 import InterviewNoticeComponent from "../views/SeekerAuth/InterviewNoticeComponent";
+import NotFoundPage from "../views/NotFoundPage";
 
 const route = [
+    {
+        path: '*',
+        name: 'NotFoundPage',
+        component: NotFoundPage
+
+    },
     {
         path: '/',
         name: 'home',

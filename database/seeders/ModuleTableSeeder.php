@@ -169,7 +169,7 @@ class ModuleTableSeeder extends Seeder
             ],
             [
                 'name' => 'Partnerships',
-                'key' => 'partnership',
+                'key' => 'client',
                 'link' => '#',
                 'icon' => 'fas fa-handshake',
                 'permission' => ['index','store', 'show','create', 'edit', 'update', 'destroy'],

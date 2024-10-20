@@ -88,18 +88,15 @@ export default {
                 this.$router.push('/seekerlogin');
                 return;
             }
-
-            if (this.savedJobs.has(job.id)) {
-                this.$toast.info('Job is already saved!');
+            if (this.saveds.includes(job.id)) {
+                this.$toast.warning('Job is already saved!');
                 return;
             }
-
             try {
-                const response = await axios.post('/api/saved', {
+                const response = await axios.post('/api/frontend/saved', {
                     job_id: job.id
                 });
-
-                this.savedJobs.add(job.id);
+                this.saveds.push(job.id);
                 this.$toast.success('Job saved successfully!');
             } catch (error) {
                 console.error('Error saving job:', error);
@@ -108,27 +105,16 @@ export default {
         },
 
         loadSavedJobs() {
-            axios.get('/api/saved')
+            axios.get('/api/frontend/saved')
                 .then((response) => {
-                    this.saveds = new Set(response.data.result.map(job => job.id));
+                    console.log('Saved jobs data:', response.data.result);
+
+                    this.saveds = response.data.result.map(job => job.job_id);
                 })
                 .catch((error) => {
                     console.error('Error loading saved jobs:', error);
                 });
         },
-        // uploadImage : function (event, dataObject, dataModel, callback = false) {
-        //     const _this = this;
-        //
-        //     var files = event.target.files[0];
-        //     var form = new FormData();
-        //
-        //     form.append('file', files);
-        //
-        //     _this.httpReq('post', _this.urlGenaretor('api/upload'), form, {}, function (retData) {
-        //         _this.$set(dataObject, dataModel, retData.result.name);
-        //     })
-        // },
-
         async authData() {
             try {
                 const response = await axios.get('/api/frontend/seekerAuth');

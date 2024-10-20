@@ -104,14 +104,9 @@
         methods:{
             async getPartnership() {
                 try {
-                    const response = await axios.get('/api/partnership');
-                    if (response.data && response.data.result) {
-                        this.partnership = response.data.result;
-                    } else {
-                        throw new Error("Unexpected response format");
-                    }
+                    const response = await axios.get('/api/frontend/joblist');
+                        this.partnership = response.data.result.partner;
                 } catch (error) {
-                    // console.error("Error fetching blog data:", error);
                     this.error = "Error fetching blog data. Please try again later.";
                 }
             },

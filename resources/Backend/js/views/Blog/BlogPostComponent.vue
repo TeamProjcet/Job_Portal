@@ -24,7 +24,10 @@
                         <a v-if="can('blogpost.destroy')" @click="CategoryDatadelete(data.id, index)">
                             <i class="fas fa-trash-alt" style="color: red; margin-left: 10px"></i>
                         </a>
-                        <router-link style="margin-left: 10px"  :to="`/admin/blog/viewblogcomment/${data.id}`">View Comment</router-link>
+                    </td>
+                    <td>
+                        <router-link v-if="can('blogcomment.show')" :to="`/admin/blog/viewblogcomment/${data.id}`"><i class="fas fa-eye" style="color: blue; margin-right: 5px; font-size: 20px"></i></router-link>
+
                     </td>
                 </tr>
 
@@ -126,7 +129,7 @@
         },
         data() {
             return {
-                tableHeading: ["Id", "company name", "title",  "image", "status", "action"],
+                tableHeading: ["Id", "company name", "title",  "image", "status", "action","View Comment"],
                 tinymceInit:{
                     license_key: 'gpl',
                     height: 300,
