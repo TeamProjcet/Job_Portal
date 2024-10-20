@@ -9,7 +9,7 @@
              :src="storageImage(seeker.image)"
              class="img-fluid rounded-circle mx-auto d-block" alt="Profile Picture">
         <h4 class="mt-3">{{ seeker.name }}</h4>
-        <h5 class="pt-2">Bio</h5>
+        <h6 class="pt-2">Bio</h6>
         <p class="text-muted">{{ seeker.bio }}</p>
         <hr>
         <h6>Expreince</h6>
@@ -294,7 +294,7 @@
 
             async SavedJobs() {
                 try {
-                    const response = await axios.get('/api/saved');
+                    const response = await axios.get('/api/frontend/saved');
                     this.savedJobs = response.data.result;
                 } catch (error) {
                     console.error('Error fetching saved jobs:', error);
@@ -324,7 +324,7 @@
 
                 if (result.isConfirmed) {
                     try {
-                        const response = await axios.delete(`/api/saved/${id}`);
+                        const response = await axios.delete(`/api/frontend/saved/${id}`);
                         this.savedJobs = this.savedJobs.filter(job => job.id !== id);
                         this.$swal.fire('Deleted!', 'Your job has been deleted.', 'success');
                     } catch (error) {

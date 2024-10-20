@@ -10,6 +10,7 @@ use App\Models\BlogComment;
 use App\Models\Category;
 use App\Models\Company;
 use App\Models\JobPostModel;
+use App\Models\PartnershipModel;
 use App\Models\SavedJobs;
 use App\Models\Seeker;
 use App\Supports\Helper;
@@ -33,7 +34,7 @@ class FrontendController extends Controller
 
         $data['category'] = Category::get();
 
-//        $data['company'] = Company::get();
+        $data['partner'] = PartnershipModel::take(4)->skip(0)->orderBy('id','DESC')->get();
         $data['blogpost']=blog::with('user','company')->where('status',1)->orderBy('id','DESC')->get();
 
         return $this->returnData(2000,$data);

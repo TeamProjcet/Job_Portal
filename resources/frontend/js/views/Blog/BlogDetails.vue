@@ -103,7 +103,7 @@
         },
         mounted() {
             this.getPostDetails();
-            this.blogCommentData();
+            this.blogCommentList();
             this.authData();
 
         },
@@ -134,7 +134,7 @@
                     this.error = "Failed to load blog details.";
                 }
             },
-       async blogCommentData() {
+       async blogCommentList() {
            if (!this.id) {
                this.error = "Category ID is not defined.";
                return;
@@ -150,7 +150,7 @@
             async blogComment() {
                 this.fromData.blog_id = this.post.id;
                 try {
-                    const response = await axios.post('/api/frontend/blogcomment', this.fromData);
+                    const response = await axios.post('/api/blogcomment', this.fromData);
                     if (parseInt(response.data.status) === 2000) {
                         this.$toast.success("Comment Submited successfully");
                     } else {

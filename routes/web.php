@@ -27,7 +27,6 @@ Route::prefix('api')->group(function () {
     Route::resource('/employer_profile', \App\Http\Controllers\EmployersController::class);
     Route::resource('/interview', \App\Http\Controllers\InterviewScheduleController ::class);
     Route::resource('/message', \App\Http\Controllers\MessagesController ::class);
-    Route::resource('/saved', \App\Http\Controllers\SavedJobsController ::class);
     Route::resource('/companyreviews', \App\Http\Controllers\CompanyReviewsController ::class);
     Route::resource('blogpost', \App\Http\Controllers\Backend\BlogController::class);
     Route::resource('/partnership', \App\Http\Controllers\PartnershipController::class);
@@ -42,8 +41,8 @@ Route::prefix('api')->group(function () {
     Route::resource('roles',\App\Http\Controllers\RoleController::class);
     Route::get('/roles/{role}/permissions',[\App\Http\Controllers\RoleController::class,'getRolePermissions']);
     Route::post('/roles/{role}/permissions',[\App\Http\Controllers\RoleController::class,'updateRolePermissions']);
-    Route::get('/blogcomment', [\App\Http\Controllers\Backend\BackendController::class, 'blogcomment']);
-    Route::delete('/blogcomment/{id}', [\App\Http\Controllers\Backend\BackendController::class, 'blogCommentDelete']);
+    Route::resource('/blogcomment', \App\Http\Controllers\frontend\BlogCommentController::class);
+
 });
 
 //frontend Route
@@ -58,11 +57,9 @@ Route::prefix('api/frontend')->group(function () {
     Route::post('seekerlogin', [\App\Http\Controllers\frontend\SeekerLoginController::class, 'login']);
     Route::post('seekerlogout', [\App\Http\Controllers\frontend\SeekerLoginController::class, 'logout']);
     Route::post('seeker/profile', [\App\Http\Controllers\frontend\SeekerLoginController::class, 'update']);
-    Route::post('/seekerlogout', [\App\Http\Controllers\frontend\SeekerLoginController::class, 'logout']);
+    Route::resource('/saved', \App\Http\Controllers\SavedJobsController ::class);
     Route::resource('/newsletter', \App\Http\Controllers\frontend\NewsletterController::class);
     Route::resource('/contact', \App\Http\Controllers\frontend\ContactController::class);
-    Route::post('/blogcomment', [\App\Http\Controllers\frontend\BlogCommentController::class, 'store']);
-    Route::get('/blogcomment', [\App\Http\Controllers\frontend\BlogCommentController::class, 'index']);
 
 });
 

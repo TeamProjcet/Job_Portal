@@ -10,10 +10,13 @@ class PartnershipModel extends Model
 {
     use HasFactory;
     protected $table = 'partnerships';
-    protected $fillable = ['partnership', 'logo'];
+    protected $fillable = ['name', 'logo','weblink'];
+
+
     public function validator($input){
         return Validator::make($input, [
-            'partnership' => 'required',
+            'name' => 'required',
+            'weblink' => 'required',
             'logo' => 'required'
         ]);
     }
