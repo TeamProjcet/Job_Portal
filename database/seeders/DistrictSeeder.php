@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\District;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -21,7 +22,7 @@ class DistrictSeeder extends Seeder
             ['name' => 'Barguna'],
             ['name' => 'Barisal'],
             ['name' => 'Bhola'],
-            ['name' => 'Bogra'],
+            ['name' => 'Bogura'],
             ['name' => 'Brahmanbaria'],
             ['name' => 'Chandpur'],
             ['name' => 'Chapai Nawabganj'],
@@ -82,10 +83,7 @@ class DistrictSeeder extends Seeder
             ['name' => 'Thakurgaon'],
         ];
 
-
-        DB::table('districts')->truncate();
-
-        // Insert districts
-        DB::table('districts')->insert($districts);
+        District::truncate();
+        District::insert($districts);
     }
 }

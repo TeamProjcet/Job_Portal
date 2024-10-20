@@ -33,6 +33,7 @@
         "vue-axios": "^3.5.2",
         "vue-multiselect": "^2.1.9",
         "vue-router": "^3.6.5",
+        "vue-select": "^3.20.3",
         "vue-sweetalert2": "^5.0.11",
         "vue-tinymce": "^1.0.5",
         "vue-toastification": "^1.7.14",

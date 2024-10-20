@@ -1,66 +1,164 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Job Portal Site
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Welcome to the Job Portal Site! This application provides a comprehensive platform for job seekers to find and apply for jobs, manage their profiles, and engage with our blog. Employers can manage job postings and applications efficiently through the backend.
 
-## About Laravel
+## Features
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Frontend
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- **User Registration and Login**: Users must register and log in to apply for jobs and comment on blogs.
+- **Job Application**: Users can apply for any available job listings after logging in.
+- **Job Search**: Search for jobs, companies, and keywords with filtering options.
+- **Job Categories**: Explore job listings by categories for better organization.
+- **Client Section**: Information about clients and partnerships.
+- **Blog Section**: Anyone can view blogs, but only registered users can comment.
+- **Contact Us**: Users can contact us via email without needing to log in.
+- **Footer Links**: Includes company information, important links, contact details, and a newsletter subscription.
+- **User Profile**: Users can update their profile, including image, address, and email. They can view their saved jobs, apply for jobs, and see the status of their applications (pending, approved, rejected) and interview details.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Menus
 
-## Learning Laravel
+- Home
+- About
+- Contact
+- Job Listings
+- Login
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Backend
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+- **Job Management**: Admins can create, edit, delete, and update job categories, companies, and job postings.
+- **Blog Management**: Admins can create blog posts and view comments made by users.
+- **Application Management**: Admins can view job applications and manage the status (approve or reject) based on education, skills, experience, or CV format.
+- **Role-Permission System**: Admins can manage user roles and permissions for secure access.
+- **Visitor Management**:
+  - **Contact Management**: Manage user inquiries submitted through the contact form.
+  - **Newsletter Management**: View, delete, or manage newsletter subscriptions and inquiries related to the newsletter.
+- **Partnerships Management**: Manage client partnerships, including posting, updating, or deleting client information.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Prerequisites 🔒
 
-## Laravel Sponsors
+Before you begin, ensure you have met the following requirements:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+- PHP (8.0 - 8.3)
+- Laravel 9
+- Vue 2
+- MySQL
+- Mix
+- Axios
+- TinyMCE
+- SweetAlert2
+- Toastr
+- Bootstrap
+- NPM (Node.js)
+- Vee-Validate
+- Vuex
+- Vue Router
 
-### Premium Partners
+## Default Login Credentials 🔑
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+- **Superadmin**:
+  - **Email**: superadmin@gmail.com
+  - **Password**: 1234
 
-## Contributing
+- **Admin**:
+  - **Email**: admin@gmail.com
+  - **Password**: 1234
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- **Editor**:
+  - **Email**: edior@gmail.com
+  - **Password**: 1234
+ 
 
-## Code of Conduct
+</br></br></br></br>
+## Getting Started 🚀
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+To get started with the Job Portal Site, follow these instructions:
 
-## Security Vulnerabilities
+### Installation
+------------------
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-## License
+1. Clone the Project.
+- **Make Folder Location:**
+    
+    ```jsx
+    git clone <repository-url>
+   cd job-portal
+    ```
+    
+</br></br>
+- **env file create from .env.example:**
+    
+    ```jsx
+    php -v
+    ```
+    
+</br></br>
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- **Local PHP and project PHP file check, make to same**:
+    - Check the PHP version required by the project (usually in the `composer.json` file under `platform` or `require`):
+        
+        ```jsx
+           sudo apt install php7.4  # Replace with the version you need
+        ```
+        
+        ```jsx
+           sudo apt update
+        ```
+        
+ </br></br>
+- **Composer update:**
+    - Run this to update your dependencies:
+    
+    ```bash
+    
+    composer update
+
+     ```
+  </br>  
+    - If you don’t have Composer installed:
+    
+    ```bash
+    
+    sudo apt install composer
+    ```
+    
+</br></br>
+- Key generate:
+    
+    ```jsx
+    php artisan key:generate
+    ```
+
+
+
+</br></br>   
+2. Install the frontend dependencies:
+    ```bash
+    
+    cd frontend
+    npm install
+
+</br></br>
+3. Set up the backend:
+    Configure your .env file with the database settings.
+    Run the migrations:
+        ```bash
+   
+        php artisan migrate
+
+</br></br>
+4. Start the servers:
+    Frontend:
+        ```bash
+        
+        npm run serve
+</br></br>
+    Backend:
+        ````bash
+   
+        php artisan serve
+
+        
+Contributing
+Contributions are welcome! Please submit a pull request or open an issue to discuss changes.

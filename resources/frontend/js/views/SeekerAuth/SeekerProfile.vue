@@ -165,10 +165,13 @@
                                     <label for="phone" class="form-label">Phone</label>
                                     <input type="text" class="form-control" id="phone" v-model="fromData.phone">
                                 </div>
-                                <div class="col-md-6 mb-3">
+                                <select class="col-md-6 mb-3" v-model="fromData.address">
                                     <label for="address" class="form-label">Address</label>
+                                    <template v-for="data in requireData.district">
+                                        <option :value="data.name">{{data.name}}</option>
+                                    </template>
                                     <input type="text" class="form-control" id="address" v-model="fromData.address">
-                                </div>
+                                </select>
                             </div>
 
                             <div class="row">
@@ -278,7 +281,7 @@
         mounted() {
             this.seekerdata();
             this.SavedJobs();
-
+            this.getRequiredData(['district'])
         },
 
         methods: {

@@ -37,9 +37,10 @@
                         <div class="form-group">
                             <label class="form-label fw-bold">Address</label>
                             <select class="form-select" v-model="selectedAddress" @change="filterData">
-                                <option value="">Filtering</option>
-                                <option value="Dhaka">Dhaka</option>
-                                <option value="Chittagong">Chittagong</option>
+                                <option disabled>Filter Address</option>
+                                <template v-for="data in requireData.district">
+                                    <option :value="data.name">{{data.name}}</option>
+                                </template>
                             </select>
                         </div>
                     </div>
@@ -47,9 +48,10 @@
                         <div class="form-group">
                             <label class="form-label fw-bold">Education</label>
                             <select class="form-select" v-model="selectedEducation" @change="filterData">
-                                <option value="">Filtering</option>
-                                <option value="Diploma in Engineering">Diploma in Engineering</option>
-                                <option value="Bachelor's Degree">Bachelor's Degree</option>
+                                <option disabled>Filter Educations</option>
+                                <template v-for="educat in educations">
+                                    <option value="educat">{{educat}}</option>
+                                </template>
                             </select>
                         </div>
                     </div>
@@ -57,9 +59,10 @@
                         <div class="form-group">
                             <label class="form-label fw-bold">Skills</label>
                             <select class="form-select" v-model="selectedSkills" @change="filterData">
-                                <option value="">Filtering</option>
-                                <option value="Python">Python</option>
-                                <option value="Java">Java</option>
+                                <option disabled>Filter Skills</option>
+                                <template v-for="skill in skillname">
+                                    <option value="skill">{{skill}}</option>
+                                </template>
                             </select>
                         </div>
                     </div>
@@ -136,7 +139,7 @@
 
     export default {
         name: "ApplicationComponent",
-        components: { DataTable },
+        components: { DataTable},
         data() {
             return {
                 tableHeading: ["Sl", "Name", "Email", "Image", "Company", "Position", "Status", "Resume", "Action"],
@@ -148,6 +151,9 @@
                 selectedInterviewStatus: '',
                 selectedApplicationStatus: '',
                 filteredData: [],
+                educations: ['Secondary School (SSC)', 'Higher Secondary School (HSC)', 'Diploma in Engineering', 'Bachelor\'s Degree', 'Master\'s Degree', 'Professional Degree', 'Postgraduate Degree', 'Ph.D.'],
+                skillname:[ 'JavaScript', 'Python', 'Java', 'C++', 'Laravel','vue', 'PHP', 'C#', 'TypeScript', 'HTML', 'CSS', 'React', 'Angular', 'SQL','MongoDB', 'Express.js', 'Node', 'Bootstrap', 'Django','Git'],
+
             };
         },
         watch: {
@@ -166,7 +172,7 @@
         },
         mounted() {
             this.getDataList();
-            this.getRequiredData(['application_status', 'interview_status']);
+            this.getRequiredData(['application_status', 'interview_status','district']);
         },
         methods: {
             filterData() {

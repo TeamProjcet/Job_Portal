@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Applications;
 use App\Models\Category;
 use App\Models\Company;
+use App\Models\District;
 use App\Models\JobPostModel;
 use App\Models\Module;
 use App\Models\Role;
@@ -36,6 +37,9 @@ class SupportController extends Controller
         if (in_array('jobData', $array)) {
             $user = auth()->user();
             $data['jobData'] = JobPostModel::where('user_id', $user->id)->get();
+        }
+        if (in_array('district', $array)) {
+            $data['district'] = District::get();
         }
 
         if(in_array('job_type', $array)){
