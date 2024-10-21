@@ -21,7 +21,6 @@
 </template>
 
 <script>
-    import axios from 'axios';
     import PageTop from "../../Components/PageTop";
     import DataTable from "../../Components/DataTable";
     import FormModal from "../../Components/FormModal";
@@ -39,27 +38,9 @@
         },
         mounted(){
             this.getDataList();
-            // this.blogCommentShow();
         },
 
         methods: {
-            // async blogCommentShow() {
-            //     try {
-            //         const response = await axios.get(`/api/blogcomment`);
-            //
-            //         if (response.data && response.data.result) {
-            //             this.commentShow = response.data.result.map(comment => ({
-            //                 id: comment.id,
-            //                 comments: comment.comments,
-            //                 seekerName: comment.seeker.name,
-            //             }));
-            //         } else {
-            //             this.error = "No blog details found.";
-            //         }
-            //     } catch (error) {
-            //         this.error = "Failed to load blog details.";
-            //     }
-            // },
 
 
         }

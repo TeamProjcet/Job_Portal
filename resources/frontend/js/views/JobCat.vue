@@ -6,20 +6,20 @@
                     Explore By Category
                    </span>
         </h3>
-        <div class="container mt-4">
-            <div class="row g-4 " style="max-height: 400px;"> <!-- Adjust max-height as needed -->
-                <div class="col-lg-4 col-md-4 col-sm-4"  v-for="jobcat in jobcateg" :key="jobcat.id">
-                    <a class="cat-item rounded p-4">
-                        <img class="flex-shrink-0 img-fluid border rounded" :src="storageImage(jobcat.image)" alt="" style="width: 80px; height: 80px;">
-                        <router-link :to="{ name: 'jobcategory', params: { category_id: jobcat.id } }">
-                            {{ jobcat.name }} ( {{jobcat.jobCount}} )
-                        </router-link>
-                    </a>
-                </div>
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6 col-sm-12" v-for="jobcat in jobcateg" :key="jobcat.id">
+                <a class="cat-item rounded p-4 text-center">
+                    <img class="img-fluid border rounded mb-2"
+                         :src="storageImage(jobcat.image)"
+                         alt=""
+                         style="width: 80px; height: 80px;">
+                    <router-link :to="{ name: 'jobcategory', params: { category_id: jobcat.id } }" class="text-decoration-none">
+                        {{ jobcat.name }} ({{ jobcat.jobCount }})
+                    </router-link>
+                </a>
             </div>
         </div>
     </div>
-
     <!-- Category End -->
 </template>
 
@@ -32,8 +32,6 @@
             return {
                 jobcateg: [],
                 error: null,
-
-
             };
         },
         mounted() {
@@ -54,17 +52,16 @@
                         ...cat,
                         jobCount: jobCountMap[cat.id] || 0
                     }));
-
                 } catch (error) {
                     this.error = "Error fetching job data. Please try again later.";
                 }
             }
-
         }
     }
 </script>
 
 <style scoped>
-
+    .cat-item {
+        border: 1px solid #dee2e6;
+    }
 </style>
-

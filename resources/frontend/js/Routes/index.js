@@ -25,7 +25,8 @@ const route = [
     {
         path: '/',
         name: 'home',
-        component: Home
+        component: Home,
+        meta:{dataUrl:'api/frontend/joblist'},
 
     },
     {
@@ -55,8 +56,7 @@ const route = [
         path: '/blog-post',
         name: 'Blog-Post',
         component: BlogPost,
-        meta:{dataUrl:'api/frontend/joblist',
-        },
+        meta:{dataUrl:'api/frontend/joblist'},
     },
     {
         path: '/blog-details/:id',

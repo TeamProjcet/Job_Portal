@@ -163,16 +163,20 @@
                                 <!-- Phone and Address -->
                                 <div class="col-md-6 mb-3">
                                     <label for="phone" class="form-label">Phone</label>
-                                    <input type="text" class="form-control" id="phone" v-model="fromData.phone">
+                                    <input type="text" class="form-control" id="phone" v-model="fromData.phone" placeholder="Enter your phone number">
                                 </div>
-                                <select class="col-md-6 mb-3" v-model="fromData.address">
+
+                                <div class="col-md-6 mb-3">
                                     <label for="address" class="form-label">Address</label>
-                                    <template v-for="data in requireData.district">
-                                        <option :value="data.name">{{data.name}}</option>
-                                    </template>
-                                    <input type="text" class="form-control" id="address" v-model="fromData.address">
-                                </select>
+                                    <select class="form-select" id="address" v-model="fromData.address">
+                                        <option value="" disabled>Select your address</option>
+                                        <template v-for="data in requireData.district" >
+                                            <option :value="data.name">{{ data.name }}</option>
+                                        </template>
+                                    </select>
+                                </div>
                             </div>
+
 
                             <div class="row">
                                 <div class="col-md-6 mb-3  ">

@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('seekers', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('email');
+            $table->string('email')->unique();
             $table->text('education')->nullable();
             $table->text('experience')->nullable();
             $table->text('skills')->nullable();
@@ -25,9 +25,6 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->string('bio')->nullable();
             $table->string('image')->nullable();
-            $table->string('skills')->nullable();
-            $table->string('education')->nullable();
-            $table->string('experience')->nullable();
             $table->timestamps();
         });
     }

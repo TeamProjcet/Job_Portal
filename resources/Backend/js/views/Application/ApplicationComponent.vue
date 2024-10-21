@@ -37,7 +37,7 @@
                         <div class="form-group">
                             <label class="form-label fw-bold">Address</label>
                             <select class="form-select" v-model="selectedAddress" @change="filterData">
-                                <option disabled>Filter Address</option>
+                                <option >Filter Address</option>
                                 <template v-for="data in requireData.district">
                                     <option :value="data.name">{{data.name}}</option>
                                 </template>
@@ -48,9 +48,9 @@
                         <div class="form-group">
                             <label class="form-label fw-bold">Education</label>
                             <select class="form-select" v-model="selectedEducation" @change="filterData">
-                                <option disabled>Filter Educations</option>
+                                <option >Filter Educations</option>
                                 <template v-for="educat in educations">
-                                    <option value="educat">{{educat}}</option>
+                                    <option :value="educat">{{educat}}</option>
                                 </template>
                             </select>
                         </div>
@@ -59,9 +59,9 @@
                         <div class="form-group">
                             <label class="form-label fw-bold">Skills</label>
                             <select class="form-select" v-model="selectedSkills" @change="filterData">
-                                <option disabled>Filter Skills</option>
+                                <option >Filter Skills</option>
                                 <template v-for="skill in skillname">
-                                    <option value="skill">{{skill}}</option>
+                                    <option :value="skill">{{skill}}</option>
                                 </template>
                             </select>
                         </div>

@@ -33,7 +33,14 @@
                     </div>
                     <div class="d-flex gap-2  p-3">
                         <router-link :to="{ name: 'Details', params: { id: jobcom.id }}" class="btn btn-primary">Apply Now Or View</router-link>
-                        <button class="btn btn-danger">Save Job</button>
+                        <a
+                                @click="saveJob(jobcom)"
+                                :class="{'btn btn-info': saveds.includes(jobcom.id), 'btn btn-secondary': !saveds.includes(jobcom.id)}">
+                                    <span v-if="saveds.includes(jobcom.id)">
+                                        <i class="fa fa-check"></i>
+                                    </span>
+                            {{ saveds.includes(jobcom.id) ? ' ' : ' Save Job' }}
+                        </a>
                     </div>
                 </div>
             </div>
@@ -50,11 +57,18 @@
         data() {
             return {
                 jobcompany: [],
+                saveds:[],
+                isAuthenticated:false,
                 error: null
             };
         },
         mounted() {
             this.companyList();
+            this.authData();
+            this.loadSavedJobs();
+            if (this.$route.query.jobs) {
+                this.jobs = JSON.parse(this.$route.query.jobs);
+            }
         },
         methods: {
 

@@ -31,7 +31,7 @@
     <link href="{{asset('frontend/assets/css/style.css')}}" rel="stylesheet">
 </head>
 
-<body>
+<body style="margin: 0px">
 
    <div id="app">
        <app></app>

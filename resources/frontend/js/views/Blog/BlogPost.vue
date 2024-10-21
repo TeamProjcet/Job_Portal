@@ -16,7 +16,7 @@
                             alt="Blog Post Image"
                     />
                     <div class="card-body">
-                        <h5 class="card-title">{{ post.title }}</h5>
+                        <h5 class="card-title">{{ truncateString(post.title, 50) }}</h5>
                         <p class="card-text font">{{truncateString(post.description, 180)}}</p>
                         <div class="d-flex  justify-content-between">
                             <router-link

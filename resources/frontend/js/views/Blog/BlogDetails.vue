@@ -109,7 +109,6 @@
         },
 
         methods: {
-
             formatDate(dateString) {
                 if (!dateString) {
                     return "Date not available";

@@ -35,8 +35,14 @@ class FrontendController extends Controller
         $data['category'] = Category::get();
 
         $data['partner'] = PartnershipModel::take(4)->skip(0)->orderBy('id','DESC')->get();
+        $data['partner_logo'] = PartnershipModel::orderBy('id','DESC')->get();
         $data['blogpost']=blog::with('user','company')->where('status',1)->orderBy('id','DESC')->get();
-
+        $data['blogpost_slide'] = blog::with('user', 'company')
+            ->where('status', 1)
+            ->orderBy('id', 'DESC')
+            ->take(6)
+            ->skip(0)
+            ->get();
         return $this->returnData(2000,$data);
     }
 

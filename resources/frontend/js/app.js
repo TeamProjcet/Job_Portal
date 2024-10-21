@@ -51,9 +51,10 @@ import 'vue-toastification/dist/index.css';
 Vue.use(Toast);
 
 // alret massage
+import 'sweetalert2/dist/sweetalert2.min.css';
 import VueSweetalert2 from 'vue-sweetalert2';
 Vue.use(VueSweetalert2);
-import 'sweetalert2/dist/sweetalert2.min.css';
+
 import axios from "axios";
 
 const vue = new Vue({
