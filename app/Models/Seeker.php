@@ -36,5 +36,9 @@ class Seeker extends Authenticatable
     {
         return $this->hasMany(Applications::class);
     }
+    public function employer()
+    {
+        return $this->hasMany(Employers::class);
+    }
 
 }

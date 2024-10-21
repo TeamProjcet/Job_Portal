@@ -18,8 +18,11 @@ class SavedJobsController extends Controller
 
     public function index()
     {
-        $seekerId = Auth::guard('seeker')->user();
-        $savedJobs = SavedJobs::with('seeker', 'job')->where('seeker_id',$seekerId->id)->get();
+        $user = Auth::guard('seeker')->user();
+        if (!$user) {
+            return $this->returnData(5000, null, 'User is not logged in');
+        }
+        $savedJobs = SavedJobs::with('seeker', 'job')->where('seeker_id',$user->id)->get();
         return $this->returnData(2000,  $savedJobs);
 
     }

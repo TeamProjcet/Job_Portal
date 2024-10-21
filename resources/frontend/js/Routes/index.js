@@ -69,7 +69,8 @@ const route = [
     {
         path : '/contact',
         name : 'contact',
-        component : Contact
+        component : Contact,
+        meta:{pagetitle:'',dataUrl:'api/frontend/contact'},
     },
     {
         path : '/seekerlogin',

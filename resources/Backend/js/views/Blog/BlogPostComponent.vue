@@ -3,7 +3,7 @@
     <div class="row">
         <div class="card">
             <div class="card-header">
-                <PageTop></PageTop>
+                <PageTop :storePermission= "can('blogpost.store')"/>
             </div>
             <DataTable :tableHeading="tableHeading">
 

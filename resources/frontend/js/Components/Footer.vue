@@ -16,16 +16,17 @@
                     <a class="btn btn-link text-white-50" :href="data.weblink" target="_blank" rel="noopener noreferrer">{{data.name}}</a>
                     </template>
                 </div>
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-3 col-md-6" v-if="frontdata">
                     <h5 class="text-white mb-4">Contact</h5>
-                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>West Kazipara, Mirpur-10, Dhaka</p>
-                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+880-2-55075620</p>
-                    <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@jobportal.com</p>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>{{frontdata.location}}</p>
+                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+880{{frontdata.phone}}</p>
+                    <p class="mb-2"><i class="fa fa-envelope me-3"></i>{{frontdata.email}}</p>
                     <div class="d-flex pt-2">
-                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
-                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-youtube"></i></a>
-                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
+                        <a class="btn btn-outline-light btn-social" target="_blank" :href="frontdata.facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-outline-light btn-social" target="_blank" :href="frontdata.linkdin"><i class="fab fa-linkedin-in"></i></a>
+                        <a class="btn btn-outline-light btn-social" target="_blank" :href="frontdata.youtube"><i class="fab fa-youtube"></i></a>
+                        <a class="btn btn-outline-light btn-social" target="_blank" :href="frontdata.twitter"><i class="fab fa-twitter"></i></a>
+
                     </div>
                 </div>
 
@@ -75,7 +76,8 @@
         name: "Footer",
         data() {
             return {
-                partnership:[]
+                partnership:[],
+                frontdata:null
 
             };
         },
@@ -104,6 +106,7 @@
                 try {
                     const response = await axios.get('/api/frontend/joblist');
                     this.partnership = response.data.result.partner;
+                    this.frontdata = response.data.result.frontdata[0];
                 } catch (error) {
                     this.error = "Error fetching blog data. Please try again later.";
                 }

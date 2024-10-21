@@ -83,10 +83,6 @@
                                 <input type="text" class="form-control" v-model="fromData.company_address">
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">Company Description</label>
-                                <input type="text" class="form-control" v-model="fromData.company_description">
-                            </div>
-                            <div class="mb-3">
                                 <label class="form-label">Bio</label>
                                 <textarea class="form-control" v-model="fromData.bio" rows="4"></textarea>
                             </div>

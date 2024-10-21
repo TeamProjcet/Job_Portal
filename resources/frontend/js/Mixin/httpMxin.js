@@ -107,7 +107,13 @@ export default {
         loadSavedJobs() {
             axios.get('/api/frontend/saved')
                 .then((response) => {
-                    this.saveds = response.data.result.map(job => job.job_id);
+                    if (response.data && response.data.result) {
+                        this.saveds = response.data.result.map(job => job.job_id);
+
+                    }else {
+                        this.saveds = [];
+                        // console.error('No saved jobs found');
+                    }
                 })
                 .catch((error) => {
                     console.error('Error loading saved jobs:', error);

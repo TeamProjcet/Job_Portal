@@ -4,7 +4,7 @@ import JobListCommponent from "../views/jobCategory/JobListCommponent";
 import CreateJobComponent from "../views/jobCategory/CreateJobComponent.vue";
 import CompanyComponent from "../views/jobCategory/CompanyComponent";
 import BlogPostComponent from "../views/Blog/BlogPostComponent";
-import EmployerForm from "../views/Employers/EmployerForm";
+import EmployerForm from "../views/Employers/EmployeeList";
 import EmployerProfile from "../views/Employers/EmployerProfile";
 import Newsletter from "../views/Visitor/Newsletter";
 import Contact from "../views/Visitor/Contact";
@@ -76,16 +76,16 @@ const route = [
         name: 'employer_profile',
         component: EmployerProfile,
         meta: {
-            pagetitle: 'Profile Update', dataUrl: 'api/employer_profile',
+            pagetitle: 'Profile Update', dataUrl: 'api/employer',
         }
 
     },
     {
-        path: '/admin/employer/employerfrom',
-        name: 'employefrom',
+        path: '/admin/employer/employerlist',
+        name: 'employer',
         component: EmployerForm,
         meta: {
-            pagetitle: ' Employer Table', dataUrl: 'api/employerfrom',
+            pagetitle: ' Employer Table', dataUrl: 'api/employer',
         }
 
     },
@@ -194,7 +194,7 @@ const route = [
         path: '/admin/frontend/manage',
         name: 'frontendmanage',
         component: FrontendManage,
-        meta: { pagetitle: 'Frontend Management Table', dataUrl: 'api/frontend' },
+        meta: { pagetitle: 'Frontend Management Table', dataUrl: 'api/frontmanage' },
     } ,
 
 ];

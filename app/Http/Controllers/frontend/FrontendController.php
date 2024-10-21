@@ -9,6 +9,7 @@ use App\Models\blog;
 use App\Models\BlogComment;
 use App\Models\Category;
 use App\Models\Company;
+use App\Models\Frontendmanage;
 use App\Models\JobPostModel;
 use App\Models\PartnershipModel;
 use App\Models\SavedJobs;
@@ -33,7 +34,7 @@ class FrontendController extends Controller
         $data['jobData'] = JobPostModel::with('category','company')->where('status',1)->orderBy('id','DESC')->paginate(15);
 
         $data['category'] = Category::get();
-
+        $data['frontdata']=Frontendmanage::get();
         $data['partner'] = PartnershipModel::take(4)->skip(0)->orderBy('id','DESC')->get();
         $data['blogpost']=blog::with('user','company')->where('status',1)->orderBy('id','DESC')->get();
 
@@ -51,13 +52,20 @@ class FrontendController extends Controller
 
     public function detailsData($id)
     {
+        $seekerId = Auth::guard('seeker')->user();
         $data['job'] = JobPostModel::findOrFail($id)->load('category', 'company');
+        $data['application'] = Applications::with('seeker')->where('seeker_id',$seekerId->id)->get();
         return $this->returnData(2000,$data);
     }
 
     public function blogDetails($id)
     {
         $data['post'] = blog::with('company')->findOrFail($id);
+        return $this->returnData(2000,$data);
+    }
+
+    public function frontData(){
+        $data=Frontendmanage::get();
         return $this->returnData(2000,$data);
     }
 

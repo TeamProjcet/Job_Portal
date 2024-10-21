@@ -6,7 +6,7 @@
                 <div class="card mt-3">
                     <div class="card-header">
 
-                  <page-top></page-top>
+                        <PageTop :storePermission= "can('roles.store')"/>
                     </div>
                     <div class="card-body">
                         <DataTable :tableHeading="tableHeading">

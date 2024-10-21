@@ -8,7 +8,7 @@
                             <h3 class="fw-bold mb-3 ms-3">{{$route.meta.pagetitle}}</h3>
                         </div>
                         <div class="col-md-6 text-md-end">
-                            <router-link to="/admin/role/rolepermissions" class="btn btn-secondary btn-round">
+                            <router-link v-if="can('roles.index')" to="/admin/role/rolepermissions" class="btn btn-secondary btn-round">
                                 Back To User And Role Page
                             </router-link>
                         </div>

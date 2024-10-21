@@ -51,7 +51,7 @@
                     <form @submit.prevent="updateApplicationStatus">
 
                         <label>Note</label>
-                        <textarea type="text" v-model="note" class="form-control" name="note"/>
+                        <editor type="text" v-model="note" class="form-control" name="note" />
 
                         <button type="submit"  class="btn btn-success mt-2">submit</button>
                     </form>

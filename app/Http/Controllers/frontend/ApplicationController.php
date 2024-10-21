@@ -46,9 +46,6 @@ class ApplicationController extends Controller
 
     public function store(Request $request)
     {
-        if (!$this->can('application.store')) {
-            return $this->returnData(5000, null, 'You are not authorized to access this page');
-        }
 
         $validator = $this->model->Validator($request->all());
         if ($validator->fails()) {

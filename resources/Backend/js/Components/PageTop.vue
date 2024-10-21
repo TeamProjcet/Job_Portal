@@ -5,14 +5,23 @@
             <h3 class="fw-bold mb-3 " style="margin-left: 20px">{{$route.meta.pagetitle}}</h3>
         </div>
         <div class="ms-md-auto py-2 py-md-0">
-            <a @click="openEditModal()" class="btn btn-custom btn-round"><i class="fas fa-plus"></i>Add</a>
+            <a v-if="storePermission" @click="openEditModal()" class="btn btn-custom btn-round"><i class="fas fa-plus"></i>Add</a>
         </div>
     </div>
 </template>
 
 <script>
     export default {
-        name: "PageTop"
+        name: "PageTop",
+        props:{
+            storePermission:{
+                type: Boolean,
+                default: false
+            }
+        },
+        methods:{
+
+        }
     }
 </script>
 
