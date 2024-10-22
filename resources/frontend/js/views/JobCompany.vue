@@ -72,13 +72,6 @@
         },
         methods: {
 
-            truncateString(str, length) {
-                if (str.length > length) {
-                    return str.substring(0, length) + '...';
-                }
-                return str;
-            },
-
             async companyList() {
                 if (!this.company_id) {
                     this.error = "company ID is not defined.";

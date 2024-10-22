@@ -243,7 +243,6 @@
 <script>
     import axios from 'axios';
     import Toast from "vue-toastification";
-    import format from 'date-fns/format';
     import multiselect from 'vue-multiselect'
     import VueMultiselect from "vue-multiselect/src/Multiselect";
 
@@ -257,7 +256,7 @@
                 applications: [],
                 savedJobs: [],
                 components: {
-                    Toast, format,
+                    Toast,
                 },
 
                 educations: ['Secondary School (SSC)', 'Higher Secondary School (HSC)', 'Diploma in Engineering', 'Bachelor\'s Degree', 'Master\'s Degree', 'Professional Degree', 'Postgraduate Degree', 'Ph.D.'],
@@ -289,16 +288,6 @@
         },
 
         methods: {
-            formatDate(dateString) {
-                return format(new Date(dateString), 'MMMM d, yyyy');
-            },
-            truncateString(str, length) {
-                if (str.length > length) {
-                    return str.substring(0, length) + '...';
-                }
-                return str;
-            },
-
             async SavedJobs() {
                 try {
                     const response = await axios.get('/api/frontend/saved');

@@ -37,7 +37,8 @@ const route = [
     {
         path : '/job-cat',
         name : 'category',
-        component : JobCat
+        component : JobCat,
+        meta:{dataUrl:'api/frontend/joblist'},
     },
     {
         path : '/job-list',

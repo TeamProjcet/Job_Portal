@@ -85,9 +85,6 @@
 
 <script>
     import axios from 'axios';
-    import  format  from 'date-fns/format';
-    import  parseISO  from 'date-fns/format';
-
     export default {
         name: "BlogDetails",
         props: ['id'],
@@ -97,8 +94,6 @@
                 comment: {},
                 isAuthenticated:false,
                 error: null,
-
-                components: {format, parseISO}
             };
         },
         mounted() {
@@ -109,16 +104,6 @@
         },
 
         methods: {
-            formatDate(dateString) {
-                if (!dateString) {
-                    return "Date not available";
-                }
-                const parsedDate = new Date(dateString);
-                if (isNaN(parsedDate.getTime())) {
-                    return "Invalid date";
-                }
-                return format(parsedDate, 'MMMM d, yyyy');
-            },
 
             async getPostDetails() {
                 try {

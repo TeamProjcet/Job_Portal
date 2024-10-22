@@ -113,8 +113,6 @@
 
 <script>
     import axios from 'axios';
-    import  format from 'date-fns/format';
-    import   parseISO from 'date-fns/format';
     export default {
         name: "JobDetails",
         props: ['id'],
@@ -125,9 +123,6 @@
                     category: {},
                 },
                 isAuthenticated:false,
-                components:{
-                    format, parseISO
-                },
 
                 tinymceInit:{
                     height: 300,
@@ -143,16 +138,6 @@
             this.authData();
         },
         methods: {
-            formatDate(dateString) {
-                if (!dateString) {
-                    return "Date not available";
-                }
-                const parsedDate = new Date(dateString);
-                if (isNaN(parsedDate.getTime())) {
-                    return "Invalid date";
-                }
-                return format(parsedDate, 'MMMM d, yyyy');
-            },
 
 
             async getJobDetails() {

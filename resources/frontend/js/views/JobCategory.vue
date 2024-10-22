@@ -50,7 +50,6 @@
 
 <script>
     import axios from 'axios';
-    import  format  from 'date-fns/format';
 
     export default {
         name: "JobCategory",
@@ -61,7 +60,6 @@
                 saveds:[],
                 isAuthenticated:false,
                 error: null,
-                components: {format}
             };
         },
         mounted() {
@@ -73,15 +71,6 @@
             }
         },
         methods: {
-            formatDate(dateString) {
-                return format(new Date(dateString), 'MMMM d, yyyy');
-            },
-            truncateString(str, length) {
-                if (str.length > length) {
-                    return str.substring(0, length) + '...';
-                }
-                return str;
-            },
 
             async getDataList() {
                 if (!this.category_id) {

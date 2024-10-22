@@ -12,13 +12,13 @@ export default {
 
 
     methods: {
-        getDataList: function () {
+        getDataList: function (page = 1) {
             const _this = this;
             axios.get(_this.urlGenaretor(), {
-                // params: {
-                //     page: page,
-                //     filter: _this.formFilter,
-                // }
+                params: {
+                    page: page,
+                    // filter: _this.formFilter,
+                }
             })
                 .then(function (res) {
                     if (parseInt(res.data.status) === 2000) {

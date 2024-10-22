@@ -2,9 +2,9 @@
     <!-- Jobs Start -->
     <div class="container mt-4 shadow p-4 rounded">
         <h3 class="d-flex justify-content-center my-4">
-            <span class="badge bg-primary py-3 px-3 container-fluid">
-                Job Listing
-            </span>
+        <span class="badge bg-primary py-3 px-3 container-fluid">
+            Job Listing
+        </span>
         </h3>
         <div class="row">
             <template v-if="!isLoading && joblist.jobData !== undefined">
@@ -35,15 +35,17 @@
                             <a
                                     @click="saveJob(job)"
                                     :class="{'btn btn-info': saveds.includes(job.id), 'btn btn-secondary': !saveds.includes(job.id)}">
-                                    <span v-if="saveds.includes(job.id)">
-                                        <i class="fa fa-check"></i>
-                                    </span>
+                                <span v-if="saveds.includes(job.id)">
+                                    <i class="fa fa-check"></i>
+                                </span>
                                 {{ saveds.includes(job.id) ? ' ' : ' Save Job' }}
                             </a>
                         </div>
                     </div>
                 </div>
-                <pagination previousText="PREV" nextText="NEXT" :data="joblist.jobData" @paginateTo="getJobList"></pagination>
+                <div class="col-12 d-flex justify-content-center">
+                    <pagination previousText="PREV" nextText="NEXT" :data="joblist.jobData" @paginateTo="getJobList"></pagination>
+                </div>
             </template>
 
             <template v-else>
@@ -52,16 +54,16 @@
         </div>
     </div>
     <!-- Jobs End -->
+
 </template>
 
 <script>
     import axios from 'axios';
     import Pagination from "../plugins/pagination/pagination";
-    import  format  from 'date-fns/format';
 
     export default {
         name: "JobList",
-        components: {Pagination, format},
+        components: {Pagination},
         data() {
             return {
                 savedJobs: new Set(),
@@ -88,15 +90,6 @@
             this.getRequiredData(['job_type'])
         },
         methods: {
-            formatDate(dateString) {
-                return format(new Date(dateString), 'MMMM d, yyyy');
-            },
-            truncateString(str, length) {
-                if (str.length > length) {
-                    return str.substring(0, length) + '...';
-                }
-                return str;
-            },
             getJobList(page = 1) {
                 this.isLoading = true;
                 this.joblist = {};
@@ -108,7 +101,6 @@
                     .catch((error) => {
                         this.isLoading = false;
                         this.error = "Error fetching job data. Please try again later.";
-                        console.error('Error fetching job data:', error);
                     });
             },
 
@@ -135,7 +127,7 @@
     }
 
     .hover-card:hover {
-        transform: translateY(-5px); /* Moves the card up slightly */
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Increases shadow on hover */
+        transform: translateY(-5px);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
     }
 </style>
