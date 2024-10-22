@@ -52,9 +52,17 @@ class FrontendController extends Controller
 
     public function detailsData($id)
     {
-        $seekerId = Auth::guard('seeker')->user();
+        $seeker = Auth::guard('seeker')->user();
         $data['job'] = JobPostModel::findOrFail($id)->load('category', 'company');
-        $data['application'] = Applications::with('seeker')->where('seeker_id',$seekerId->id)->get();
+        if ($seeker) {
+            $data['application'] = Applications::with('seeker')
+                ->where('seeker_id', $seeker->id)
+                ->where('job_id', $id)
+                ->get();
+        } else {
+            $data['application'] = [];
+        }
+//        $data['application'] = Applications::with('seeker')->where('seeker_id',$seekerId->id)->get();
         return $this->returnData(2000,$data);
     }
 
@@ -62,6 +70,10 @@ class FrontendController extends Controller
     {
         $data['post'] = blog::with('company')->findOrFail($id);
         return $this->returnData(2000,$data);
+    }
+    public function applydetails($id){
+        $post = Applications::with('job', 'seeker')->findOrFail($id);
+        return $this->returnData(2000,$post);
     }
 
     public function frontData(){

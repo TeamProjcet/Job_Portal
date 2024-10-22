@@ -51,6 +51,7 @@ Route::prefix('api/frontend')->group(function () {
     Route::get('joblist', [\App\Http\Controllers\frontend\FrontendController::class, 'joblist']);
     Route::get('detailsData/{id}', [\App\Http\Controllers\frontend\FrontendController::class, 'detailsData']);
     Route::get('blogDetails/{id}', [\App\Http\Controllers\frontend\FrontendController::class, 'blogDetails']);
+    Route::get('applydetails/{id}', [\App\Http\Controllers\frontend\FrontendController::class, 'applydetails']);
     Route::get('seekerdata', [\App\Http\Controllers\frontend\FrontendController::class, 'seekerdata']);
     Route::get('frontData', [\App\Http\Controllers\frontend\FrontendController::class, 'frontData']);
     Route::get('jobcate/{cateId}', [\App\Http\Controllers\frontend\FrontendController::class, 'jobCategory'])->name('web.cat');

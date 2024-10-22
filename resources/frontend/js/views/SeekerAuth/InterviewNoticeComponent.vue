@@ -54,7 +54,7 @@
             async getApplicationDetails() {
                 const id = this.$route.params.id;
                 try {
-                    const response = await axios.get(`/api/application/${id}`);
+                    const response = await axios.get(`/api/frontend/applydetails/${id}`);
                     this.application = response.data.result;
                 } catch (error) {
                     console.error('Error fetching application data:', error);

@@ -30,7 +30,7 @@
                         <div>
                             <div v-if="isAuthenticated">
                                 <h4 class="mb-4">Apply For The Job</h4>
-                                <form @submit="submitApplication()">
+                                <form @submit.prevent="submitApplication()">
                                     <div class="row g-3">
                                         <div class="col-12 col-sm-6">
                                             <input type="text" class="form-control" placeholder="Your Name" v-model="fromData.name" readonly>
@@ -40,11 +40,11 @@
 
                                         </div>
                                         <div class="col-12 col-sm-6">
-                                            <input type="number" class="form-control" placeholder="Your Phone" v-model="fromData.phone" >
+                                            <input type="number" class="form-control" placeholder="Your Phone" v-model="fromData.phone" required>
 
                                         </div>
                                         <div class="col-12 col-sm-6">
-                                            <select class="form-control" v-model="fromData.address">
+                                            <select class="form-control" v-model="fromData.address" required>
                                                 <template v-for="data in requireData.district">
                                                     <option :value="data.name">{{data.name}}</option>
                                                 </template>
@@ -84,10 +84,6 @@
                                         </div>
 
                                         <div class="col-12">
-<!--                                            <button class="btn btn-primary w-100" type="submit">Apply Now</button>-->
-<!--                                            <button v-if="!hasApplied(job.id)" class="btn btn-primary w-100" type="submit">Apply Now</button>-->
-<!--                                            <button v-else class="btn btn-secondary w-100" disabled>Applied</button>-->
-
                                             <div :class="{'': hasApplied.includes(job.id), '': !hasApplied.includes(job.id)}">
                                                 <span  class="btn btn-primary w-100" v-if="hasApplied.includes(job.id)">
                                                     <i class="fa fa-check"></i> Applied
@@ -196,26 +192,9 @@
                     _this.error = "Failed to load Job details.";
                 }
             },
-            //
-            // validateForm() {
-            //     this.errors = {};
-            //
-            //     if (!this.fromData.portfolio) {
-            //         this.errors.portfolio = "Portfolio link is required.";
-            //     }
-            //     if (!this.fromData.coverLetter) {
-            //         this.errors.coverLetter = "Cover letter is required.";
-            //     }
-            //     if (!this.fromData.image) {
-            //         this.errors.image = "Resume is required.";
-            //     }
-            //     return Object.keys(this.errors).length === 0;
-            // },
+
+
             async submitApplication() {
-                // if (!this.validateForm()) {
-                //     this.$toast.error("Please fill in all the required fields.");
-                //     return;
-                // }
 
                 this.fromData.job_id = this.job.id;
                 this.fromData.seeker_id = this.seeker.id;
