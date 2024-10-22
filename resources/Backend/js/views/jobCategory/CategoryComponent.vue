@@ -2,7 +2,7 @@
     <div class="row">
         <div class="card">
             <div class="card-header">
-                <PageTop></PageTop>
+                <PageTop :storePermission= "can('categories.store')"/>
             </div>
             <DataTable :tableHeading="tableHeading">
                 <tr v-for="(data, index) in dataList" :key="index">
@@ -67,6 +67,7 @@
         data() {
             return {
                 tableHeading: ["Sl", "Name", "Image", "Action"],
+
             };
         },
         mounted() {

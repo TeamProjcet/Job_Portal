@@ -3,7 +3,7 @@
         <div class="row">
         <div class="card">
             <div class="card-header">
-                <PageTop></PageTop>
+                <PageTop :storePermission="can('company.store')"/>
             </div>
             <DataTable :tableHeading="tableHeading">
                 <tr v-for="(data, index) in dataList">

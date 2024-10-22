@@ -24,7 +24,7 @@ Route::prefix('api')->group(function () {
     Route::resource('/createjob', \App\Http\Controllers\Backend\JobPostController::class);
     Route::resource('/joblist', \App\Http\Controllers\Backend\JobPostController::class);
     Route::resource('/jobseeker', \App\Http\Controllers\JobSeekersController::class);
-    Route::resource('/employer_profile', \App\Http\Controllers\EmployersController::class);
+    Route::resource('/employer', \App\Http\Controllers\EmployersController::class);
     Route::resource('/interview', \App\Http\Controllers\InterviewScheduleController ::class);
     Route::resource('/message', \App\Http\Controllers\MessagesController ::class);
     Route::resource('/companyreviews', \App\Http\Controllers\CompanyReviewsController ::class);
@@ -42,6 +42,8 @@ Route::prefix('api')->group(function () {
     Route::get('/roles/{role}/permissions',[\App\Http\Controllers\RoleController::class,'getRolePermissions']);
     Route::post('/roles/{role}/permissions',[\App\Http\Controllers\RoleController::class,'updateRolePermissions']);
     Route::resource('/blogcomment', \App\Http\Controllers\frontend\BlogCommentController::class);
+    Route::resource('/frontmanage', \App\Http\Controllers\FrontendmanageController::class);
+    Route::post('sendMail', [\App\Http\Controllers\SubscribeController::class,'store']);
 
 });
 
@@ -50,7 +52,10 @@ Route::prefix('api/frontend')->group(function () {
     Route::get('joblist', [\App\Http\Controllers\frontend\FrontendController::class, 'joblist']);
     Route::get('detailsData/{id}', [\App\Http\Controllers\frontend\FrontendController::class, 'detailsData']);
     Route::get('blogDetails/{id}', [\App\Http\Controllers\frontend\FrontendController::class, 'blogDetails']);
+    Route::get('applydetails/{id}', [\App\Http\Controllers\frontend\FrontendController::class, 'applydetails']);
     Route::get('seekerdata', [\App\Http\Controllers\frontend\FrontendController::class, 'seekerdata']);
+    Route::get('frontData', [\App\Http\Controllers\frontend\FrontendController::class, 'frontData']);
+    Route::get('blogComment/{blogId}', [\App\Http\Controllers\frontend\FrontendController::class, 'blogComment']);
     Route::get('jobcate/{cateId}', [\App\Http\Controllers\frontend\FrontendController::class, 'jobCategory'])->name('web.cat');
     Route::get('seekerAuth', [\App\Http\Controllers\frontend\SeekerLoginController::class, 'index']);
     Route::post('seekerregis', [\App\Http\Controllers\frontend\SeekerLoginController::class, 'store']);

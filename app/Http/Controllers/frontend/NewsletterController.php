@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
+use App\Mail\WelcomeMail;
 use App\Models\Newsletter;
 use App\Supports\Helper;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class NewsletterController extends Controller
@@ -50,6 +52,7 @@ use Helper;
             ], 422);
         }
         Newsletter::create($request->only('email'));
+        Mail::to($request->email)->queue(new WelcomeMail($request->email));
 
         return response()->json([
             'success' => true,

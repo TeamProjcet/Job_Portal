@@ -155,14 +155,21 @@ class ModuleTableSeeder extends Seeder
                         'name' => 'NewsLetter',
                         'key' => 'newsletter',
                         'link' => '/admin/visitor/newsletter',
-                        'icon' => 'fas fa-pen',
+                        'icon' => 'fas fa-newspaper',
+                        'permission' => ['index','store', 'show','create', 'edit', 'update', 'destroy'],
+                    ],
+                    [
+                        'name' => 'Subscriber Mails',
+                        'key' => 'sendMail',
+                        'link' => '/admin/subscribe/emails',
+                        'icon' => 'fas fa-envelope',
                         'permission' => ['index','store', 'show','create', 'edit', 'update', 'destroy'],
                     ],
                     [
                         'name' => 'Contact',
                         'key' => 'contact',
                         'link' => '/admin/visitor/contact',
-                        'icon' => 'fas fa-pen',
+                        'icon' => 'fas fa-address-book',
                         'permission' => ['index','store', 'show','create', 'edit', 'update', 'destroy'],
                     ],
                 ],
@@ -184,6 +191,41 @@ class ModuleTableSeeder extends Seeder
                 ],
 
         ],
+            [
+                'name' => 'Employee',
+                'key' => 'employee',
+                'link' => '#',
+                'icon' => 'fas fa-user',
+                'permission' => ['index','store', 'show','create', 'edit', 'update', 'destroy'],
+                'submenus' => [
+                    [
+                        'name' => 'Employee List',
+                        'key' => 'employer',
+                        'link' => '/admin/employer/employerlist',
+                        'icon' => 'fas fa-users',
+                        'permission' => ['index','store', 'show','create', 'edit', 'update', 'destroy'],
+                    ],
+                ],
+
+        ],
+            [
+                'name' => 'Frontend Manage',
+                'key' => 'frontendmanage',
+                'link' => '#',
+                'icon' => 'fas fa-cogs',
+                'permission' => ['index','store', 'show','create', 'edit', 'update', 'destroy'],
+                'submenus' => [
+                    [
+                        'name' => 'Frontend Management',
+                        'key' => 'frontmanage',
+                        'link' => '/admin/frontend/manage',
+                        'icon' => 'fas fa-tasks',
+                        'permission' => ['index','store', 'show','create', 'edit', 'update', 'destroy'],
+                    ],
+                ],
+
+            ],
+
         ];
 
         $adminRole = Role::create(['name' => 'Admin']);

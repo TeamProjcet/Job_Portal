@@ -34,10 +34,16 @@
             return {
 
                 errorMessage: '',
-
             };
         },
+        mounted() {
+            this.defaultUrl();
+        },
         methods: {
+            defaultUrl() {
+                const referrer = document.referrer || window.location.href;
+                localStorage.setItem('redirectAfterLogin', referrer);
+            },
             submitLogin() {
                 const _this = this;
 
@@ -48,8 +54,11 @@
                     .then(function (res) {
                         if (parseInt(res.data.status) === 2000) {
                             _this.$toast.success("Login successful!");
-                            _this.$router.push('/');
+                            // const redirectUrl = localStorage.getItem('redirectAfterLogin') || '/defaultPage';
+                            // localStorage.removeItem('redirectAfterLogin');
 
+                            // _this.$router.push(redirectUrl);
+                            _this.$router.push('/');
                         } else {
                             _this.$toast.error("Invalid credentials!");
                         }
@@ -60,9 +69,8 @@
                         }
                     });
             },
-
-
         }
+
     };
 </script>
 

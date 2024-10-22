@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employers;
+use App\Models\User;
 use App\Supports\Helper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +17,11 @@ class EmployersController extends Controller
     }
     public function index()
     {
-        $data = $this->model->get();
+        if (!$this->can('employer.index')) {
+            return $this->returnData(5000, null, 'You are not authorized to access this page');
+        }
+        $user = Auth::id();
+        $data = User::where('id', '!=', $user)->with('company', 'employer')->get();
         return $this->returnData(2000, $data);
     }
 
@@ -28,6 +33,7 @@ class EmployersController extends Controller
 
     public function store(Request $request)
     {
+
         $validator = $this->model->Validator($request->all());
         if ($validator->fails()) {
             return response()->json(['result' => $validator->errors(), 'status' => 3000], 422);
@@ -50,11 +56,8 @@ class EmployersController extends Controller
 
     public function show()
     {
-        // Get the authenticated user's profile
         $user = Auth::user();
-
-        // Return user data as JSON
-        return response()->json($user);
+        return $this->returnData(2000,$user);
     }
 
     public function edit(Employers $employers)
@@ -64,6 +67,7 @@ class EmployersController extends Controller
 
     public function update(Request $request)
     {
+
         try {
             $validator = $this->model->Validator($request->all());
 
@@ -90,9 +94,12 @@ class EmployersController extends Controller
 
     public function destroy( $id)
     {
+        if (!$this->can('employer.destroy')) {
+            return $this->returnData(5000, null, 'You are not authorized to access this page');
+        }
 
         try {
-            $data = $this->model->where('id',$id)->first();
+            $data = User::where('id',$id)->first();
             if ($data){
                 $data->delete();
 

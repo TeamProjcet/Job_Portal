@@ -14,7 +14,6 @@ class Employers extends Model
         'company_website',
         'company_address',
         'contact_person',
-        'company_description',
         'bio',
         'image'
     ];
@@ -26,7 +25,6 @@ class Employers extends Model
             'company_website',
             'company_address',
             'contact_person',
-            'company_description',
             'bio',
             'image'
         ]);
@@ -35,5 +33,9 @@ class Employers extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
     }
 }

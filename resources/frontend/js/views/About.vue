@@ -17,26 +17,15 @@
                 <div class="row g-5 align-items-center">
                     <div class="col-lg-6" >
                         <div class="row g-0 about-bg rounded overflow-hidden">
-                            <div class="col-6 text-start">
-                                <img class="img-fluid w-100" src="/frontend/assets/img/about-1.jpg">
-                            </div>
-                            <div class="col-6 text-start">
-                                <img class="img-fluid" src="/frontend/assets/img/about-2.jpg" style="width: 85%; margin-top: 15%;">
-                            </div>
-                            <div class="col-6 text-end">
-                                <img class="img-fluid" src="/frontend/assets/img/about-3.jpg" style="width: 85%;">
-                            </div>
-                            <div class="col-6 text-end">
-                                <img class="img-fluid w-100" src="/frontend/assets/img/about-4.jpg">
+                            <div class="col-6 text-start" v-if="frontdata">
+                                <img  style="width: 600px" :src="storageImage(frontdata.image)" alt="image"/>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-6" >
-                        <h1 class="mb-4">We Help To Get The Best Job And Find A Talent</h1>
-                        <p class="mb-4">At Job Portal, we specialize in connecting individuals with their ideal job opportunities and helping organizations find exceptional talent. Our dedicated team leverages industry insights, personalized coaching, and a vast network to ensure that job seekers not only find roles that align with their skills and passions but also thrive in their careers.</p>
-                        <p><i class="fa fa-check text-primary me-3"></i>Talent Sourcing and Screening</p>
-                        <p><i class="fa fa-check text-primary me-3"></i>Comprehensive Recruitment Solutions</p>
-                        <p><i class="fa fa-check text-primary me-3"></i>Employer Branding Services</p>
+                        <h1 v-if="frontdata" class="mb-4">{{frontdata.title}}</h1>
+                        <p  v-if="frontdata" v-html="frontdata.details" class="mb-4"></p>
+
                     </div>
                 </div>
             </div>
@@ -46,8 +35,30 @@
 </template>
 
 <script>
+    import axios from 'axios'
     export default {
-        name: "About"
+        name: "About",
+        data(){
+            return{
+                frontdata:null
+
+            }
+        },
+        mounted(){
+            this.getFrontdata();
+        },
+        methods:{
+            async getFrontdata() {
+                axios.get('api/frontend/frontData')
+                    .then((response) => {
+                        this.frontdata = response.data.result[0];
+                    })
+                    .catch((error) => {
+                        this.error = "Error fetching data. Please try again later.";
+                    });
+            }
+
+        }
     }
 </script>
 

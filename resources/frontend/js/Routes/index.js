@@ -69,13 +69,18 @@ const route = [
     {
         path : '/contact',
         name : 'contact',
-        component : Contact
+        component : Contact,
+        meta:{pagetitle:'',dataUrl:'api/frontend/contact'},
     },
     {
-        path : '/seekerlogin',
-        name : 'seekerlogin',
-        component : SeekerLogin,
-        meta:{pagetitle:'',dataUrl:'api/frontend/seekerlogin'},
+        path: '/seekerlogin',
+        name: 'seekerlogin',
+        component: SeekerLogin,
+        meta: { pagetitle: '', dataUrl: 'api/frontend/seekerlogin' },
+        beforeEnter: (to, from, next) => {
+            localStorage.setItem('redirectAfterLogin', from.fullPath);
+            next(); // নিশ্চিত করুন যে next() কল করা হচ্ছে
+        }
     },
     {
         path : '/seekerregis',
@@ -83,6 +88,7 @@ const route = [
         component : SeekerRegis,
         meta:{pagetitle:'',dataUrl:'api/frontend/seekerregis'},
     },
+
     {
         path : '/seekerprofile',
         name : 'seekerprofile',

@@ -22,7 +22,7 @@
                                          style="width: 45px; height: 45px;">
                                         <i class="fa fa-map-marker-alt text-primary"></i>
                                     </div>
-                                    <span>West Kazipara, Mirpur-10, Dhaka</span>
+                                    <span v-if="frontdata">{{frontdata.location}}</span>
                                 </div>
                             </div>
                             <div class="col-md-4 ">
@@ -31,7 +31,8 @@
                                          style="width: 45px; height: 45px;">
                                         <i class="fa fa-envelope-open text-primary"></i>
                                     </div>
-                                    <span>info@jobportal.com</span>
+                                    <span v-if="frontdata">{{frontdata.email}}</span>
+
                                 </div>
                             </div>
                             <div class="col-md-4 ">
@@ -40,45 +41,45 @@
                                          style="width: 45px; height: 45px;">
                                         <i class="fa fa-phone-alt text-primary"></i>
                                     </div>
-                                    <span>+880-2-55075620</span>
+                                    <span v-if="frontdata">+88{{frontdata.phone}}</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6 ">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d467269.85203977005!2d90.371239!3d23.799186!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c0d20d6ab031%3A0x9b156afb312d6fba!2sTMSS%20Head%20Office!5e0!3m2!1sen!2sus!4v1726932213993!5m2!1sen!2sus"
+                        <iframe v-if="frontdata" :src="frontdata.map"
                                 width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
                                 referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                     <div class="col-md-6">
                         <div class="">
 
-                            <form @submit.prevent="subscribeNewsletter">
+                            <form @submit.prevent="submitFromData(fromData)">
                                 <div class="row g-3">
                                     <div class="col-md-6">
                                         <div class="form-floating">
-                                            <input v-model="name" type="text" class="form-control" id="name"
+                                            <input v-model="fromData.name" type="text" class="form-control" id="name"
                                                    placeholder="Your Name">
                                             <label for="name">Your Name</label>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-floating">
-                                            <input v-model="email" type="email" class="form-control" id="email"
+                                            <input v-model="fromData.email" type="email" class="form-control" id="email"
                                                    placeholder="Your Email">
                                             <label for="email">Your Email</label>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-floating">
-                                            <input v-model="subject" type="text" class="form-control" id="subject"
+                                            <input v-model="fromData.subject" type="text" class="form-control" id="subject"
                                                    placeholder="Subject">
                                             <label for="subject">Subject</label>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-floating">
-                                            <textarea v-model="message" class="form-control"
+                                            <textarea v-model="fromData.message" class="form-control"
                                                       placeholder="Leave a message here"
                                                       id="message" style="height: 150px"></textarea>
                                             <label for="message">Message</label>
@@ -106,34 +107,21 @@
         name: "Contact",
         data() {
             return {
-                name: '',
-                email: '',
-                subject: '',
-                message: ''
+                frontdata: null
             };
         },
+        mounted(){
+            this.getFrontdata();
+        },
         methods: {
-            async subscribeNewsletter() {
-                try {
-                    const response = await axios.post('/api/frontend/contact', {
-                        name: this.name,
-                        email: this.email,
-                        subject: this.subject,
-                        message: this.message
+            async getFrontdata() {
+                axios.get('api/frontend/frontData')
+                    .then((response) => {
+                        this.frontdata = response.data.result[0];
+                    })
+                    .catch((error) => {
+                        this.error = "Error fetching data. Please try again later.";
                     });
-
-                    if (response.status === 200) {
-                        this.$toast.success("Thank you for contacting us!");
-                        // Clear the form fields
-                        this.name = '';
-                        this.email = '';
-                        this.subject = '';
-                        this.message = '';
-                    }
-                } catch (error) {
-                    console.error('Failed to contact:', error);
-                    alert('There was an error. Please try again later.');
-                }
             }
         }
 

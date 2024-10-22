@@ -37,12 +37,19 @@
                                         </div>
                                         <div class="col-12 col-sm-6">
                                             <input type="email" class="form-control" placeholder="Your Email" v-model="fromData.email" readonly>
+
                                         </div>
                                         <div class="col-12 col-sm-6">
-                                            <input type="number" class="form-control" placeholder="Your Phone" v-model="fromData.phone" readonly>
+                                            <input type="number" class="form-control" placeholder="Your Phone" v-model="fromData.phone" required>
+
                                         </div>
                                         <div class="col-12 col-sm-6">
-                                            <input type="text" class="form-control" placeholder="Your Address" v-model="fromData.address" readonly>
+                                            <select class="form-control" v-model="fromData.address" required>
+                                                <template v-for="data in requireData.district">
+                                                    <option :value="data.name">{{data.name}}</option>
+                                                </template>
+
+                                            </select>
                                         </div>
                                         <div class="col-12">
                                             <label class="form-label"> Portfolio/Linkdin/Github</label>
@@ -53,7 +60,8 @@
 
                                         <div class="mb-3">
                                             <label class="form-label"> Cover Letter</label>
-                                            <editor v-model="fromData.coverLetter"  name="details" :init="tinymceInit"/>
+                                            <editor v-model="fromData.coverLetter" name="coverLetter" :init="tinymceInit"/>
+
                                         </div>
 
 
@@ -71,11 +79,22 @@
                                                     </template>
                                                 </div>
                                                 <input @change="uploadImage($event, fromData, 'image')" type="file" name="image" id="imageField" class="file_field" accept=".pdf,image"  />
+
                                             </div>
                                         </div>
 
                                         <div class="col-12">
-                                            <button class="btn btn-primary w-100" type="submit">Apply Now</button>
+                                            <div :class="{'': hasApplied.includes(job.id), '': !hasApplied.includes(job.id)}">
+                                                <span  class="btn btn-primary w-100" v-if="hasApplied.includes(job.id)">
+                                                    <i class="fa fa-check"></i> Applied
+                                                </span>
+                                                <button v-else class="btn btn-primary w-100">
+                                                    Apply Now
+                                                </button>
+                                            </div>
+
+
+
                                         </div>
                                     </div>
                                 </form>
@@ -135,11 +154,14 @@
                     plugins: 'link image code',
                     toolbar: 'undo redo | styleselect | bold italic | link image | code',
                 },
+                saveds:[],
+                hasApplied: []
 
             };
         },
         mounted() {
             this.getJobDetails();
+            this.getRequiredData(['district']);
             this.authData();
         },
         methods: {
@@ -161,6 +183,7 @@
                     const response = await axios.get(`/api/frontend/detailsData/${this.id}`);
                     if (response.data && response.data.result) {
                         _this.job = response.data.result.job;
+                        _this.hasApplied = response.data.result.application.map(app => app.job_id);
                     } else {
                         _this.error = "No Job details found.";
                     }
@@ -170,7 +193,9 @@
                 }
             },
 
+
             async submitApplication() {
+
                 this.fromData.job_id = this.job.id;
                 this.fromData.seeker_id = this.seeker.id;
 
@@ -179,8 +204,7 @@
 
                     if (parseInt(res.data.status) === 2000) {
                         this.$toast.success("Application Submitted Successfully");
-                    } else {
-                        this.$toast.error("You Have Already Applied For This Job!");
+                        this.saveds.push(this.job.id);
                     }
                 } catch (error) {
                     if (error.response) {
