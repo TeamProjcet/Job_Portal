@@ -35,7 +35,6 @@
 
 <script>
     import axios from 'axios';
-    import Toast from "vue-toastification";
 
     export default {
         name: "InterviewNoticeComponent",

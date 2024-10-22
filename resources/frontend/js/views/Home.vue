@@ -57,21 +57,7 @@
                             :space-between="30"
                             :loop="true"
                             :pagination="false"
-                            :navigation="false"
-                            :breakpoints="{
-                                0: {
-                                    slidesPerView: 1,
-                                    spaceBetween: 10
-                                },
-                                768: {
-                                    slidesPerView: 2,
-                                    spaceBetween: 20
-                                },
-                                992: {
-                                    slidesPerView: 3,
-                                    spaceBetween: 30
-                                }
-                            }"
+                            :navigation="true"
                             @swiper="onSwiper"
                             @slideChange="onSlideChange">
 
@@ -116,21 +102,7 @@
                             :space-between="30"
                             :loop="true"
                             :pagination="false"
-                            :navigation="false"
-                            :breakpoints="{
-                                0: {
-                                    slidesPerView: 1,
-                                    spaceBetween: 10
-                                },
-                                768: {
-                                    slidesPerView: 2,
-                                    spaceBetween: 20
-                                },
-                                992: {
-                                    slidesPerView: 3,
-                                    spaceBetween: 30
-                                }
-                            }"
+                            :navigation="true"
                             @swiper="onSwiper"
                             @slideChange="onSlideChange">
 
@@ -180,19 +152,7 @@
             this.getDataList();
         },
         methods: {
-            truncateString(str, length) {
-                if (str) {
-                    const tempElement = document.createElement('div');
-                    tempElement.innerHTML = str;
-                    const plainText = tempElement.textContent || tempElement.innerText || '';
 
-                    if (plainText.length > length) {
-                        return plainText.substring(0, length) + '...';
-                    }
-                    return plainText;
-                }
-                return '';
-            },
             async getPartnership() {
                 try {
                     const response = await axios.get('/api/frontend/joblist');

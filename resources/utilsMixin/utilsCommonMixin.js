@@ -1,8 +1,8 @@
-import axios from 'axios';
-
 export default {
     data() {
-        return {}
+        return {
+
+        }
     },
     watch: {
         'errors': {
@@ -147,6 +147,32 @@ export default {
             });
         },
 
+        truncateString(str, length) {
+            if (str) {
+                const tempElement = document.createElement('div');
+                tempElement.innerHTML = str;
+                const plainText = tempElement.textContent || tempElement.innerText || '';
+
+                if (plainText.length > length) {
+                    return plainText.substring(0, length) + '...';
+                }
+                return plainText;
+            }
+            return '';
+        },
+
+        formatDate(dateString) {
+            if (!dateString) {
+                return "Date not available";
+            }
+            const parsedDate = new Date(dateString);
+            if (isNaN(parsedDate.getTime())) {
+                return "Invalid date";
+            }
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            return parsedDate.toLocaleDateString('en-US', options);
+        }
+
     },
 
 
@@ -158,6 +184,7 @@ export default {
         dataList() {
             return this.$store.state.dataList;
         },
+
         requireData() {
             return this.$store.state.requireData;
         },

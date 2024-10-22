@@ -73,7 +73,6 @@
                     const matchesCompany = this.selectedCompany ? job.company.id === this.selectedCompany : true;
                     const matchesCategory = this.selectedCategory ? job.category.id === this.selectedCategory : true;
 
-                    // সব শর্ত মিলিয়ে দেখুন
                     return matchesKeyword && matchesCompany && matchesCategory;
                 });
 
