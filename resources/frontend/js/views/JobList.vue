@@ -85,7 +85,7 @@
             this.getJobList();
             this.authData();
             this.loadSavedJobs();
-            this.getRequiredData(['job_type'])
+            this.getRequiredData(['job_type']);
         },
         methods: {
             formatDate(dateString) {

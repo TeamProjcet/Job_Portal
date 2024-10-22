@@ -24,5 +24,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ModuleTableSeeder::class);
         $this->call(RoleTableSeeder::class);
         $this->call(DistrictSeeder::class);
+        $this->call(JobTableSeeder::class);
     }
 }

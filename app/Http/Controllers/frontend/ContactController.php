@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
+use App\Mail\WelcomeMail;
 use App\Models\Contact;
 use App\Models\Newsletter;
 use App\Supports\Helper;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
@@ -47,6 +49,9 @@ class ContactController extends Controller
             return $this->returnData(3000,$validator->errors());
         }
         $this->model->fill($request->all());
+//        Mail::to($this->model->email)->queue(new WelcomeMail($this->model));
+
+
         $this->model->save();
         return $this->returnData(2000, $this->model);
 

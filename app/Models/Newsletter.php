@@ -9,11 +9,13 @@ use Illuminate\Support\Facades\Validator;
 class Newsletter extends Model
 {
     use HasFactory;
-    protected $fillable = ["email"];
+    protected $fillable = ["email","details"];
 
     public function validator($input){
         return Validator::make($input, [
             'email'=>'required|email|unique:newsletters,email',
+            'details'=>'',
+            'Url'=>'',
         ]);
     }
 }

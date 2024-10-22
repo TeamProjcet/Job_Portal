@@ -140,7 +140,7 @@
                return;
            }
            try {
-               const response = await axios.get(`/api/frontend/jobcate/${this.id}`);
+               const response = await axios.get(`/api/frontend/blogComment/${this.id}`);
                this.comment = response.data.result.blogComment;
            } catch (error) {
                console.error('Error fetching comments:', error);

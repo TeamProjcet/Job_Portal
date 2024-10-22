@@ -43,6 +43,7 @@ Route::prefix('api')->group(function () {
     Route::post('/roles/{role}/permissions',[\App\Http\Controllers\RoleController::class,'updateRolePermissions']);
     Route::resource('/blogcomment', \App\Http\Controllers\frontend\BlogCommentController::class);
     Route::resource('/frontmanage', \App\Http\Controllers\FrontendmanageController::class);
+    Route::post('sendMail', [\App\Http\Controllers\SubscribeController::class,'store']);
 
 });
 
@@ -54,6 +55,7 @@ Route::prefix('api/frontend')->group(function () {
     Route::get('applydetails/{id}', [\App\Http\Controllers\frontend\FrontendController::class, 'applydetails']);
     Route::get('seekerdata', [\App\Http\Controllers\frontend\FrontendController::class, 'seekerdata']);
     Route::get('frontData', [\App\Http\Controllers\frontend\FrontendController::class, 'frontData']);
+    Route::get('blogComment/{blogId}', [\App\Http\Controllers\frontend\FrontendController::class, 'blogComment']);
     Route::get('jobcate/{cateId}', [\App\Http\Controllers\frontend\FrontendController::class, 'jobCategory'])->name('web.cat');
     Route::get('seekerAuth', [\App\Http\Controllers\frontend\SeekerLoginController::class, 'index']);
     Route::post('seekerregis', [\App\Http\Controllers\frontend\SeekerLoginController::class, 'store']);

@@ -45,7 +45,13 @@ class FrontendController extends Controller
     {
         $data['jobPosts'] = JobPostModel::with('category','company')->where('category_id',$cateId)->get();
         $data['companycate'] = JobPostModel::with('category','company')->where('company_id',$cateId)->get();
-        $data['blogComment'] = BlogComment::with('seeker')->where('blog_id',$cateId)->get();
+//        $data['blogComment'] = BlogComment::with('seeker')->where('blog_id',$cateId)->get();
+        return $this->returnData(2000,$data);
+
+    }
+    public function blogComment($blogId)
+    {;
+        $data['blogComment'] = BlogComment::with('seeker')->where('blog_id',$blogId)->get();
         return $this->returnData(2000,$data);
 
     }

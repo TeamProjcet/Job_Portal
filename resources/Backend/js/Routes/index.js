@@ -20,6 +20,7 @@ import Partnership from "../views/Partnership/Partnership";
 import ViewBlgoComment from "../views/Blog/ViewBlgoComment";
 import FrontendManage from "../views/FrontendManagement/FrontendManage";
 import NotFoundPage from "../views/NotFoundPage";
+import SubscribeEmails from "../views/Emails/SubscribeEmails";
 
 
 const route = [
@@ -195,6 +196,12 @@ const route = [
         name: 'frontendmanage',
         component: FrontendManage,
         meta: { pagetitle: 'Frontend Management Table', dataUrl: 'api/frontmanage' },
+    } ,
+    {
+        path: '/admin/subscribe/emails',
+        name: 'SubscribeEmails',
+        component: SubscribeEmails,
+        meta: { pagetitle: 'Subscriber SendMail Table', dataUrl: '' },
     } ,
 
 ];
