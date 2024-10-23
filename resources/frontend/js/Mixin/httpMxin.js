@@ -12,54 +12,6 @@ export default {
 
 
     methods: {
-        // getDataList: function (page = 1) {
-        //     const _this = this;
-        //     axios.get(_this.urlGenaretor()
-        //         // {params: {
-        //         //     page : page,
-        //         //     filter : _this.formFilter,
-        //         // }}
-        //     )
-        //         .then(function (res) {
-        //             if (parseInt(res.data.status) === 2000) {
-        //                 _this.$store.commit("dataList", res.data.result);
-        //
-        //             }
-        //             if (parseInt(res.data.status) === 5000) {
-        //
-        //             }
-        //         });
-        // },
-        // getRequiredData: function (array) {
-        //     const _this = this;
-        //     _this.httpReq('post', _this.urlGenaretor('api/required_data'), array, {}, function (retData) {
-        //         $.each(retData.result, function (eachItem, value) {
-        //             _this.$set(_this.requireData, eachItem, value);
-        //         });
-        //     });
-        // },
-        // httpReq: function (method, url, data = {}, params = {}, callback = false) {
-        //
-        //     axios({
-        //         method: method,
-        //         url: url,
-        //         data: data,
-        //         params: params
-        //     }).then(function (res) {
-        //         if (parseInt(res.data.result) === 5000) {
-        //             return;
-        //
-        //         }
-        //         if (parseInt(res.data.result) === 3000) {
-        //             return;
-        //
-        //         }
-        //         if (typeof callback === 'function') {
-        //             callback(res.data);
-        //         }
-        //     })
-        //
-        // },
         submitFrom() {
             const _this = this;
 
@@ -72,7 +24,11 @@ export default {
                 .then(function (res) {
                     if (parseInt(res.data.status) === 2000) {
                         _this.$toast.success("Registered successfully!");
-                        _this.$router.push('/seekerlogin');
+                        if(_this.$route.query.next_url !== undefined){
+                            _this.$router.push(`/seekerlogin?next_url=${_this.$route.query.next_url}`);
+                        }else{
+                            _this.$router.push(`/seekerlogin`);
+                        }
                     } else {
                         _this.$toast.error("Registration failed!");
                     }
@@ -85,7 +41,7 @@ export default {
         },
         async saveJob(job) {
             if (!this.isAuthenticated) {
-                this.$router.push('/seekerlogin');
+                this.$router.push(`/seekerlogin?next_url=${this.$route.fullPath}`);
                 return;
             }
             if (this.saveds.includes(job.id)) {
@@ -143,7 +99,27 @@ export default {
                 this.seeker = {};
                 console.error('Error fetching authentication data:', error);
             }
-        }
+        },
+        updateCountdown(endTime) {
+            const now = new Date().getTime();
+            const distance = endTime - now;
+
+            if (distance <= 0) {
+                clearInterval(this.timer);
+                this.countdownTime = "Time is up!";
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            this.countdownTime = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        },
+        beforeDestroy() {
+            clearInterval(this.timer);
+        },
 
     }
 

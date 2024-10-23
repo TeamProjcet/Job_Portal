@@ -18,7 +18,7 @@ class blog extends Model
             'title'=>'required ',
             'description'=>'required ',
             'image'=>'required ',
-            'status' => 'required|boolean',
+            'status' => 'boolean',
 
         ]);
     }

@@ -3,21 +3,23 @@
     <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5" >
         <div class="container py-5">
             <div class="row g-5">
+
+                    <div class="col-lg-3 col-md-6">
+                        <h5 class="text-white mb-4">{{ $t('company') }}</h5>
+                        <a class="btn btn-link text-white-50" href="">{{ $t('about_us') }}</a>
+                        <a class="btn btn-link text-white-50" href="">{{ $t('contact_us') }}</a>
+                        <a class="btn btn-link text-white-50" href="">{{ $t('privacy_policy') }}</a>
+                        <a class="btn btn-link text-white-50" href="">{{ $t('terms_condition') }}</a>
+                    </div>
+
                 <div class="col-lg-3 col-md-6">
-                    <h5 class="text-white mb-4">Company</h5>
-                    <a class="btn btn-link text-white-50" href="">About Us</a>
-                    <a class="btn btn-link text-white-50" href="">Contact Us</a>
-                    <a class="btn btn-link text-white-50" href="">Privacy Policy</a>
-                    <a class="btn btn-link text-white-50" href="">Terms & Condition</a>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <h5 class="text-white mb-4">Important Links</h5>
+                    <h5 class="text-white mb-4">{{ $t('important_links') }}</h5>
                     <template v-for="data in partnership" >
                     <a class="btn btn-link text-white-50" :href="data.weblink" target="_blank" rel="noopener noreferrer">{{data.name}}</a>
                     </template>
                 </div>
                 <div class="col-lg-3 col-md-6" v-if="frontdata">
-                    <h5 class="text-white mb-4">Contact</h5>
+                    <h5 class="text-white mb-4">{{$t('contact')}}</h5>
                     <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>{{frontdata.location}}</p>
                     <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+880{{frontdata.phone}}</p>
                     <p class="mb-2"><i class="fa fa-envelope me-3"></i>{{frontdata.email}}</p>
@@ -32,13 +34,13 @@
 
                 <div class="col-lg-3 col-md-6">
                     <form @submit.prevent="subscribeNewsletter">
-                        <h5 class="text-white mb-4">Newsletter</h5>
+                        <h5 class="text-white mb-4">{{ $t('newsletter_intro') }}</h5>
                         <p>Feel free to get in touch with us. We always open to discussing new projects, creative ideas,
                             or opportunities to be part of your visions.</p>
                         <div class="position-relative mx-auto d-flex" style="max-width: 400px;">
                             <input v-model="fromData.email" name="email" class="form-control me-2" type="email" placeholder="Your email" required>
                             <button type="submit" class="btn btn-primary">
-                                SignUp
+                            {{$t('subscribe')}}
                             </button>
                         </div>
 
@@ -56,10 +58,10 @@
                     </div>
                     <div class="col-md-6 text-center text-md-end">
                         <div class="footer-menu">
-                            <a href="">Home</a>
-                            <a href="">Cookies</a>
-                            <a href="">Help</a>
-                            <a href="">FQAs</a>
+                            <a href="">{{$t('home')}}</a>
+                            <a href="">{{$t('cookies')}}</a>
+                            <a href="">{{$t('help')}}</a>
+                            <a href="">{{$t('faqs')}}</a>
                         </div>
                     </div>
                 </div>

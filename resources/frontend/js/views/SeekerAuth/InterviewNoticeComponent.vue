@@ -1,16 +1,16 @@
 <template>
-    <div class="container-fluid page-background"> <!-- Background class added -->
-        <h1 class="mt-4 text-center">{{$route.meta.pagetitle}}</h1> <!-- Center the page title -->
+    <div class="container-fluid page-background">
+        <h1 class="mt-4 text-center">{{$route.meta.pagetitle}}</h1>
         <div class="row justify-content-center application-container">
             <div class="col-md-7 application-details card" v-if="application">
                 <div class="card-header">
-                    <h6 class="card-title">Interview Information</h6>
+                    <h6 class="card-title">{{$t('interview_information')}}</h6>
                 </div>
                 <div class="card-body">
                     <table>
                         <tr>
                             <td class="bg-light p-2 text-dark">
-                                <label >Interview Status:</label>
+                                <label >{{$t('interviewStatus')}}:</label>
 
                                 <span :class="{
                     'bg-secondary p-1 ': application.interview_status == 1,
@@ -24,7 +24,7 @@
                         </tr>
                     </table>
 
-                    <h6 class="card-title mt-4">Notice:</h6>
+                    <h6 class="card-title mt-4">{{$t('notice')}}:</h6>
                     <p v-html="application.note ? application.note : 'Your Document will be Veryfied, Soon...'"></p>
                 </div>
 

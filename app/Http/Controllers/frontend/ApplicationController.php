@@ -4,6 +4,7 @@ namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Applications;
+use App\Models\JobPostModel;
 use App\Supports\Helper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -33,7 +34,7 @@ class ApplicationController extends Controller
         $data = Applications::with(['job.category', 'job.company', 'seeker'])
             ->whereHas('job', function ($query) use ($user) {
                 $query->where('user_id', $user->id);
-            })->get();
+            })->paginate(2);
 
         return $this->returnData(2000, $data);
     }
@@ -87,18 +88,61 @@ class ApplicationController extends Controller
     }
 
 
+//    public function update(Request $request, $id)
+//    {
+//        if (!$this->can('application.update')) {
+//            return $this->returnData(5000, null, 'You are not authorized to access this page');
+//        }
+//        $application = Applications::find($id);
+//        if (!$application) {
+//            return response()->json(['message' => 'Application not found'], 404);
+//        }
+//        $application->application_status = $request->application_status;
+//        $application->interview_status = $request->interview_status;
+//        $application->note = $request->note;
+//        if ($application->interview_status == 2) {
+//            $job = JobPostModel::findOrFail($application->job_id);
+//
+//            if ($job->vacancy > 0) {
+//                $job->vacancy--;
+//                $job->save();
+//            }
+//        }
+//        $application->save();
+//
+//        return $this->returnData(2000, $application);
+//    }
+
+
+
     public function update(Request $request, $id)
     {
         if (!$this->can('application.update')) {
             return $this->returnData(5000, null, 'You are not authorized to access this page');
         }
+
         $application = Applications::find($id);
         if (!$application) {
             return response()->json(['message' => 'Application not found'], 404);
         }
+
+        $previousInterviewStatus = $application->interview_status;
+
         $application->application_status = $request->application_status;
         $application->interview_status = $request->interview_status;
         $application->note = $request->note;
+
+        $job = JobPostModel::findOrFail($application->job_id);
+
+        if ($previousInterviewStatus == 2 && $application->interview_status != 2) {
+            $job->vacancy++;
+        } elseif ($previousInterviewStatus != 2 && $application->interview_status == 2) {
+            if ($job->vacancy > 0) {
+                $job->vacancy--;
+            }
+        }
+
+        $job->save();
         $application->save();
 
         return $this->returnData(2000, $application);

@@ -24,12 +24,12 @@ class FrontendController extends Controller
     use Helper;
     public function joblist()
     {
-        $data['jobData'] = JobPostModel::with('category','company')->where('status',1)->orderBy('id','DESC')->paginate(1);
+        $data['jobData'] = JobPostModel::with('category','company')->where('status',1)->orderBy('id','DESC')->paginate(15);
         $data['category'] = Category::get();
         $data['frontdata']=Frontendmanage::get();
         $data['partner'] = PartnershipModel::take(4)->skip(0)->orderBy('id','DESC')->get();
         $data['partner_logo'] = PartnershipModel::orderBy('id','DESC')->get();
-        $data['blogpost']=blog::with('user','company')->where('status',1)->orderBy('id','DESC')->paginate(2);
+        $data['blogpost']=blog::with('user','company')->where('status',1)->orderBy('id','DESC')->paginate(12);
         $data['blogpost_slide'] = blog::with('user', 'company')
             ->where('status', 1)
             ->orderBy('id', 'DESC')

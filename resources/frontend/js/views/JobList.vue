@@ -3,7 +3,7 @@
     <div class="container mt-4 shadow p-4 rounded">
         <h3 class="d-flex justify-content-center my-4">
         <span class="badge bg-primary py-3 px-3 container-fluid">
-            Job Listing
+            {{$t("job_listing")}} <!-- Translated text here -->
         </span>
         </h3>
         <div class="row">
@@ -22,7 +22,7 @@
                                 </div>
                                 <router-link :to="{ name: 'jobcompany', params: { company_id: job.company_id }}" class="comp-name-text mb-2">
                                     <i class="bi bi-building"></i>
-                                    <strong>Company:</strong>
+                                    <strong>{{$t("company")}}:</strong>
                                     <span class="text-muted">{{ job.company.name }}</span>
                                 </router-link>
                             </div>
@@ -30,21 +30,26 @@
                                 <img style="height: 80px" :src="storageImage(job.image)" alt="Company Logo" class="company-logo" />
                             </div>
                         </div>
+                        <div class="m-lg-3">
+                            <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i>
+                                {{ job.job_type == 1 ? $t("remote") : (job.job_type == 2 ? $t("full_time") : (job.job_type == 3 ? $t("part_time") : $t("not_specified"))) }} <!-- Translated text here -->
+                            </span>
+                        </div>
                         <div class="d-flex gap-2 p-3">
-                            <router-link :to="{ name: 'Details', params: { id: job.id }}" class="btn btn-primary">Apply Now Or View</router-link>
+                            <router-link :to="{ name: 'Details', params: { id: job.id }}" class="btn btn-primary">{{$t("apply_now_or_view")}}</router-link> <!-- Translated text here -->
                             <a
                                     @click="saveJob(job)"
                                     :class="{'btn btn-info': saveds.includes(job.id), 'btn btn-secondary': !saveds.includes(job.id)}">
                                 <span v-if="saveds.includes(job.id)">
                                     <i class="fa fa-check"></i>
                                 </span>
-                                {{ saveds.includes(job.id) ? ' ' : ' Save Job' }}
+                                {{ saveds.includes(job.id) ? ' ' : $t("save_job") }}
                             </a>
                         </div>
                     </div>
                 </div>
                 <div class="col-12 d-flex justify-content-center">
-                    <pagination previousText="PREV" nextText="NEXT" :data="joblist.jobData" @paginateTo="getJobList"></pagination>
+                    <pagination previousText="prev" nextText="next" :data="joblist.jobData" @paginateTo="getJobList"></pagination>
                 </div>
             </template>
 
@@ -54,8 +59,8 @@
         </div>
     </div>
     <!-- Jobs End -->
-
 </template>
+
 
 <script>
     import axios from 'axios';

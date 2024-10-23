@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('job_type');
             $table->integer('salary');
             $table->string('date_time');
-            $table->integer('status')->default(0);
+            $table->integer('status')->default(1);
             $table->integer('interview_status')->default(0);
 
             $table->timestamps();

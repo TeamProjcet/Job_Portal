@@ -3,7 +3,7 @@
     <div class="container mt-4 shadow p-4 rounded">
         <h3 class="d-flex justify-content-center my-4">
             <span class="badge bg-primary py-3 px-3 container-fluid">
-                Explore By Category
+                {{ $t('explore_by_category') }}
             </span>
         </h3>
         <div class="row g-4">
@@ -16,14 +16,15 @@
                 </a>
             </div>
         </div>
-        <div class=" mt-4">
+        <div class="mt-4">
             <button v-if="showMoreButton" @click="showMoreCategories" class="btn btn-primary">
-                More +
+                {{ $t('more') }} +
             </button>
         </div>
     </div>
     <!-- Category End -->
 </template>
+
 
 <script>
     import axios from 'axios';

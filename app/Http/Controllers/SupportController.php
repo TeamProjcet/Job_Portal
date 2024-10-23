@@ -45,7 +45,7 @@ class SupportController extends Controller
         if(in_array('job_type', $array)){
             $data['job_type'] = [
                 [
-                    'name' => 'Featured',
+                    'name' => 'Remote',
                     'value' => 1
                 ],
                 [
@@ -56,7 +56,6 @@ class SupportController extends Controller
                     'name' => 'Part Time',
                     'value' => 3
                 ],
-
             ];
         }
         if (in_array('application_status',$array)) {
