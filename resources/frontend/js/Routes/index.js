@@ -14,6 +14,9 @@ import JobCompany from "../views/JobCompany";
 import JobResults from "../views/Searching/JobResults";
 import InterviewNoticeComponent from "../views/SeekerAuth/InterviewNoticeComponent";
 import NotFoundPage from "../views/NotFoundPage";
+import CookiesPolicy from "../views/Policy/CookiesPolicy";
+import Help from "../views/Policy/Help";
+import FQAs from "../views/Policy/FQAs";
 
 const route = [
     {
@@ -125,6 +128,23 @@ const route = [
         meta:{pagetitle:'Interview Notice Table'},
         props: true
 
+    },
+
+    {
+        path:'/cookies-policy',
+        name:'CookiesPolicy',
+        component:CookiesPolicy,
+    } ,
+    {
+        path:'/help-policy',
+        name:'Help',
+        component:Help,
+    },
+    {
+        path:'/fqas-policy',
+        name:'FQAs',
+        component:FQAs,
     }
+
 ];
 export default route;

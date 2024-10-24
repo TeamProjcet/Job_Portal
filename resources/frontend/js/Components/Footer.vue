@@ -57,9 +57,9 @@
                     <div class="col-md-6 text-center text-md-end">
                         <div class="footer-menu">
                             <router-link to="/" >Home</router-link>
-                            <router-link to="">Cookies</router-link>
-                            <router-link to="">Help</router-link>
-                            <router-link to="">FQAs</router-link>
+                            <router-link to="/cookies-policy">Cookies Policy</router-link>
+                            <router-link to="/help-policy">Help</router-link>
+                            <router-link to="/fqas-policy">FQAs</router-link>
                         </div>
                     </div>
                 </div>

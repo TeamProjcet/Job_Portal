@@ -27,6 +27,7 @@
     <!-- Customized Bootstrap Stylesheet -->
     <link href="{{asset('frontend/assets/css/bootstrap.min.css')}}" rel="stylesheet">
 
+
     <!-- Template Stylesheet -->
     <link href="{{asset('frontend/assets/css/style.css')}}" rel="stylesheet">
 </head>
