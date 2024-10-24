@@ -26,7 +26,7 @@
                                 <router-link :to="{ name: 'jobcompany', params: { company_id : job.company_id }}"
                                              class="comp-name-text mb-2">
                                     <i class="bi bi-building"></i>
-                                    <strong>Company:</strong>
+                                    <strong>{{$t('company')}}:</strong>
                                     <span class="text-muted">{{ job.company.name }}</span>
                                 </router-link>
                             </div>
@@ -36,8 +36,10 @@
                             </div>
                         </div>
                         <div class="m-lg-3">
-                            <strong>Type:</strong>
-                            <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i>{{ job.job_type == 1 ? 'Remote' : (job.job_type == 2 ? 'Full Time' : (job.job_type == 3 ? 'Part Time' : 'Not Specified')) }}</span>
+                            <strong>{{$t('type')}}:</strong>
+                            <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i>
+                                {{ job.job_type == 1 ? $t("remote") : (job.job_type == 2 ? $t("full_time") : (job.job_type == 3 ? $t("part_time") : $t("not_specified"))) }}
+                            </span>
 
                         </div>
                         <div class="d-flex gap-2  p-3">
@@ -48,7 +50,7 @@
                                     <span v-if="saveds.includes(job.id)">
                                         <i class="fa fa-check"></i>
                                     </span>
-                                {{ saveds.includes(job.id) ? ' ' : ' Save Job' }}
+                                {{ saveds.includes(job.id) ? ' ' : $t("save_job") }}
                             </a>
                         </div>
                     </div>

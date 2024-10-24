@@ -32,8 +32,10 @@
                         </div>
                     </div>
                     <div class="m-lg-3">
-                        <strong>Type:</strong>
-                        <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i>{{ jobcat.job_type == 1 ? 'Remote' : (jobcat.job_type == 2 ? 'Full Time' : (jobcat.job_type == 3 ? 'Part Time' : 'Not Specified')) }}</span>
+                        <strong>{{$t('type')}}:</strong>
+                        <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i>
+                                {{ jobcat.job_type == 1 ? $t("remote") : (jobcat.job_type == 2 ? $t("full_time") : (jobcat.job_type == 3 ? $t("part_time") : $t("not_specified"))) }}
+                        </span>
 
                     </div>
                     <div class="d-flex gap-2  p-3">

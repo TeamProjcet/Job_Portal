@@ -32,11 +32,11 @@
                         </div>
                         <div class="m-lg-3">
                             <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i>
-                                {{ job.job_type == 1 ? $t("remote") : (job.job_type == 2 ? $t("full_time") : (job.job_type == 3 ? $t("part_time") : $t("not_specified"))) }} <!-- Translated text here -->
+                                {{ job.job_type == 1 ? $t("remote") : (job.job_type == 2 ? $t("full_time") : (job.job_type == 3 ? $t("part_time") : $t("not_specified"))) }}
                             </span>
                         </div>
                         <div class="d-flex gap-2 p-3">
-                            <router-link :to="{ name: 'Details', params: { id: job.id }}" class="btn btn-primary">{{$t("apply_now_or_view")}}</router-link> <!-- Translated text here -->
+                            <router-link :to="{ name: 'Details', params: { id: job.id }}" class="btn btn-primary">{{$t("apply_now_or_view")}}</router-link>
                             <a
                                     @click="saveJob(job)"
                                     :class="{'btn btn-info': saveds.includes(job.id), 'btn btn-secondary': !saveds.includes(job.id)}">

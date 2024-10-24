@@ -80,6 +80,7 @@ const messages = {
         cookies: 'Cookies',
         help: 'Help',
         faqs: 'FAQs',
+        type: 'Type',
 
 
 
@@ -161,6 +162,8 @@ const messages = {
         cookies: 'কুকিজ',
         help: 'সাহায্য',
         faqs: 'প্রশ্নোত্তর',
+        type: 'ধরণ',
+
     },
 };
 
