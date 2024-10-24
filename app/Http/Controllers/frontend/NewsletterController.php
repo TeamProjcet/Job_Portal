@@ -15,12 +15,6 @@ class NewsletterController extends Controller
 use Helper;
     public function __construct()
     {
-//        $this->middleware(function ($request, $next) {
-//            if (!$this->can(request()->route()->action['as'])){
-//                return $this->returnData(5000, null, 'You are not authorized to access this page');
-//            }
-//            return $next($request);
-//        });
         $this->model=new Newsletter();
     }
 
@@ -29,7 +23,7 @@ use Helper;
         if (!$this->can('newsletter.index')) {
             return $this->returnData(5000, null, 'You are not authorized to access this page');
         }
-        $data = Newsletter::all();
+        $data = Newsletter::paginate(2);
         return $this->returnData(2000, $data);
 
     }

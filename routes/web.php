@@ -11,7 +11,6 @@ Route::get('login', [\App\Http\Controllers\auth\AuthController::class, 'index'])
 Route::get('userAuth', [\App\Http\Controllers\auth\AuthController::class, 'userAuth']);
 Route::get('userdata', [\App\Http\Controllers\auth\AuthController::class, 'userdata']);
 Route::get('logout', [\App\Http\Controllers\auth\AuthController::class, 'logout'])->name('logout');
-//Route::resource('/register', \App\Http\Controllers\auth\AuthController::class);
 Route::post('adlogin', [\App\Http\Controllers\auth\AuthController::class, 'adlogin']);
 
 Route::view('admin/{any}', 'backend')->where('any', '.*')->middleware('auth');

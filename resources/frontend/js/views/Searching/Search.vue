@@ -56,7 +56,7 @@
         methods: {
             async jonDataList() {
                 try {
-                    const response = await axios.get('/api/frontend/joblist');
+                    const response = await axios.get(`/api/frontend/joblist`);
                     this.jobPosts = Array.isArray(response.data.result.jobData.data) ? response.data.result.jobData.data : [];
                 } catch (error) {
                     console.error("Error fetching job posts:", error);
@@ -81,9 +81,6 @@
                     query: { jobs: JSON.stringify(filteredJobPosts) }
                 });
             }
-
-
-
         }
     }
 </script>

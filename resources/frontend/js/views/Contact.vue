@@ -22,7 +22,7 @@
                                          style="width: 45px; height: 45px;">
                                         <i class="fa fa-map-marker-alt text-primary"></i>
                                     </div>
-                                    <span v-if="frontdata">{{frontdata.location}}</span>
+                                    <span v-if="frontdata"> {{frontdata.location}}</span>
                                 </div>
                             </div>
                             <div class="col-md-4 ">
@@ -31,7 +31,7 @@
                                          style="width: 45px; height: 45px;">
                                         <i class="fa fa-envelope-open text-primary"></i>
                                     </div>
-                                    <span v-if="frontdata">{{frontdata.email}}</span>
+                                    <span v-if="frontdata"> {{frontdata.email}}</span>
 
                                 </div>
                             </div>
@@ -41,15 +41,22 @@
                                          style="width: 45px; height: 45px;">
                                         <i class="fa fa-phone-alt text-primary"></i>
                                     </div>
-                                    <span v-if="frontdata">+88{{frontdata.phone}}</span>
+                                    <span v-if="frontdata">+88 {{frontdata.phone}}</span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 ">
-                        <iframe v-if="frontdata" :src="frontdata.map"
-                                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
-                                referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <div class="col-md-6">
+                        <div class="embed-responsive embed-responsive-16by9">
+                            <iframe
+                                    v-if="frontdata"
+                                    :src="frontdata.map"
+                                    class="embed-responsive-item"
+                                    allowfullscreen
+                                    loading="lazy"
+                                    referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
+                        </div>
                     </div>
                     <div class="col-md-6">
                         <div class="">
@@ -129,5 +136,22 @@
 </script>
 
 <style scoped>
+    .embed-responsive {
+        position: relative;
+        display: block;
+        height: 0;
+        padding: 0;
+    }
 
+    .embed-responsive-16by9 {
+        padding-bottom: 56.25%;
+    }
+
+    .embed-responsive-item {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
 </style>

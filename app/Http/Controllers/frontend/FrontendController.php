@@ -24,12 +24,12 @@ class FrontendController extends Controller
     use Helper;
     public function joblist()
     {
-        $data['jobData'] = JobPostModel::with('category','company')->where('status',1)->orderBy('id','DESC')->paginate(1);
+        $data['jobData'] = JobPostModel::with('category','company')->where('status',1)->orderBy('id','DESC')->paginate(18);
         $data['category'] = Category::get();
         $data['frontdata']=Frontendmanage::get();
         $data['partner'] = PartnershipModel::take(4)->skip(0)->orderBy('id','DESC')->get();
         $data['partner_logo'] = PartnershipModel::orderBy('id','DESC')->get();
-        $data['blogpost']=blog::with('user','company')->where('status',1)->orderBy('id','DESC')->paginate(2);
+        $data['blogpost']=blog::with('user','company')->where('status',1)->orderBy('id','DESC')->paginate(18);
         $data['blogpost_slide'] = blog::with('user', 'company')
             ->where('status', 1)
             ->orderBy('id', 'DESC')
@@ -42,8 +42,7 @@ class FrontendController extends Controller
     public function jobCategory($cateId)
     {
         $data['jobPosts'] = JobPostModel::with('category','company')->where('category_id',$cateId)->get();
-        $data['companycate'] = JobPostModel::with('category','company')->where('company_id',$cateId)->get();
-//        $data['blogComment'] = BlogComment::with('seeker')->where('blog_id',$cateId)->get();
+        $data['companycate'] = JobPostModel::with('category','company')->where('company_id',$cateId)->paginate(1);
         return $this->returnData(2000,$data);
 
     }
@@ -66,7 +65,6 @@ class FrontendController extends Controller
         } else {
             $data['application'] = [];
         }
-//        $data['application'] = Applications::with('seeker')->where('seeker_id',$seekerId->id)->get();
         return $this->returnData(2000,$data);
     }
 
@@ -102,8 +100,5 @@ class FrontendController extends Controller
         return $this->returnData(2000,$data);
 
     }
-
-
-
 
 }

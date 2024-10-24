@@ -7,7 +7,7 @@
                         Job Listing
                    </span>
             </h3>
-            <div class="col-sm-4 mb-4" v-for="jobcom in jobcompany" :key="jobcom.id">
+            <div class="col-sm-4 mb-4" v-for="jobcom in jobcompany.companycate.data" :key="jobcom.id">
                 <div class="card mb-3 shadow-sm">
                     <div class="card-body d-flex justify-content-between">
                         <div class="job-details">
@@ -44,6 +44,9 @@
                     </div>
                 </div>
             </div>
+            <div class="col-12 d-flex justify-content-lg-start">
+                <pagination previousText="PREV" nextText="NEXT" :data="jobcompany.companycate" @paginateTo="companyList"></pagination>
+            </div>
         </div>
     </div>
 </template>
@@ -56,7 +59,7 @@
         props: ['company_id'],
         data() {
             return {
-                jobcompany: [],
+                jobcompany: {companycate:{data: []}},
                 saveds:[],
                 isAuthenticated:false,
                 error: null
@@ -72,14 +75,14 @@
         },
         methods: {
 
-            async companyList() {
+            async companyList(page = 1) {
                 if (!this.company_id) {
                     this.error = "company ID is not defined.";
                     return;
                 }
                 try {
-                    const response = await axios.get(`/api/frontend/jobcate/${this.company_id}`);
-                    this.jobcompany = response.data.result.companycate;
+                    const response = await axios.get(`/api/frontend/jobcate/${this.company_id}?page=${page}`);
+                    this.jobcompany = response.data.result;
                 } catch (error) {
                     this.error = "Error fetching job data. Please try again later.";
                 }

@@ -13,23 +13,27 @@
         <!-- About Start -->
         <div class="container-xxl py-5 shadow p-4 rounded">
             <div class="container">
-
                 <div class="row g-5 align-items-center">
-                    <div class="col-lg-6" >
-                        <div class="row g-0 about-bg rounded overflow-hidden">
-                            <div class="col-6 text-start" v-if="frontdata">
-                                <img  style="width: 600px" :src="storageImage(frontdata.image)" alt="image"/>
+                    <div class="col-lg-6">
+                        <div class="row g-0 rounded overflow-hidden">
+                            <div class="col-12 text-start" v-if="frontdata">
+                                <img
+                                        class="d-none d-lg-block"
+                                        style="width: 100%; height: 500px; object-fit: cover;"
+                                        :src="storageImage(frontdata.image)"
+                                        alt="image"
+                                />
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6" >
-                        <h1 v-if="frontdata" class="mb-4">{{frontdata.title}}</h1>
-                        <p  v-if="frontdata" v-html="frontdata.details" class="mb-4"></p>
-
+                    <div class="col-lg-6">
+                        <h1 v-if="frontdata" class="mb-4">{{ frontdata.title }}</h1>
+                        <p v-if="frontdata" v-html="frontdata.details" class="mb-4"></p>
                     </div>
                 </div>
             </div>
         </div>
+
         <!-- About End -->
     </div>
 </template>

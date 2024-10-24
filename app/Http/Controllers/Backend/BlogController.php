@@ -27,7 +27,7 @@ class BlogController extends Controller
     {
 
         $user = auth()->user();
-        $data = $this->model->with('user', 'company')->where('user_id', $user->id)->get();
+        $data = $this->model->with('user', 'company')->where('user_id', $user->id)->paginate(2);
         return $this->returnData(2000, $data);
     }
 

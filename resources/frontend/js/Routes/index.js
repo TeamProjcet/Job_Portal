@@ -80,7 +80,7 @@ const route = [
         meta: { pagetitle: '', dataUrl: 'api/frontend/seekerlogin' },
         beforeEnter: (to, from, next) => {
             localStorage.setItem('redirectAfterLogin', from.fullPath);
-            next(); // নিশ্চিত করুন যে next() কল করা হচ্ছে
+            next();
         }
     },
     {

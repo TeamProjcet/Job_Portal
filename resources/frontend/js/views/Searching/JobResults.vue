@@ -9,8 +9,6 @@
                    </span>
                 </h3>
                 <div class="col-sm-4 mb-4" v-for="job in jobs" :key="job.id">
-
-
                     <div class="card mb-3 shadow-sm">
                         <div class="card-body d-flex justify-content-between">
                             <div class="job-details">

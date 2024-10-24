@@ -28,7 +28,7 @@ class BlogCommentController extends Controller
         $data = BlogComment::with('seeker', 'blog')
             ->whereHas('blog', function ($query) use ($user) {
                 $query->where('user_id', $user->id);
-            })->get();
+            })->paginate(2);
 
         return $this->returnData(2000, $data);
     }
@@ -59,7 +59,7 @@ class BlogCommentController extends Controller
         if (!$this->can('blogcomment.show')) {
             return $this->returnData(5000, null, 'You are not authorized to access this page');
         }
-       $data= $this->model->with('seeker')->where('blog_id', $id)->get();
+       $data= $this->model->with('seeker')->where('blog_id', $id)->paginate(1);
         return $this->returnData(2000,$data);
 
     }

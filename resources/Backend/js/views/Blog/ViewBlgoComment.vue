@@ -5,7 +5,7 @@
                 <h3 class="fw-bold mb-3 " style="margin-left: 20px">{{$route.meta.pagetitle}}</h3>
             </div>
             <DataTable :tableHeading="tableHeading">
-                <tr v-for="(data, index) in comments" :key="data.id">
+                <tr v-for="(data, index) in comments.data" :key="data.id">
                     <td>{{ index + 1 }}</td>
                     <td>{{ data.seeker.name }}</td>
                     <td>{{ data.comments }}</td>
@@ -16,6 +16,16 @@
                     </td>
                 </tr>
             </DataTable>
+            <div class="col-12 d-flex justify-content-lg-start">
+                <pagination
+                        previousText="PREV"
+                        nextText="NEXT"
+                        :totalPages="totalPages"
+                        :currentPage="currentPage"
+                        :data="comments"
+                        @paginateTo="ViewComment"
+                ></pagination>
+            </div>
         </div>
     </div>
 </template>
@@ -34,19 +44,21 @@
                 tableHeading: ['#', 'User', 'Comment', 'Actions'],
                 postId: this.$route.params.id,
                 comments: [],
+                currentPage: 1,
+                totalPages: 0,
             }
         },
         mounted() {
             this.ViewComment()
         },
         methods: {
-            async ViewComment() {
+            async ViewComment(page = 1) {
                 if (!this.postId) {
                     this.error = "Category ID is not defined.";
                     return;
                 }
                 try {
-                    const response = await axios.get(`/api/blogcomment/${this.postId}`);
+                    const response = await axios.get(`/api/blogcomment/${this.postId}?page=${page}`);
                     this.comments = response.data.result;
                 } catch (error) {
                     console.error('Error fetching comments:', error);

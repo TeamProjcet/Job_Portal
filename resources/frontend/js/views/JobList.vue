@@ -43,7 +43,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-12 d-flex justify-content-center">
+                <div class="col-12 d-flex justify-content-lg-start">
                     <pagination previousText="PREV" nextText="NEXT" :data="joblist.jobData" @paginateTo="getJobList"></pagination>
                 </div>
             </template>

@@ -16,12 +16,6 @@ class ContactController extends Controller
     use Helper;
     public function __construct()
     {
-//        $this->middleware(function ($request, $next) {
-//            if (!$this->can(request()->route()->action['as'])){
-//                return $this->returnData(5000, null, 'You are not authorized to access this page');
-//            }
-//            return $next($request);
-//        });
         $this->model=new Contact();
     }
 
@@ -30,7 +24,7 @@ class ContactController extends Controller
         if (!$this->can('contact.index')) {
             return $this->returnData(5000, null, 'You are not authorized to access this page');
         }
-        $data = Contact::all();
+        $data = Contact::paginate(2);
         return $this->returnData(2000, $data);
 
     }

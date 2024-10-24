@@ -25,7 +25,7 @@ class CompanyController extends Controller
 
     public function index()
     {
-            $data = $this->model->get();
+            $data = $this->model->paginate(10);
             return $this->returnData(2000, $data);
     }
 

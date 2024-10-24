@@ -6,7 +6,7 @@
                     <h3 class="fw-bold mb-3 " style="margin-left: 20px">{{$route.meta.pagetitle}}</h3>
                 </div>
                 <DataTable :tableHeading="tableHeading">
-                    <tr v-for="(data, index) in dataList">
+                    <tr v-for="(data, index) in dataList.data">
                         <td>{{ index+1 }}</td>
                         <td>{{ data.name }}</td>
                         <td>{{ data.email }}</td>
@@ -19,6 +19,16 @@
                         </td>
                     </tr>
                 </DataTable>
+                <div class="col-12 d-flex justify-content-lg-start">
+                    <pagination
+                            previousText="PREV"
+                            nextText="NEXT"
+                            :totalPages="totalPages"
+                            :currentPage="currentPage"
+                            :data="dataList"
+                            @paginateTo="getDataList"
+                    ></pagination>
+                </div>
             </div>
         </div>
     </div>
@@ -33,6 +43,8 @@
         data() {
             return {
                 tableHeading: ["Sl", "Name", "Email", "Subject", "Message", "Action"],
+                currentPage: 1,
+                totalPages: 0,
             };
         },
         mounted() {

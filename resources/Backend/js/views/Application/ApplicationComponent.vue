@@ -79,7 +79,7 @@
                             <template v-if="!isLoading && dataList !== undefined">
                                 <div class="table-responsive">
                                     <DataTable :tableHeading="tableHeading">
-                                        <tr v-for="(data, index) in displayedData" :key="index">
+                                        <tr v-for="(data, index) in displayedData.data" :key="index">
                                             <td>{{ index + 1 }}</td>
                                             <td>{{ data.seeker.name }}</td>
                                             <td>{{ data.seeker.email }}</td>
@@ -120,6 +120,16 @@
                                             </td>
                                         </tr>
                                     </DataTable>
+                                    <div class="col-12 d-flex justify-content-lg-start">
+                                        <pagination
+                                                previousText="PREV"
+                                                nextText="NEXT"
+                                                :totalPages="totalPages"
+                                                :currentPage="currentPage"
+                                                :data="dataList"
+                                                @paginateTo="getDataList"
+                                        ></pagination>
+                                    </div>
                                 </div>
                             </template>
 
@@ -153,6 +163,8 @@
                 filteredData: [],
                 educations: ['Secondary School (SSC)', 'Higher Secondary School (HSC)', 'Diploma in Engineering', 'Bachelor\'s Degree', 'Master\'s Degree', 'Professional Degree', 'Postgraduate Degree', 'Ph.D.'],
                 skillname:[ 'JavaScript', 'Python', 'Java', 'C++', 'Laravel','vue', 'PHP', 'C#', 'TypeScript', 'HTML', 'CSS', 'React', 'Angular', 'SQL','MongoDB', 'Express.js', 'Node', 'Bootstrap', 'Django','Git'],
+                currentPage: 1,
+                totalPages: 0,
 
             };
         },

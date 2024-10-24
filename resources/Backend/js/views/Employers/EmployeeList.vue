@@ -9,7 +9,7 @@
             </div>
             <div class="table-responsive">
             <DataTable :tableHeading="tableHeading">
-                <tr v-for="(data, index) in dataList" :key="index">
+                <tr v-for="(data, index) in dataList.data" :key="index">
                     <td>{{ index + 1 }}</td>
                     <td>
                         <img class="w-50 h-50" :src="storageImage(data.employer.image)" alt="image"></td>
@@ -33,6 +33,16 @@
                     </td>
                 </tr>
             </DataTable>
+                <div class="col-12 d-flex justify-content-lg-start">
+                    <pagination
+                            previousText="PREV"
+                            nextText="NEXT"
+                            :totalPages="totalPages"
+                            :currentPage="currentPage"
+                            :data="dataList"
+                            @paginateTo="getDataList"
+                    ></pagination>
+                </div>
             </div>
         </div>
     </div>
@@ -48,6 +58,8 @@
         data() {
             return {
                 tableHeading: ["Sl", "Profile","name",  "Email", "Company Name", "company_website",  "company_address",  "contact_person",  "Bio",   "Action"],
+                currentPage: 1,
+                totalPages: 0,
 
             };
         },

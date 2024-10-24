@@ -1,7 +1,8 @@
 <template>
     <div class="main-header">
         <nav class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom">
-            <div class="container-fluid">
+            <div class="container-fluid ">
+                <!-- Search bar for larger screens -->
                 <nav class="navbar navbar-header-left navbar-expand-lg navbar-form nav-search p-0 d-none d-lg-flex">
                     <div class="input-group">
                         <div class="input-group-prepend">
@@ -12,9 +13,11 @@
                         <input type="text" placeholder="Search ..." class="form-control" />
                     </div>
                 </nav>
+
+                <!-- Responsive Search Dropdown for smaller screens -->
                 <ul class="navbar-nav topbar-nav ms-md-auto align-items-center">
                     <li class="nav-item topbar-icon dropdown hidden-caret d-flex d-lg-none">
-                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" aria-haspopup="true">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
                             <i class="fa fa-search"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-search animated fadeIn">
@@ -26,10 +29,11 @@
                         </ul>
                     </li>
 
+                    <!-- User Profile Dropdown -->
                     <li class="nav-item topbar-user dropdown hidden-caret">
                         <a class="dropdown-toggle profile-pic" data-bs-toggle="dropdown" href="#" aria-expanded="false">
                             <div class="d-flex align-items-center bg-success text-white p-2 rounded">
-                                <h5 class="mb-0 me-2">{{ user? user.name : 'Guest' }}</h5>
+                                <h5 class="mb-0 me-2">{{ user ? user.name : 'Guest' }}</h5>
                                 <i class="fa fa-angle-down ms-2"></i>
                             </div>
                         </a>
@@ -39,16 +43,12 @@
                                     <div class="dropdown-divider"></div>
                                     <router-link to="/admin/employer/profile" class="dropdown-item">My Profile</router-link>
                                     <div class="dropdown-divider"></div>
-                                    <div class="dropdown-divider"></div>
                                     <a href="#" @click.prevent="logout" class="dropdown-item">Logout</a>
                                 </li>
                             </div>
                         </ul>
                     </li>
-
-
                 </ul>
-
             </div>
         </nav>
     </div>
@@ -65,7 +65,6 @@
             };
         },
         mounted() {
-            // this.userAuthentication();
             this.userAuthData();
         },
         methods: {
@@ -80,18 +79,12 @@
             async userAuthData() {
                 try {
                     const response = await axios.get('/userAuth');
-                    if (response.data.result) {
-                        this.user = response.data.result;
-                    } else {
-                        this.user = {};
-                    }
+                    this.user = response.data.result || {};
                 } catch (error) {
                     this.user = {};
                     console.error('Error fetching authentication data:', error);
                 }
             },
-
-
         }
     }
 </script>

@@ -18,9 +18,9 @@
                 </div>
                 <div class="col-lg-3 col-md-6" v-if="frontdata">
                     <h5 class="text-white mb-4">Contact</h5>
-                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>{{frontdata.location}}</p>
-                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+880{{frontdata.phone}}</p>
-                    <p class="mb-2"><i class="fa fa-envelope me-3"></i>{{frontdata.email}}</p>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i> {{frontdata.location}}</p>
+                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+88 {{frontdata.phone}}</p>
+                    <p class="mb-2"><i class="fa fa-envelope me-3"></i> {{frontdata.email}}</p>
                     <div class="d-flex pt-2">
                         <a class="btn btn-outline-light btn-social" target="_blank" :href="frontdata.facebook"><i class="fab fa-facebook-f"></i></a>
                         <a class="btn btn-outline-light btn-social" target="_blank" :href="frontdata.linkdin"><i class="fab fa-linkedin-in"></i></a>
@@ -51,15 +51,15 @@
             <div class="copyright">
                 <div class="row">
                     <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                        &copy; <a class="border-bottom" href="#">Job Portal</a>, All Right Reserved.
-                        Designed By <a class="border-bottom" href="#">Tmss Ict Ltd</a>
+                        &copy; <router-link class="border-bottom" to="/">Job Portal</router-link>, All Right Reserved.
+                        Develop By <a class="border-bottom" target="_blank" href="https://tmss-ict.com/">Tmss Ict Ltd</a>
                     </div>
                     <div class="col-md-6 text-center text-md-end">
                         <div class="footer-menu">
-                            <a href="">Home</a>
-                            <a href="">Cookies</a>
-                            <a href="">Help</a>
-                            <a href="">FQAs</a>
+                            <router-link to="/" >Home</router-link>
+                            <router-link to="">Cookies</router-link>
+                            <router-link to="">Help</router-link>
+                            <router-link to="">FQAs</router-link>
                         </div>
                     </div>
                 </div>

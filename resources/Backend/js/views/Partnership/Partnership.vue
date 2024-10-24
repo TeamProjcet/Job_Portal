@@ -6,7 +6,7 @@
 
             </div>
             <DataTable :tableHeading="tableHeading">
-                <tr v-for="(data, index) in dataList" :key="index">
+                <tr v-for="(data, index) in dataList.data" :key="index">
                     <td>{{index + 1}}</td>
                     <td>{{data.name}}</td>
                     <td>
@@ -22,6 +22,16 @@
                     </td>
                 </tr>
             </DataTable>
+            <div class="col-12 d-flex justify-content-lg-start">
+                <pagination
+                        previousText="PREV"
+                        nextText="NEXT"
+                        :totalPages="totalPages"
+                        :currentPage="currentPage"
+                        :data="dataList"
+                        @paginateTo="getDataList"
+                ></pagination>
+            </div>
         </div>
 
         <!-- Slot for the form modal -->
@@ -76,6 +86,8 @@
         data() {
             return {
                 tableHeading: ["Sl", "Partnership", "Logo", "Action"],
+                currentPage: 1,
+                totalPages: 0,
             };
         },
         mounted() {

@@ -13,7 +13,7 @@
                 </div>
             </div>
             <DataTable :tableHeading="tableHeading">
-                <tr v-for="(data, index) in dataList" :key="index" >
+                <tr v-for="(data, index) in dataList.data" :key="index" >
                     <td>{{index +1}}</td>
                     <td>{{data.position}}</td>
                     <td>{{data.salary  || 'Negotiatable'}}</td>
@@ -37,17 +37,16 @@
                     </td>
                 </tr>
             </DataTable>
-            <template>
-<!--                <pagination-->
-<!--                        :current-page="pagination.current_page"-->
-<!--                        :total="pagination.total"-->
-<!--                        :per-page="10"-->
-<!--                        @paginate="getDataList"-->
-<!--                        previousText="PREV"-->
-<!--                        nextText="NEXT"-->
-<!--                ></pagination>-->
-                <pagination previousText="PREV" nextText="NEXT" :data="dataList" @paginateTo="getDataList"></pagination>
-            </template>
+            <div class="col-12 d-flex justify-content-lg-start">
+                <pagination
+                        previousText="PREV"
+                        nextText="NEXT"
+                        :totalPages="totalPages"
+                        :currentPage="currentPage"
+                        :data="dataList"
+                        @paginateTo="getDataList"
+                ></pagination>
+            </div>
             <FormModal class="form-modal"  @submit="submitFromData(fromData)">
                 <div class="row">
                         <div class="mb-3">
@@ -133,13 +132,6 @@
                         </div>
                 </div>
             </FormModal>
-<!--            <a v-if="dataList && dataList.current_page < dataList.last_page"-->
-<!--               class="btn btn-primary py-3 px-5"-->
-<!--               @click="getDataList(dataList.current_page + 1)">-->
-<!--                Browse More Jobs-->
-<!--            </a>-->
-
-
         </div>
 
     </div>
@@ -151,6 +143,7 @@
     import PageTop from "../../Components/PageTop";
     import DataTable from "../../Components/DataTable";
     import FormModal from "../../Components/FormModal";
+
 
     import DatePicker from 'vue2-datepicker';
     import 'vue2-datepicker/index.css';
@@ -170,7 +163,9 @@
                     menubar: false,
                     plugins: 'link image code',
                     toolbar: 'undo redo | styleselect | bold italic | link image | code',
-                }
+                },
+                currentPage: 1,
+                totalPages: 0,
             };
         },
         mounted() {

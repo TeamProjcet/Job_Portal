@@ -5,7 +5,7 @@
                 <h3 class="fw-bold mb-3 " style="margin-left: 20px">{{$route.meta.pagetitle}}</h3>
             </div>
             <DataTable :tableHeading="tableHeading">
-                    <tr v-for="(data, index) in dataList" :key="data.id">
+                    <tr v-for="(data, index) in dataList.data" :key="data.id">
                         <td>{{ index + 1 }}</td>
                         <td>{{ data.seekerName }}</td>
                         <td>{{ data.comments }}</td>
@@ -16,6 +16,16 @@
                         </td>
                     </tr>
             </DataTable>
+            <div class="col-12 d-flex justify-content-lg-start">
+                <pagination
+                        previousText="PREV"
+                        nextText="NEXT"
+                        :totalPages="totalPages"
+                        :currentPage="currentPage"
+                        :data="dataList"
+                        @paginateTo="getDataList"
+                ></pagination>
+            </div>
         </div>
     </div>
 </template>
@@ -33,7 +43,9 @@
         data() {
             return {
                 commentShow: {},
-                tableHeading: ['#', 'User', 'Comment', 'Actions']
+                tableHeading: ['#', 'User', 'Comment', 'Actions'],
+                currentPage: 1,
+                totalPages: 0,
             };
         },
         mounted(){

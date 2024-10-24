@@ -6,8 +6,7 @@
                 <PageTop :storePermission= "can('blogpost.store')"/>
             </div>
             <DataTable :tableHeading="tableHeading">
-
-                <tr v-for="(data, index) in dataList" :key="index">
+                <tr v-for="(data, index) in dataList.data" :key="index">
                     <td>{{ index + 1 }}</td>
                     <td>{{data.company.name}}</td>
                     <td>{{ data.title }}</td>
@@ -32,6 +31,16 @@
                 </tr>
 
             </DataTable>
+            <div class="col-12 d-flex justify-content-lg-start">
+                <pagination
+                        previousText="PREV"
+                        nextText="NEXT"
+                        :totalPages="totalPages"
+                        :currentPage="currentPage"
+                        :data="dataList"
+                        @paginateTo="getDataList"
+                ></pagination>
+            </div>
         </div>
 
         <!--        slot-->
@@ -136,7 +145,9 @@
                     menubar: false,
                     plugins: 'link image code',
                     toolbar: 'undo redo | styleselect | bold italic | link image | code',
-                }
+                },
+                currentPage: 1,
+                totalPages: 0,
             };
         },
         mounted() {

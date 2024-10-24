@@ -5,7 +5,7 @@
                 <PageTop :storePermission= "can('categories.store')"/>
             </div>
             <DataTable :tableHeading="tableHeading">
-                <tr v-for="(data, index) in dataList" :key="index">
+                <tr v-for="(data, index) in dataList.data" :key="index">
                     <td>{{ index + 1 }}</td>
                     <td>{{ data.name }}</td>
                     <td>
@@ -23,6 +23,16 @@
                     </td>
                 </tr>
             </DataTable>
+            <div class="col-12 d-flex justify-content-lg-start">
+                <pagination
+                        previousText="PREV"
+                        nextText="NEXT"
+                        :totalPages="totalPages"
+                        :currentPage="currentPage"
+                        :data="dataList"
+                        @paginateTo="getDataList"
+                ></pagination>
+            </div>
         </div>
 
         <!-- Slot for the form modal -->
@@ -60,14 +70,16 @@
     import PageTop from "../../Components/PageTop";
     import DataTable from "../../Components/DataTable";
     import FormModal from "../../Components/FormModal";
+    import Pagination from "../../plugins/pagination/pagination";
 
     export default {
         name: "CategoryComponent",
-        components: {FormModal, DataTable, PageTop},
+        components: {FormModal, DataTable, PageTop, Pagination},
         data() {
             return {
                 tableHeading: ["Sl", "Name", "Image", "Action"],
-
+                currentPage: 1,
+                totalPages: 0,
             };
         },
         mounted() {

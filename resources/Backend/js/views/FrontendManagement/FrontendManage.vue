@@ -62,14 +62,14 @@
                                 <td><strong>Facebook:</strong></td>
                                 <td><a :href="dataList[0].facebook" target="_blank">View Facebook</a></td>
                             </tr><tr>
-                                <td><strong>Map:</strong></td>
-                                <td><a :href="dataList[0].map" target="_blank">View Map</a></td>
+                                <td><strong>Linkdin:</strong></td>
+                                <td><a :href="dataList[0].map" target="_blank">View Linkdin</a></td>
                             </tr><tr>
-                                <td><strong>Map:</strong></td>
-                                <td><a :href="dataList[0].map" target="_blank">View Map</a></td>
+                                <td><strong>Youtube:</strong></td>
+                                <td><a :href="dataList[0].map" target="_blank">View Youtube</a></td>
                             </tr><tr>
-                                <td><strong>Map:</strong></td>
-                                <td><a :href="dataList[0].map" target="_blank">View Map</a></td>
+                                <td><strong>Twitter:</strong></td>
+                                <td><a :href="dataList[0].map" target="_blank">View Twitter</a></td>
                             </tr>
                             </tbody>
                         </table>
@@ -90,8 +90,7 @@
 
             <FormModal @submit="submitFromData(fromData)">
 <!--                about    Section-->
-                <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <h3 class="d-flex justify-content-center my-4">
                             <span class="badge bg-dark py-3 px-3 container-fluid">About Table</span>
                         </h3>
@@ -121,7 +120,7 @@
 
                     </div>
 <!--                    Contact Section-->
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <h3 class="d-flex justify-content-center my-4">
                             <span class="badge bg-dark py-3 px-3 container-fluid">Contact Table</span>
                         </h3>
@@ -158,8 +157,6 @@
                             <input type="url" class="form-control" v-model="fromData.twitter" name="twitter" />
                         </div>
                     </div>
-
-                </div>
             </FormModal>
         </div>
     </div>
@@ -176,7 +173,7 @@
             return{
 
                 tinymceInit:{
-                    height: 300,
+                    height: 500,
                     menubar: false,
                     plugins: 'link image code',
                     toolbar: 'undo redo | styleselect | bold italic | link image | code',

@@ -14,12 +14,6 @@ class ApplicationController extends Controller
 
     public function __construct()
     {
-//        $this->middleware(function ($request, $next) {
-//            if (!$this->can(request()->route()->action['as'])) {
-//                return $this->returnData(5000, null, 'You are not authorized to access this page');
-//            }
-//            return $next($request);
-//        });
         $this->model = new Applications();
     }
 
@@ -33,7 +27,7 @@ class ApplicationController extends Controller
         $data = Applications::with(['job.category', 'job.company', 'seeker'])
             ->whereHas('job', function ($query) use ($user) {
                 $query->where('user_id', $user->id);
-            })->get();
+            })->paginate(2);
 
         return $this->returnData(2000, $data);
     }

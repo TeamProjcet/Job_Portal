@@ -58,6 +58,20 @@
                             :loop="true"
                             :pagination="false"
                             :navigation="true"
+                            :breakpoints="{
+                                0: {
+                                    slidesPerView: 1,
+                                    spaceBetween: 10
+                                },
+                                576: {
+                                    slidesPerView: 2,
+                                    spaceBetween: 20
+                                },
+                                768: {
+                                    slidesPerView: 3,
+                                    spaceBetween: 30
+                                }
+                            }"
                             @swiper="onSwiper"
                             @slideChange="onSlideChange">
 
@@ -103,6 +117,20 @@
                             :loop="true"
                             :pagination="false"
                             :navigation="true"
+                            :breakpoints="{
+                                0: {
+                                    slidesPerView: 1,
+                                    spaceBetween: 10
+                                },
+                                576: {
+                                    slidesPerView: 2,
+                                    spaceBetween: 20
+                                },
+                                768: {
+                                    slidesPerView: 3,
+                                    spaceBetween: 30
+                                }
+                            }"
                             @swiper="onSwiper"
                             @slideChange="onSlideChange">
 

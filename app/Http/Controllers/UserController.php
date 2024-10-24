@@ -30,7 +30,7 @@ class UserController extends Controller
 //            $user->roles = Role::whereIn('id', explode(',', $user->role_id))->get();
 //            return $user;
 //        });
-        $users = User::with(['company', 'roles'])->get();
+        $users = User::with(['company', 'roles'])->paginate(2);
         return $this->returnData(2000,$users);
     }
 
