@@ -12,6 +12,9 @@ Vue.component('pagination',Pagination);
 import { Vue2TinymceEditor } from "vue2-tinymce-editor";
 Vue.component('Editor', Vue2TinymceEditor);
 
+import i18n from './localization'
+Vue.use(i18n);
+
 // common-function define and create
 import httpMixin from "./Mixin/httpMxin"
 import commonMixin from "./Mixin/commonMixin"
@@ -60,5 +63,5 @@ import axios from "axios";
 const vue = new Vue({
     el: '#app',
     components:{App},
-    router, axios, store
+    router, axios, store,i18n
 });

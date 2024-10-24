@@ -26,7 +26,7 @@ class JobPostModel extends Model
             'details'=>'required ',
             'date_time'=>'required ',
             'image'=>'required',
-            'status'=>'required|boolean',
+            'status'=>'boolean',
         ]);
     }
     public function category(){
@@ -37,6 +37,9 @@ class JobPostModel extends Model
     }
     public function company(){
         return $this->belongsTo(Company::class,'company_id','id');
+    }
+    public function seeker(){
+        return $this->hasOne(Seeker::class);
     }
 
 

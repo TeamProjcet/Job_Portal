@@ -48,7 +48,7 @@
             <div class="container mt-4">
                 <h3 class="d-flex justify-content-center my-4">
                     <span class="badge bg-primary py-3 px-3 container-fluid">
-                        Our Blog News
+                      {{$t('our_blog_news')}}
                     </span>
                 </h3>
                 <div>
@@ -91,7 +91,7 @@
                                                 :to="{ name: 'Blog-Details', params: { id: post.id } }"
                                                 class="btn btn-primary"
                                         >
-                                            Read More
+                                            {{$t('read_more')}}
                                         </router-link>
                                     </div>
                                 </div>
@@ -107,7 +107,7 @@
             <div class="container mt-4">
                 <h3 class="d-flex justify-content-center my-4">
                     <span class="badge bg-primary py-3 px-3 container-fluid">
-                        Our Trusted Clients
+                       {{$t('our_trusted_clients')}}
                     </span>
                 </h3>
                 <div>

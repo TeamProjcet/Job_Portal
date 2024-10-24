@@ -49,7 +49,7 @@ class Applications extends Model
 
     public function seeker()
     {
-        return $this->belongsTo(Seeker::class, 'seeker_id','id');
+        return $this->belongsTo(Seeker::class, 'seeker_id');
     }
 
 }

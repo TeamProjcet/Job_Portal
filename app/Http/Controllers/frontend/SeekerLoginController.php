@@ -17,6 +17,7 @@ class SeekerLoginController extends Controller
 
 
     public function index(){
+        $next_url = \request()->query('next_url');
         $user = Auth::guard('seeker')->user();
         if (!$user) {
             return $this->returnData(5000, null, 'User is not logged in');

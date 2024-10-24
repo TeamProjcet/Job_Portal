@@ -32,16 +32,20 @@ use Helper;
         return $this->returnData(2000, $data);
 
 
-//        $user = User::with('company')->find(Auth::id());
-//        $employerData = Employers::where('user_id', $user->id)->get();
-//        $data = [
-//            'user' => $user,
-//            'employer' => $employerData
-//        ];
-//
-//        return $this->returnData(2000, $data);
 
     }
+    public function superadmindata(){
+        $user = Auth::user();
+        if (!$user) {
+            return $this->returnData(401, null, 'Unauthorized'); // 401 Unauthorized
+        }
+        if ((int)$user->role_id === 1) { // টাইপ কাস্টিং করুন
+            return $this->returnData(2000, $user);
+        } else {
+            return $this->returnData(403, null, 'Unauthorized'); // 403 Forbidden
+        }
+    }
+
     public function userdata(){
 //        $data= Auth::user();
 //        return $this->returnData(2000, $data);

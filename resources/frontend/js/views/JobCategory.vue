@@ -4,7 +4,7 @@
             <h3 class="d-flex justify-content-center my-4" >
 
                     <span class="badge bg-primary  py-3 px-3 container-fluid">
-                 Job Listing
+                    {{ $t('job_listing') }}
                    </span>
             </h3>
             <div class="col-sm-4 mb-4" v-for="jobcat in jobcategory.jobPosts" :key="jobcat.id">
@@ -21,7 +21,7 @@
                             </div>
                             <router-link :to="{ name: 'jobcompany', params: { company_id : jobcat.company_id }}" class="comp-name-text mb-2">
                                 <i class="bi bi-building"></i>
-                                <strong>Company:</strong>
+                                <strong>{{$t('company')}}:</strong>
                                 <span class="text-muted">
                                 {{ jobcat.company.name }}
                                 </span>
@@ -31,15 +31,22 @@
                             <img style="height: 80px" :src="storageImage(jobcat.image)" alt="Company Logo" class="company-logo" />
                         </div>
                     </div>
+                    <div class="m-lg-3">
+                        <strong>{{$t('type')}}:</strong>
+                        <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i>
+                                {{ jobcat.job_type == 1 ? $t("remote") : (jobcat.job_type == 2 ? $t("full_time") : (jobcat.job_type == 3 ? $t("part_time") : $t("not_specified"))) }}
+                        </span>
+
+                    </div>
                     <div class="d-flex gap-2  p-3">
-                        <router-link :to="{ name: 'Details', params: { id: jobcat.id }}" class="btn btn-primary">Apply Now Or View</router-link>
+                        <router-link :to="{ name: 'Details', params: { id: jobcat.id }}" class="btn btn-primary">{{ $t('apply_now_or_view') }}</router-link>
                         <a
-                                @click="saveJob(job)"
+                                @click="saveJob(jobcat)"
                                 :class="{'btn btn-info': saveds.includes(jobcat.id), 'btn btn-secondary': !saveds.includes(jobcat.id)}">
                                     <span v-if="saveds.includes(jobcat.id)">
                                         <i class="fa fa-check"></i>
                                     </span>
-                            {{ saveds.includes(jobcat.id) ? ' ' : ' Save Job' }}
+                            {{ saveds.includes(jobcat.id) ? ' ' : $t('save_job') }}
                         </a>
                     </div>
                 </div>

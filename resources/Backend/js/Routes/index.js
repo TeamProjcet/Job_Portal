@@ -21,6 +21,7 @@ import ViewBlgoComment from "../views/Blog/ViewBlgoComment";
 import FrontendManage from "../views/FrontendManagement/FrontendManage";
 import NotFoundPage from "../views/NotFoundPage";
 import SubscribeEmails from "../views/Emails/SubscribeEmails";
+import SettingComponent from "../views/Configurations/SettingComponent";
 
 
 const route = [
@@ -202,6 +203,12 @@ const route = [
         name: 'SubscribeEmails',
         component: SubscribeEmails,
         meta: { pagetitle: 'Subscriber SendMail Table', dataUrl: '' },
+    } ,
+    {
+        path: '/admin/soft/setting',
+        name: 'setting',
+        component: SettingComponent,
+        meta: { pagetitle: 'Setting SendMail Table', dataUrl: '' },
     } ,
 
 ];

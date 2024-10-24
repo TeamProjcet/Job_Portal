@@ -26,7 +26,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Title</label>
+                        <label class="form-label">Position</label>
                         <input type="text" class="form-control" v-validate="'required'" v-model="fromData.position" name="title">
                     </div>
 
@@ -52,7 +52,11 @@
 
                     <div class="mb-3">
                         <div class="form-label">Location</div>
-                        <input type="text" class="form-control" v-validate="'required'" v-model="fromData.address" placeholder="Enter address" name="address">
+                        <select class="form-control" v-model="fromData.address" v-validate="'required'" name="address">
+                            <template v-for="item in requireData.district">
+                                <option :value="item.name">{{item.name}}</option>
+                            </template>
+                        </select>
                     </div>
                 </div>
 
@@ -60,7 +64,7 @@
                     <div class="mb-3">
                         <label class="form-label">Job Type</label>
                         <select v-model="fromData.job_type" name="job_type" v-validate="'required'" class="form-control">
-                            <option value="" disabled>Select Job Type</option>
+                            <option  disabled>Select Job Type</option>
                             <template v-for="(type, index) in requireData.job_type">
                                 <option :value="type.value">{{type.name}}</option>
                             </template>
@@ -118,9 +122,11 @@
 
     import DatePicker from 'vue2-datepicker';
     import 'vue2-datepicker/index.css';
+    import PageTop from "../../Components/PageTop";
     export default {
         name: "CreateJobComponent",
         components: {
+            PageTop,
             DatePicker
         },
         data() {
@@ -136,7 +142,7 @@
         },
         mounted() {
             this.getDataList();
-            this.getRequiredData(['category','company','job_type']);
+            this.getRequiredData(['category','company','job_type','district']);
         },
     }
 </script>

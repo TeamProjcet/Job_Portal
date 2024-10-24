@@ -54,11 +54,11 @@
                     .then(function (res) {
                         if (parseInt(res.data.status) === 2000) {
                             _this.$toast.success("Login successful!");
-                            // const redirectUrl = localStorage.getItem('redirectAfterLogin') || '/defaultPage';
-                            // localStorage.removeItem('redirectAfterLogin');
-
-                            // _this.$router.push(redirectUrl);
-                            _this.$router.push('/');
+                            if (_this.$route.query.next_url){
+                                _this.$router.push({path : _this.$route.query.next_url});
+                            }else{
+                                _this.$router.push('/');
+                            }
                         } else {
                             _this.$toast.error("Invalid credentials!");
                         }

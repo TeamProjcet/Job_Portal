@@ -1,11 +1,13 @@
+
 <template>
     <div class="container mt-4 shadow p-4 rounded">
         <div class="row">
             <h3 class="d-flex justify-content-center my-4">
                 <span class="badge bg-primary py-3 px-3 container-fluid">
-                    Blog & Article
+                    {{$t("blog_Article")}}
                 </span>
             </h3>
+            <template v-if="dataList.blogpost !== undefined">
             <div class="col-md-4"  v-for="post in dataList.blogpost.data" :key="post.id">
                 <div class="card mb-4">
                     <img
@@ -22,16 +24,18 @@
                                     :to="{ name: 'Blog-Details', params: { id: post.id } }"
                                     class="btn btn-primary"
                             >
-                                Read More
+                                {{$t("read_more")}}
                             </router-link>
                         </div>
                     </div>
                 </div>
             </div>
+            </template>
+
         </div>
         <div v-if="error" class="alert alert-danger">{{ error }}</div>
 
-        <div class="col-12 d-flex justify-content-lg-start">
+        <div class="col-12 d-flex justify-content-center" v-if="dataList.blogpost !== undefined">
             <pagination
                     previousText="PREV"
                     nextText="NEXT"

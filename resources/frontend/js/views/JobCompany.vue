@@ -4,7 +4,7 @@
             <h3 class="d-flex justify-content-center my-4" >
 
                     <span class="badge bg-primary  py-3 px-3 container-fluid">
-                        Job Listing
+              {{ $t('job_listing') }}
                    </span>
             </h3>
             <div class="col-sm-4 mb-4" v-for="jobcom in jobcompany.companycate.data" :key="jobcom.id">
@@ -19,27 +19,32 @@
                                     </h5>
                                 </router-link>
                             </div>
-                            <router-link :to="{ name: 'jobcompany', params: { company_id : jobcom.company_id }}" class="comp-name-text mb-2">
-                                <i class="bi bi-building"></i>
-                                <strong>Company:</strong>
-                                <span class="text-muted">
-                                {{ jobcom.company.name }}
-                                </span>
-                            </router-link>
+                                <p  class="comp-name-text mb-2">
+                                    <i class="bi bi-building"></i>
+                                    <strong>{{$t('company')}}:</strong>
+                                    <span class="text-muted">
+                                    {{ jobcom.company.name }}
+                                    </span>
+                                </p>
                         </div>
                         <div class="logo-container">
                             <img style="height: 80px" :src="storageImage(jobcom.image)" alt="Company Logo" class="company-logo" />
                         </div>
                     </div>
+                    <div class="m-lg-3">
+                        <strong>Type:</strong>
+                        <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i>{{ jobcom.job_type == 1 ? 'Remote' : (jobcom.job_type == 2 ? 'Full Time' : (jobcom.job_type == 3 ? 'Part Time' : 'Not Specified')) }}</span>
+
+                    </div>
                     <div class="d-flex gap-2  p-3">
-                        <router-link :to="{ name: 'Details', params: { id: jobcom.id }}" class="btn btn-primary">Apply Now Or View</router-link>
+                        <router-link :to="{ name: 'Details', params: { id: jobcom.id }}" class="btn btn-primary">  {{ $t('apply_now_or_view') }}</router-link>
                         <a
                                 @click="saveJob(jobcom)"
                                 :class="{'btn btn-info': saveds.includes(jobcom.id), 'btn btn-secondary': !saveds.includes(jobcom.id)}">
                                     <span v-if="saveds.includes(jobcom.id)">
                                         <i class="fa fa-check"></i>
                                     </span>
-                            {{ saveds.includes(jobcom.id) ? ' ' : ' Save Job' }}
+                            {{ saveds.includes(jobcom.id) ? ' ' : $t('save_job') }}
                         </a>
                     </div>
                 </div>

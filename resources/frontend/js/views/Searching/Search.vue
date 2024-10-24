@@ -5,11 +5,11 @@
                 <div class="col-md-12">
                     <div class="row g-2 align-items-center justify-content-center">
                         <div class="col-md-4">
-                            <input type="text" class="form-control border-0 search-input" placeholder="Keyword Search" v-model="keyword"/>
+                            <input type="text" class="form-control border-0 search-input" :placeholder="$t('keywordsearch')" v-model="keyword"/>
                         </div>
                         <div class="col-md-2">
                             <select class="form-select border-0 select-input" v-model="selectedCompany">
-                                <option value="" disabled selected>Company</option>
+                                <option value="" disabled>{{$t('company')}}</option>
                                 <template v-for="item in requireData.company" >
                                     <option :value="item.id">{{ item.name }}</option>
                                 </template>
@@ -17,7 +17,7 @@
                         </div>
                         <div class="col-md-2">
                             <select class="form-select border-0 select-input" v-model="selectedCategory">
-                                <option value="" disabled selected>Category</option>
+                                <option value="" disabled selected>{{$t('job_category')}}</option>
                                 <template v-for="item in requireData.category" >
                                     <option :value="item.id">{{ item.name }}</option>
                                 </template>
@@ -25,7 +25,7 @@
                         </div>
                         <div class="col-md-2">
                             <button class="btn btn-dark border-0 w-100 search-button" @click="redirectToResults">
-                                <i class="bi bi-search"></i>   Search
+                                <i class="bi bi-search"></i>  {{$t('search')}}
                             </button>
                         </div>
                     </div>

@@ -27,28 +27,28 @@ class ModuleTableSeeder extends Seeder
                 'key' => 'job',
                 'link' => '#',
                 'icon' => 'fas fa-briefcase',
-                'permission' => ['index','store', 'show','create', 'edit', 'update', 'destroy'],
+                'permission' => ['index', 'store', 'show', 'create', 'edit', 'update', 'destroy'],
                 'submenus' => [
                     [
                         'name' => 'Job Category',
                         'key' => 'categories',
                         'link' => '/admin/jobcategory/category',
                         'icon' => 'fas fa-folder',
-                        'permission' => ['index','store', 'show','create', 'edit', 'update', 'destroy'],
+                        'permission' => ['index', 'store', 'show', 'create', 'edit', 'update', 'destroy'],
                     ],
                     [
                         'name' => 'Company',
                         'key' => 'company',
                         'link' => '/admin/jobcategory/company',
                         'icon' => 'fas fa-building',
-                        'permission' => ['index','store', 'show','create', 'edit', 'update', 'destroy'],
+                        'permission' => ['index', 'store', 'show', 'create', 'edit', 'update', 'destroy'],
                     ],
                     [
                         'name' => 'Job Post',
                         'key' => 'joblist',
                         'link' => '/admin/jobcategory/joblist',
                         'icon' => 'fas fa-file-alt',
-                        'permission' => ['index','store', 'show','create', 'edit', 'update', 'destroy'],
+                        'permission' => ['index', 'store', 'show', 'create', 'edit', 'update', 'destroy'],
                     ],
                 ],
             ],
@@ -57,21 +57,21 @@ class ModuleTableSeeder extends Seeder
                 'key' => 'blog',
                 'link' => '#',
                 'icon' => 'fas fa-newspaper',
-                'permission' => ['index','store', 'show','create', 'edit', 'update', 'destroy'],
+                'permission' => ['index', 'store', 'show', 'create', 'edit', 'update', 'destroy'],
                 'submenus' => [
                     [
                         'name' => 'Blog Post',
                         'key' => 'blogpost',
                         'link' => '/admin/blog/blogpost',
                         'icon' => 'fas fa-pen',
-                        'permission' => ['index','store', 'show','create', 'edit', 'update', 'destroy']
+                        'permission' => ['index', 'store', 'show', 'create', 'edit', 'update', 'destroy']
                     ],
                     [
                         'name' => 'Blog Comment',
                         'key' => 'blogcomment',
                         'link' => '/admin/blog/blogcomment',
                         'icon' => 'fas fa-pen',
-                        'permission' => ['index','store', 'show','create', 'edit', 'update', 'destroy']
+                        'permission' => ['index', 'store', 'show', 'create', 'edit', 'update', 'destroy']
                     ],
                 ],
             ],
@@ -80,14 +80,14 @@ class ModuleTableSeeder extends Seeder
                 'key' => 'apply',
                 'link' => '#',
                 'icon' => 'fas fa-file-alt',
-                'permission' => ['index','store', 'show','create', 'edit', 'update', 'destroy'],
+                'permission' => ['index', 'store', 'show', 'create', 'edit', 'update', 'destroy'],
                 'submenus' => [
                     [
                         'name' => 'Application',
                         'key' => 'application',
                         'link' => '/admin/seeker/application',
                         'icon' => 'fas fa-pen',
-                        'permission' => ['index','store', 'show','create', 'edit', 'update', 'destroy'],
+                        'permission' => ['index', 'store', 'show', 'create', 'edit', 'update', 'destroy'],
                     ],
                 ],
             ],
@@ -96,14 +96,14 @@ class ModuleTableSeeder extends Seeder
                 'key' => 'interview',
                 'link' => '#',
                 'icon' => 'fas fa-file-alt',
-                'permission' => ['index','store', 'show','create', 'edit', 'update', 'destroy'],
+                'permission' => ['index', 'store', 'show', 'create', 'edit', 'update', 'destroy'],
                 'submenus' => [
                     [
                         'name' => 'Interview Schedules',
                         'key' => 'interview',
                         'link' => '/admin/interview',
                         'icon' => 'fas fa-pen',
-                        'permission' => ['index','store', 'show','create', 'edit', 'update', 'destroy'],
+                        'permission' => ['index', 'store', 'show', 'create', 'edit', 'update', 'destroy'],
                     ],
                 ],
             ],
@@ -112,35 +112,35 @@ class ModuleTableSeeder extends Seeder
                 'key' => 'rolepermission',
                 'link' => '#',
                 'icon' => 'fas fa-file-alt',
-                'permission' => ['index','store', 'show','create', 'edit', 'update', 'destroy'],
+                'permission' => ['index', 'store', 'show', 'create', 'edit', 'update', 'destroy'],
                 'submenus' => [
                     [
                         'name' => 'Role User Management',
                         'key' => 'roleusermanagement',
                         'link' => '/admin/role/rolepermissions',
                         'icon' => 'fas fa-users',
-                        'permission' => ['index','store', 'show','create', 'edit', 'update', 'destroy'],
+                        'permission' => ['index', 'store', 'show', 'create', 'edit', 'update', 'destroy'],
                     ],
                     [
                         'name' => 'User',
                         'key' => 'users',
                         'link' => '/admin/user/registration',
                         'icon' => 'fas fa-users',
-                        'permission' =>['index','store', 'show','create', 'edit', 'update', 'destroy'],
+                        'permission' => ['index', 'store', 'show', 'create', 'edit', 'update', 'destroy'],
                     ],
                     [
                         'name' => 'Role',
                         'key' => 'roles',
                         'link' => '/admin/role/role',
                         'icon' => 'fas fa-user-shield',
-                        'permission' => ['index', 'store','edit','getRolePermissions', 'updateRolePermissions', 'update', 'destroy'],
+                        'permission' => ['index', 'store', 'edit', 'getRolePermissions', 'updateRolePermissions', 'update', 'destroy'],
                     ],
                     [
                         'name' => 'Role Permission',
                         'key' => 'permissions',
                         'link' => '/admin/role/permissions',
                         'icon' => 'fas fa-lock',
-                        'permission' => ['index','store', 'show','create', 'edit', 'update', 'destroy'],
+                        'permission' => ['index', 'store', 'show', 'create', 'edit', 'update', 'destroy'],
                     ],
                 ],
             ],
@@ -149,28 +149,28 @@ class ModuleTableSeeder extends Seeder
                 'key' => 'visitor',
                 'link' => '#',
                 'icon' => 'fas fa-user',
-                'permission' => ['index','store', 'show','create', 'edit', 'update', 'destroy'],
+                'permission' => ['index', 'store', 'show', 'create', 'edit', 'update', 'destroy'],
                 'submenus' => [
                     [
                         'name' => 'NewsLetter',
                         'key' => 'newsletter',
                         'link' => '/admin/visitor/newsletter',
                         'icon' => 'fas fa-newspaper',
-                        'permission' => ['index','store', 'show','create', 'edit', 'update', 'destroy'],
+                        'permission' => ['index', 'store', 'show', 'create', 'edit', 'update', 'destroy'],
                     ],
                     [
                         'name' => 'Subscriber Mails',
                         'key' => 'sendMail',
                         'link' => '/admin/subscribe/emails',
                         'icon' => 'fas fa-envelope',
-                        'permission' => ['index','store', 'show','create', 'edit', 'update', 'destroy'],
+                        'permission' => ['index', 'store', 'show', 'create', 'edit', 'update', 'destroy'],
                     ],
                     [
                         'name' => 'Contact',
                         'key' => 'contact',
                         'link' => '/admin/visitor/contact',
                         'icon' => 'fas fa-address-book',
-                        'permission' => ['index','store', 'show','create', 'edit', 'update', 'destroy'],
+                        'permission' => ['index', 'store', 'show', 'create', 'edit', 'update', 'destroy'],
                     ],
                 ],
             ],
@@ -179,53 +179,76 @@ class ModuleTableSeeder extends Seeder
                 'key' => 'client',
                 'link' => '#',
                 'icon' => 'fas fa-handshake',
-                'permission' => ['index','store', 'show','create', 'edit', 'update', 'destroy'],
+                'permission' => ['index', 'store', 'show', 'create', 'edit', 'update', 'destroy'],
                 'submenus' => [
                     [
                         'name' => 'Collaboartions',
                         'key' => 'partnership',
                         'link' => '/admin/client/partnership',
                         'icon' => 'fas fa-users',
-                        'permission' => ['index','store', 'show','create', 'edit', 'update', 'destroy'],
+                        'permission' => ['index', 'store', 'show', 'create', 'edit', 'update', 'destroy'],
                     ],
                 ],
 
-        ],
+            ],
             [
                 'name' => 'Employee',
                 'key' => 'employee',
                 'link' => '#',
                 'icon' => 'fas fa-user',
-                'permission' => ['index','store', 'show','create', 'edit', 'update', 'destroy'],
+                'permission' => ['index', 'store', 'show', 'create', 'edit', 'update', 'destroy'],
                 'submenus' => [
                     [
                         'name' => 'Employee List',
                         'key' => 'employer',
                         'link' => '/admin/employer/employerlist',
                         'icon' => 'fas fa-users',
-                        'permission' => ['index','store', 'show','create', 'edit', 'update', 'destroy'],
+                        'permission' => ['index', 'store', 'show', 'create', 'edit', 'update', 'destroy'],
                     ],
                 ],
 
-        ],
+            ],
             [
                 'name' => 'Frontend Manage',
                 'key' => 'frontendmanage',
                 'link' => '#',
-                'icon' => 'fas fa-cogs',
-                'permission' => ['index','store', 'show','create', 'edit', 'update', 'destroy'],
+                'icon' => 'fas fa-desktop',
+                'permission' => ['index', 'store', 'show', 'create', 'edit', 'update', 'destroy'],
                 'submenus' => [
                     [
                         'name' => 'Frontend Management',
                         'key' => 'frontmanage',
                         'link' => '/admin/frontend/manage',
                         'icon' => 'fas fa-tasks',
-                        'permission' => ['index','store', 'show','create', 'edit', 'update', 'destroy'],
+                        'permission' => ['index', 'store', 'show', 'create', 'edit', 'update', 'destroy'],
+                    ],
+                    [
+                        'name' => 'Frontend',
+                        'key' => 'Frontend',
+                        'link' => '/',
+                        'icon' => 'fas fa-file-alt',
+                        'permission' => ['index', 'store', 'show', 'create', 'edit', 'update', 'destroy'],
                     ],
                 ],
 
             ],
+            [
+                'name' => 'Configuration',
+                'key' => 'config',
+                'link' => '#',
+                'icon' => 'fas fa-cogs',
+                'permission' => ['index', 'store', 'show', 'create', 'edit', 'update', 'destroy'],
+                'submenus' => [
+                    [
+                        'name' => 'Setting',
+                        'key' => 'setting',
+                        'link' => '/admin/soft/setting',
+                        'icon' => 'fas fa-cog',
+                        'permission' => ['index', 'store', 'show', 'create', 'edit', 'update', 'destroy'],
 
+                    ],
+                ]
+            ]
         ];
 
         $adminRole = Role::create(['name' => 'Admin']);

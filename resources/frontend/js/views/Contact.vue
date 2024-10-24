@@ -4,7 +4,7 @@
         <!-- Header End -->
         <div class=" py-5 bg-dark page-header mb-5">
             <div class="container my-5 pt-5 pb-4">
-                <h1 class="display-3 text-white mb-3  slideInDown">Contact</h1>
+                <h1 class="display-3 text-white mb-3  slideInDown">{{$t('contact')}}</h1>
             </div>
         </div>
         <!-- Header End -->
@@ -22,7 +22,7 @@
                                          style="width: 45px; height: 45px;">
                                         <i class="fa fa-map-marker-alt text-primary"></i>
                                     </div>
-                                    <span v-if="frontdata"> {{frontdata.location}}</span>
+                                    <span @dblclick="openTextModal('contlocation')">{{staticText.contlocation}}</span>
                                 </div>
                             </div>
                             <div class="col-md-4 ">
@@ -31,7 +31,7 @@
                                          style="width: 45px; height: 45px;">
                                         <i class="fa fa-envelope-open text-primary"></i>
                                     </div>
-                                    <span v-if="frontdata"> {{frontdata.email}}</span>
+                                    <span @dblclick="openTextModal('contemail')">{{staticText.contemail}}</span>
 
                                 </div>
                             </div>
@@ -41,7 +41,8 @@
                                          style="width: 45px; height: 45px;">
                                         <i class="fa fa-phone-alt text-primary"></i>
                                     </div>
-                                    <span v-if="frontdata">+88 {{frontdata.phone}}</span>
+                                    <span @dblclick="openTextModal('contphone')">+88{{staticText.contphone}}</span>
+
                                 </div>
                             </div>
                         </div>
@@ -103,19 +104,34 @@
             </div>
         </div>
         <!-- Contact End -->
+        <TextModal @submit="submitText()"     :isModalOpen="isModalOpen"
+                   @close="isModalOpen = false" >
+
+            <textarea v-model="editableText" class="form-control" rows="4"></textarea>
+        </TextModal>
 
     </div>
 </template>
 
 <script>
     import axios from 'axios';
+    import TextModal from "../Components/TextModal";
 
     export default {
         name: "Contact",
+        components: {TextModal},
         data() {
             return {
-                frontdata: null
+                frontdata: null,
+                staticText: {},
+                isModalOpen: false,
+                canOpenModal:false,
+
             };
+        },
+        created() {
+            this.checkUserRole();
+            this.fetchStaticTexts();
         },
         mounted(){
             this.getFrontdata();

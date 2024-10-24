@@ -40,5 +40,9 @@ class Seeker extends Authenticatable
     {
         return $this->hasMany(Employers::class);
     }
+    public function job()
+    {
+        return $this->belongsTo(JobPostModel::class);
+    }
 
 }
