@@ -17,32 +17,64 @@
                 <div class="row g-5 align-items-center">
                     <div class="col-lg-6" >
                         <div class="row g-0 about-bg rounded overflow-hidden">
-                            <div class="col-6 text-start" v-if="frontdata">
-                                <img  style="width: 600px" :src="storageImage(frontdata.image)" alt="image"/>
+
+                            <div class="col-6 text-start">
+                                <img @dblclick="openTextModal('aboutimage1')" class="img-fluid w-100"  :src="staticText.aboutimage1" alt="image"/>
+
                             </div>
+                            <div class="col-6 text-start">
+                                <img @dblclick="openTextModal('aboutimage2')" class="img-fluid" style="width: 85%; margin-top: 15%;"  :src="staticText.aboutimage2" alt="image"/>
+
+                            </div>
+                            <div class="col-6 text-end">
+                                <img @dblclick="openTextModal('aboutimage3')"  class="img-fluid" style="width: 85%;"  :src="staticText.aboutimage3" alt="image"/>
+
+                            </div>
+                            <div class="col-6 text-end">
+                                <img @dblclick="openTextModal('aboutimage4')" class="img-fluid w-100"   :src="staticText.aboutimage4" alt="image"/>
+
+                            </div>
+
                         </div>
                     </div>
                     <div class="col-lg-6" >
-                        <h1 v-if="frontdata" class="mb-4">{{frontdata.title}}</h1>
-                        <p  v-if="frontdata" v-html="frontdata.details" class="mb-4"></p>
+                        <h1 @dblclick="openTextModal('aboutTitle')" class="mb-4">{{staticText.aboutTitle}}</h1>
+                        <p @dblclick="openTextModal('aboutDetails')"  v-html="staticText.aboutDetails" class="mb-4"></p>
 
                     </div>
                 </div>
             </div>
         </div>
         <!-- About End -->
+        <TextModal @submit="submitText()"     :isModalOpen="isModalOpen"
+                   @close="isModalOpen = false" >
+
+            <textarea v-model="editableText" class="form-control" rows="4"></textarea>
+        </TextModal>
     </div>
 </template>
 
 <script>
     import axios from 'axios'
+    import TextModal from "../Components/TextModal";
     export default {
         name: "About",
+        components: {TextModal},
         data(){
             return{
-                frontdata:null
+                frontdata:null,
+                staticText: {},
+                isModalOpen: false,
+                canOpenModal:false,
 
-            }
+
+            };
+        },
+        created() {
+            this.fetchStaticTexts();
+            this.checkUserRole();
+
+
         },
         mounted(){
             this.getFrontdata();
@@ -63,5 +95,8 @@
 </script>
 
 <style scoped>
+    .whimage{
+        width: 200px;
+    }
 
 </style>

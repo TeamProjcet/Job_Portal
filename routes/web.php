@@ -11,7 +11,7 @@ Route::get('login', [\App\Http\Controllers\auth\AuthController::class, 'index'])
 Route::get('userAuth', [\App\Http\Controllers\auth\AuthController::class, 'userAuth']);
 Route::get('userdata', [\App\Http\Controllers\auth\AuthController::class, 'userdata']);
 Route::get('logout', [\App\Http\Controllers\auth\AuthController::class, 'logout'])->name('logout');
-//Route::resource('/register', \App\Http\Controllers\auth\AuthController::class);
+Route::get('superadmin', [\App\Http\Controllers\auth\AuthController::class,'superadmindata']);
 Route::post('adlogin', [\App\Http\Controllers\auth\AuthController::class, 'adlogin']);
 
 Route::view('admin/{any}', 'backend')->where('any', '.*')->middleware('auth');
@@ -44,6 +44,7 @@ Route::prefix('api')->group(function () {
     Route::resource('/blogcomment', \App\Http\Controllers\frontend\BlogCommentController::class);
     Route::resource('/frontmanage', \App\Http\Controllers\FrontendmanageController::class);
     Route::post('sendMail', [\App\Http\Controllers\SubscribeController::class,'store']);
+    Route::resource('staticContents',\App\Http\Controllers\FrontendStaticContentController::class);
 
 });
 

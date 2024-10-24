@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Frontendmanage;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -24,6 +25,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ModuleTableSeeder::class);
         $this->call(RoleTableSeeder::class);
         $this->call(DistrictSeeder::class);
+        $this->call(FrontendTableSeeder::class);
         $this->call(JobTableSeeder::class);
     }
 }

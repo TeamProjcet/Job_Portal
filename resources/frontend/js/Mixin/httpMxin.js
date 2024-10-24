@@ -6,6 +6,9 @@ import {Toast} from "vue-toastification";
 export default {
     data() {
         return {
+            editableKey: '',
+            editableText: '',
+            canOpenModal: false,
 
         };
     },
@@ -120,6 +123,80 @@ export default {
         beforeDestroy() {
             clearInterval(this.timer);
         },
+
+        submitText() {
+            const url = this.editableKey ? `/api/staticContents/${this.editableKey}` : '/api/staticContents';
+            const method = this.editableKey ? 'put' : 'post';
+            axios({
+                method: method,
+                url: url,
+                data: {
+                    key: this.editableKey,
+                    value: this.editableText
+                }
+            })
+                .then(response => {
+                    if (method === 'post') {
+                        this.staticText[this.editableKey] = this.editableText;
+                    } else {
+                        this.staticText[this.editableKey] = response.data.result;
+                    }
+                    this.isModalOpen = false;
+                })
+                .catch(error => {
+                    console.error('Error updating static text:', error);
+                });
+        },
+        fetchStaticTexts() {
+            axios.get('/api/staticContents').then(response => {
+                this.staticText = response.data.result;
+            });
+        },
+        // openTextModal(key) {
+        //     this.editableKey = key;
+        //     this.editableText = this.staticText[key];
+        //     if (this.canOpenModal) {
+        //         this.isModalOpen = true;
+        //
+        //     }
+        // },
+
+        // async checkUserRole() {
+        //     try {
+        //         const response = await axios.get('/superadmin');
+        //         const user = response.data.result;
+        //         if (user && user.role_id === 1) {
+        //             this.canOpenModal = true;
+        //         }
+        //     } catch (error) {
+        //         console.error('Error fetching user data:', error);
+        //         this.canOpenModal = false;
+        //     }
+        // },
+        async checkUserRole() {
+            try {
+                const response = await axios.get('/superadmin');
+                const user = response.data.result;
+
+                if (user && user.role_id === "1") {
+                    this.canOpenModal = true;
+                } else {
+                    this.canOpenModal = false;
+                }
+            } catch (error) {
+                console.error('Error fetching user data:', error);
+                this.canOpenModal = false;
+            }
+        },
+
+
+        openTextModal(key) {
+            this.editableKey = key;
+            this.editableText = this.staticText[key];
+            if (this.canOpenModal) {
+                this.isModalOpen = true;
+            }
+        }
 
     }
 
