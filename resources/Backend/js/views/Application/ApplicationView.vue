@@ -7,6 +7,8 @@
                     <h6 class="card-title">Applicant Information</h6>
                 </div>
                 <div class="card-body">
+                    <h3><strong>Position:</strong> {{application.job.position}}</h3>
+
                     <p><strong>Name:</strong> {{application.seeker.name}}</p>
                     <p><strong>Email:</strong> {{application.seeker.email}}</p>
                     <p><strong>Expreince:</strong> {{application.seeker.experience}}</p>
@@ -25,10 +27,12 @@
                     <h6 class="card-title mt-4">Cover Letter</h6>
                     <p v-html="application.coverLetter"></p>
                 </div>
+                <hr>
+                <hr>
                 <div class="row">
                     <div class="col-md-4">
                     <p>
-                        <strong>Status:</strong>
+                        <label>Status:</label>
                         <select v-model="applicationStatus" @change="updateApplicationStatus">
                             <option disabled>Select application Status</option>
                             <template v-for="(status,index) in requireData.application_status"  >
@@ -38,7 +42,7 @@
                         </select>
                     </p>
                     <p>
-                        <strong>InterView:</strong>
+                        <label>InterView:</label>
                         <select v-model="interviewStatus" @change="updateApplicationStatus">
                             <option disabled>Select Interview Status</option>
                             <template v-for="(status,index) in requireData.interview_status"  >
@@ -50,7 +54,7 @@
                     <div class="col-md-7">
                     <form @submit.prevent="updateApplicationStatus">
 
-                        <label>Note</label>
+                        <h5>Note</h5>
                         <editor type="text" v-model="note" class="form-control" name="note" />
 
                         <button type="submit"  class="btn btn-success mt-2">submit</button>

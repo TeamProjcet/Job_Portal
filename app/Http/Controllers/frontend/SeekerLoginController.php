@@ -108,10 +108,17 @@ class SeekerLoginController extends Controller
 
         $data->save();
 
-        return response()->json([
-            'status' => 2000,
-            'data' => $data,
-            'message' => 'Profile updated successfully',
-        ]);
+        return $this->returnData(2000,$data,'Profile updated successfully');
+    }
+    public function superadmindata(){
+        $user = Auth::user();
+        if (!$user) {
+            return $this->returnData(401, null, 'Unauthorized'); // 401 Unauthorized
+        }
+        if ((int)$user->role_id === 1) { // টাইপ কাস্টিং করুন
+            return $this->returnData(2000, $user);
+        } else {
+            return $this->returnData(403, null, 'Unauthorized'); // 403 Forbidden
+        }
     }
 }

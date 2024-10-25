@@ -50,8 +50,8 @@
                     <div class="col-md-6">
                         <div class="embed-responsive embed-responsive-16by9">
                             <iframe
-                                    v-if="frontdata"
-                                    :src="frontdata.map"
+                                    @dblclick="openTextModal('contmap')"
+                                    :src="staticText.contmap"
                                     class="embed-responsive-item"
                                     allowfullscreen
                                     loading="lazy"

@@ -7,7 +7,8 @@
                     {{ $t('job_listing') }}
                    </span>
             </h3>
-            <div class="col-sm-4 mb-4" v-for="jobcat in jobcategory.jobPosts" :key="jobcat.id">
+            <template v-if="jobcategory.cateJob !==undefined">
+            <div class="col-sm-4 mb-4" v-for="jobcat in jobcategory.cateJob.data" :key="jobcat.id">
                 <div class="card mb-3 shadow-sm">
                     <div class="card-body d-flex justify-content-between">
                         <div class="job-details">
@@ -51,6 +52,10 @@
                     </div>
                 </div>
             </div>
+            </template>
+            <div class="col-12 d-flex justify-content-lg-start" v-if="jobcategory.cateJob !==undefined">
+                <pagination previousText="PREV" nextText="NEXT" :data="jobcategory.cateJob" @paginateTo="getCategoryList"></pagination>
+            </div>
         </div>
     </div>
 </template>
@@ -70,7 +75,7 @@
             };
         },
         mounted() {
-            this.getDataList();
+            this.getCategoryList();
             this.authData();
             this.loadSavedJobs();
             if (this.$route.query.jobs) {
@@ -79,13 +84,13 @@
         },
         methods: {
 
-            async getDataList() {
+            async getCategoryList(page=1) {
                 if (!this.category_id) {
                     this.error = "Category ID is not defined.";
                     return;
                 }
                 try {
-                    const response = await axios.get(`/api/frontend/jobcate/${this.category_id}`);
+                    const response = await axios.get(`/api/frontend/jobcate/${this.category_id}?page=${page}`);
                     this.jobcategory = response.data.result;
                 } catch (error) {
                     this.error = "Error fetching job data. Please try again later.";
