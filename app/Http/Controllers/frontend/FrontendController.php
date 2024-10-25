@@ -14,6 +14,7 @@ use App\Models\JobPostModel;
 use App\Models\PartnershipModel;
 use App\Models\SavedJobs;
 use App\Models\Seeker;
+use App\Models\Slider;
 use App\Supports\Helper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -27,6 +28,7 @@ class FrontendController extends Controller
         $data['jobData'] = JobPostModel::with('category','company')->where('status',1)->orderBy('id','DESC')->paginate(18);
         $data['category'] = Category::get();
         $data['frontdata']=Frontendmanage::get();
+        $data['slider']= Slider::get();
         $data['partner'] = PartnershipModel::take(4)->skip(0)->orderBy('id','DESC')->get();
         $data['partner_logo'] = PartnershipModel::orderBy('id','DESC')->get();
         $data['blogpost']=blog::with('user','company')->where('status',1)->orderBy('id','DESC')->paginate(18);
@@ -43,12 +45,6 @@ class FrontendController extends Controller
     {
         $data['jobPosts'] = JobPostModel::with('category','company')->where('category_id',$cateId)->get();
         $data['companycate'] = JobPostModel::with('category','company')->where('company_id',$cateId)->paginate(1);
-        return $this->returnData(2000,$data);
-
-    }
-    public function blogComment($blogId)
-    {;
-        $data['blogComment'] = BlogComment::with('seeker')->where('blog_id',$blogId)->get();
         return $this->returnData(2000,$data);
 
     }
@@ -70,7 +66,12 @@ class FrontendController extends Controller
 
     public function blogDetails($id)
     {
-        $data['post'] = blog::with('company')->findOrFail($id);
+        $post = Blog::with('company')->findOrFail($id);
+        $post->increment('view_count');
+        $data['post'] = $post;
+
+        $data['blogComment'] = BlogComment::with('seeker')->where('blog_id',$id)->get();
+
         return $this->returnData(2000,$data);
     }
     public function applydetails($id){

@@ -66,8 +66,6 @@ class User extends Authenticatable
         return $this->hasMany(Applications::class);
     }
 
- 
-
     public function employer()
     {
         return $this->hasMany(Employers::class);
@@ -79,15 +77,5 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Company::class, 'company_id');
     }
-
-//    public function hasPermission($permission)
-//    {
-//        foreach ($this->roles as $role) {
-//            if ($role->permissions->contains('key', $permission)) {
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
 
 }

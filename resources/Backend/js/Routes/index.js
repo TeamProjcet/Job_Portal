@@ -21,6 +21,7 @@ import ViewBlgoComment from "../views/Blog/ViewBlgoComment";
 import FrontendManage from "../views/FrontendManagement/FrontendManage";
 import NotFoundPage from "../views/NotFoundPage";
 import SubscribeEmails from "../views/Emails/SubscribeEmails";
+import SliderComponent from "../views/FrontendManagement/SliderComponent";
 
 
 const route = [
@@ -33,7 +34,8 @@ const route = [
     {
         path: '/admin/dashboard',
         name: 'dashboard',
-        component: Dashboard
+        component: Dashboard,
+        meta: { dataUrl: 'api/Counting'},
     },
     {
         path: '/admin/jobcategory/category',
@@ -196,6 +198,12 @@ const route = [
         name: 'frontendmanage',
         component: FrontendManage,
         meta: { pagetitle: 'Frontend Management Table', dataUrl: 'api/frontmanage' },
+    } ,
+    {
+        path: '/admin/frontend/slider',
+        name: 'SliderComponent',
+        component: SliderComponent,
+        meta: { pagetitle: 'Frontend Slider Table', dataUrl: 'api/slider' },
     } ,
     {
         path: '/admin/subscribe/emails',

@@ -42,8 +42,9 @@ Route::prefix('api')->group(function () {
     Route::post('/roles/{role}/permissions',[\App\Http\Controllers\RoleController::class,'updateRolePermissions']);
     Route::resource('/blogcomment', \App\Http\Controllers\frontend\BlogCommentController::class);
     Route::resource('/frontmanage', \App\Http\Controllers\FrontendmanageController::class);
+    Route::resource('slider', \App\Http\Controllers\SliderController::class);
     Route::post('sendMail', [\App\Http\Controllers\SubscribeController::class,'store']);
-
+    Route::get('Counting', [\App\Http\Controllers\Backend\BackendController::class, 'Counting']);
 });
 
 //frontend Route
