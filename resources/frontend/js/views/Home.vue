@@ -2,34 +2,38 @@
     <div>
         <!-- Carousel Start -->
         <div class="">
-            <div class="owl-carousel header-carousel position-relative">
-                <div class="owl-carousel-item position-relative">
-                    <img class="img-fluid" src="/frontend/assets/img/carousel1.jpg" alt="">
-                    <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center" style="background: rgba(43, 57, 64, .5);">
-                        <div class="container">
-                            <div class="row justify-content-start">
-                                <div class="col-10 col-lg-8">
-                                    <h1 class="display-3 text-white slideInDown mb-4">Find The Perfect Job That You Deserved</h1>
-                                    <p class="fs-5 fw-medium text-white mb-4 pb-2">Discover your perfect role in the dynamic world of startups! We help you identify opportunities that align with your skills, passions, and career goals. With personalized support, tailored job matches, and insights into the startup culture, we make it easier for you to find a position where you can thrive and make an impact. Let’s take your career to the next level!</p>
+            <Swiper v-if="Slider.length > 0"
+                    :slides-per-view="1"
+                    :space-between="0"
+                    :loop="true"
+                    :autoplay="true"
+                    :pagination="false"
+                    :navigation="false"
+                    :breakpoints="{
+                        0: { slidesPerView: 1, spaceBetween: 10 },
+                        576: { slidesPerView: 1, spaceBetween: 20 },
+                        768: { slidesPerView: 1, spaceBetween: 30 }
+                    }"
+                    @swiper="onSwiper"
+                    @slideChange="onSlideChange"
+                    class="full-width-swiper"
+            >
+                <swiper-slide class="test" v-for="slide in Slider" :key="slide.id">
+                    <div class="owl-carousel-item position-relative">
+                        <img class="img-fluid" :src="storageImage(slide.slide_image)" alt="">
+                        <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center" style="background: rgba(43, 57, 64, .5);">
+                            <div class="container">
+                                <div class="row justify-content-start">
+                                    <div class="col-10 col-lg-8">
+                                        <h1 class="display-3 text-white slideInDown mb-4">{{slide.title}}</h1>
+                                        <p class="fs-5 fw-medium text-white mb-4 pb-2">{{truncateString(slide.description)}}</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="owl-carousel-item position-relative">
-                    <img class="img-fluid" src="/frontend/assets/img/carousel-2.jpg" alt="">
-                    <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center" style="background: rgba(43, 57, 64, .5);">
-                        <div class="container">
-                            <div class="row justify-content-start">
-                                <div class="col-10 col-lg-8">
-                                    <h1 class="display-3 text-white slideInDown mb-4">Find The Best Startup Job That Fit You</h1>
-                                    <p class="fs-5 fw-medium text-white mb-4 pb-2">Discover your perfect role in the dynamic world of startups! We help you identify opportunities that align with your skills, passions, and career goals. With personalized support, tailored job matches, and insights into the startup culture, we make it easier for you to find a position where you can thrive and make an impact. Let’s take your career to the next level!</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                </swiper-slide>
+            </Swiper>
         </div>
         <!-- Carousel End -->
 
@@ -56,8 +60,9 @@
                             :slides-per-view="3"
                             :space-between="30"
                             :loop="true"
+                            :autoplay="true"
                             :pagination="false"
-                            :navigation="true"
+                            :navigation="false"
                             :breakpoints="{
                                 0: {
                                     slidesPerView: 1,
@@ -115,8 +120,9 @@
                             :slides-per-view="3"
                             :space-between="30"
                             :loop="true"
+                            :autoplay="true"
                             :pagination="false"
-                            :navigation="true"
+                            :navigation="false"
                             :breakpoints="{
                                 0: {
                                     slidesPerView: 1,
@@ -153,10 +159,10 @@
     import Search from "./Searching/Search";
     import axios from 'axios';
 
-    import { Navigation, Pagination } from 'swiper';
+    import { Navigation, Pagination, Autoplay } from 'swiper';
     import { SwiperCore, Swiper, SwiperSlide } from 'swiper-vue2';
     import 'swiper/swiper-bundle.css';
-    SwiperCore.use([Navigation, Pagination]);
+    SwiperCore.use([Navigation, Pagination, Autoplay, ]);
 
     export default {
         name: "Home",
@@ -165,17 +171,10 @@
             return {
                 partnership: [],
                 blogpost_slide: [],
+                Slider: [],
             };
         },
         mounted() {
-            $('.header-carousel').owlCarousel({
-                loop: true,
-                items: 1,
-                nav: false,
-                autoplay: true,
-                autoplayTimeout: 3000,
-                autoplayHoverPause: true,
-            });
             this.getPartnership();
             this.getDataList();
         },
@@ -184,18 +183,21 @@
             async getPartnership() {
                 try {
                     const response = await axios.get('/api/frontend/joblist');
-                    this.partnership = response.data.result.partner_logo;
+                    this.partnership = response.data.result.partner_logo || [];
+                    this.Slider = response.data.result.slider || [];
                 } catch (error) {
                     this.error = "Error fetching partnership data. Please try again later.";
                     console.error(error);
                 }
             },
+
             onSwiper(swiper) {
                 // console.log(swiper)
             },
             onSlideChange(swiper) {
                 // console.log('slide change')
             },
+
         }
     }
 </script>
@@ -210,10 +212,6 @@
         opacity: 0.8;
     }
 
-    .header-carousel {
-        height: 600px;
-    }
-
     .owl-carousel-item {
         height: 600px;
         overflow: hidden;
@@ -221,6 +219,16 @@
 
     .owl-carousel-item img {
         height: 100%;
-        object-fit: cover;
+        object-fit: contain;
+    }
+
+    .full-width-swiper {
+        width: 100%;
+        margin: 0;
+    }
+
+    .owl-carousel-item img {
+        width: 100%;
+        height: auto;
     }
 </style>

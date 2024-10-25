@@ -35,7 +35,7 @@
                     <i class="fab fa-linkedin-in"></i> LinkedIn
                 </a>
             </div>
-
+            <h4 class="text-muted ">Views: {{ post.view_count }}</h4>
             <div class="row col-md-6 mt-5">
                 <h4>Comments</h4>
                 <div v-for="comm in comment">
@@ -98,37 +98,24 @@
         },
         mounted() {
             this.getPostDetails();
-            this.blogCommentList();
             this.authData();
 
         },
 
         methods: {
-
             async getPostDetails() {
                 try {
                     const response = await axios.get(`/api/frontend/blogDetails/${this.id}`);
 
                     if (response.data && response.data.result) {
                         this.post = response.data.result.post;
+                        this.comment = response.data.result.blogComment;
                     } else {
                         this.error = "No blog details found.";
                     }
                 } catch (error) {
                     this.error = "Failed to load blog details.";
                 }
-            },
-       async blogCommentList() {
-           if (!this.id) {
-               this.error = "Category ID is not defined.";
-               return;
-           }
-           try {
-               const response = await axios.get(`/api/frontend/blogComment/${this.id}`);
-               this.comment = response.data.result.blogComment;
-           } catch (error) {
-               console.error('Error fetching comments:', error);
-           }
             },
 
             async blogComment() {
