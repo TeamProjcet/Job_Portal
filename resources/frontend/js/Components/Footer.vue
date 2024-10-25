@@ -1,15 +1,15 @@
 <template>
     <!-- Footer Start -->
     <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5">
-        <div class="container-fluid py-5">
+        <div class="container py-5">
             <div class="row g-5">
 
                 <div class="col-lg-3 col-md-3">
                     <h5 class="text-white mb-4">{{ $t('company') }}</h5>
-                    <a class="btn btn-link text-white-50" href="">{{ $t('about_us') }}</a>
-                    <a class="btn btn-link text-white-50" href="">{{ $t('contact_us') }}</a>
-                    <a class="btn btn-link text-white-50" href="">{{ $t('privacy_policy') }}</a>
-                    <a class="btn btn-link text-white-50" href="">{{ $t('terms_condition') }}</a>
+                    <router-link to="/about" class="btn btn-link text-white-50" >{{ $t('about_us') }}</router-link>
+                    <router-link to="/contact" class="btn btn-link text-white-50" >{{ $t('contact_us') }}</router-link>
+                    <router-link to="/cookies-policy" class="btn btn-link text-white-50" >{{ $t('privacy_policy') }}</router-link>
+                    <router-link to="/help-policy" class="btn btn-link text-white-50" >{{ $t('terms_condition') }}</router-link>
                 </div>
 
                 <div class="col-lg-3 col-md-3">
@@ -35,7 +35,9 @@
                 <div class="col-lg-3 ">
                     <form @submit.prevent="subscribeNewsletter">
                         <h5 class="text-white mb-4">{{ $t('newsletter_intro') }}</h5>
-
+                        <div class="mb-4">
+                            <p @dblclick="openTextModal('newsletter')" >{{staticText.newsletter}}</p>
+                        </div>
                         <div class="position-relative mx-auto d-flex" style="max-width: 400px;">
                             <input v-model="fromData.email" name="email" class="form-control me-2" type="email" placeholder="Your email" required>
                             <button type="submit" class="btn btn-primary">
@@ -43,9 +45,6 @@
                             </button>
                         </div>
                     </form>
-                    <div class="mb-4">
-                        <p @dblclick="openTextModal('newsletter')" >{{staticText.newsletter}}</p>
-                    </div>
                 </div>
 
             </div>
@@ -59,10 +58,10 @@
                     </div>
                     <div class="col-md-6 text-center text-md-end">
                         <div class="footer-menu">
-                            <a href="">{{$t('home')}}</a>
-                            <a href="">{{$t('cookies')}}</a>
-                            <a href="">{{$t('help')}}</a>
-                            <a href="">{{$t('faqs')}}</a>
+                            <router-link to="/">{{$t('home')}}</router-link>
+                            <router-link to="/cookies-policy">{{$t('cookies')}}</router-link>
+                            <router-link to="/help-policy">{{$t('help')}}</router-link>
+                            <router-link to="/fqas-policy">{{$t('faqs')}}</router-link>
                         </div>
                     </div>
                 </div>

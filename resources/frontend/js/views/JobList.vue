@@ -50,7 +50,7 @@
                 </div>
 
 
-                <div class="col-12 d-flex justify-content-center">
+                <div class="col-12 d-flex justify-content-start">
                     <pagination previousText="prev" nextText="next" :data="joblist.jobData" @paginateTo="getJobList"></pagination>
 
                 </div>
