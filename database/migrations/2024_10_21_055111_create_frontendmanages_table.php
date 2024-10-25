@@ -22,7 +22,7 @@ return new class extends Migration
             $table->text('map');
             $table->text('facebook');
             $table->text('youtube');
-            $table->text('linkdin');
+            $table->text('linkedin');
             $table->text('twitter');
             //about
             $table->text('image');
