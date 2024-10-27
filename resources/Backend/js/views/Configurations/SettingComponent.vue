@@ -320,45 +320,6 @@
 
 
             </table>
-
-            <template>
-                <div class="container mt-5">
-                    <h1 class="mb-4 text-center">Settings Management</h1>
-                    <div class="table-responsive">
-                        <table class="table table-striped table-bordered">
-                            <thead class="table-dark">
-                            <tr>
-                                <th>Feature</th>
-                                <th>Status</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td><label for="jobSelect">Job</label></td>
-                                <td>
-                                    <select v-model="editableText.job" class="form-control" id="jobSelect">
-                                        <option value="1">Yes</option>
-                                        <option value="0">No</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><label for="blogSelect">Blog</label></td>
-                                <td>
-                                    <select v-model="editableText.blog" class="form-control" id="blogSelect">
-                                        <option value="1">Yes</option>
-                                        <option value="0">No</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </template>
-
-
-
         </div>
     </div>
 </template>
