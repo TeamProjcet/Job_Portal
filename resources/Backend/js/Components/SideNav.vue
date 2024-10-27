@@ -47,12 +47,6 @@
                 </span>
                         <h4 class="text-section">Menu Items</h4>
                     </li>
-
-                    <li class="nav-item ">
-                        <router-link to="/admin/frontend/slider">Slider</router-link>
-                    </li>
-
-
                     <li class="nav-item" v-for="(menu, mindex) in Config.menus" :key="mindex">
                         <template v-if="menu.sub_menus.length > 0">
                             <a :data-bs-toggle="'collapse'" :href="'#collapse' + mindex">

@@ -216,7 +216,7 @@ const route = [
         path: '/admin/soft/setting',
         name: 'setting',
         component: SettingComponent,
-        meta: { pagetitle: 'Setting SendMail Table', dataUrl: '' },
+        meta: { pagetitle: 'Setting SendMail Table', dataUrl: '/api/setting' },
     } ,
 
 ];

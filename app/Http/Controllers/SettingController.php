@@ -3,83 +3,83 @@
 namespace App\Http\Controllers;
 
 use App\Models\Setting;
+use App\Supports\Helper;
 use Illuminate\Http\Request;
 
 class SettingController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    use Helper;
     public function index()
     {
-        //
+        $contents = Setting::pluck('value', 'key');
+        return $this->returnData(2000,$contents);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'key' => 'required|string|unique:settings,key',
+            'value' => 'required|string',
+        ]);
+
+        $setting = new Setting();
+        $setting->key = $request->key;
+        $setting->value = $request->value;
+        $setting->save();
+
+        return $this->returnData( 2000,  $setting,  'Setting created successfully');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Setting  $setting
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Setting $setting)
+    public function show($key)
+    {
+        $setting = Setting::where('key', $key)->first();
+
+        if ($setting) {
+            return $this->returnData( 2000,  $setting,  'Setting created successfully');
+
+        }
+        return $this->returnData( 3000,  null,  'Setting not found');
+
+    }
+
+    public function edit($key)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Setting  $setting
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Setting $setting)
+    public function update(Request $request, $key)
     {
-        //
+        $request->validate([
+            'value' => 'required|string',
+        ]);
+
+        $setting = Setting::where('key', $key)->first();
+
+        if ($setting) {
+            $setting->value = $request->value;
+            $setting->save();
+            return $this->returnData(2000, $setting->value,'Content updated successfully');
+
+        }
+        return $this->returnData( 3000,  null,  'Setting not found');
+
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Setting  $setting
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Setting $setting)
+    public function destroy($key)
     {
-        //
-    }
+        $setting = Setting::where('key', $key)->first();
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Setting  $setting
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Setting $setting)
-    {
-        //
+        if ($setting) {
+            $setting->delete();
+
+            return response()->json(['status' => 2000, 'data' => null, 'message' => 'Setting deleted successfully']);
+        }
+
+        return response()->json(['status' => 3000, 'data' => null, 'message' => 'Setting not found']);
     }
 }

@@ -43,8 +43,8 @@ class FrontendController extends Controller
 
     public function jobCategory($cateId)
     {
-        $data['jobPosts'] = JobPostModel::with('category','company')->where('category_id',$cateId)->get();
-        $data['companycate'] = JobPostModel::with('category','company')->where('company_id',$cateId)->paginate(1);
+        $data['cateJob'] = JobPostModel::with('category','company')->where('category_id',$cateId)->paginate(15);
+        $data['companycate'] = JobPostModel::with('category','company')->where('company_id',$cateId)->paginate(15);
         return $this->returnData(2000,$data);
 
     }

@@ -2,7 +2,7 @@
     <div>
         <div>
             <div class="card-header">
-                <PageTop :storePermission="can('company.store')"/>
+                <PageTop :storePermission="can('slider.store')"/>
             </div>
             <DataTable :tableHeading="tableHeading">
                 <tr v-for="(data, index) in dataList" :key="index">
@@ -11,10 +11,10 @@
                     <td>{{truncateString(data.description, 20)}}</td>
                     <td><img :src="storageImage(data.slide_image)" style="width: 100px; height: 100px" alt="Image"></td>
                     <td>
-                        <a  @click="openEditModal(data, data.id)">
+                        <a v-if="can('slider.edit')" @click="openEditModal(data, data.id)">
                             <i class="fas fa-edit" style="color: blue;"></i>
                         </a>
-                        <a  @click="CategoryDatadelete(data.id, index)">
+                        <a v-if="can('slider.destroy')"  @click="CategoryDatadelete(data.id, index)">
                             <i class="fas fa-trash-alt" style="color: red;"></i>
                         </a>
                     </td>

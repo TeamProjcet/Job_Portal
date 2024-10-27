@@ -152,30 +152,10 @@ export default {
                 this.staticText = response.data.result;
             });
         },
-        // openTextModal(key) {
-        //     this.editableKey = key;
-        //     this.editableText = this.staticText[key];
-        //     if (this.canOpenModal) {
-        //         this.isModalOpen = true;
-        //
-        //     }
-        // },
 
-        // async checkUserRole() {
-        //     try {
-        //         const response = await axios.get('/superadmin');
-        //         const user = response.data.result;
-        //         if (user && user.role_id === 1) {
-        //             this.canOpenModal = true;
-        //         }
-        //     } catch (error) {
-        //         console.error('Error fetching user data:', error);
-        //         this.canOpenModal = false;
-        //     }
-        // },
         async checkUserRole() {
             try {
-                const response = await axios.get('/superadmin');
+                const response = await axios.get('/api/frontend/superadmin');
                 const user = response.data.result;
 
                 if (user && user.role_id === "1") {

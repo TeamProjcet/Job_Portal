@@ -11,7 +11,6 @@ Route::get('login', [\App\Http\Controllers\auth\AuthController::class, 'index'])
 Route::get('userAuth', [\App\Http\Controllers\auth\AuthController::class, 'userAuth']);
 Route::get('userdata', [\App\Http\Controllers\auth\AuthController::class, 'userdata']);
 Route::get('logout', [\App\Http\Controllers\auth\AuthController::class, 'logout'])->name('logout');
-Route::get('superadmin', [\App\Http\Controllers\auth\AuthController::class,'superadmindata']);
 Route::post('adlogin', [\App\Http\Controllers\auth\AuthController::class, 'adlogin']);
 
 Route::view('admin/{any}', 'backend')->where('any', '.*')->middleware('auth');
@@ -47,6 +46,7 @@ Route::prefix('api')->group(function () {
     Route::post('sendMail', [\App\Http\Controllers\SubscribeController::class,'store']);
     Route::get('Counting', [\App\Http\Controllers\Backend\BackendController::class, 'Counting']);
     Route::resource('staticContents',\App\Http\Controllers\FrontendStaticContentController::class);
+    Route::resource('setting',\App\Http\Controllers\SettingController::class);
 
 });
 
@@ -65,6 +65,7 @@ Route::prefix('api/frontend')->group(function () {
     Route::post('seekerlogin', [\App\Http\Controllers\frontend\SeekerLoginController::class, 'login']);
     Route::post('seekerlogout', [\App\Http\Controllers\frontend\SeekerLoginController::class, 'logout']);
     Route::post('seeker/profile', [\App\Http\Controllers\frontend\SeekerLoginController::class, 'update']);
+    Route::get('superadmin', [\App\Http\Controllers\frontend\SeekerLoginController::class,'superadmindata']);
     Route::resource('/saved', \App\Http\Controllers\SavedJobsController ::class);
     Route::resource('/newsletter', \App\Http\Controllers\frontend\NewsletterController::class);
     Route::resource('/contact', \App\Http\Controllers\frontend\ContactController::class);
