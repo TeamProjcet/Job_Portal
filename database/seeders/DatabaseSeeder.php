@@ -27,5 +27,6 @@ class DatabaseSeeder extends Seeder
         $this->call(DistrictSeeder::class);
         $this->call(FrontendTableSeeder::class);
         $this->call(JobTableSeeder::class);
+        $this->call(SettingTableSeeder::class);
     }
 }

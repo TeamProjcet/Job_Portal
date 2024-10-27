@@ -21,7 +21,7 @@ class Frontendmanage extends Model
             'map'=>'required',
             'facebook'=>'',
             'youtube'=>'',
-            'linkdin'=>'',
+            'linkedin'=>'',
             'twitter'=>'',
             'title'=>'required',
             'details'=>'required',

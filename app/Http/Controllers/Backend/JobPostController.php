@@ -12,6 +12,7 @@ class JobPostController extends Controller
 {
     use Helper;
 
+
     public function __construct()
     {
         $this->middleware(function ($request, $next) {

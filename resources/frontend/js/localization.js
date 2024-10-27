@@ -144,7 +144,7 @@ const messages = {
         contact_us: 'যোগাযোগ করুন',
         privacy_policy: 'গোপনীয়তা নীতি',
         terms_condition: 'শর্তাবলী',
-        subscribe: 'অবস্থান',
+        subscribe: 'সাবস্ক্রাইব',
         remove:'অপসারণ',
         name: 'নাম',
         email: 'ইমেইল',

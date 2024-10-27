@@ -41,7 +41,7 @@
                                          style="width: 45px; height: 45px;">
                                         <i class="fa fa-phone-alt text-primary"></i>
                                     </div>
-                                    <span @dblclick="openTextModal('contphone')">+88{{staticText.contphone}}</span>
+                                    <span @dblclick="openTextModal('contphone')">+880 {{staticText.contphone}}</span>
 
                                 </div>
                             </div>

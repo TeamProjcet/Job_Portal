@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 trait Helper
 {
     public $model='';
+    public $isJob = null;
     public function returnData($status=2000,$result=null,$message=null){
 
         $data=[];
@@ -39,6 +40,9 @@ trait Helper
             ->where('role_id', auth()->user()->role_id)
             ->get()->pluck('name')->toArray();
     }
+
+
+
 
 
 }

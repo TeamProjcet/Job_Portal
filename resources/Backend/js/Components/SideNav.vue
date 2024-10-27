@@ -1,15 +1,14 @@
 <template>
     <div class="sidebar" data-background-color="dark">
         <div class="sidebar-logo">
-            <!-- Logo Header -->
             <div class="logo-header" data-background-color="dark">
                 <router-link to="/admin/dashboard" class="logo">
                     <img
-                            src="https://i.ibb.co.com/6w26Pc2/logo.jpg"
+                            :src="storageImage(settingvalue.softlogo)"
                             alt="navbar brand"
-                            class="navbar-brand"
-                            height="40"
-                            width="50"
+                            class="logo-image"
+                            height="100"
+                            width="150"
                     />
                 </router-link>
                 <div class="nav-toggle">
@@ -47,8 +46,6 @@
                 </span>
                         <h4 class="text-section">Menu Items</h4>
                     </li>
-
-
                     <li class="nav-item" v-for="(menu, mindex) in Config.menus" :key="mindex">
                         <template v-if="menu.sub_menus.length > 0">
                             <a :data-bs-toggle="'collapse'" :href="'#collapse' + mindex">
@@ -67,14 +64,7 @@
                             </div>
                         </template>
                     </li>
-              
-       
 
-
-                            
-
-
-                   
                 </ul>
             </div>
         </div>
@@ -84,8 +74,14 @@
 <script>
     export default {
         name: "SideNav",
+        data(){
+            return{
+                settingvalue:[]
+            }
+        },
         mounted() {
             this.getconfigurations();
+            this.fetchSettings();
         },
 
         methods:{

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('description');
             $table->boolean('status')->default(1);
+            $table->integer('view_count')->default(0);
             $table->text('image');
             $table->timestamps();
         });
