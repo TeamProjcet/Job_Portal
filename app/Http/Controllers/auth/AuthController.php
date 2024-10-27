@@ -34,17 +34,7 @@ use Helper;
 
 
     }
-    public function superadmindata(){
-        $user = Auth::user();
-        if (!$user) {
-            return $this->returnData(401, null, 'Unauthorized'); // 401 Unauthorized
-        }
-        if ((int)$user->role_id === 1) { // টাইপ কাস্টিং করুন
-            return $this->returnData(2000, $user);
-        } else {
-            return $this->returnData(403, null, 'Unauthorized'); // 403 Forbidden
-        }
-    }
+
 
     public function userdata(){
 //        $data= Auth::user();

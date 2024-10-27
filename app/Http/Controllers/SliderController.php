@@ -11,12 +11,12 @@ class SliderController extends Controller
     use Helper;
     public function __construct()
     {
-//        $this->middleware(function ($request, $next) {
-//            if (!$this->can(request()->route()->action['as'])){
-//                return $this->returnData(5000, null, 'You are not authorized to access this page');
-//            }
-//            return $next($request);
-//        });
+        $this->middleware(function ($request, $next) {
+            if (!$this->can(request()->route()->action['as'])){
+                return $this->returnData(5000, null, 'You are not authorized to access this page');
+            }
+            return $next($request);
+        });
         $this->model= new Slider();
     }
 

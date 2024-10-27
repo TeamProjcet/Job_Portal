@@ -28,7 +28,7 @@ class ApplicationController extends Controller
         $data = Applications::with(['job.category', 'job.company', 'seeker'])
             ->whereHas('job', function ($query) use ($user) {
                 $query->where('user_id', $user->id);
-            })->paginate(2);
+            })->paginate(12);
 
         return $this->returnData(2000, $data);
     }
@@ -80,33 +80,6 @@ class ApplicationController extends Controller
         }
 // Code for showing the form to edit a specific application
     }
-
-
-//    public function update(Request $request, $id)
-//    {
-//        if (!$this->can('application.update')) {
-//            return $this->returnData(5000, null, 'You are not authorized to access this page');
-//        }
-//        $application = Applications::find($id);
-//        if (!$application) {
-//            return response()->json(['message' => 'Application not found'], 404);
-//        }
-//        $application->application_status = $request->application_status;
-//        $application->interview_status = $request->interview_status;
-//        $application->note = $request->note;
-//        if ($application->interview_status == 2) {
-//            $job = JobPostModel::findOrFail($application->job_id);
-//
-//            if ($job->vacancy > 0) {
-//                $job->vacancy--;
-//                $job->save();
-//            }
-//        }
-//        $application->save();
-//
-//        return $this->returnData(2000, $application);
-//    }
-
 
 
     public function update(Request $request, $id)

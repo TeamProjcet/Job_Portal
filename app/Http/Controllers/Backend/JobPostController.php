@@ -28,7 +28,7 @@ class JobPostController extends Controller
         $user = auth()->user();
         $data = $this->model->with('category','company')
             ->where('user_id', $user->id)
-            ->paginate(10);
+            ->paginate(18);
         return $this->returnData(2000, $data);
     }
 
