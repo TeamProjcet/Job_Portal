@@ -28,12 +28,12 @@ use Helper;
     }
 
     public function userAuth(){
-        $data= Auth::user();
+        $data= Auth::user()->load('roles', 'employer');
         return $this->returnData(2000, $data);
 
-
-
     }
+
+
 
 
     public function userdata(){

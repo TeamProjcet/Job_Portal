@@ -39,7 +39,7 @@
                 <div>
                     <div class="nav-item dropdown" v-if="isAuthenticated">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <img src="https://i.ibb.co.com/3WPvxLF/user.png" alt="User Avatar" class="rounded-circle" width="30" height="30">
+                            <img :src="storageImage(seeker ? seeker.image : '')" alt="User Avatar" class="rounded-circle" width="30" height="30">
                             {{ seeker ? seeker.name : 'Guest' }}
                         </a>
                         <div class="dropdown-menu rounded-0 m-0">

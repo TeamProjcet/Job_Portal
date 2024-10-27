@@ -28,7 +28,7 @@
         <hr>
         <h6>Contact Info</h6>
         <p><strong>{{$t('email')}}:</strong> {{ seeker.email }}</p>
-        <p><strong>{{$t('phone')}}:</strong> +880{{ seeker.phone }}</p>
+        <p><strong>{{$t('phone')}}:</strong> +88{{ seeker.phone }}</p>
         <p><strong>{{$t('address')}}:</strong> {{ seeker.address }}</p>
     </div>
 </div>

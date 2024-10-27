@@ -53,7 +53,7 @@
                 </div>
             </div>
             </template>
-            <div class="col-12 d-flex justify-content-lg-start" v-if="jobcategory.cateJob !==undefined">
+            <div class="col-12 d-flex justify-content-lg-start" v-if="jobcategory.cateJob.data !==undefined">
                 <pagination previousText="PREV" nextText="NEXT" :data="jobcategory.cateJob" @paginateTo="getCategoryList"></pagination>
             </div>
         </div>
@@ -68,7 +68,7 @@
         props: ['category_id'],
         data() {
             return {
-                jobcategory: [],
+                jobcategory: {cateJob:{data: []}},
                 saveds:[],
                 isAuthenticated:false,
                 error: null,
