@@ -413,10 +413,8 @@
                         _this.httpReq('put', _this.urlGenaretor(`api/setting/${dataModel}`), settingData, {}, function (updateResponse) {
                             _this.$set(dataObject, dataModel, imageName);
                             if (callback) callback(updateResponse);
-                            _this.toast.success("Image updated successfully!");
                         });
                     } else {
-                        _this.toast.error("Image updated Unsuccessfully!");
                         console.error("Error uploading file: API not found");
                     }
                 });
