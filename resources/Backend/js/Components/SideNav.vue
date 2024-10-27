@@ -25,6 +25,13 @@
                 </button>
             </div>
             <!-- End Logo Header -->
+
+            <!-- User Profile Section -->
+            <div class="user-profile">
+                <img :src="storageImage(user && user.employer && user.employer.length > 0 ? user.employer[0].image : '')" alt="User Profile" class="profile-image" />
+                <p class="user-name">{{ user ? user.name : 'Guest' }}<span>{{user && user.roles && user.roles.length > 0 ? user.roles[0].name : '' }}</span></p>
+            </div>
+            <!-- End User Profile Section -->
         </div>
         <div class="sidebar-wrapper scrollbar scrollbar-inner">
             <div class="sidebar-content">
@@ -73,10 +80,18 @@
 </template>
 
 <script>
+    import axios from 'axios';
+
     export default {
         name: "SideNav",
+        data(){
+            return{
+                user: {},
+            }
+        },
         mounted() {
             this.getconfigurations();
+            this.userAuthData()
         },
 
         methods:{
@@ -90,7 +105,17 @@
 
 
                 })
-            }
+            },
+
+            async userAuthData() {
+                try {
+                    const response = await axios.get('/userAuth');
+                    this.user = response.data.result || {};
+                } catch (error) {
+                    this.user = {};
+                    console.error('Error fetching authentication data:', error);
+                }
+            },
 
 
         },
@@ -99,5 +124,40 @@
 </script>
 
 <style scoped>
+    .user-profile {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        color: white;
+        transition: background-color 0.3s;
+    }
 
+    .user-profile:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .profile-image {
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        margin-right: 10px;
+        border: 2px solid white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .user-name {
+        font-size: 14px;
+        font-weight: bold;
+        margin-top: 15px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .user-name span {
+        font-weight: normal;
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 12px;
+    }
 </style>

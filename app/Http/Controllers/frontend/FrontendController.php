@@ -31,7 +31,7 @@ class FrontendController extends Controller
         $data['slider']= Slider::get();
         $data['partner'] = PartnershipModel::take(4)->skip(0)->orderBy('id','DESC')->get();
         $data['partner_logo'] = PartnershipModel::orderBy('id','DESC')->get();
-        $data['blogpost']=blog::with('user','company')->where('status',1)->orderBy('id','DESC')->paginate(12);
+        $data['blogpost']=blog::with('user','company')->where('status',1)->orderBy('id','DESC')->paginate(15);
         $data['blogpost_slide'] = blog::with('user', 'company')
             ->where('status', 1)
             ->orderBy('id', 'DESC')

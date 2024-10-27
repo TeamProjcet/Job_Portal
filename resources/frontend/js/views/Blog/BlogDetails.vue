@@ -41,7 +41,7 @@
                 <div v-for="comm in comment">
                     <div class="card mb-3">
                         <div class="card-body d-flex align-items-start">
-                            <img src="https://i.ibb.co.com/3WPvxLF/user.png" alt="User Avatar" class="rounded-circle" style="width: 50px; height: 50px; margin-right: 15px;">
+                            <img :src="storageImage(comm.seeker.image)" alt="User Avatar" class="rounded-circle" style="width: 50px; height: 50px; margin-right: 15px;">
                             <div>
                                 <h5 class="card-title">{{comm.seeker.name}}</h5>
                                 <p class="card-text">{{comm.comments}}</p>

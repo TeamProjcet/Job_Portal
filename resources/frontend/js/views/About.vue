@@ -4,7 +4,7 @@
         <!-- Header End -->
         <div class=" py-5 bg-dark page-header mb-5">
             <div class="container  my-5 pt-5 pb-4">
-                <h1 class="display-3 text-white mb-3  slideInDown">{{$t('about_us')}}</h1>
+                <h1 class="display-3 text-white mb-3 ">{{$t('about_us')}}</h1>
             </div>
         </div>
         <!-- Header End -->
