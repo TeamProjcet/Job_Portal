@@ -139,7 +139,6 @@
 <!--</style>-->
 
 
-
 <template>
     <div class="container mt-5">
         <div class="card shadow-sm">
@@ -150,13 +149,10 @@
                 <div
                         v-for="msg in messages"
                         :key="msg.id"
-                        :class="{
-                        'message-item mb-3 p-3 border rounded': true,
-                        'text-right ml-auto': msg.sender && msg.sender.id === currentUserId,
-                        'mr-auto': msg.sender && msg.sender.id !== currentUserId
-                    }"
+                        class="message-item mb-3 p-3 border rounded"
+                        :class="msg.sender && msg.sender.id === currentUserId ? 'bg-secondary text-white textright ml-auto' : 'bg-light text-left mr-auto'"
                 >
-                    <p class="mb-1"><strong>{{ msg.sender?msg.sender.name : 'Unknown' }}:</strong></p>
+                    <p class="mb-1"><strong>{{ msg.sender ? msg.sender.name : 'Unknown' }}</strong></p>
                     <div class="message-content">{{ msg.message_content }}</div>
                     <button
                             class="btn btn-danger btn-sm mt-1"
@@ -165,21 +161,6 @@
                     >
                         Delete
                     </button>
-
-                    <div v-if="msg.replies && msg.replies.length > 0" class="mt-2">
-                        <div
-                                v-for="reply in msg.replies"
-                                :key="reply.id"
-                                :class="{
-                                'reply-item border rounded p-2 mb-2': true,
-                                'bg-light mr-auto': reply.sender && reply.sender.id  !== currentUserId,
-                                'text-right ml-auto': reply.sender && reply.sender.id === currentUserId
-                            }"
-                        >
-                            <p class="mb-1"><strong>{{ reply.sender?reply.sender.name : 'Unknown' }}:</strong></p>
-                            <div class="message-content">{{ reply.message_content }}</div>
-                        </div>
-                    </div>
                 </div>
             </div>
             <div class="card-footer">
@@ -208,7 +189,7 @@
                 messages: [],
                 newMessage: '',
                 currentUserId: null,
-                // receiverId: this.$route.params.id
+                receiverId: this.$route.params.id
             };
         },
         created() {
@@ -218,9 +199,8 @@
             async fetchMessages() {
                 try {
                     const id = this.$route.params.id;
-                    const response = await axios.get(`/api/messages/${this.id}`);
+                    const response = await axios.get(`/api/messagessend/${id}`);
                     this.messages = response.data.result;
-                    console.log(this.messages);
                 } catch (error) {
                     console.error("Error fetching messages:", error);
                 }
@@ -231,8 +211,8 @@
                         receiver_id: this.receiverId,
                         message_content: this.newMessage,
                     });
-                    this.messages.unshift(response.data.data);
                     this.newMessage = '';
+                    this.fetchMessages();
                 } catch (error) {
                     console.error("Error sending message:", error);
                 }
@@ -257,29 +237,19 @@
         padding: 20px;
         border-radius: 5px;
     }
-
     .message-item {
         max-width: 75%;
     }
-
-    .text-right {
+    .text-left {
+        text-align: left;
+    }
+    .textright{
         text-align: right;
     }
-
     .ml-auto {
-        margin-left: auto; /* Your sent message */
+        margin-left: auto;
     }
-
     .mr-auto {
-        margin-right: auto; /* Your received message */
+        margin-right: auto;
     }
 </style>
-
-
-
-
-
-
-
-
-

@@ -172,6 +172,13 @@ class ModuleTableSeeder extends Seeder
                         'icon' => 'fas fa-address-book',
                         'permission' => ['index', 'store', 'show', 'create', 'edit', 'update', 'destroy'],
                     ],
+                    [
+                        'name' => 'Support',
+                        'key' => 'messages',
+                        'link' => '/admin/seeker/messagetable',
+                        'icon' => 'fas fa-headset',
+                        'permission' => ['index', 'store', 'show', 'getMessagesByReceiver', 'edit', 'update', 'destroy'],
+                    ],
                 ],
             ],
             [

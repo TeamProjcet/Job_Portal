@@ -212,7 +212,7 @@
                 messages: [],
                 newMessage: '',
                 UserId: [],
-                currentUserId: null // Initialize as null
+                currentUserId: null
             };
         },
         created() {
@@ -242,12 +242,13 @@
                     const response = await axios.post('/api/seekerstore', {
                         receiver_id: 3,
                         message_content: this.newMessage,
-                        // sender_id: this.currentUserId
+
                     });
-                    this.messages.unshift(response.data.data);
+                    // this.messages.unshift(response.data.result);
                     this.newMessage = '';
                     this.fetchMessages();
-                 } catch (error) {
+
+                } catch (error) {
                     console.error("Error sending message:", error);
                 }
             },

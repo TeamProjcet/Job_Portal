@@ -10,25 +10,23 @@
             </tr>
             </thead>
             <tbody>
-            <template v-for="(group, index) in groupedMessages" >
-                <tr>
-                    <td>
-                        <p class="">
-                            {{ group[0].sender.name || 'Unknown' }}
-                        </p>
-                    </td>
-                    <td>
-                        <div v-for="message in group" :key="message.id">
-                            {{ message.message_content }}
-                        </div>
-                    </td>
-                    <td>
-                        <router-link :to="{ name: 'MessageComponent', params: { id: group[0].sender.id } }" class="btn btn-dark text-white">
-                            Reply
-                        </router-link>
-                    </td>
-                </tr>
-            </template>
+            <tr v-for="(group) in groupedMessages" :key="group[0].sender.id">
+                <td>
+                    <p>
+                        {{ group[0].sender ? group[0].sender.name : 'Unknown' }}
+                    </p>
+                </td>
+                <td>
+                    <div v-for="message in group" :key="message.id">
+                        {{ message.message_content }}
+                    </div>
+                </td>
+                <td>
+                    <router-link :to="{ name: 'MessageComponent', params: { id: group[0].sender ? group[0].sender.id : null } }" class="btn btn-dark text-white">
+                        Reply
+                    </router-link>
+                </td>
+            </tr>
             </tbody>
         </table>
     </div>
@@ -47,11 +45,13 @@
             groupedMessages() {
                 const groups = {};
                 this.messages.forEach(msg => {
-                    const senderId = msg.sender.id;
-                    if (!groups[senderId]) {
-                        groups[senderId] = [];
+                    if (msg.sender) {
+                        const senderId = msg.sender.id;
+                        if (!groups[senderId]) {
+                            groups[senderId] = [];
+                        }
+                        groups[senderId].push(msg);
                     }
-                    groups[senderId].push(msg);
                 });
                 return Object.values(groups);
             },
@@ -72,7 +72,6 @@
         },
     };
 </script>
-
 
 <style scoped>
     .message-table {

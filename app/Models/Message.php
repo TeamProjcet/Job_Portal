@@ -24,6 +24,6 @@ class Message extends Model
 
     public function receiver()
     {
-        return $this->morphTo(); // polymorphic relation
+        return $this->morphTo();
     }
 }
