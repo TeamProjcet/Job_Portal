@@ -17,8 +17,8 @@
                     </p>
                 </td>
                 <td>
-                    <div v-for="message in group" :key="message.id">
-                        {{ message.message_content }}
+                    <div>
+                        {{ group[group.length - 1].message_content }}
                     </div>
                 </td>
                 <td>

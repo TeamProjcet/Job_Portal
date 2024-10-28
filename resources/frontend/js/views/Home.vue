@@ -2,7 +2,7 @@
     <div>
         <!-- Carousel Start -->
         <div class="">
-            <Swiper v-if="Slider.length > 0"
+            <Swiper v-if="filteredSlides.length > 0"
                     :slides-per-view="1"
                     :space-between="0"
                     :loop="true"
@@ -18,7 +18,7 @@
                     @slideChange="onSlideChange"
                     class="full-width-swiper"
             >
-                <swiper-slide class="test" v-for="slide in Slider" :key="slide.id">
+                <swiper-slide class="test" v-for="slide in filteredSlides" :key="slide.id">
                     <div class="owl-carousel-item position-relative">
                         <img class="img-fluid" :src="storageImage(slide.slide_image)" alt="">
                         <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center" style="background: rgba(43, 57, 64, .5);">
@@ -173,6 +173,11 @@
                 blogpost_slide: [],
                 Slider: [],
             };
+        },
+        computed: {
+            filteredSlides() {
+                return this.Slider.filter(slide => slide.status == 1);
+            }
         },
         mounted() {
             this.getPartnership();

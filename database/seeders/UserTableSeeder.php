@@ -20,9 +20,23 @@ class UserTableSeeder extends Seeder
 
         $arrUser=[
             [
+                'name'=> 'Super Admin',
+                'email'=> 'superadmin@gmail.com',
+                'password'=> Hash::make('superadmin'),
+                'role_id' => 1,
+                'company_id' => 1,
+            ],
+            [
+                'name'=> 'admin',
+                'email'=> 'admin@gmail.com',
+                'password'=> Hash::make('admin'),
+                'role_id' => 2,
+                'company_id' => 1,
+            ],
+            [
                 'name'=> 'Mohon Sarker',
                 'email'=> 'mohon@gmail.com',
-                'password'=> Hash::make('1234'),
+                'password'=> Hash::make('12345'),
                 'role_id' => 1,
                 'company_id' => 1,
             ],

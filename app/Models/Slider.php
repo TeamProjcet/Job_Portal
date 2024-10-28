@@ -11,7 +11,7 @@ class Slider extends Model
     use HasFactory;
 
     protected $table = 'sliders';
-    protected $fillable = ['title', 'description', 'slide_image'];
+    protected $fillable = ['title', 'description', 'status','slide_image'];
 
     // Validation method
     public function validator($input)
@@ -19,6 +19,7 @@ class Slider extends Model
         return Validator::make($input,[
             'title' => 'required',
             'description' => 'required',
+            'status'=>'required',
             'slide_image' => 'required',
         ]);
     }

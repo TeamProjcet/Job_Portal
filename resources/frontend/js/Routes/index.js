@@ -17,7 +17,6 @@ import NotFoundPage from "../views/NotFoundPage";
 import CookiesPolicy from "../views/Policy/CookiesPolicy";
 import Help from "../views/Policy/Help";
 import FQAs from "../views/Policy/FQAs";
-import MessageComponent from "../views/Message/MessageComponent";
 
 const route = [
     {
@@ -98,9 +97,7 @@ const route = [
         path : '/seekerprofile',
         name : 'seekerprofile',
         component : SeekerProfile,
-        meta:{pagetitle:'',dataUrl:'api/frontend/seeker/profile'
-            
-        },
+        meta:{pagetitle:'',dataUrl:'api/frontend/seeker/profile'},
     },
     {
         path: '/jobcategory/:category_id',
@@ -146,11 +143,7 @@ const route = [
         name:'FQAs',
         component:FQAs,
     } ,
-    {
-        path:'/suport/messages',
-        name:'message',
-        component:MessageComponent,
-    }
+
 
 ];
 export default route;

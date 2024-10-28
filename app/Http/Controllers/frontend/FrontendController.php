@@ -11,6 +11,7 @@ use App\Models\Category;
 use App\Models\Company;
 use App\Models\Frontendmanage;
 use App\Models\JobPostModel;
+use App\Models\Message;
 use App\Models\PartnershipModel;
 use App\Models\SavedJobs;
 use App\Models\Seeker;
@@ -100,6 +101,30 @@ class FrontendController extends Controller
 
         return $this->returnData(2000,$data);
 
+    }
+
+
+    public function fetchMessage(){
+        if (Auth::guard('seeker')->check()) {
+            $currentUserId = Auth::guard('seeker')->user()->id;
+            $currentUserType = 'App\Models\Seeker';
+        } else {
+            $currentUserId = Auth::id();
+            $currentUserType = 'App\Models\User';
+        }
+
+        $messages = Message::where(function ($query) use ($currentUserId, $currentUserType) {
+            $query->where('receiver_id', $currentUserId)
+                ->where('receiver_type', $currentUserType);
+        })
+            ->orWhere(function ($query) use ($currentUserId, $currentUserType) {
+                $query->where('sender_id', $currentUserId)
+                    ->where('sender_type', $currentUserType);
+            })
+            ->with(['sender', 'receiver'])
+            ->get();
+
+        return $this->returnData(2000,$messages);
     }
 
 }
