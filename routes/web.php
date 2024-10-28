@@ -32,7 +32,8 @@ Route::prefix('api')->group(function () {
     Route::resource('/application', \App\Http\Controllers\frontend\ApplicationController::class);
     Route::post('upload', [\App\Http\Controllers\Backend\UploadController::class, 'upload']);
     Route::put('/settings/{key}', [\App\Http\Controllers\SettingController::class, 'updateimage']);
-
+    Route::resource('/messages', \App\Http\Controllers\MessageController::class);
+    Route::post('/seekerstore', [\App\Http\Controllers\MessageController::class,'seekerstore']);
     Route::post('/required_data', [\App\Http\Controllers\SupportController::class, 'requireData']);
     Route::get('/configurations', [\App\Http\Controllers\SupportController::class, 'getconfigurations']);
     Route::get('backendData',[\App\Http\Controllers\Backend\BackendController::class,'backendData']);
@@ -49,6 +50,8 @@ Route::prefix('api')->group(function () {
     Route::get('Counting', [\App\Http\Controllers\Backend\BackendController::class, 'Counting']);
     Route::resource('staticContents',\App\Http\Controllers\FrontendStaticContentController::class);
     Route::resource('setting',\App\Http\Controllers\SettingController::class);
+    Route::get('fetchmessage', [\App\Http\Controllers\MessageController::class,'fetchmessage']);
+
 
 });
 

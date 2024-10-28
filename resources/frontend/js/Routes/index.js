@@ -17,6 +17,7 @@ import NotFoundPage from "../views/NotFoundPage";
 import CookiesPolicy from "../views/Policy/CookiesPolicy";
 import Help from "../views/Policy/Help";
 import FQAs from "../views/Policy/FQAs";
+import MessageComponent from "../views/Message/MessageComponent";
 
 const route = [
     {
@@ -144,6 +145,11 @@ const route = [
         path:'/fqas-policy',
         name:'FQAs',
         component:FQAs,
+    } ,
+    {
+        path:'/suport/messages',
+        name:'message',
+        component:MessageComponent,
     }
 
 ];

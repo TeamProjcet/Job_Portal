@@ -37,9 +37,6 @@ use Helper;
 
 
     public function userdata(){
-//        $data= Auth::user();
-//        return $this->returnData(2000, $data);
-
 
         $user = User::with('company')->find(Auth::id());
         $employerData = Employers::where('user_id', $user->id)->get();
