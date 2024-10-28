@@ -1,25 +1,4 @@
-<!--<template>-->
-<!--    <div class="modal fade" :id="modalId" tabindex="-1" role="dialog" v-if="isModalOpen" @click.self="isModalOpen = false">-->
-<!--        <div class="modal-dialog" role="document">-->
-<!--            <div class="modal-content">-->
-<!--                <div class="modal-header">-->
-<!--                    <h5 class="modal-title">Edit Text</h5>-->
-<!--                    <button type="button" class="close" @click="isModalOpen = false">-->
-<!--                        <span>&times;</span>-->
-<!--                    </button>-->
-<!--                </div>-->
-<!--                <div class="modal-body">-->
-<!--                    <slot/>-->
-<!--                </div>-->
-<!--                <div class="modal-footer">-->
-<!--                    <button type="button" class="btn btn-secondary" @click="isModalOpen = false">Close</button>-->
-<!--                    <button type="submit" class="btn btn-primary" @click="submitText">Submit</button>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
 
-<!--</template>-->
 <template>
     <div class="modal fade " :class="{ show: isModalOpen }" tabindex="-1" role="dialog" @click.self="closeModal">
         <div class="modal-dialog modal-lg">

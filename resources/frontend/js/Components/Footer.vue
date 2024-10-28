@@ -69,9 +69,7 @@
         </div>
 
         <!-- Bootstrap Modal -->
-        <TextModal @submit="submitText()"     :isModalOpen="isModalOpen"
-                   @close="isModalOpen = false" >
-
+        <TextModal @submit="submitText" :isModalOpen="isModalOpen" @close="isModalOpen = false">
             <textarea v-model="editableText" class="form-control" rows="4"></textarea>
         </TextModal>
     </div>

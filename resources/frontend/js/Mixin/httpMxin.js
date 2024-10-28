@@ -158,7 +158,7 @@ export default {
                 const response = await axios.get('/api/frontend/superadmin');
                 const user = response.data.result;
 
-                if (user && user.role_id === "1") {
+                if (user && user.role_id === 1) {
                     this.canOpenModal = true;
                 } else {
                     this.canOpenModal = false;

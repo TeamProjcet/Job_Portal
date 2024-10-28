@@ -41,6 +41,9 @@ class MessageController extends Controller
 
     public function index()
     {
+        if (!$this->can(' messages.index')) {
+            return $this->returnData(5000, null, 'You are not authorized to access this page');
+        }
         $messages = Message::where('sender_type', 'App\Models\Seeker')
             ->with(['sender', 'receiver'])
             ->get();
@@ -57,6 +60,9 @@ class MessageController extends Controller
 
     public function store(Request $request)
     {
+        if (!$this->can('messages.store')) {
+            return $this->returnData(5000, null, 'You are not authorized to access this page');
+        }
         $request->validate([
             'receiver_id' => 'required|integer',
             'message_content' => 'required|string',
@@ -97,6 +103,9 @@ class MessageController extends Controller
 
     public function getMessagesByReceiver($receiverId)
     {
+        if (!$this->can('messages.getMessagesByReceiver')) {
+            return $this->returnData(5000, null, 'You are not authorized to access this page');
+        }
         $currentUserId = auth()->id();
         $currentUserType = 'App\Models\User';
 
@@ -143,6 +152,9 @@ class MessageController extends Controller
 
     public function destroy($id)
     {
+        if (!$this->can('messages.destroy')) {
+            return $this->returnData(5000, null, 'You are not authorized to access this page');
+        }
         $message = Message::find($id);
         if ($message) {
             $message->delete();

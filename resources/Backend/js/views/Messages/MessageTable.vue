@@ -22,7 +22,7 @@
                     </div>
                 </td>
                 <td>
-                    <router-link :to="{ name: 'MessageComponent', params: { id: group[0].sender ? group[0].sender.id : null } }" class="btn btn-dark text-white">
+                    <router-link v-if="can('messages.getMessagesByReceiver')" :to="{ name: 'MessageComponent', params: { id: group[0].sender ? group[0].sender.id : null } }" class="btn btn-dark text-white">
                         Reply
                     </router-link>
                 </td>
