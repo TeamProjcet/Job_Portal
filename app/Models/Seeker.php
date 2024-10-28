@@ -44,5 +44,10 @@ class Seeker extends Authenticatable
     {
         return $this->belongsTo(JobPostModel::class);
     }
+    public function messages()
+    {
+        return $this->morphMany(Message::class, 'sender');
+    }
+
 
 }

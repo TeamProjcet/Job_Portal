@@ -77,5 +77,10 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Company::class, 'company_id');
     }
+    public function messages()
+    {
+        return $this->morphMany(Message::class, 'sender');
+    }
+
 
 }

@@ -23,6 +23,8 @@ import NotFoundPage from "../views/NotFoundPage";
 import SubscribeEmails from "../views/Emails/SubscribeEmails";
 import SliderComponent from "../views/FrontendManagement/SliderComponent";
 import SettingComponent from "../views/Configurations/SettingComponent";
+import MessageComponent from "../views/Messages/MessageComponent";
+import MessageTable from "../views/Messages/MessageTable";
 
 
 const route = [
@@ -217,6 +219,18 @@ const route = [
         name: 'setting',
         component: SettingComponent,
         meta: { pagetitle: 'Setting SendMail Table', dataUrl: '/api/setting' },
+    } ,
+    {
+        path: '/admin/seeker/messagetable',
+        name: 'MessageTable',
+        component: MessageTable,
+
+    } ,
+    {
+        path: '/admin/seeker/message',
+        name: 'MessageComponent',
+        component: MessageComponent,
+
     } ,
 
 ];
