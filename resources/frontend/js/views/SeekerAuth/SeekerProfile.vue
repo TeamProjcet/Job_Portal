@@ -252,45 +252,30 @@ height: 52px; min-width: 52px; padding: 10px 0px 0px 10px; position: fixed !impo
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="chat-box" style="height: 300px; overflow-y: auto;  padding: 10px;">
-                        <div class="d-flex justify-content-start mb-2"
-                             v-for="msg in messages"
-                             :key="msg.id"
-                             :class="{
-                                'message-item mb-2 p-3  rounded': true,
-                                'text-right ml-auto': msg.sender?.id === currentUserId,
-                                'mr-auto': msg.sender?.id !== currentUserId
-                            }"
-                            >
-                            <div class="mr-2">
-                                <img style="width: 40px; height: 40px; border: 1px solid; border-radius: 50px" :src="storageImage( msg.sender?.image || 'Unknown' )">
+                    <div class="chat-box" style="height: 300px; overflow-y: auto; padding: 10px;">
+                        <div v-for="msg in messages" :key="msg.id" class="mb-2">
+                            <div class="d-flex justify-content-start mb-2">
+                                <div class="mr-2">
+                                    <img style="width: 40px; height: 40px; border: 1px solid; border-radius: 50px" :src="storageImage(msg.sender ? msg.sender.image : 'Unknown')">
+                                </div>
+                                <div class="p-2 bg-light rounded">
+                                    <strong>{{ msg.sender ? msg.sender.name : 'Unknown' }}:</strong>
+                                    <span>{{ msg.message_content }}</span>
+<!--                                    <button-->
+<!--                                            class="btn btn-danger btn-sm mt-1"-->
+<!--                                            @click="deleteMessage(msg.id)"-->
+<!--                                            v-if="msg.sender && msg.sender.id === userId"  &lt;!&ndash; userId should represent the logged-in user &ndash;&gt;-->
+<!--                                    >-->
+<!--                                    Delete-->
+<!--                                    </button>-->
+                                </div>
                             </div>
-                            <div class="p-2 bg-light rounded">
-                                <strong>{{ msg.message_content }}</strong>
-                            </div>
-                            <button
-                                    class="btn btn-danger btn-sm mt-1"
-                                    @click="deleteMessage(msg.id)"
-                                    v-if="msg.sender?.id === currentUserId"
-                            >
-                                Delete
-                            </button>
-                        </div>
-                        <div v-if="msg.replies && msg.replies.length > 0" class="d-flex justify-content-end mb-2">
-                            <div class="p-2 bg-light  rounded"
-                                 v-for="reply in msg.replies"
-                                 :key="reply.id"
-                                 :class="{
-                                'reply-item border rounded p-2 mb-2': true,
-                                'bg-light mr-auto': reply.sender?.id !== currentUserId,
-                                'text-right ml-auto': reply.sender?.id === currentUserId
-                            }"
-                            >
-                                <strong>{{ reply.message_content }}</strong>
-                            </div>
-                            <div class="ml-2">
-                                {{ reply.sender?.name || 'Unknown' }}
-                                <i class="fas fa-user-shield fa-2x "></i>
+
+                            <div v-if="msg.replies && msg.replies.length > 0" class="d-flex justify-content-end mb-2">
+                                <div v-for="reply in msg.replies" :key="reply.id" class="p-2 bg-light rounded">
+                                    <strong>{{ reply.sender ? reply.sender.name : 'Unknown' }}:</strong>
+                                    <span>{{ reply.message_content }}</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -303,6 +288,7 @@ height: 52px; min-width: 52px; padding: 10px 0px 0px 10px; position: fixed !impo
                         </div>
                     </form>
                 </div>
+
             </div>
         </div>
     </div>
@@ -338,7 +324,7 @@ height: 52px; min-width: 52px; padding: 10px 0px 0px 10px; position: fixed !impo
                 messages: [],
                 newMessage: '',
                 UserId: [],
-                currentUserId: null
+                // currentUserId: null
             }
         },
         computed: {
@@ -366,7 +352,7 @@ height: 52px; min-width: 52px; padding: 10px 0px 0px 10px; position: fixed !impo
         },
 
         created() {
-            this.fetchCurrentUser();
+            // this.fetchCurrentUser();
             this.fetchMessages();
         },
 
@@ -415,15 +401,15 @@ height: 52px; min-width: 52px; padding: 10px 0px 0px 10px; position: fixed !impo
 
 
 
-            async fetchCurrentUser() {
-                try {
-                    const response = await axios.get('/userAuth');
-                    this.UserId = response.data.result;
-                    this.currentUserId=this.UserId.id;
-                } catch (error) {
-                    console.error("Error fetching current user:", error);
-                }
-            },
+            // async fetchCurrentUser() {
+            //     try {
+            //         const response = await axios.get('/userAuth');
+            //         this.UserId = response.data.result;
+            //         this.currentUserId=this.UserId.id;
+            //     } catch (error) {
+            //         console.error("Error fetching current user:", error);
+            //     }
+            // },
             async fetchMessages() {
                 try {
                     const response = await axios.get('/api/frontend/fetchmessage');
@@ -435,11 +421,10 @@ height: 52px; min-width: 52px; padding: 10px 0px 0px 10px; position: fixed !impo
             async sendMessage() {
                 try {
                     const response = await axios.post('/api/seekerstore', {
-                        receiver_id: 3,
+                        receiver_id: 2,
                         message_content: this.newMessage,
                         // sender_id: this.currentUserId
                     });
-                    this.messages.unshift(response.data.data);
                     this.newMessage = '';
                     this.fetchMessages();
                 } catch (error) {

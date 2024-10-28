@@ -19,11 +19,11 @@ class Message extends Model
 
     public function sender()
     {
-        return $this->morphTo(); // polymorphic relation
+        return $this->morphTo();
     }
 
     public function receiver()
     {
-        return $this->morphTo(); // polymorphic relation
+        return $this->morphTo();
     }
 }

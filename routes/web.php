@@ -50,6 +50,8 @@ Route::prefix('api')->group(function () {
     Route::get('Counting', [\App\Http\Controllers\Backend\BackendController::class, 'Counting']);
     Route::resource('staticContents',\App\Http\Controllers\FrontendStaticContentController::class);
     Route::resource('setting',\App\Http\Controllers\SettingController::class);
+    Route::get('/messagessend/{receiverId}', [\App\Http\Controllers\MessageController::class, 'getMessagesByReceiver']);
+
 
 });
 
