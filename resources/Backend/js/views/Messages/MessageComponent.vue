@@ -140,7 +140,6 @@
 
 
 
-
 <template>
     <div class="container mt-5">
         <div class="card shadow-sm">
@@ -148,44 +147,41 @@
                 <h3 class="mb-0">Messages</h3>
             </div>
             <div class="card-body message-container">
-                <!-- Messages list -->
                 <div
                         v-for="msg in messages"
                         :key="msg.id"
                         :class="{
                         'message-item mb-3 p-3 border rounded': true,
-                        'text-right ml-auto': msg.sender?.id === currentUserId,
-                        'mr-auto': msg.sender?.id !== currentUserId
+                        'text-right ml-auto': msg.sender && msg.sender.id === currentUserId,
+                        'mr-auto': msg.sender && msg.sender.id !== currentUserId
                     }"
                 >
-                    <p class="mb-1"><strong>{{ msg.sender?.name || 'Unknown' }}:</strong></p>
+                    <p class="mb-1"><strong>{{ msg.sender?msg.sender.name : 'Unknown' }}:</strong></p>
                     <div class="message-content">{{ msg.message_content }}</div>
                     <button
                             class="btn btn-danger btn-sm mt-1"
                             @click="deleteMessage(msg.id)"
-                            v-if="msg.sender?.id === currentUserId"
+                            v-if="msg.sender && msg.sender.id === currentUserId"
                     >
                         Delete
                     </button>
 
-                    <!-- Replies -->
                     <div v-if="msg.replies && msg.replies.length > 0" class="mt-2">
                         <div
                                 v-for="reply in msg.replies"
                                 :key="reply.id"
                                 :class="{
                                 'reply-item border rounded p-2 mb-2': true,
-                                'bg-light mr-auto': reply.sender?.id !== currentUserId,
-                                'text-right ml-auto': reply.sender?.id === currentUserId
+                                'bg-light mr-auto': reply.sender && reply.sender.id  !== currentUserId,
+                                'text-right ml-auto': reply.sender && reply.sender.id === currentUserId
                             }"
                         >
-                            <p class="mb-1"><strong>{{ reply.sender?.name || 'Unknown' }}:</strong></p>
+                            <p class="mb-1"><strong>{{ reply.sender?reply.sender.name : 'Unknown' }}:</strong></p>
                             <div class="message-content">{{ reply.message_content }}</div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Message input -->
             <div class="card-footer">
                 <form @submit.prevent="sendMessage">
                     <div class="form-group">
@@ -211,51 +207,40 @@
             return {
                 messages: [],
                 newMessage: '',
-                UserId: [],
-                currentUserId: null
+                currentUserId: null,
+                // receiverId: this.$route.params.id
             };
         },
         created() {
-            this.fetchCurrentUser();
             this.fetchMessages();
         },
         methods: {
-            async fetchCurrentUser() {
-                try {
-                    const response = await axios.get('/userAuth');
-                    this.UserId = response.data.result;
-                    this.currentUserId=this.UserId.id;
-                } catch (error) {
-                    console.error("Error fetching current user:", error);
-                }
-            },
             async fetchMessages() {
                 try {
-                    const response = await axios.get('/api/messages');
+                    const id = this.$route.params.id;
+                    const response = await axios.get(`/api/messages/${this.id}`);
                     this.messages = response.data.result;
+                    console.log(this.messages);
                 } catch (error) {
                     console.error("Error fetching messages:", error);
                 }
             },
-
             async sendMessage() {
                 try {
                     const response = await axios.post('/api/messages', {
-                        receiver_id: 1,
+                        receiver_id: this.receiverId,
                         message_content: this.newMessage,
-                        // sender_id: this.currentUserId
                     });
                     this.messages.unshift(response.data.data);
                     this.newMessage = '';
-                    this.fetchMessages();
-                 } catch (error) {
+                } catch (error) {
                     console.error("Error sending message:", error);
                 }
             },
             async deleteMessage(messageId) {
                 try {
-                    await axios.delete(`/api/messages/${messageId}`); // Delete request to your API
-                    this.messages = this.messages.filter(msg => msg.id !== messageId); // Remove the message from the list
+                    await axios.delete(`/api/messages/${messageId}`);
+                    this.messages = this.messages.filter(msg => msg.id !== messageId);
                 } catch (error) {
                     console.error("Error deleting message:", error);
                 }

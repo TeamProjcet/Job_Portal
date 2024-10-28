@@ -51,6 +51,7 @@ Route::prefix('api')->group(function () {
     Route::resource('staticContents',\App\Http\Controllers\FrontendStaticContentController::class);
     Route::resource('setting',\App\Http\Controllers\SettingController::class);
     Route::get('fetchmessage', [\App\Http\Controllers\MessageController::class,'fetchmessage']);
+    Route::get('/messages/{id}', [\App\Http\Controllers\MessageController::class, 'getMessagesByReceiver']);
 
 
 });

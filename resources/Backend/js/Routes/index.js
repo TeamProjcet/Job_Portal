@@ -137,6 +137,13 @@ const route = [
 
     },
     {
+        path: '/admin/seeker/application-view/:id',
+        name: 'ApplicationView',
+        component: ApplicationView,
+        meta: {pagetitle: 'Job Application', dataUrl: 'api/application',},
+        props: true
+    },
+    {
         path: '/admin/role/permissions',
         name: 'Permission',
         component: PermissionComponent,
@@ -164,13 +171,7 @@ const route = [
 
     },
 
-    {
-        path: '/admin/seeker/application-view/:id',
-        name: 'ApplicationView',
-        component: ApplicationView,
-        meta: {pagetitle: 'Job Application', dataUrl: 'api/application',},
-        props: true
-    },
+
     {
         path: '/admin/user/registration',
         name: 'UserRegisComponenet',
@@ -227,7 +228,7 @@ const route = [
 
     } ,
     {
-        path: '/admin/seeker/message',
+        path: '/admin/suport/message/:id',
         name: 'MessageComponent',
         component: MessageComponent,
 

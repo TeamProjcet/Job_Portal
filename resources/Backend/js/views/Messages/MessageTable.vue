@@ -10,53 +10,69 @@
             </tr>
             </thead>
             <tbody>
-            <tr v-for="message in messages" :key="message.id">
-                <td>
-                    <a @click="openMessenger(message.sender.id)">
-                        {{ message.sender.name || 'Unknown' }} <!-- সিকার নাম দেখাতে হবে -->
-                    </a>
-                </td>
-                <td>{{ message.message_content }}</td>
-                <td>
-                    <button @click="openMessenger(message.sender.id)" class="btn btn-primary">
-                        Reply
-                    </button>
-                </td>
-            </tr>
+            <template v-for="(group, index) in groupedMessages" >
+                <tr>
+                    <td>
+                        <p class="">
+                            {{ group[0].sender.name || 'Unknown' }}
+                        </p>
+                    </td>
+                    <td>
+                        <div v-for="message in group" :key="message.id">
+                            {{ message.message_content }}
+                        </div>
+                    </td>
+                    <td>
+                        <router-link :to="{ name: 'MessageComponent', params: { id: group[0].sender.id } }" class="btn btn-dark text-white">
+                            Reply
+                        </router-link>
+                    </td>
+                </tr>
+            </template>
             </tbody>
         </table>
     </div>
 </template>
 
 <script>
-    import axios from 'axios'
+    import axios from 'axios';
+
     export default {
         data() {
             return {
                 messages: [],
             };
         },
+        computed: {
+            groupedMessages() {
+                const groups = {};
+                this.messages.forEach(msg => {
+                    const senderId = msg.sender.id;
+                    if (!groups[senderId]) {
+                        groups[senderId] = [];
+                    }
+                    groups[senderId].push(msg);
+                });
+                return Object.values(groups);
+            },
+        },
         mounted() {
             this.fetchMessages();
         },
         methods: {
             fetchMessages() {
-                // API থেকে মেসেজগুলি ফেচ করুন
                 axios.get('/api/messages')
                     .then(response => {
-                        this.messages = response.data.data; // এখানে ডেটা সেট করুন
+                        this.messages = response.data.result;
                     })
                     .catch(error => {
                         console.error("There was an error fetching messages!", error);
                     });
             },
-            openMessenger(seekerId) {
-                // মেসেজিং পেজে নিয়ে যান
-                this.$router.push({ name: 'Messenger', params: { seekerId: seekerId } });
-            },
         },
     };
 </script>
+
 
 <style scoped>
     .message-table {

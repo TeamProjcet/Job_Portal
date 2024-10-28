@@ -11,32 +11,40 @@ class MessageController extends Controller
 {
     use Helper;
 
+//    public function index()
+//    {
+//        if (Auth::guard('seeker')->check()) {
+//            $currentUserId = Auth::guard('seeker')->user()->id;
+//            $currentUserType = 'App\Models\Seeker';
+//        } else {
+//            $currentUserId = Auth::id();
+//            $currentUserType = 'App\Models\User';
+//        }
+//
+//        $messages = Message::where(function ($query) use ($currentUserId, $currentUserType) {
+//            $query->where('receiver_id', $currentUserId)
+//                ->where('receiver_type', $currentUserType);
+//        })
+//            ->orWhere(function ($query) use ($currentUserId, $currentUserType) {
+//                $query->where('sender_id', $currentUserId)
+//                    ->where('sender_type', $currentUserType);
+//            })
+//            ->with(['sender', 'receiver'])
+//            ->get();
+//
+//        return $this->returnData(2000,$messages);
+//
+//    }
+
+
     public function index()
     {
-        if (Auth::guard('seeker')->check()) {
-            $currentUserId = Auth::guard('seeker')->user()->id;
-            $currentUserType = 'App\Models\Seeker';
-        } else {
-            $currentUserId = Auth::id();
-            $currentUserType = 'App\Models\User';
-        }
-
-        $messages = Message::where(function ($query) use ($currentUserId, $currentUserType) {
-            $query->where('receiver_id', $currentUserId)
-                ->where('receiver_type', $currentUserType);
-        })
-            ->orWhere(function ($query) use ($currentUserId, $currentUserType) {
-                $query->where('sender_id', $currentUserId)
-                    ->where('sender_type', $currentUserType);
-            })
+        $messages = Message::where('sender_type', 'App\Models\Seeker')
             ->with(['sender', 'receiver'])
             ->get();
-
         return $this->returnData(2000,$messages);
 
     }
-
-
 
 
     public function create()
@@ -60,7 +68,7 @@ class MessageController extends Controller
             'receiver_type' => 'App\Models\Seeker',
         ]);
 
-        return response()->json(['message' => 'Message sent successfully!', 'data' => $message]);
+        return $this->returnData(2000,$message,'Message sent successfully!');
     }
 
     public function seekerstore(Request $request)
@@ -88,11 +96,21 @@ class MessageController extends Controller
             'receiver_type' => 'App\Models\User',
         ]);
 
-        return response()->json(['message' => 'Message sent successfully!', 'data' => $message]);
+        return $this->returnData(2000,$message,'Message sent successfully!');
+
     }
 
 
+    public function getMessagesByReceiver($receiverId)
+    {
+        $messages = Message::with(['sender', 'replies.sender'])
+            ->where('receiver_id', $receiverId)
+            ->get();
 
+        return response()->json([
+            'result' => $messages,
+        ]);
+    }
     public function show(Message $message)
     {
         //
