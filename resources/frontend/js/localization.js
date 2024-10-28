@@ -81,6 +81,8 @@ const messages = {
         help: 'Help',
         faqs: 'FAQs',
         type: 'Type',
+        applied: 'Login Before Apply',
+        comment: 'Login Before Comment'
 
 
 
@@ -163,6 +165,8 @@ const messages = {
         help: 'সাহায্য',
         faqs: 'প্রশ্নোত্তর',
         type: 'ধরণ',
+        applied: 'আবেদন করার পূর্বে লগইন করুন',
+        comment: 'কমেন্ট করার আগে লগইন করুন',
 
     },
 };

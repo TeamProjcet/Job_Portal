@@ -158,7 +158,7 @@
                         'mr-auto': msg.sender?.id !== currentUserId
                     }"
                 >
-                    <p class="mb-1"><strong>{{ msg.sender?.name || 'Unknown' }}:</strong></p>
+                    <p class="mb-1"><strong>{{ msg.sender?.name || 'Unknown' }}</strong></p>
                     <div class="message-content">{{ msg.message_content }}</div>
                     <button
                             class="btn btn-danger btn-sm mt-1"
@@ -209,10 +209,11 @@
     export default {
         data() {
             return {
+
                 messages: [],
                 newMessage: '',
                 UserId: [],
-                currentUserId: null // Initialize as null
+                currentUserId: null
             };
         },
         created() {
@@ -231,7 +232,7 @@
             },
             async fetchMessages() {
                 try {
-                    const response = await axios.get('/api/messages');
+                    const response = await axios.get('/api/frontend/fetchmessage');
                     this.messages = response.data.result;
                 } catch (error) {
                     console.error("Error fetching messages:", error);
@@ -253,8 +254,8 @@
             },
             async deleteMessage(messageId) {
                 try {
-                    await axios.delete(`/api/messages/${messageId}`); // Delete request to your API
-                    this.messages = this.messages.filter(msg => msg.id !== messageId); // Remove the message from the list
+                    await axios.delete(`/api/messages/${messageId}`);
+                    this.messages = this.messages.filter(msg => msg.id !== messageId);
                 } catch (error) {
                     console.error("Error deleting message:", error);
                 }

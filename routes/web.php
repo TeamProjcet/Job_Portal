@@ -50,8 +50,6 @@ Route::prefix('api')->group(function () {
     Route::get('Counting', [\App\Http\Controllers\Backend\BackendController::class, 'Counting']);
     Route::resource('staticContents',\App\Http\Controllers\FrontendStaticContentController::class);
     Route::resource('setting',\App\Http\Controllers\SettingController::class);
-    Route::get('fetchmessage', [\App\Http\Controllers\MessageController::class,'fetchmessage']);
-
 
 });
 
@@ -74,6 +72,8 @@ Route::prefix('api/frontend')->group(function () {
     Route::resource('/saved', \App\Http\Controllers\SavedJobsController ::class);
     Route::resource('/newsletter', \App\Http\Controllers\frontend\NewsletterController::class);
     Route::resource('/contact', \App\Http\Controllers\frontend\ContactController::class);
+    Route::get('fetchmessage', [\App\Http\Controllers\frontend\FrontendController::class,'fetchmessage']);
+
 
 });
 

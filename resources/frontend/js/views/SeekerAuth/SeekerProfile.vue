@@ -248,34 +248,60 @@ height: 52px; min-width: 52px; padding: 10px 0px 0px 10px; position: fixed !impo
                 <div class="modal-header">
                     <h5 class="modal-title" id="chatModalLabel">Chat</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span>&times;</span>
+                        <span>X</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="chat-box" style="height: 300px; overflow-y: auto; border: 1px solid #ccc; padding: 10px;">
-                        <div class="d-flex justify-content-start mb-2">
+                    <div class="chat-box" style="height: 300px; overflow-y: auto;  padding: 10px;">
+                        <div class="d-flex justify-content-start mb-2"
+                             v-for="msg in messages"
+                             :key="msg.id"
+                             :class="{
+                                'message-item mb-2 p-3  rounded': true,
+                                'text-right ml-auto': msg.sender?.id === currentUserId,
+                                'mr-auto': msg.sender?.id !== currentUserId
+                            }"
+                            >
                             <div class="mr-2">
-                                <i class="fas fa-user-circle fa-2x"></i>
+                                <img style="width: 40px; height: 40px; border: 1px solid; border-radius: 50px" :src="storageImage( msg.sender?.image || 'Unknown' )">
                             </div>
                             <div class="p-2 bg-light rounded">
-                                <strong>Hello!</strong>
+                                <strong>{{ msg.message_content }}</strong>
                             </div>
+                            <button
+                                    class="btn btn-danger btn-sm mt-1"
+                                    @click="deleteMessage(msg.id)"
+                                    v-if="msg.sender?.id === currentUserId"
+                            >
+                                Delete
+                            </button>
                         </div>
-                        <div class="d-flex justify-content-end mb-2">
-                            <div class="p-2 bg-light  rounded" >
-                                <strong>Hi there! How can I help you?</strong>
+                        <div v-if="msg.replies && msg.replies.length > 0" class="d-flex justify-content-end mb-2">
+                            <div class="p-2 bg-light  rounded"
+                                 v-for="reply in msg.replies"
+                                 :key="reply.id"
+                                 :class="{
+                                'reply-item border rounded p-2 mb-2': true,
+                                'bg-light mr-auto': reply.sender?.id !== currentUserId,
+                                'text-right ml-auto': reply.sender?.id === currentUserId
+                            }"
+                            >
+                                <strong>{{ reply.message_content }}</strong>
                             </div>
                             <div class="ml-2">
+                                {{ reply.sender?.name || 'Unknown' }}
                                 <i class="fas fa-user-shield fa-2x "></i>
                             </div>
                         </div>
                     </div>
-                    <div class="input-group mt-3">
-                        <input type="text" class="form-control" placeholder="Type your message..." aria-label="User's message">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary" type="button">Send</button>
+                    <form @submit.prevent="sendMessage">
+                        <div class="input-group mt-3">
+                            <input type="text" v-model="newMessage" class="form-control" placeholder="Type your message..." aria-label="User's message">
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-primary">Send</button>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -306,6 +332,13 @@ height: 52px; min-width: 52px; padding: 10px 0px 0px 10px; position: fixed !impo
                 educations: ['Secondary School (SSC)', 'Higher Secondary School (HSC)', 'Diploma in Engineering', 'Bachelor\'s Degree', 'Master\'s Degree', 'Professional Degree', 'Postgraduate Degree', 'Ph.D.'],
                 skillname:[ 'JavaScript', 'Python', 'Java', 'C++', 'Laravel','vue', 'PHP', 'C#', 'TypeScript', 'HTML', 'CSS', 'React', 'Angular', 'SQL','MongoDB', 'Express.js', 'Node', 'Bootstrap', 'Django','Git'],
 
+                msg: {
+                    replies: []
+                },
+                messages: [],
+                newMessage: '',
+                UserId: [],
+                currentUserId: null
             }
         },
         computed: {
@@ -328,7 +361,13 @@ height: 52px; min-width: 52px; padding: 10px 0px 0px 10px; position: fixed !impo
         mounted() {
             this.seekerdata();
             this.SavedJobs();
-            this.getRequiredData(['district'])
+            this.getRequiredData(['district']);
+
+        },
+
+        created() {
+            this.fetchCurrentUser();
+            this.fetchMessages();
         },
 
         methods: {
@@ -373,6 +412,48 @@ height: 52px; min-width: 52px; padding: 10px 0px 0px 10px; position: fixed !impo
                     }
                 }
             },
+
+
+
+            async fetchCurrentUser() {
+                try {
+                    const response = await axios.get('/userAuth');
+                    this.UserId = response.data.result;
+                    this.currentUserId=this.UserId.id;
+                } catch (error) {
+                    console.error("Error fetching current user:", error);
+                }
+            },
+            async fetchMessages() {
+                try {
+                    const response = await axios.get('/api/frontend/fetchmessage');
+                    this.messages = response.data.result;
+                } catch (error) {
+                    console.error("Error fetching messages:", error);
+                }
+            },
+            async sendMessage() {
+                try {
+                    const response = await axios.post('/api/seekerstore', {
+                        receiver_id: 3,
+                        message_content: this.newMessage,
+                        // sender_id: this.currentUserId
+                    });
+                    this.messages.unshift(response.data.data);
+                    this.newMessage = '';
+                    this.fetchMessages();
+                } catch (error) {
+                    console.error("Error sending message:", error);
+                }
+            },
+            async deleteMessage(messageId) {
+                try {
+                    await axios.delete(`/api/messages/${messageId}`);
+                    this.messages = this.messages.filter(msg => msg.id !== messageId);
+                } catch (error) {
+                    console.error("Error deleting message:", error);
+                }
+            }
 
 
 

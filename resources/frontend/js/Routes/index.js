@@ -98,9 +98,7 @@ const route = [
         path : '/seekerprofile',
         name : 'seekerprofile',
         component : SeekerProfile,
-        meta:{pagetitle:'',dataUrl:'api/frontend/seeker/profile'
-            
-        },
+        meta:{pagetitle:'',dataUrl:'api/frontend/seeker/profile'},
     },
     {
         path: '/jobcategory/:category_id',
@@ -150,6 +148,7 @@ const route = [
         path:'/suport/messages',
         name:'message',
         component:MessageComponent,
+        meta:{pagetitle:'',dataUrl:'/api/frontend/fetchmessage'},
     }
 
 ];

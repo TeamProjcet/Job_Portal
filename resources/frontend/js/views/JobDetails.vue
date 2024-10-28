@@ -89,7 +89,7 @@
 
                             <div v-else>
                                 <a :href="`/seekerlogin?next_url=${$route.fullPath}`" class="nav-link">
-                                    <button class="btn btn-primary w-100">Login</button>
+                                    <button class="btn btn-primary w-100">{{$t('applied')}}</button>
                                 </a>
                             </div>
                         </div>

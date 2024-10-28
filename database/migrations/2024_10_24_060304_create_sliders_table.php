@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('description');
+            $table->boolean('status')->default(1);
             $table->string('slide_image');
             $table->timestamps();
         });

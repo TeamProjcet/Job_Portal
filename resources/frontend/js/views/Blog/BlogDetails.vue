@@ -75,7 +75,7 @@
             </div>
             <div v-else class="row col-md-6">
                 <router-link to="/seekerlogin" class="nav-link">
-                    <button class="btn btn-primary w-100">Login</button>
+                    <button class="btn btn-primary w-100">{{$t('comment')}}</button>
                 </router-link>
             </div>
         </footer>

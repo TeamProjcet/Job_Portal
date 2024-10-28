@@ -9,6 +9,11 @@
                     <td>{{index +1}}</td>
                     <td>{{data.title}}</td>
                     <td>{{truncateString(data.description, 20)}}</td>
+                    <td>
+                    <span :class="data.status ? 'badge badge-success' : 'badge badge-danger'">
+                        {{ data.status ? 'Active' : 'Inactive' }}
+                    </span>
+                    </td>
                     <td><img :src="storageImage(data.slide_image)" style="width: 100px; height: 100px" alt="Image"></td>
                     <td>
                         <a v-if="can('slider.edit')" @click="openEditModal(data, data.id)">
@@ -33,6 +38,34 @@
                     <div class="mb-3">
                         <label class="form-label">Details</label>
                         <editor v-model="fromData.description" v-validate="'required'" name="details" :init="tinymceInit" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Status</label>
+                        <div class="form-check">
+                            <input
+                                    class="form-check-input"
+                                    type="radio"
+                                    v-model="fromData.status"
+                                    :value="1"
+                                    id="activeStatus"
+                            />
+                            <label class="form-check-label" for="activeStatus">
+                                Active
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input
+                                    class="form-check-input"
+                                    type="radio"
+                                    v-model="fromData.status"
+                                    :value="0"
+                                    id="inactiveStatus"
+                            />
+                            <label class="form-check-label" for="inactiveStatus">
+                                Inactive
+                            </label>
+                        </div>
                     </div>
 
                     <div class="row">
@@ -66,7 +99,7 @@
 
         data(){
             return{
-                tableHeading: ["SL", "Title", "Description", "Slider Image", "Action"],
+                tableHeading: ["SL", "Title", "Description", "Status","Slider Image", "Action"],
                 tinymceInit:{
                     height: 500,
                     menubar: false,
