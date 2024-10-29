@@ -71,7 +71,11 @@
                                     <label class="form-label">User Email</label>
                                     <input type="text" class="form-control" v-model="fromData.email" readonly>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="col-md-6">
+                                    <label class="form-label">Password</label>
+                                    <input type="text" class="form-control" v-model="fromData.password" placeholder="Enter New Password">
+                                </div>
+                                <div class="col-md-6">
                                     <label class="form-label">Role Name</label>
                                     <select v-validate="'required'" v-model="fromData.role_id" name="role_id" class="form-control">
                                         <option value="" disabled>Select Role name</option>

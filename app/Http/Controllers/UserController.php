@@ -26,11 +26,8 @@ class UserController extends Controller
 
     public function index()
     {
-//        $users = User::with('company')->get()->map(function($user) {
-//            $user->roles = Role::whereIn('id', explode(',', $user->role_id))->get();
-//            return $user;
-//        });
-        $users = User::with(['company', 'roles'])->paginate(2);
+
+        $users = User::with(['company', 'roles'])->paginate(12);
         return $this->returnData(2000,$users);
     }
 
@@ -72,6 +69,7 @@ class UserController extends Controller
         $request->validate([
             'id' => 'required',
             'role_id' => 'required',
+            'password' => 'required',
 
         ]);
 
@@ -81,8 +79,7 @@ class UserController extends Controller
         if ($data){
 
             $data->role_id = $request->input('role_id');
-
-
+            $data->password =Hash::make($request->input('password')) ;
             $data->save();
 
             return $this->returnData(2000, ' updated Successfully ');
