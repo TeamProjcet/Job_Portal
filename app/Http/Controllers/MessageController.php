@@ -41,7 +41,7 @@ class MessageController extends Controller
 
     public function index()
     {
-        if (!$this->can(' messages.index')) {
+        if (!$this->can('messages.index')) {
             return $this->returnData(5000, null, 'You are not authorized to access this page');
         }
         $messages = Message::where('sender_type', 'App\Models\Seeker')

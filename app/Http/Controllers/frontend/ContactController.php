@@ -24,7 +24,7 @@ class ContactController extends Controller
         if (!$this->can('contact.index')) {
             return $this->returnData(5000, null, 'You are not authorized to access this page');
         }
-        $data = Contact::paginate(2);
+        $data = Contact::orderBy('id','DESC')->paginate(12);
         return $this->returnData(2000, $data);
 
     }

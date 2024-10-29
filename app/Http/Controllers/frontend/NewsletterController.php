@@ -23,7 +23,7 @@ use Helper;
         if (!$this->can('newsletter.index')) {
             return $this->returnData(5000, null, 'You are not authorized to access this page');
         }
-        $data = Newsletter::paginate(2);
+        $data = Newsletter::orderBy('id','DESC')->paginate(12);
         return $this->returnData(2000, $data);
 
     }
