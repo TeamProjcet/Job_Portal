@@ -21,7 +21,7 @@ class EmployersController extends Controller
             return $this->returnData(5000, null, 'You are not authorized to access this page');
         }
         $user = Auth::id();
-        $data = User::where('id', '!=', $user)->with('company', 'employer')->paginate(1);
+        $data = User::where('id', '!=', $user)->with('company', 'employer')->orderBy('id','DESC')->paginate(14);
         return $this->returnData(2000, $data);
     }
 

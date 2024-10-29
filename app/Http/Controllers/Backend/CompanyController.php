@@ -25,7 +25,7 @@ class CompanyController extends Controller
 
     public function index()
     {
-            $data = $this->model->paginate(10);
+            $data = $this->model->orderBy('id','DESC')->paginate(12);
             return $this->returnData(2000, $data);
     }
 
