@@ -14,7 +14,7 @@
     />
 
     <!-- Fonts and icons -->
-    <script src="{{asset('assets/js/plugin/webfont/webfont.min.js')}}"></script>
+    <script src="{{asset_custom('assets/js/plugin/webfont/webfont.min.js')}}"></script>
     <script>
       WebFont.load({
         google: { families: ["Public Sans:300,400,500,600,700"] },
@@ -25,7 +25,7 @@
             "Font Awesome 5 Brands",
             "simple-line-icons",
           ],
-          urls: ["{{asset('assets/css/fonts.min.css')}}"],
+          urls: ["{{asset_custom('assets/css/fonts.min.css')}}"],
         },
         active: function () {
           sessionStorage.fonts = true;
@@ -34,12 +34,12 @@
     </script>
     <!-- CSS Files -->
 
-    <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}" />
-    <link rel="stylesheet" href="{{asset('assets/css/plugins.min.css')}}" />
-    <link rel="stylesheet" href="{{asset('assets/css/kaiadmin.min.css')}}" />
+    <link rel="stylesheet" href="{{asset_custom('assets/css/bootstrap.min.css')}}" />
+    <link rel="stylesheet" href="{{asset_custom('assets/css/plugins.min.css')}}" />
+    <link rel="stylesheet" href="{{asset_custom('assets/css/kaiadmin.min.css')}}" />
 
     <!-- CSS Just for demo purpose, don't include it in your project -->
-    <link rel="stylesheet" href="{{asset('assets/css/demo.css')}}" />
+    <link rel="stylesheet" href="{{asset_custom('assets/css/demo.css')}}" />
   </head>
   <body style="margin: 0px">
 
@@ -52,39 +52,39 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/7.3.0/tinymce.min.js" integrity="sha512-RUZ2d69UiTI+LdjfDCxqJh5HfjmOcouct56utQNVRjr90Ea8uHQa+gCxvxDTC9fFvIGP+t4TDDJWNTRV48tBpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <!--   Core JS Files   -->
-    <script src="{{asset('assets/js/core/jquery-3.7.1.min.js')}}"></script>
-    <script src="{{asset('assets/js/core/popper.min.js')}}"></script>
-    <script src="{{asset('assets/js/core/bootstrap.min.js')}}"></script>
+    <script src="{{asset_custom('assets/js/core/jquery-3.7.1.min.js')}}"></script>
+    <script src="{{asset_custom('assets/js/core/popper.min.js')}}"></script>
+    <script src="{{asset_custom('assets/js/core/bootstrap.min.js')}}"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <!-- jQuery Scrollbar -->
-    <script src="{{asset('assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js')}}"></script>
+    <script src="{{asset_custom('assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js')}}"></script>
 
     <!-- Chart JS -->
-    <script src="{{asset('assets/js/plugin/chart.js/chart.min.js')}}"></script>
+    <script src="{{asset_custom('assets/js/plugin/chart.js/chart.min.js')}}"></script>
 
     <!-- jQuery Sparkline -->
-    <script src="{{asset('assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js')}}"></script>
+    <script src="{{asset_custom('assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js')}}"></script>
 
     <!-- Chart Circle -->
-    <script src="{{asset('assets/js/plugin/chart-circle/circles.min.js')}}"></script>
+    <script src="{{asset_custom('assets/js/plugin/chart-circle/circles.min.js')}}"></script>
 
     <!-- Datatables -->
-    <script src="{{asset('assets/js/plugin/datatables/datatables.min.js')}}"></script>
+    <script src="{{asset_custom('assets/js/plugin/datatables/datatables.min.js')}}"></script>
 
     <!-- jQuery Vector Maps -->
-    <script src="{{asset('assets/js/plugin/jsvectormap/jsvectormap.min.js')}}"></script>
-    <script src="{{asset('assets/js/plugin/jsvectormap/world.js')}}"></script>
+    <script src="{{asset_custom('assets/js/plugin/jsvectormap/jsvectormap.min.js')}}"></script>
+    <script src="{{asset_custom('assets/js/plugin/jsvectormap/world.js')}}"></script>
 
     <!-- Sweet Alert -->
-    <script src="{{asset('assets/js/plugin/sweetalert/sweetalert.min.js')}}"></script>
+    <script src="{{asset_custom('assets/js/plugin/sweetalert/sweetalert.min.js')}}"></script>
 
     <!-- Kaiadmin JS -->
-    <script src="{{asset('assets/js/kaiadmin.min.js')}}"></script>
+    <script src="{{asset_custom('assets/js/kaiadmin.min.js')}}"></script>
 
     <!-- Kaiadmin DEMO methods, don't include it in your project! -->
-    <script src="{{asset('assets/js/setting-demo.js')}}"></script>
+    <script src="{{asset_custom('assets/js/setting-demo.js')}}"></script>
     <script>
       $("#lineChart").sparkline([102, 109, 120, 99, 110, 105, 115], {
         type: "line",
@@ -121,7 +121,7 @@
     </script>
 
 
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset_custom('js/app.js') }}"></script>
 
   </body>
 </html>
