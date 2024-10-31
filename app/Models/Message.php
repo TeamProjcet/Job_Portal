@@ -26,4 +26,7 @@ class Message extends Model
     {
         return $this->morphTo();
     }
+    public function seeker(){
+        return $this->belongsTo(Seeker::class);
+    }
 }

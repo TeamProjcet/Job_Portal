@@ -29,7 +29,7 @@
                         <div>
                             <div v-if="isAuthenticated">
                                 <h4 class="mb-4">Apply For The Job</h4>
-                                <form @submit.prevent="submitApplication()">
+                                <form @submit="submitApplication()">
                                     <div class="row g-3">
                                         <div class="col-12 col-sm-6">
                                             <input type="text" class="form-control" placeholder="Your Name" v-model="fromData.name" readonly>

@@ -19,7 +19,7 @@ class Slider extends Model
         return Validator::make($input,[
             'title' => 'required',
             'description' => 'required',
-            'status'=>'required',
+            'status'=>'',
             'slide_image' => 'required',
         ]);
     }

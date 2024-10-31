@@ -11,7 +11,7 @@
 
                     <p><strong>Name:</strong> {{application.seeker.name}}</p>
                     <p><strong>Email:</strong> {{application.seeker.email}}</p>
-                    <p><strong>Expreince:</strong> {{application.seeker.experience}}</p>
+                    <p><strong>Experience:</strong> {{application.seeker.experience}}</p>
                     <p v-if="parsedSkills && parsedSkills.length">
                         <strong>Skills:</strong>
                         <label class="badge mx-1" v-for="(Skills, index) in parsedSkills" :key="index">{{ Skills }}</label>

@@ -45,7 +45,7 @@ class MessageController extends Controller
             return $this->returnData(5000, null, 'You are not authorized to access this page');
         }
         $messages = Message::where('sender_type', 'App\Models\Seeker')
-            ->with(['sender', 'receiver'])
+            ->with(['sender', 'receiver'])->with('seeker')
             ->get();
         return $this->returnData(2000,$messages);
 

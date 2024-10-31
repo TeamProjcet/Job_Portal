@@ -55,6 +55,10 @@
         },
         created() {
             this.fetchMessages();
+            // setInterval(() => {
+            //     this.fetchMessages();
+            // }, 1000);
+
         },
         methods: {
             getCurrentUserId() {
@@ -74,7 +78,7 @@
                     const response = await axios.post('/api/messages', {
                         receiver_id: this.receiverId,
                         message_content: this.newMessage,
-                        sender_id: this.currentUserId, // Include sender ID if needed in the backend
+                        sender_id: this.currentUserId,
                     });
                     this.newMessage = '';
                     this.fetchMessages();
@@ -83,13 +87,30 @@
                 }
             },
             async deleteMessage(messageId) {
-                try {
-                    await axios.delete(`/api/messages/${messageId}`);
-                    this.messages = this.messages.filter(msg => msg.id !== messageId);
-                } catch (error) {
-                    console.error("Error deleting message:", error);
+                const result = await this.$swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                });
+
+                if (result.isConfirmed) {
+                    try {
+                        await axios.delete(`/api/messages/${messageId}`);
+                        this.messages = this.messages.filter(msg => msg.id !== messageId);
+                        this.$swal.fire('Deleted!', 'Your job has been deleted.', 'success');
+
+                    } catch (error) {
+                        console.error("Error deleting message:", error);
+                        this.$swal.fire('Deleted!', 'Your job has been deleted.', 'success');
+
+                    }
                 }
             }
+
         }
     };
 </script>

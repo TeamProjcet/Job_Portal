@@ -65,6 +65,9 @@
 
         mounted() {
             this.fetchMessages();
+            // setInterval(() => {
+            //     this.fetchMessages();
+            // }, 1000);
         },
         methods: {
             fetchMessages() {

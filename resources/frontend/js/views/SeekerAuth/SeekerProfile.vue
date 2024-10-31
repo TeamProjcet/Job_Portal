@@ -12,7 +12,7 @@
         <h6 class="pt-2">{{$t('bio')}}</h6>
         <p class="text-muted">{{ seeker.bio }}</p>
         <hr>
-        <h6>{{$t('expreince')}}</h6>
+        <h6>{{$t('experience')}}</h6>
         <p class="text-muted">{{ seeker.experience }}</p>
         <hr>
         <h6>{{$t('skill')}}:</h6>
@@ -47,7 +47,8 @@
     </li>
     <li class="nav-item">
         <a class="nav-link" id="update-profile-tab" data-bs-toggle="tab" href="#update-profile"
-           role="tab" aria-controls="update-profile" aria-selected="false">{{ $t('update_profile') }}</a>
+           role="tab" aria-controls="update-profile" aria-selected="false"
+           @click="goToUpdateProfile">{{ $t('update_profile') }}</a>
     </li>
 </ul>
 <!-- Tab Content -->
@@ -101,41 +102,44 @@
 
     <!-- Saved Jobs Section -->
     <div class="tab-pane fade" id="saved-jobs" role="tabpanel" aria-labelledby="saved-jobs-tab">
-        <div v-for="job in savedJobs" :key="job.id">
-            <div class="card mb-3 shadow-sm">
-                <div class="card-body d-flex justify-content-between">
-                    <div class="job-details">
-                        <div class="job-title-text mb-3">
-                            <router-link :to="{ name: 'Details', params: { id: job.job_id }}"
-                                         class="job-link text-decoration-none">
-                                <h5 class="card-title text-primary">
-                                    <i class="bi bi-briefcase"></i>
-                                    {{truncateString(job.job.position, 50)}}
-                                </h5>
-                            </router-link>
-                        </div>
-                        <a class="comp-name-text mb-2">
-                            <i class="bi bi-geo-alt"></i>
-                            <strong>{{ $t('address') }}:</strong>
-                            <span class="text-muted">
+        <div class="overflow-auto" style="max-height: 700px;">
+            <div v-for="job in savedJobs" :key="job.id">
+                <div class="card mb-3 shadow-sm">
+                    <div class="card-body d-flex justify-content-between">
+                        <div class="job-details">
+                            <div class="job-title-text mb-3">
+                                <router-link :to="{ name: 'Details', params: { id: job.job_id }}"
+                                             class="job-link text-decoration-none">
+                                    <h5 class="card-title text-primary">
+                                        <i class="bi bi-briefcase"></i>
+                                        {{truncateString(job.job.position, 50)}}
+                                    </h5>
+                                </router-link>
+                            </div>
+                            <a class="comp-name-text mb-2">
+                                <i class="bi bi-geo-alt"></i>
+                                <strong>{{ $t('address') }}:</strong>
+                                <span class="text-muted">
                             {{ job.job.address }}
                             </span>
-                        </a>
+                            </a>
+                        </div>
+                        <div class="logo-container">
+                            <img style="height: 80px" :src="storageImage(job.job.image)" alt="Company Logo"
+                                 class="company-logo"/>
+                        </div>
                     </div>
-                    <div class="logo-container">
-                        <img style="height: 80px" :src="storageImage(job.job.image)" alt="Company Logo"
-                             class="company-logo"/>
+                    <div class="d-flex gap-2 p-3">
+                        <router-link :to="{ name: 'Details', params: { id: job.job_id }}"
+                                     class="btn btn-primary">{{ $t('apply_now') }}
+                        </router-link>
+                        <button @click="deleteJob(job.id)" class="btn btn-danger">{{ $t('remove') }}</button>
                     </div>
-                </div>
-                <div class="d-flex gap-2 p-3">
-                    <router-link :to="{ name: 'Details', params: { id: job.job_id }}"
-                                 class="btn btn-primary">{{ $t('apply_now') }}
-                    </router-link>
-                    <button @click="deleteJob(job.id)" class="btn btn-danger">{{ $t('remove') }}</button>
                 </div>
             </div>
         </div>
     </div>
+
 
     <!-- Update Profile Section -->
     <div class="tab-pane fade" id="update-profile" role="tabpanel" aria-labelledby="update-profile-tab">
@@ -146,7 +150,7 @@
                         <h4 class="mb-0">{{$t('updateProfile')}}</h4>
                     </div>
                     <div class="card-body">
-                        <form id="updateProfileForm" @submit.prevent="submitFromData(fromData)">
+                        <form id="updateProfileForm" @submit="submitFromData(fromData)">
                             <div class="row">
                                 <!-- Name and Email -->
                                 <div class="col-md-6 mb-3">
@@ -331,6 +335,7 @@ height: 52px; min-width: 52px; padding: 10px 0px 0px 10px; position: fixed !impo
     import axios from 'axios';
     import Toast from "vue-toastification";
     import multiselect from 'vue-multiselect'
+    import {EventBus} from "../../eventBus";
     import VueMultiselect from "vue-multiselect/src/Multiselect";
 
     export default {
@@ -377,15 +382,44 @@ height: 52px; min-width: 52px; padding: 10px 0px 0px 10px; position: fixed !impo
             this.seekerdata();
             this.SavedJobs();
             this.getRequiredData(['district']);
-
-        },
-
-        created() {
-            // this.fetchCurrentUser();
             this.fetchMessages();
-        },
+            // setInterval(() => {
+            //     this.fetchMessages();
+            // }, 1000);
 
+        },
         methods: {
+            goToUpdateProfile() {
+                this.$nextTick(() => {
+                    this.$router.push({ hash: '#update-profile' }).then(() => {
+                        window.location.reload();
+                    });
+                });
+            },
+
+            async fetchMessages() {
+                try {
+                    const response = await axios.get('/api/frontend/fetchmessage');
+                    this.messages = response.data.result;
+
+
+                } catch (error) {
+                    console.error("Error fetching messages:", error);
+                }
+
+            },
+            async sendMessage() {
+                try {
+                    const response = await axios.post('/api/seekerstore', {
+                        receiver_id: 2,
+                        message_content: this.newMessage,
+                    });
+                    this.newMessage = '';
+                    this.fetchMessages();
+                } catch (error) {
+                    console.error("Error sending message:", error);
+                }
+            },
             async SavedJobs() {
                 try {
                     const response = await axios.get('/api/frontend/saved');
@@ -428,27 +462,7 @@ height: 52px; min-width: 52px; padding: 10px 0px 0px 10px; position: fixed !impo
                 }
             },
 
-            async fetchMessages() {
-                try {
-                    const response = await axios.get('/api/frontend/fetchmessage');
-                    this.messages = response.data.result;
-                } catch (error) {
-                    console.error("Error fetching messages:", error);
-                }
-            },
-            async sendMessage() {
-                try {
-                    const response = await axios.post('/api/seekerstore', {
-                        receiver_id: 2,
-                        message_content: this.newMessage,
-                        // sender_id: this.currentUserId
-                    });
-                    this.newMessage = '';
-                    this.fetchMessages();
-                } catch (error) {
-                    console.error("Error sending message:", error);
-                }
-            },
+
             async deleteMessage(messageId) {
                 const result = await this.$swal.fire({
                     title: 'Are you sure?',
@@ -500,6 +514,8 @@ height: 52px; min-width: 52px; padding: 10px 0px 0px 10px; position: fixed !impo
         align-items: center;
         justify-content: center;
     }
+
+
 
     .photo {
         height: 100%;

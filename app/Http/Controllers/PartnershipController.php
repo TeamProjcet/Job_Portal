@@ -24,7 +24,7 @@ class PartnershipController extends Controller
 
     public function index()
     {
-        $data = $this->model->paginate(2);
+        $data = $this->model->paginate(12);
         return $this->returnData(2000, $data);
     }
 

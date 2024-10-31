@@ -37,13 +37,9 @@
             };
         },
         mounted() {
-            this.defaultUrl();
         },
         methods: {
-            defaultUrl() {
-                const referrer = document.referrer || window.location.href;
-                localStorage.setItem('redirectAfterLogin', referrer);
-            },
+
             submitLogin() {
                 const _this = this;
 
@@ -54,10 +50,15 @@
                     .then(function (res) {
                         if (parseInt(res.data.status) === 2000) {
                             _this.$toast.success("Login successful!");
+
                             if (_this.$route.query.next_url){
-                                _this.$router.push({path : _this.$route.query.next_url});
+                                _this.$router.push({path : _this.$route.query.next_url}).then(() => {
+                                    window.location.reload();
+                                });
                             }else{
-                                _this.$router.push('/');
+                                _this.$router.push('/').then(() => {
+                                    window.location.reload();
+                                });
                             }
                         } else {
                             _this.$toast.error("Invalid credentials!");

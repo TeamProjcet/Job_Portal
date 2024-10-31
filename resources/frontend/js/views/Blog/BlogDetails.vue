@@ -74,9 +74,9 @@
                 </form>
             </div>
             <div v-else class="row col-md-6">
-                <router-link to="/seekerlogin" class="nav-link">
+                <a :href="`/seekerlogin?next_url=${$route.fullPath}`" class="nav-link">
                     <button class="btn btn-primary w-100">{{$t('comment')}}</button>
-                </router-link>
+                </a>
             </div>
         </footer>
     </div>
