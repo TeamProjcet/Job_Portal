@@ -35,6 +35,18 @@
 
                     <div class="col-md-2">
                         <div class="form-group">
+                            <label class="form-label fw-bold">Job Category</label>
+                            <select class="form-select" v-model="selectedCategory" @change="filterData">
+                                <option value="">Select Application Status</option>
+                                <template v-for="(cate, index) in requireData.category">
+                                    <option :value="cate.name">{{ cate.name }}</option>
+                                </template>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-group">
                             <label class="form-label fw-bold">Address</label>
                             <select class="form-select" v-model="selectedAddress" @change="filterData">
                                 <option >Filter Address</option>
@@ -79,7 +91,7 @@
                             <template v-if="!isLoading && dataList !== undefined">
                                 <div class="table-responsive">
                                     <DataTable :tableHeading="tableHeading">
-                                        <tr v-for="(data, index) in displayedData.data" :key="index">
+                                        <tr v-for="(data, index) in displayedData" :key="index">
                                             <td>{{ index + 1 }}</td>
                                             <td>{{ data.seeker.name }}</td>
                                             <td>{{ data.seeker.email }}</td>
@@ -153,13 +165,14 @@
         data() {
             return {
                 tableHeading: ["Sl", "Name", "Email", "Image", "Company", "Position", "Status", "Resume", "Action"],
-                application_status: 0,
+                application_status: '',
                 isLoading: false,
                 selectedAddress: '',
                 selectedEducation: '',
                 selectedSkills: '',
                 selectedInterviewStatus: '',
                 selectedApplicationStatus: '',
+                selectedCategory: '',
                 filteredData: [],
                 educations: ['Secondary School (SSC)', 'Higher Secondary School (HSC)', 'Diploma in Engineering', 'Bachelor\'s Degree', 'Master\'s Degree', 'Professional Degree', 'Postgraduate Degree', 'Ph.D.'],
                 skillname:[ 'JavaScript', 'Python', 'Java', 'C++', 'Laravel','vue', 'PHP', 'C#', 'TypeScript', 'HTML', 'CSS', 'React', 'Angular', 'SQL','MongoDB', 'Express.js', 'Node', 'Bootstrap', 'Django','Git'],
@@ -179,25 +192,26 @@
         },
         computed: {
             displayedData() {
-                return this.filteredData.length > 0 ? this.filteredData : this.dataList;
+                return this.filteredData.length > 0 ? this.filteredData : this.dataList.data;
             }
         },
         mounted() {
             this.getDataList();
-            this.getRequiredData(['application_status', 'interview_status','district']);
+            this.getRequiredData(['application_status', 'interview_status','district', 'category']);
         },
         methods: {
             filterData() {
-                this.filteredData = this.dataList.filter(item => {
-                    const seeker = item.seeker;
+                this.filteredData = this.dataList.data.filter(item => {
+                    const seeker = item.seeker || {};
                     const matchesAddress = !this.selectedAddress || seeker.address == this.selectedAddress;
-                    const matchesEducation = !this.selectedEducation || JSON.parse(seeker.education).includes(this.selectedEducation);
-                    const matchesSkills = !this.selectedSkills || JSON.parse(seeker.skills).includes(this.selectedSkills);
+                    const matchesCategory = !this.selectedCategory || (item.job && item.job.category.name == this.selectedCategory);
+                    const matchesEducation = !this.selectedEducation || (seeker.education && JSON.parse(seeker.education).includes(this.selectedEducation));
+                    const matchesSkills = !this.selectedSkills || (seeker.skills && JSON.parse(seeker.skills).includes(this.selectedSkills));
                     const matchesInterviewStatus = !this.selectedInterviewStatus || item.interview_status == this.selectedInterviewStatus;
                     const matchesApplicationStatus = !this.selectedApplicationStatus || item.application_status == this.selectedApplicationStatus;
-                    return matchesAddress && matchesEducation && matchesSkills && matchesInterviewStatus && matchesApplicationStatus;
-                });
 
+                    return matchesAddress && matchesEducation && matchesSkills && matchesInterviewStatus && matchesApplicationStatus && matchesCategory;
+                });
             },
         }
     };

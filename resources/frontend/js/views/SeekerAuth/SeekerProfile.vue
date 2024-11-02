@@ -261,13 +261,6 @@ height: 52px; min-width: 52px; padding: 10px 0px 0px 10px; position: fixed !impo
                                 <div class="p-2 bg-light rounded">
                                     <strong>{{ msg.sender ? msg.sender.name : 'Unknown' }}:</strong>
                                     <span>{{ msg.message_content }}</span>
-<!--                                    <button-->
-<!--                                            class="btn btn-danger btn-sm mt-1"-->
-<!--                                            @click="deleteMessage(msg.id)"-->
-<!--                                            v-if="msg.sender && msg.sender.id === userId"  &lt;!&ndash; userId should represent the logged-in user &ndash;&gt;-->
-<!--                                    >-->
-<!--                                    Delete-->
-<!--                                    </button>-->
                                 </div>
                             </div>
 
@@ -292,6 +285,7 @@ height: 52px; min-width: 52px; padding: 10px 0px 0px 10px; position: fixed !impo
             </div>
         </div>
     </div>
+
 </div>
 
 </template>
