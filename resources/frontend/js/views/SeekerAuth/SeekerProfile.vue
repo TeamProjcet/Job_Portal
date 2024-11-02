@@ -265,19 +265,9 @@ height: 52px; min-width: 52px; padding: 10px 0px 0px 10px; position: fixed !impo
                                 <div class="mr-2">
                                     <img style="width: 40px; height: 40px; border: 1px solid; border-radius: 50px" src="https://www.w3schools.com/howto/img_avatar.png" alt="image">
                                 </div>
-                                <div class="p-2 bg-light rounded position-relative">
-                                    <strong>{{ msg.sender ? msg.sender.name : 'Unknown' }}</strong>
-                                    <div class="message-content d-flex justify-content-between align-items-center">
-                                        <span>{{ msg.message_content }}</span>
-                                        <button
-                                                v-if="msg.sender && msg.sender.id === seeker.id"
-                                                class="delete-btn btn btn-danger btn-sm"
-                                                @click="deleteMessage(msg.id)"
-                                                title="Delete Message"
-                                        >
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </div>
+                                <div class="p-2 bg-light rounded">
+                                    <strong>{{ msg.sender ? msg.sender.name : 'Unknown' }}:</strong>
+                                    <span>{{ msg.message_content }}</span>
                                 </div>
                             </div>
                             <div class="d-flex justify-content-end mb-2" v-else>
@@ -327,6 +317,7 @@ height: 52px; min-width: 52px; padding: 10px 0px 0px 10px; position: fixed !impo
             </div>
         </div>
     </div>
+
 </div>
 
 </template>
